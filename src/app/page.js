@@ -1,11 +1,32 @@
 import Link from "next/link";
+import {
+  Code2,
+  Handshake,
+  Users,
+  Palette,
+  Calendar,
+  ArrowRight,
+  Image as ImageIcon
+} from "lucide-react";
 
 export default function Home() {
+  const teamCategories = [
+    { title: "Technical", icon: Code2, description: "Managing workshops, hackathons, and society projects." },
+    { title: "Sponsorship", icon: Handshake, description: "Building partnerships and securing resources for events." },
+    { title: "Executive", icon: Users, description: "Overall administration and strategic planning of the society." },
+    { title: "Design & Media", icon: Palette, description: "Creating visual content, branding, and social media presence." },
+  ];
+
+  const upcomingEvents = [
+    { title: "Tech-Fest 2025", date: "April 20, 2025", badge: "Flagship" },
+    { title: "UI/UX Workshop", date: "May 15, 2025", badge: "Workshop" },
+  ];
+
   return (
     <div className="flex flex-col items-center">
       {/* Hero Section */}
       <section className="w-full py-24 md:py-32 lg:py-48 bg-white dark:bg-black">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
           <div className="flex flex-col items-center space-y-8 text-center">
             <div className="space-y-4">
               <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl uppercase">
@@ -33,28 +54,152 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Info Section */}
+      {/* About TSS Section */}
       <section className="w-full py-20 bg-neutral-50 dark:bg-neutral-900/50">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid gap-12 lg:grid-cols-3">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
+          <div className="grid gap-12 lg:grid-cols-2 items-center">
             <div className="space-y-4">
-              <h3 className="text-xl font-bold uppercase tracking-tight">Technical Excellence</h3>
-              <p className="text-neutral-500 dark:text-neutral-400">
-                We organize workshops and seminars on cutting-edge technologies to keep our students ahead in the industry.
+              <h2 className="text-3xl font-extrabold uppercase tracking-tight sm:text-4xl">About TSS</h2>
+              <div className="space-y-4 text-neutral-500 dark:text-neutral-400 text-lg">
+                <p>
+                  Technical Student Society (TSS) at GNDU is a student-led organization dedicated to fostering a tech-driven culture on campus.
+                </p>
+                <p>
+                  Since its inception, TSS has served as a bridge between classroom knowledge and industrial application, offering students the tools, mentorship, and opportunities they need to excel in the rapidly evolving technology landscape.
+                </p>
+                <p>
+                  We believe in learning by doing, community building, and technical excellence.
+                </p>
+              </div>
+              <div className="pt-4">
+                <Link href="/about" className="inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm hover:underline underline-offset-4">
+                  Full Story <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+            <div className="relative aspect-video rounded-xl overflow-hidden bg-neutral-200 dark:bg-neutral-800 border dark:border-neutral-700 flex items-center justify-center">
+              <span className="text-neutral-400 dark:text-neutral-600 font-bold uppercase tracking-widest text-sm">Society Highlight Image</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Team Categories Section */}
+      <section className="w-full py-20 bg-white dark:bg-black">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
+          <div className="text-center space-y-4 mb-12">
+            <h2 className="text-3xl font-extrabold uppercase tracking-tight sm:text-4xl">Our Core Teams</h2>
+            <p className="text-neutral-500 dark:text-neutral-400 mx-auto max-w-2xl">
+              Diverse specialized teams working in synergy to provide seamless technical experiences for the students.
+            </p>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {teamCategories.map((category) => (
+              <div key={category.title} className="group p-8 border rounded-xl dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-300">
+                <category.icon className="h-10 w-10 mb-6 text-neutral-900 dark:text-neutral-50 group-hover:scale-110 transition-transform" />
+                <h3 className="text-xl font-bold uppercase tracking-tight mb-2">{category.title}</h3>
+                <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                  {category.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Events Section */}
+      <section className="w-full py-20 bg-neutral-50 dark:bg-neutral-900/50">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+            <div className="space-y-4 text-center md:text-left">
+              <h2 className="text-3xl font-extrabold uppercase tracking-tight sm:text-4xl">Events Spotlight</h2>
+              <p className="text-neutral-500 dark:text-neutral-400 max-w-xl">
+                Stay tuned with our upcoming highlights and ongoing competitions.
               </p>
             </div>
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold uppercase tracking-tight">Community Driven</h3>
-              <p className="text-neutral-500 dark:text-neutral-400">
-                A vibrant community of developers, designers, and tech enthusiasts working together on impactful projects.
+            <Link href="/events" className="pb-2 inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm hover:underline underline-offset-4">
+              All Events <Calendar className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="grid gap-8 lg:grid-cols-2 max-w-5xl mx-auto">
+            {upcomingEvents.map((event) => (
+              <div key={event.title} className="p-8 border rounded-xl bg-white dark:bg-black dark:border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-6">
+                <div className="space-y-2 text-center sm:text-left">
+                  <div className="inline-flex px-2 px-1 text-[10px] font-bold uppercase tracking-widest border border-neutral-200 dark:border-neutral-700 rounded text-neutral-400 mb-2">
+                    {event.badge}
+                  </div>
+                  <h3 className="text-2xl font-bold uppercase tracking-tight">{event.title}</h3>
+                  <p className="text-sm font-semibold text-neutral-400 uppercase tracking-widest">{event.date}</p>
+                </div>
+                <button className="px-6 py-2 bg-neutral-900 dark:bg-neutral-50 text-white dark:text-black rounded-md text-xs font-bold uppercase tracking-widest hover:opacity-90">
+                  Register
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="w-full py-20 bg-white dark:bg-black">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
+          <div className="text-center space-y-4 mb-12">
+            <h2 className="text-3xl font-extrabold uppercase tracking-tight sm:text-4xl text-center">Common Questions</h2>
+            <p className="text-neutral-500 dark:text-neutral-400 mx-auto max-w-2xl">
+              Everything you need to know about getting involved with TSS GNDU.
+            </p>
+          </div>
+          <div className="grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
+            <div className="space-y-2 p-6 border rounded-xl dark:border-neutral-800">
+              <h3 className="text-lg font-bold uppercase tracking-tight">Who can join TSS?</h3>
+              <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                Any student currently enrolled in Guru Nanak Dev University with a passion for technology, design, or management is welcome to join our community.
               </p>
             </div>
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold uppercase tracking-tight">Career Growth</h3>
-              <p className="text-neutral-500 dark:text-neutral-400">
-                Regular hackathons and coding competitions to sharpen skills and provide exposure to real-world challenges.
+            <div className="space-y-2 p-6 border rounded-xl dark:border-neutral-800">
+              <h3 className="text-lg font-bold uppercase tracking-tight">Are there any membership fees?</h3>
+              <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                No, membership to the Technical Student Society is completely free. We focus on talent, dedication, and the collective growth of our members.
               </p>
             </div>
+            <div className="space-y-2 p-6 border rounded-xl dark:border-neutral-800">
+              <h3 className="text-lg font-bold uppercase tracking-tight">What kind of events do you host?</h3>
+              <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                We organize a variety of events including hands-on technical workshops, annual hackathons, coding competitions, and industrial guest lectures.
+              </p>
+            </div>
+            <div className="space-y-2 p-6 border rounded-xl dark:border-neutral-800">
+              <h3 className="text-lg font-bold uppercase tracking-tight">How can I stay updated?</h3>
+              <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                You can keep an eye on our "Events" page or follow our official social media handles for the latest announcements and registration links.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Sneak Peak Section */}
+      <section className="w-full py-20 bg-white dark:bg-black">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
+          <div className="text-center space-y-4 mb-12">
+            <h2 className="text-3xl font-extrabold uppercase tracking-tight sm:text-4xl text-center">Gallery Sneak Peak</h2>
+            <p className="text-neutral-500 dark:text-neutral-400 mx-auto max-w-2xl">
+              Capturing moments of innovation and community from our recent gatherings.
+            </p>
+          </div>
+          <div className="grid gap-6 grid-cols-2 md:grid-cols-4 mb-10">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="relative aspect-square rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-900 group border dark:border-neutral-800">
+                <div className="absolute inset-0 flex items-center justify-center text-neutral-300 dark:text-neutral-700">
+                  <ImageIcon className="h-8 w-8" />
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <Link href="/gallery" className="inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm hover:underline underline-offset-4">
+              Explore Full Gallery <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>
