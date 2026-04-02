@@ -41,7 +41,7 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-zinc-400 bg-white/80 backdrop-blur-md dark:bg-black/80 dark:border-neutral-800">
-      <div className="mx-auto  px-6 md:px-12 lg:px-28 ">
+      <div className="mx-auto px-1 md:px-12 lg:px-28 ">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-3">
@@ -55,7 +55,7 @@ export default function Navbar() {
 
               {/* Text Content */}
               <div className="flex flex-col leading-tight ">
-                <span className="text-base sm:text-lg lg:text-lg font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
+                <span className="text-sm sm:text-lg lg:text-lg font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
                   Technical Students' Society
                 </span>
 
@@ -131,25 +131,34 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="md:hidden border-t dark:border-neutral-800 bg-white dark:bg-black">
-          <div className="space-y-1 px-2 pb-3 pt-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsMenuOpen(false)}
-                className={`block rounded-md px-3 py-2 text-base font-medium transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800 ${pathname === link.href
-                  ? "bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100"
-                  : "text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
-                  }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
+        <div className="border-t dark:border-neutral-800 bg-white/90 dark:bg-black/90 backdrop-blur-lg px-3 py-4 space-y-2">
+
+          {navLinks.map((link, index) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              onClick={() => setIsMenuOpen(false)}
+              className={`group flex items-center justify-between rounded-lg px-4 py-2.5 text-base font-medium transition-all duration-200
+          ${pathname === link.href
+                  ? "bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-white"
+                  : "text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                }`}
+              style={{
+                transitionDelay: `${index * 50}ms`, // stagger animation
+              }}>
+              <span>{link.name}</span>
+
+              {/* Arrow */}
+              <span className="transform -rotate-45 opacity-60 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-200">
+                →
+              </span>
+            </Link>
+          ))}
+
         </div>
-      )}
+      </div>
     </nav>
   );
 }
