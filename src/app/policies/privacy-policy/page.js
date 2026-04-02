@@ -3,7 +3,7 @@ import { Mail } from "lucide-react";
 
 export default function PP() {
     return (
-        <div className="min-h-screen relative flex items-center justify-center py-10 text-white overflow-hidden bg-[#470003]">
+        <div className="min-h-screen relative flex items-center justify-center py-10 text-white overflow-hidden bg-zinc-950">
 
             {/* Background Image */}
             <div
