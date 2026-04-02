@@ -19,13 +19,29 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md dark:bg-black/80 dark:border-neutral-800">
-      <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-16 xl:px-24">
+      <div className="mx-auto max-w-7xl px-2f md:px-12 lg:px-16 xl:px-24">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 uppercase">
-                TSS GNDU
-              </span>
+            <Link href="/" className="flex items-center gap-3">
+
+              {/* Logo */}
+              <img
+                src="/images/logos/tss-logo.png"
+                alt="Logo"
+                className="h-12 lg:h-16 w-auto object-contain"
+              />
+
+              {/* Text Content */}
+              <div className="flex flex-col leading-tight">
+                <span className="text-base sm:text-lg lg:text-lg font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
+                  Technical Students' Society
+                </span>
+
+                <span className="text-xs text-neutral-600 dark:text-neutral-400">
+                  Guru Nanak Dev University, Asr.
+                </span>
+              </div>
+
             </Link>
           </div>
 
@@ -36,11 +52,10 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-sm font-medium transition-colors hover:text-neutral-900 dark:hover:text-neutral-100 ${
-                    pathname === link.href
-                      ? "text-neutral-900 dark:text-neutral-100"
-                      : "text-neutral-500 dark:text-neutral-400"
-                  }`}
+                  className={`text-sm font-medium transition-colors hover:text-neutral-900 dark:hover:text-neutral-100 ${pathname === link.href
+                    ? "text-neutral-900 dark:text-neutral-100"
+                    : "text-neutral-500 dark:text-neutral-400"
+                    }`}
                 >
                   {link.name}
                 </Link>
@@ -78,11 +93,10 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMenuOpen(false)}
-                className={`block rounded-md px-3 py-2 text-base font-medium transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800 ${
-                  pathname === link.href
-                    ? "bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100"
-                    : "text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
-                }`}
+                className={`block rounded-md px-3 py-2 text-base font-medium transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800 ${pathname === link.href
+                  ? "bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100"
+                  : "text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+                  }`}
               >
                 {link.name}
               </Link>

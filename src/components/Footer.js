@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowRight } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -8,7 +9,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-16 xl:px-24 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-4">
-            <h3 className="text-lg font-bold tracking-tight uppercase">TSS GNDU</h3>
+            <h3 className="text-lg font-bold tracking-tight">Think. Build. Innovate.</h3>
             <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-xs">
               Technical Student Society (TSS) at Guru Nanak Dev University. Bridging the gap between knowledge and career opportunities since its inception.
             </p>
@@ -24,22 +25,60 @@ export default function Footer() {
           </div>
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wider mb-4 opacity-75">Connect With Us</h4>
-            <ul className="space-y-2">
-              <li><Link href="#" className="text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">LinkedIn</Link></li>
-              <li><Link href="#" className="text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">Instagram</Link></li>
-              <li><Link href="#" className="text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">Twitter (X)</Link></li>
-              <li><Link href="/contact" className="text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">Contact Form</Link></li>
+            <ul className="space-y-3">
+              {[
+                { name: "GitHub", link: "https://github.com/Technical-Students-Society" },
+                { name: "LinkedIn", link: "https://www.linkedin.com/company/technical-students-societies/" },
+                { name: "Instagram", link: "https://www.instagram.com/tss_gndu" },
+                { name: "Gmail", link: "mailto:tss.gndu@gmail.com" },
+              ].map((item, index) => (
+                <li key={index}>
+                  <Link
+                    href={item.link}
+                    target="_blank"
+                    className="group flex items-center gap-1 text-sm text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
+                  >
+                    <span>{item.name}</span>
+
+                    <ArrowRight className="h-4 w-4 -rotate-45 opacity-70 group-hover:translate-x-1 transition-all duration-200 text-white" />
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
         <div className="mt-12 pt-8 border-t dark:border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 text-center">
-            &copy; {currentYear} TSS GNDU. All rights reserved.
-          </p>
-          <div className="flex gap-6">
-            <Link href="/privacy" className="text-xs text-neutral-400 hover:text-black transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="text-xs text-neutral-400 hover:text-black transition-colors">Terms of Service</Link>
+
+          {/* Left Section */}
+          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+            <p className="text-sm text-neutral-500 dark:text-neutral-400 capitalize">
+              &copy; {currentYear} Technical Students' Society GNDU. All rights reserved.
+            </p>
+
+            <p className="text-xs text-neutral-400 mt-1">
+              Built & Maintained by <a href="https://www.linkedin.com/in/kartikay-sharma2004/">Kartikay Sharma</a> & <a href="https://www.linkedin.com/in/sahil-singh-0421b7275">Sahildeep Singh</a>
+            </p>
           </div>
+
+          {/* Right Section */}
+          <div className="flex gap-3 items-center">
+            <Link
+              href="/privacy"
+              className="text-xs text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
+            >
+              Privacy Policy
+            </Link>
+
+            <span className="text-neutral-500">|</span>
+
+            <Link
+              href="/terms"
+              className="text-xs text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
+            >
+              Terms of Service
+            </Link>
+          </div>
+
         </div>
       </div>
     </footer>
