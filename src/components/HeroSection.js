@@ -73,7 +73,9 @@ export default function HeroSection() {
         {/* Badge */}
         <div className="flex items-center gap-2 mb-6 text-xs text-neutral-500 dark:text-neutral-400 tracking-wide">
           <span className="w-2 h-2 rounded-full bg-orange-400 inline-block" />
-          Technical Student Society
+          <span className="w-2 h-2 rounded-full bg-orange-400 inline-block absolute animate-ping" />
+
+          Technical Students' Society
         </div>
 
         {/* Headline */}
@@ -97,6 +99,8 @@ export default function HeroSection() {
             className="inline-flex items-center gap-2 h-11 px-7 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-sm font-medium hover:bg-neutral-700 dark:hover:bg-neutral-200 transition-colors"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-neutral-900 inline-block" />
+            <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-neutral-900 inline-block absolute animate-ping" />
+
             View Events
           </Link>
           <Link
