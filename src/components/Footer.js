@@ -25,16 +25,17 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wider mb-4 opacity-75">Connect With Us</h4>
             <ul className="space-y-2">
-              <li><Link href="#" className="text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">LinkedIn</Link></li>
-              <li><Link href="#" className="text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">Instagram</Link></li>
-              <li><Link href="#" className="text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">Twitter (X)</Link></li>
-              <li><Link href="/contact" className="text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">Contact Form</Link></li>
+              <li><Link href="https://github.com/Technical-Students-Society" className="text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">GitHub</Link></li>
+              <li><Link href="https://www.linkedin.com/company/technical-students-societies/" className="text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">LinkedIn</Link></li>
+              <li><Link href="https://www.instagram.com/tss_gndu" className="text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">Instagram</Link></li>
+              <li><Link href="mailto:tss.gndu@gmail.com" className="text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">Gmail</Link></li>
+
             </ul>
           </div>
         </div>
         <div className="mt-12 pt-8 border-t dark:border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 text-center">
-            &copy; {currentYear} TSS GNDU. All rights reserved.
+          <p className="text-sm text-neutral-500 dark:text-neutral-400 text-center capitalize">
+            &copy; {currentYear} Technical Students' Society GNDU. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link href="/privacy" className="text-xs text-neutral-400 hover:text-black transition-colors">Privacy Policy</Link>

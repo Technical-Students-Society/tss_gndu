@@ -16,8 +16,56 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "TSS GNDU | Technical Student Society",
-  description: "Official website of the Technical Student Society (TSS) at Guru Nanak Dev University.",
+  title: "Technical Students' Society GNDU | TSS GNDU Official",
+  
+  description:
+    "Official website of the Technical Students' Society (TSS) at Guru Nanak Dev University, Amritsar. Explore events, tech fests, workshops, and student initiatives.",
+
+  keywords: [
+    "TSS GNDU",
+    "Technical Students Society GNDU",
+    "Guru Nanak Dev University technical society",
+    "GNDU events",
+    "GNDU tech fest",
+    "student societies in GNDU",
+    "TSS Amritsar",
+  ],
+
+  authors: [{ name: "Technical Students' Society GNDU" }],
+  creator: "TSS GNDU",
+
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+
+  openGraph: {
+    title: "TSS GNDU | Technical Students' Society",
+    description:
+      "Join Technical Students' Society at GNDU. Discover events, workshops, and innovation.",
+    url: "https://tss-gndu.org/",
+    siteName: "TSS GNDU",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "TSS GNDU",
+      },
+    ],
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "TSS GNDU",
+    description:
+      "Official Technical Students' Society of Guru Nanak Dev University.",
+    images: ["/og-image.png"],
+  },
+
+  metadataBase: new URL("https://tss-gndu.org/"),
 };
 
 export default function RootLayout({ children }) {
