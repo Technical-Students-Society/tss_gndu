@@ -1,65 +1,97 @@
+import { Mail, MapPin, User, Send } from "lucide-react";
+
 export default function ContactPage() {
   return (
-    <div className="container mx-auto px-4 py-20 max-w-4xl">
+    <div className="container mx-auto px-4 py-15 max-sm:py-20 max-w-5xl">
       <div className="grid gap-12 lg:grid-cols-2">
         <div className="space-y-8">
           <div className="space-y-4">
-            <h1 className="text-4xl font-extrabold tracking-tighter uppercase sm:text-5xl">Get in Touch</h1>
-            <p className="text-xl text-neutral-500 dark:text-neutral-400">
-              Have questions or want to collaborate? We'd love to hear from you.
+            <h1 className="text-xl font-extrabold tracking-tighter sm:text-2xl">Get in Touch</h1>
+            <p className="text-neutral-500 dark:text-neutral-400">
+              Have questions or want to collaborate?<br /> We'd love to hear from you.
             </p>
           </div>
 
           <div className="space-y-6">
             <div className="space-y-2">
-              <h3 className="text-sm font-bold uppercase tracking-widest text-neutral-400">Email</h3>
-              <p className="text-lg font-medium">tssgndu@gmail.com</p>
+              <h3 className="text-sm font-bold  tracking-widest text-neutral-400 flex items-center">
+                <Mail className="h-4 w-4 text-neutral-400 mr-2" />
+                Email</h3>
+              <a href="mailto:tss.gndu@gmail.com">
+                <p className="text-base font-medium">tss.gndu@gmail.com</p></a>
             </div>
             <div className="space-y-2">
-              <h3 className="text-sm font-bold uppercase tracking-widest text-neutral-400">Location</h3>
-              <p className="text-lg font-medium">Department of Computer Science, Guru Nanak Dev University, Amritsar.</p>
+              <h3 className="text-sm font-bold tracking-widest text-neutral-400 flex items-center">
+                <MapPin className="h-4 w-4 text-neutral-400 mr-2" />Location</h3>
+              <p className="text-base font-medium ">MRS Bhawan - Department of Computer Science,<br />Guru Nanak Dev University, Amritsar.</p>
+              <iframe
+                className="mt-6 w-full h-60 rounded-lg"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3396.9435246123526!2d74.82207877448086!3d31.63539664145203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x206a6efe9e8461c1%3A0x351cb582569b3f49!2sTechnical%20Students&#39;%20Society!5e0!3m2!1sen!2sin!4v1775141161322!5m2!1sen!2sin"
+                allowFullScreen=""
+                loading="lazy"
+              ></iframe>
             </div>
           </div>
         </div>
 
-        <div className="p-8 border rounded-lg dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50">
+        {/* Form Section */}
+        <div className="p-8 border rounded-2xl dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/60 backdrop-blur-md shadow-sm">
           <form className="space-y-6">
+
+            {/* Name */}
             <div className="space-y-2">
-              <label htmlFor="name" className="text-sm font-bold uppercase tracking-widest">Name</label>
-              <input 
-                id="name" 
-                type="text" 
-                placeholder="John Doe" 
-                className="w-full p-3 bg-white dark:bg-black border rounded-md dark:border-neutral-800 outline-none focus:border-neutral-400 transition-colors"
-                required 
+              <label className="text-sm font-bold uppercase tracking-widest">
+                Name
+              </label>
+              <div className="flex items-center border rounded-md px-3 bg-white dark:bg-black dark:border-neutral-800 focus-within:border-neutral-400 transition">
+                <User className="h-4 w-4 text-neutral-400 mr-2" />
+                <input
+                  type="text"
+                  placeholder="John Doe"
+                  className="w-full py-3 bg-transparent outline-none"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Email */}
+            <div className="space-y-2">
+              <label className="text-sm font-bold uppercase tracking-widest">
+                Email
+              </label>
+              <div className="flex items-center border rounded-md px-3 bg-white dark:bg-black dark:border-neutral-800 focus-within:border-neutral-400 transition">
+                <Mail className="h-4 w-4 text-neutral-400 mr-2" />
+                <input
+                  type="email"
+                  placeholder="john@example.com"
+                  className="w-full py-3 bg-transparent outline-none"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Message */}
+            <div className="space-y-2">
+              <label className="text-sm font-bold uppercase tracking-widest">
+                Message
+              </label>
+              <textarea
+                rows={5}
+                placeholder="How can we help?"
+                className="w-full p-3 bg-white dark:bg-black border rounded-md dark:border-neutral-800 outline-none focus:border-neutral-400 transition"
+                required
               />
             </div>
-            <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-bold uppercase tracking-widest">Email</label>
-              <input 
-                id="email" 
-                type="email" 
-                placeholder="john@example.com" 
-                className="w-full p-3 bg-white dark:bg-black border rounded-md dark:border-neutral-800 outline-none focus:border-neutral-400 transition-colors"
-                required 
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="message" className="text-sm font-bold uppercase tracking-widest">Message</label>
-              <textarea 
-                id="message" 
-                rows={5} 
-                placeholder="How can we help?" 
-                className="w-full p-3 bg-white dark:bg-black border rounded-md dark:border-neutral-800 outline-none focus:border-neutral-400 transition-colors"
-                required 
-              />
-            </div>
-            <button 
-              type="submit" 
-              className="w-full py-3 bg-neutral-900 dark:bg-neutral-50 text-white dark:text-black font-bold uppercase tracking-widest rounded-md hover:opacity-90"
+
+            {/* Button */}
+            <button
+              type="submit"
+              className="w-full flex items-center justify-center gap-2 py-3 bg-neutral-900 dark:bg-neutral-50 text-white dark:text-black font-bold uppercase tracking-widest rounded-md hover:opacity-90 transition cursor-pointer"
             >
+              <Send className="h-4 w-4" />
               Send Message
             </button>
+
           </form>
         </div>
       </div>
