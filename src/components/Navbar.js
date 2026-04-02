@@ -25,6 +25,7 @@ export default function Navbar() {
   }, []);
 
   const toggleTheme = () => {
+    console.log("Current theme before toggle:", theme);
     const isDark = document.documentElement.classList.toggle('dark');
     const newTheme = isDark ? 'dark' : 'light';
     setTheme(newTheme);
@@ -34,11 +35,13 @@ export default function Navbar() {
     } else {
       document.documentElement.classList.remove('light');
     }
+    console.log("New theme after toggle:", newTheme);
   };
 
+
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md dark:bg-black/80 dark:border-neutral-800">
-      <div className="mx-auto max-w-7xl px-2f md:px-12 lg:px-16 xl:px-24">
+    <nav className="sticky top-0 z-50 w-full border-b border-zinc-400 bg-white/80 backdrop-blur-md dark:bg-black/80 dark:border-neutral-800">
+      <div className="mx-auto  px-6 md:px-12 lg:px-28 ">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-3">
@@ -47,11 +50,11 @@ export default function Navbar() {
               <img
                 src="/images/logos/tss-logo.png"
                 alt="Logo"
-                className="h-12 lg:h-16 w-auto object-contain"
+                className="h-12 invert dark:invert-0 lg:h-16 w-auto object-contain"
               />
 
               {/* Text Content */}
-              <div className="flex flex-col leading-tight">
+              <div className="flex flex-col leading-tight ">
                 <span className="text-base sm:text-lg lg:text-lg font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
                   Technical Students' Society
                 </span>
@@ -75,15 +78,12 @@ export default function Navbar() {
                     ? "text-neutral-900 dark:text-neutral-100"
                     : "text-neutral-500 dark:text-neutral-400"
                     }`}
-                  className={`text-sm font-medium transition-colors hover:text-neutral-900 dark:hover:text-neutral-100 ${pathname === link.href
-                    ? "text-neutral-900 dark:text-neutral-100"
-                    : "text-neutral-500 dark:text-neutral-400"
-                    }`}
                 >
                   {link.name}
                 </Link>
               ))}
             </div>
+
             <button
               onClick={toggleTheme}
               className="group p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-all duration-300 transform active:scale-95"

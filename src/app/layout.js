@@ -72,8 +72,10 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
+
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -90,11 +92,12 @@ export default function RootLayout({ children }) {
                 } catch (e) {}
               })();
 
+
             `,
           }}
         />
       </head>
-      <body className="flex flex-col bg-white text-neutral-900 dark:bg-black dark:text-neutral-50 selection:bg-neutral-200 dark:selection:bg-neutral-800">
+      <body className="flex flex-col antialiased selection:bg-neutral-200 dark:selection:bg-neutral-800">
 
         <CursorTrail />
         <SmoothScroll>

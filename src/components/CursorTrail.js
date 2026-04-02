@@ -53,7 +53,7 @@ export default function CursorTrail() {
   return (
     <div ref={containerRef} className="fixed inset-0 pointer-events-none z-[9999]">
       {/* Create 12 trailing dots */}
-      {Array.from({ length: 102 }).map((_, i) => (
+      {Array.from({ length: 12 }).map((_, i) => (
         <div
           key={i}
           ref={(el) => (dotsRef.current[i] = el)}

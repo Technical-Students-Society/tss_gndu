@@ -14,11 +14,11 @@ const ROWS = 8;
 
 const imagePositions = [
   { row: 1, col: 2, imgIndex: 0 },
-  { row: 1, col: 13, imgIndex: 1 },
+  { row: 1, col: 12, imgIndex: 1 },
   { row: 3, col: 3, imgIndex: 2 },
-  { row: 3, col: 12, imgIndex: 3 },
+  { row: 3, col: 11, imgIndex: 3 },
   { row: 5, col: 5, imgIndex: 4 },
-  { row: 5, col: 10, imgIndex: 5 },
+  { row: 5, col: 9, imgIndex: 5 },
 ];
 
 export default function HeroSection() {
@@ -77,7 +77,7 @@ export default function HeroSection() {
         </div>
 
         {/* Headline */}
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-rational font-extrabold tracking-tight leading-[1.05] text-neutral-900 dark:text-white max-w-3xl mb-5">
+        <h1 className="text-5xl pointer-events-none sm:text-6xl md:text-7xl lg:text-[5.5rem] font-rational font-extrabold tracking-tight leading-[1.05] text-neutral-900 dark:text-white max-w-3xl mb-5">
           Bridging Tech &amp;
           <br />
           Innovation
