@@ -74,7 +74,28 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme');
+                  var supportDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  if (theme === 'dark' || (!theme && supportDark)) {
+                    document.documentElement.classList.add('dark');
+                  } else if (theme === 'light') {
+                    document.documentElement.classList.add('light');
+                  }
+                } catch (e) {}
+              })();
+
+            `,
+          }}
+        />
+      </head>
       <body className="flex flex-col bg-white text-neutral-900 dark:bg-black dark:text-neutral-50 selection:bg-neutral-200 dark:selection:bg-neutral-800">
+
         <CursorTrail />
         <SmoothScroll>
           <Navbar />

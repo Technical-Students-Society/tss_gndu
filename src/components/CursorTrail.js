@@ -9,7 +9,7 @@ export default function CursorTrail() {
 
   useEffect(() => {
     const dots = dotsRef.current;
-    
+
     // Performance optimization: Create setters once
     const xSetters = dots.map((dot) => gsap.quickSetter(dot, "x", "px"));
     const ySetters = dots.map((dot) => gsap.quickSetter(dot, "y", "px"));
@@ -33,8 +33,8 @@ export default function CursorTrail() {
         const targetX = i === 0 ? mouse.x : pos[i - 1].x;
         const targetY = i === 0 ? mouse.y : pos[i - 1].y;
 
-        const dt = 1.0 - Math.pow(1.0 - 0.3, gsap.ticker.deltaRatio()); 
-        
+        const dt = 1.0 - Math.pow(1.0 - 0.3, gsap.ticker.deltaRatio());
+
         p.x += (targetX - p.x) * dt;
         p.y += (targetY - p.y) * dt;
 
@@ -53,7 +53,7 @@ export default function CursorTrail() {
   return (
     <div ref={containerRef} className="fixed inset-0 pointer-events-none z-[9999]">
       {/* Create 12 trailing dots */}
-      {Array.from({ length: 12 }).map((_, i) => (
+      {Array.from({ length: 102 }).map((_, i) => (
         <div
           key={i}
           ref={(el) => (dotsRef.current[i] = el)}

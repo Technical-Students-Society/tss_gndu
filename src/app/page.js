@@ -9,6 +9,8 @@ import {
   Image as ImageIcon
 } from "lucide-react";
 
+import HeroSection from "@/components/HeroSection";
+
 export default function Home() {
   const teamCategories = [
     { title: "Technical", icon: Code2, description: "Managing workshops, hackathons, and society projects." },
@@ -24,35 +26,25 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center">
-      {/* Hero Section */}
-      <section className="w-full py-24 md:py-32 lg:py-48 bg-white dark:bg-black">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
-          <div className="flex flex-col items-center space-y-8 text-center">
-            <div className="space-y-4">
-              <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl uppercase">
-                Bridging Tech & <br className="hidden md:inline" /> Innovation
-              </h1>
-              <p className="mx-auto max-w-[700px] text-neutral-500 md:text-xl dark:text-neutral-400">
-                Official Technical Student Society of Guru Nanak Dev University. We empower students through workshops, hackathons, and technical excellence.
-              </p>
+      <HeroSection />
+
+      <div className=" z-20  w-full h-[20rem] flex items-center  bg-white dark:bg-neutral-950 backdrop-blur-md">
+        <div className="max-w-5xl mx-auto px-6 py-5 grid grid-cols-2 sm:grid-cols-4 gap-30 text-center">
+          {[
+            { value: "300k", label: "New users" },
+            { value: "76M", label: "Assets Secured" },
+            { value: "10+", label: "Years of experience" },
+            { value: "98%", label: "Customer satisfaction" },
+          ].map(({ value, label }) => (
+            <div key={label}>
+              <div className="text-2xl md:text-3xl font-extrabold text-neutral-900 dark:text-white tracking-tight">
+                {value}
+              </div>
+              <div className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">{label}</div>
             </div>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/events"
-                className="inline-flex h-11 items-center justify-center rounded-md bg-neutral-900 px-8 text-sm font-medium text-neutral-50 transition-colors hover:bg-neutral-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 dark:focus-visible:ring-neutral-300"
-              >
-                View Events
-              </Link>
-              <Link
-                href="/about"
-                className="inline-flex h-11 items-center justify-center rounded-md border border-neutral-200 bg-white px-8 text-sm font-medium transition-colors hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 dark:focus-visible:ring-neutral-300"
-              >
-                Learn More
-              </Link>
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
+      </div>
 
       {/* About TSS Section */}
       <section className="w-full py-20 bg-neutral-50 dark:bg-neutral-900/50">
@@ -125,7 +117,7 @@ export default function Home() {
             {upcomingEvents.map((event) => (
               <div key={event.title} className="p-8 border rounded-xl bg-white dark:bg-black dark:border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-6">
                 <div className="space-y-2 text-center sm:text-left">
-                  <div className="inline-flex px-2 px-1 text-[10px] font-bold uppercase tracking-widest border border-neutral-200 dark:border-neutral-700 rounded text-neutral-400 mb-2">
+                  <div className="inline-flex px-2 text-[10px] font-bold uppercase tracking-widest border border-neutral-200 dark:border-neutral-700 rounded text-neutral-400 mb-2">
                     {event.badge}
                   </div>
                   <h3 className="text-2xl font-bold uppercase tracking-tight">{event.title}</h3>
