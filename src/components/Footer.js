@@ -40,7 +40,7 @@ export default function Footer() {
                   >
                     <span>{item.name}</span>
 
-                    <ArrowRight className="h-4 w-4 -rotate-45 opacity-70 group-hover:translate-x-1 transition-all duration-200 text-white" />
+                    <ArrowRight className="h-4 w-4 -rotate-45 opacity-70 group-hover:translate-x-1 transition-all duration-200 dark:text-white" />
                   </Link>
                 </li>
               ))}
