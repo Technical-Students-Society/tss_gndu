@@ -6,7 +6,7 @@ export default function Footer() {
 
   return (
     <footer className="mt-auto border-t bg-white dark:bg-black dark:border-neutral-800">
-      <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-16 xl:px-24 py-12">
+      <div className="mx-auto max-w-7xl px-4 md:px-12 lg:px-16 xl:px-24 pt-12 pb-8 max-sm:pb-3">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-4">
             <h3 className="text-lg font-bold tracking-tight">Think. Build. Innovate.</h3>
@@ -50,20 +50,20 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t dark:border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-4">
 
           {/* Left Section */}
-          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
-            <p className="text-sm text-neutral-500 dark:text-neutral-400 capitalize">
-              &copy; {currentYear} Technical Students' Society GNDU. All rights reserved.
+          <div className="flex flex-col items-center sm:items-start text-center sm:text-left max-sm:gap-2">
+            <p className="text-sm max-sm:text-xs text-neutral-500 dark:text-neutral-400 capitalize">
+              &copy; {currentYear} Technical Students' Society, GNDU. <span className="max-sm:hidden">All rights reserved.</span>
             </p>
 
             <p className="text-xs text-neutral-400 mt-1">
-              Built & Maintained by <a href="https://www.linkedin.com/in/kartikay-sharma2004/">Kartikay Sharma</a> & <a href="https://www.linkedin.com/in/sahil-singh-0421b7275">Sahildeep Singh</a>
+              Built & Maintained by <a href="https://www.linkedin.com/in/kartikay-sharma2004/" className="text-white">Kartikay Sharma</a> & <a href="https://www.linkedin.com/in/sahil-singh-0421b7275" className="text-white">Sahildeep Singh</a>
             </p>
           </div>
 
           {/* Right Section */}
           <div className="flex gap-3 items-center">
             <Link
-              href="/privacy"
+              href="/policies/privacy-policy"
               className="text-xs text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
             >
               Privacy Policy
@@ -72,7 +72,7 @@ export default function Footer() {
             <span className="text-neutral-500">|</span>
 
             <Link
-              href="/terms"
+              href="/policies/terms-and-conditions"
               className="text-xs text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
             >
               Terms of Service

@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import CursorTrail from "@/components/CursorTrail";
+import LayoutWrapper from "@/components/LayoutWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -101,11 +102,9 @@ export default function RootLayout({ children }) {
 
         <CursorTrail />
         <SmoothScroll>
-          <Navbar />
           <main className="flex-1">
-            {children}
+            <LayoutWrapper>{children}</LayoutWrapper>
           </main>
-          <Footer />
         </SmoothScroll>
       </body>
     </html>
