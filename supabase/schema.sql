@@ -3,44 +3,53 @@
 -- 1. Create 'events' table
 CREATE TABLE IF NOT EXISTS public.events (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+
   title TEXT NOT NULL,
+  caption TEXT,
   description TEXT,
-  date DATE,
+  thumbnail TEXT,
   location TEXT,
-  image_url TEXT,
-  registration_link TEXT,
+  start_at TIMESTAMPTZ,
+  end_at TIMESTAMPTZ,
+  reg_link TEXT,
+
+  image_set TEXT[],
+  winners json,
+  organizers json,
+  volunteers json,
+  
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
--- 2. Create 'team' table
-CREATE TABLE IF NOT EXISTS public.team (
+-- 2. Create 'team_members' table
+CREATE TABLE IF NOT EXISTS public.team_members (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+
   name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  team_group TEXT NOT NULL,
   role TEXT NOT NULL,
-  image_url TEXT,
-  bio TEXT,
+  avatar_url TEXT,
+
+  batch TEXT NOT NULL,
+
   linkedin_url TEXT,
   github_url TEXT,
-  created_at TIMESTAMPTZ DEFAULT now()
-);
+  instagram_url TEXT,
 
--- 3. Create 'gallery' table
-CREATE TABLE IF NOT EXISTS public.gallery (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  image_url TEXT NOT NULL,
-  caption TEXT,
-  created_at TIMESTAMPTZ DEFAULT now()
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
+ 
 );
 
 -- Enable Row Level Security (RLS)
 ALTER TABLE public.events ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.team ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.gallery ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.team_members ENABLE ROW LEVEL SECURITY;
 
 -- Create Policies (Allow anyone to read data)
 CREATE POLICY "Allow public read access for events" ON public.events FOR SELECT USING (true);
-CREATE POLICY "Allow public read access for team" ON public.team FOR SELECT USING (true);
-CREATE POLICY "Allow public read access for gallery" ON public.gallery FOR SELECT USING (true);
+CREATE POLICY "Allow public read access for team" ON public.team_members FOR SELECT USING (true);
 
 -- Note: In a production app, you would add policies to allow only authenticated 
 -- users with 'admin' role to INSERT, UPDATE, and DELETE data.

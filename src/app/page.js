@@ -10,14 +10,13 @@ import {
 } from "lucide-react";
 
 import HeroSection from "@/components/HeroSection";
+import HomeTeamSection from "@/components/HomeTeamSection";
+import HomeAboutSection from "@/components/HomeAboutSection";
+
+
 
 export default function Home() {
-  const teamCategories = [
-    { title: "Technical", icon: Code2, description: "Managing workshops, hackathons, and society projects." },
-    { title: "Sponsorship", icon: Handshake, description: "Building partnerships and securing resources for events." },
-    { title: "Executive", icon: Users, description: "Overall administration and strategic planning of the society." },
-    { title: "Design & Media", icon: Palette, description: "Creating visual content, branding, and social media presence." },
-  ];
+
 
   const upcomingEvents = [
     { title: "Tech-Fest 2025", date: "April 20, 2025", badge: "Flagship" },
@@ -28,76 +27,40 @@ export default function Home() {
     <div className="flex flex-col items-center">
       <HeroSection />
 
-      <div className=" z-20  w-full h-[20rem] flex items-center  bg-white dark:bg-neutral-950 backdrop-blur-md">
-        <div className="max-w-5xl mx-auto px-6 py-5 grid grid-cols-2 sm:grid-cols-4 gap-30 text-center">
-          {[
-            { value: "300k", label: "New users" },
-            { value: "76M", label: "Assets Secured" },
-            { value: "10+", label: "Years of experience" },
-            { value: "98%", label: "Customer satisfaction" },
-          ].map(({ value, label }) => (
-            <div key={label}>
-              <div className="text-2xl md:text-3xl font-extrabold text-neutral-900 dark:text-white tracking-tight">
-                {value}
-              </div>
-              <div className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">{label}</div>
+      {/* Stats Section */}
+      <div className="w-full py-26 bg-white dark:bg-neutral-950">
+        <div className=" mx-auto lg:mx-28 px-6">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-5">
+
+            {/* Hero card */}
+            <div className="col-span-2 sm:col-span-1 bg-neutral-900 dark:bg-neutral-50 rounded-2xl p-7 flex items-end min-h-40">
+              <p className="text-[22px] font-semibold text-white dark:text-neutral-900 leading-snug">
+                Shaping student life at GNDU since day one
+              </p>
             </div>
-          ))}
+
+            {/* Stat cards */}
+            {[
+              { value: "450+", label: "Student members including alumni" },
+              { value: "50+", label: "Events hosted every year" },
+              { value: "175+", label: "Placements facilitated" },
+              { value: "8", label: "Team divisions" },
+            ].map(({ value, label }) => (
+              <div key={label} className="bg-neutral-100 dark:bg-neutral-900 rounded-2xl p-6 flex flex-col justify-between min-h-40">
+                <span className="text-sm text-neutral-400">{label}</span>
+                <span className="text-4xl font-semibold text-neutral-900 dark:text-neutral-50 tracking-tight leading-none">
+                  {value}
+                </span>
+              </div>
+            ))}
+
+          </div>
         </div>
       </div>
 
-      {/* About TSS Section */}
-      <section className="w-full py-20 bg-neutral-50 dark:bg-neutral-900/50">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
-          <div className="grid gap-12 lg:grid-cols-2 items-center">
-            <div className="space-y-4">
-              <h2 className="text-3xl font-extrabold uppercase tracking-tight sm:text-4xl">About TSS</h2>
-              <div className="space-y-4 text-neutral-500 dark:text-neutral-400 text-lg">
-                <p>
-                  Technical Student Society (TSS) at GNDU is a student-led organization dedicated to fostering a tech-driven culture on campus.
-                </p>
-                <p>
-                  Since its inception, TSS has served as a bridge between classroom knowledge and industrial application, offering students the tools, mentorship, and opportunities they need to excel in the rapidly evolving technology landscape.
-                </p>
-                <p>
-                  We believe in learning by doing, community building, and technical excellence.
-                </p>
-              </div>
-              <div className="pt-4">
-                <Link href="/about" className="inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm hover:underline underline-offset-4">
-                  Full Story <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-            <div className="relative aspect-video rounded-xl overflow-hidden bg-neutral-200 dark:bg-neutral-800 border dark:border-neutral-700 flex items-center justify-center">
-              <span className="text-neutral-400 dark:text-neutral-600 font-bold uppercase tracking-widest text-sm">Society Highlight Image</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HomeAboutSection />
 
-      {/* Team Categories Section */}
-      <section className="w-full py-20 bg-white dark:bg-black">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl font-extrabold uppercase tracking-tight sm:text-4xl">Our Core Teams</h2>
-            <p className="text-neutral-500 dark:text-neutral-400 mx-auto max-w-2xl">
-              Diverse specialized teams working in synergy to provide seamless technical experiences for the students.
-            </p>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {teamCategories.map((category) => (
-              <div key={category.title} className="group p-8 border rounded-xl dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-300">
-                <category.icon className="h-10 w-10 mb-6 text-neutral-900 dark:text-neutral-50 group-hover:scale-110 transition-transform" />
-                <h3 className="text-xl font-bold uppercase tracking-tight mb-2">{category.title}</h3>
-                <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                  {category.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <HomeTeamSection />
 
       {/* Events Section */}
       <section className="w-full py-20 bg-neutral-50 dark:bg-neutral-900/50">

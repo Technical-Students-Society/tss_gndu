@@ -10,7 +10,7 @@ const imgSrcs = [
 ];
 
 const COLS = 15;
-const ROWS = 8;
+const ROWS = 28;
 
 const imagePositions = [
   { row: 1, col: 2, imgIndex: 0 },
@@ -115,6 +115,7 @@ export default function HeroSection() {
         </div>
       </div>
 
+      <div className="absolute bottom-0 left-0 w-full h-48 pointer-events-none bg-gradient-to-t from-white dark:from-neutral-950 to-transparent" />
     </section>
   );
 }
