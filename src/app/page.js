@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Code2,
@@ -12,6 +14,7 @@ import {
 import HeroSection from "@/components/HeroSection";
 import HomeTeamSection from "@/components/HomeTeamSection";
 import HomeAboutSection from "@/components/HomeAboutSection";
+import CountUp from "./Animations/CountUp";
 
 
 
@@ -29,12 +32,12 @@ export default function Home() {
 
       {/* Stats Section */}
       <div className="w-full py-26 bg-white dark:bg-neutral-950">
-        <div className=" mx-auto lg:mx-28 px-6">
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-5">
+        <div className=" mx-auto lg:mx-28 px-6 max-sm:px-3">
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-5">
 
             {/* Hero card */}
             <div className="col-span-2 sm:col-span-1 bg-neutral-900 dark:bg-neutral-50 rounded-2xl p-7 flex items-end min-h-40">
-              <p className="text-[22px] font-semibold text-white dark:text-neutral-900 leading-snug">
+              <p className="text-[20px] font-semibold text-white dark:text-neutral-900 leading-snug">
                 Shaping student life at GNDU since day one
               </p>
             </div>
@@ -46,10 +49,18 @@ export default function Home() {
               { value: "175+", label: "Placements facilitated" },
               { value: "8", label: "Team divisions" },
             ].map(({ value, label }) => (
-              <div key={label} className="bg-neutral-100 dark:bg-neutral-900 rounded-2xl p-6 flex flex-col justify-between min-h-40">
+              <div key={label} className="bg-neutral-100 dark:bg-neutral-900 rounded-2xl p-6 max-sm:p-3 flex flex-col justify-between min-h-40">
                 <span className="text-sm text-neutral-400">{label}</span>
-                <span className="text-4xl font-semibold text-neutral-900 dark:text-neutral-50 tracking-tight leading-none">
-                  {value}
+                <span className="text-4xl max-sm:text-3xl font-semibold text-neutral-900 dark:text-neutral-50 tracking-tight leading-none">
+                  <CountUp
+                    from={0}
+                    to={value}
+                    separator=","
+                    direction="up"
+                    duration={1}
+                    className="count-up-text"
+                    startCounting={false}
+                  />+
                 </span>
               </div>
             ))}
