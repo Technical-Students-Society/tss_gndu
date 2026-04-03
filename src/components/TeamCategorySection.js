@@ -1,11 +1,37 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import MemberCard from "@/components/MemberCard";
+import MemberStack from "@/components/MemberStack";
 
 export default function TeamCategorySection({ title, members }) {
   const scrollRef = useRef(null);
+
+  // Group members into individuals vs stacks
+  const displayItems = useMemo(() => {
+    const roleGroups = members.reduce((acc, member) => {
+      const role = member.role.trim();
+      if (!acc[role]) acc[role] = [];
+      acc[role].push(member);
+      return acc;
+    }, {});
+
+    const items = [];
+    Object.entries(roleGroups).forEach(([role, roleMembers]) => {
+      const isMemberRole = role.toLowerCase().includes("member");
+      
+      // If multiple people share a leadership/specialized role (not "Member"), stack them
+      if (roleMembers.length > 1 && !isMemberRole) {
+        items.push({ type: 'stack', role, members: roleMembers });
+      } else {
+        // Otherwise, render them as individuals
+        roleMembers.forEach(m => items.push({ type: 'individual', data: m }));
+      }
+    });
+
+    return items;
+  }, [members]);
 
   const scrollLeft = () => {
     if (scrollRef.current) {
@@ -43,11 +69,15 @@ export default function TeamCategorySection({ title, members }) {
 
       <div
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto pb-4 no-scrollbar snap-x snap-mandatory"
+        className="flex gap-6 overflow-x-auto pb-12 pt-4 no-scrollbar snap-x snap-mandatory px-2"
       >
-        {members.map((member, index) => (
+        {displayItems.map((item, index) => (
           <div key={index} className="snap-start">
-            <MemberCard {...member} />
+            {item.type === 'stack' ? (
+              <MemberStack members={item.members} />
+            ) : (
+              <MemberCard {...item.data} />
+            )}
           </div>
         ))}
       </div>

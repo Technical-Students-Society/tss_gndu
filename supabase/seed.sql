@@ -27,7 +27,7 @@ VALUES
   );
 
 -- 2. Insert seed data into 'team_members'
-INSERT INTO public.team_members (name, role, team_group, linkedin_url, github_url, avatar_url)
+INSERT INTO public.team_members (name, role, team_group, batch, linkedin_url, github_url, avatar_url)
 VALUES 
-  ('Sahildeep Singh', 'Core Lead', 'Executives', 'https://linkedin.com/in/sahil-deep', 'https://github.com/sahil-deep', 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sahil'),
-  ('Kartikay Sharma', 'Technical Head', 'Technical', 'https://linkedin.com/in/kartikay-sharma', 'https://github.com/kartikay', 'https://api.dicebear.com/7.x/avataaars/svg?seed=Kartikay');
+  ('Sahildeep Singh', 'Core Lead', 'Executives', '2025-2026', 'https://linkedin.com/in/sahil-deep', 'https://github.com/sahil-deep', 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sahil'),
+  ('Kartikay Sharma', 'Technical Head', 'Technical', '2025-2026', 'https://linkedin.com/in/kartikay-sharma', 'https://github.com/kartikay', 'https://api.dicebear.com/7.x/avataaars/svg?seed=Kartikay');
