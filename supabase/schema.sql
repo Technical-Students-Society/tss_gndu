@@ -13,10 +13,10 @@ CREATE TABLE IF NOT EXISTS public.events (
   end_at TIMESTAMPTZ,
   reg_link TEXT,
 
-  image_set TEXT[],
-  winners json,
-  organizers json,
-  volunteers json,
+  image_set TEXT[],           -- array of URL strings
+  winners JSONB DEFAULT '[]', -- array of JSON objects
+  organizers JSONB DEFAULT '[]',
+  volunteers JSONB DEFAULT '[]',
   
   created_at TIMESTAMPTZ DEFAULT now()
 );
@@ -26,20 +26,19 @@ CREATE TABLE IF NOT EXISTS public.team_members (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
 
   name TEXT NOT NULL,
-  email TEXT NOT NULL,
-  phone TEXT NOT NULL,
+  email TEXT,
+  phone TEXT,
   team_group TEXT NOT NULL,
   role TEXT NOT NULL,
   avatar_url TEXT,
 
-  batch TEXT NOT NULL,
+  batch TEXT,
 
   linkedin_url TEXT,
   github_url TEXT,
   instagram_url TEXT,
 
   created_at TIMESTAMPTZ DEFAULT now(),
-  updated_at TIMESTAMPTZ DEFAULT now()
  
 );
 
