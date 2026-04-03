@@ -56,7 +56,7 @@ export default function Footer() {
             </p>
 
             <p className="text-xs text-neutral-400 mt-1">
-              Built & Maintained by <a href="https://www.linkedin.com/in/kartikay-sharma2004/" className="text-white">Kartikay Sharma</a> & <a href="https://www.linkedin.com/in/sahil-singh-0421b7275" className="text-white">Sahildeep Singh</a>
+              Built & Maintained by <a href="https://www.linkedin.com/in/kartikay-sharma2004/" className="dark:text-white text-neutral-900">Kartikay Sharma</a> & <a href="https://www.linkedin.com/in/sahil-singh-0421b7275" className="dark:text-white text-neutral-900">Sahildeep Singh</a>
             </p>
           </div>
 
