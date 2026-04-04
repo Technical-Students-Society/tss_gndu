@@ -30,6 +30,7 @@ const ScrollToTop = () => {
         >
             <ArrowUp className="dark:text-black text-white" />
         </button>
+        
     );
 };
 
