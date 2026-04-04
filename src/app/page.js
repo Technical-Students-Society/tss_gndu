@@ -15,6 +15,7 @@ import HeroSection from "@/components/HeroSection";
 import HomeTeamSection from "@/components/HomeTeamSection";
 import HomeAboutSection from "@/components/HomeAboutSection";
 import CountUp from "./Animations/CountUp";
+import ScrollToTop from "./ScrollToTop";
 
 
 
@@ -28,6 +29,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center">
+      <ScrollToTop/>
       <HeroSection />
 
       {/* Stats Section */}
