@@ -13,6 +13,8 @@ async function getEvents() {
   }
 }
 
+export const revalidate = 0;
+
 export default async function EventsPage() {
   const events = await getEvents();
   return <EventsClient events={events} />;
