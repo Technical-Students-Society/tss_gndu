@@ -5,7 +5,7 @@ import EventModal from "@/components/EventModal";
 
 export default function EventsClient({ events }) {
   const [selectedEvent, setSelectedEvent] = useState(null);
-  
+
   const now = new Date();
   const upcomingEvents = events.filter((e) => new Date(e.start_at) >= now);
   const pastEvents = events.filter((e) => new Date(e.start_at) < now);
@@ -46,7 +46,7 @@ export default function EventsClient({ events }) {
         </div>
 
         {/* Meta */}
-        <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-1">
+        <p suppressHydrationWarning className="text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-1">
           {category}&nbsp;&nbsp;•&nbsp;&nbsp;{formatDate(event.start_at)}
         </p>
 
