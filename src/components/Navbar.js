@@ -86,7 +86,7 @@ export default function Navbar() {
 
             <button
               onClick={toggleTheme}
-              className="group p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-all duration-300 transform active:scale-95"
+              className="group p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-all duration-300 transform active:scale-95 cursor-pointer"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? (
