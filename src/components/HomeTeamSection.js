@@ -121,7 +121,7 @@ export default function HomeTeamSection() {
         {/* Header row */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12">
           <div>
-            <p className="text-[12px] flex gap-2 items-center font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-3">
+            <p className="text-xs flex gap-2 items-center font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-3">
               <Users />
               <ShinyText
                 text="Our Teams"

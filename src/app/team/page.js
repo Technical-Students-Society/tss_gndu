@@ -1,6 +1,8 @@
 import TeamCategorySection from "@/components/TeamCategorySection";
 import BatchSelector from "@/components/BatchSelector";
 import api from "@/utils/api";
+import ShinyText from "../Animations/ShinyText";
+import { Users } from "lucide-react";
 
 async function getTeamMembers(batch) {
   try {
@@ -53,25 +55,50 @@ export default async function TeamPage({ searchParams }) {
   });
 
   return (
-    <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32 py-20">
-      <div className="space-y-10 md:space-y-20 ">
+    <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32 sm:py-20 py-15">
+      <div className="space-y-12 md:space-y-20">
+
         {/* Page Header */}
-        <div className="space-y-6 pb-8">
-          <div className="space-y-4">
-            <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-2">
-              The Community
-            </p>
-            <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl lg:text-6xl uppercase text-neutral-900 dark:text-neutral-50 mb-0 inline-flex items-start gap-2 relative">
-              Meet the Team
-              <span className="-translate-y-12 self-start">
-                <BatchSelector />
-              </span>
-            </h1>
-            <p className="text-lg md:text-xl text-neutral-400 dark:text-neutral-500  max-w-2xl leading-relaxed">
-              The specialized minds behind TSS GNDU, dedicated to empowering our student community through technology, design, and culture.
-            </p>
+        <div className="relative pb-10 border-b border-neutral-200 dark:border-neutral-800">
+
+          {/* Top Tag */}
+          <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-6">
+            <Users />
+             <ShinyText
+                text="The Community"
+                speed={2.8}
+                color="#b5b5b5"
+                shineColor="#ffffff"
+              />
+            
+          </p>
+
+          {/* Heading + Selector */}
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+
+            <div className="space-y-4">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 leading-[1.1]">
+                Meet the Team
+              </h1>
+
+              <p className="text-sm md:text-base text-neutral-500 dark:text-neutral-400 max-w-xl leading-relaxed">
+                The specialized minds behind TSS GNDU — building, designing, and shaping
+                a stronger student community through innovation.
+              </p>
+            </div>
+
+            {/* Selector */}
+            <div>
+              <BatchSelector />
+            </div>
+
           </div>
+
+          {/* Subtle Glow */}
+           <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-75 h-37.5 bg-neutral-300/20 dark:bg-neutral-700/20 blur-3xl pointer-events-none" />
+
         </div>
+
 
         {/* Categories */}
         <div className="space-y-15">

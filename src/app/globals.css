@@ -180,6 +180,7 @@ body {
   color: #fff;
 }
 
+
 .scroll-x-hide::-webkit-scrollbar {
   display: none;
   /* hide scrollbar for Chrome, Safari */

@@ -20,7 +20,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl font-extrabold uppercase">
+        <h1 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-wide">
           About TSS GNDU
         </h1>
 
