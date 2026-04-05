@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+// Currently not indexed due to development phase

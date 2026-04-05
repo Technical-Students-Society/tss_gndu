@@ -35,11 +35,11 @@ export const metadata = {
   authors: [{ name: "Technical Students' Society GNDU" }],
   creator: "TSS GNDU",
 
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
+  // icons: {
+  //   icon: "/favicon.ico",
+  //   shortcut: "/favicon.ico",
+  //   apple: "/apple-touch-icon.png",
+  // },
 
   openGraph: {
     title: "TSS GNDU | Technical Students' Society",
