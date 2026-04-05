@@ -165,7 +165,7 @@ export default function HomeTeamSection() {
           ))}
         </div>
       </div>
-      <hr className="top-20 relative mx-15 dark:border-neutral-800" />
+      <hr className="top-20 relative mx-15 max-sm:mx-5 dark:border-neutral-800" />
 
     </section>
   );
