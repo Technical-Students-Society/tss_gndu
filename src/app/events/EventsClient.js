@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import EventModal from "@/components/EventModal";
+import ShinyText from "../Animations/ShinyText";
+import { Calendars } from 'lucide-react';
 
 export default function EventsClient({ events }) {
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -97,27 +99,59 @@ export default function EventsClient({ events }) {
     <>
       <div className="container mx-auto px-6 py-16 max-w-7xl">
         {/* ── Page Header (two-column like reference) ── */}
-        <div className="border-b border-neutral-200 dark:border-neutral-800 pb-10 mb-12">
-          <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-4">
-            Events
+        <div className="relative border-b border-neutral-200 dark:border-neutral-800 pb-12 mb-14">
+
+          {/* Top Tag */}
+          <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-6">
+            <Calendars />
+            <ShinyText
+              text="Events"
+              speed={2.8}
+              color="#b5b5b5"
+              shineColor="#ffffff"
+            />
           </p>
-          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 max-w-sm leading-tight">
-              What's happening at the frontier
-            </h1>
-            <div className="sm:max-w-xs space-y-4">
-              <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
+
+          {/* Main Content */}
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+
+            {/* Left */}
+            <div className="space-y-5 max-w-xl">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900 dark:text-neutral-50 leading-[1.1]">
+                What`s happening at the{" "}
+                <span className="text-neutral-400">frontier</span>
+              </h1>
+
+              <p className="text-sm sm:text-base text-neutral-500 dark:text-neutral-400 leading-relaxed">
                 Workshops, hackathons, and competitions — stay updated with our
                 latest technical events and community gatherings.
               </p>
+            </div>
+
+            {/* Right CTA */}
+            <div className="flex flex-col items-start lg:items-end gap-4">
+
               <a
                 href="#upcoming"
-                className="inline-flex items-center gap-1 text-sm font-semibold text-neutral-900 dark:text-neutral-50 border border-neutral-300 dark:border-neutral-700 rounded-full px-4 py-1.5 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                className="group inline-flex items-center gap-2 text-sm font-semibold text-neutral-900 dark:text-neutral-50 border border-neutral-300 dark:border-neutral-700 rounded-full px-5 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
               >
                 Explore Events
+                <span className="transform transition group-hover:translate-x-1">
+                  →
+                </span>
               </a>
+
+              {/* Optional small info */}
+              <p className="text-xs text-neutral-400">
+                Updated regularly • Don’t miss out
+              </p>
+
             </div>
           </div>
+
+          {/* Subtle Glow (premium touch) */}
+          <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[300px] h-[150px] bg-neutral-300/20 dark:bg-neutral-700/20 blur-3xl pointer-events-none" />
+
         </div>
 
         {/* ── Upcoming Events ── */}
