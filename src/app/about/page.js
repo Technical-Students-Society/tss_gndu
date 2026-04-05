@@ -6,7 +6,7 @@ export default function AboutPage() {
 
       {/* Header */}
       <div className="text-center space-y-6 mb-16">
-        
+
         {/* Logo */}
         <div className="flex justify-center">
           <div className="relative w-20 h-20 rounded-xl overflow-hidden border dark:border-neutral-600 bg-white dark:bg-black">
@@ -27,7 +27,11 @@ export default function AboutPage() {
         <p className="text-lg sm:text-xl text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto">
           Empowering students with technical knowledge and real-world skills.
         </p>
+        
       </div>
+
+      {/* Subtle Glow */}
+      <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-75 h-37.5 bg-neutral-300/20 dark:bg-neutral-700/20 blur-3xl pointer-events-none" />
 
       {/* Content */}
       <div className="space-y-12">
