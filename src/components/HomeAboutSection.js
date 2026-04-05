@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React, { useState, useEffect, useCallback } from "react";
-import { ArrowUpRight, Users, Sparkles } from "lucide-react";
+import { ArrowUpRight, Users, Sparkles, CirclePile   } from "lucide-react";
 import CountUp from "@/app/Animations/CountUp";
 import ShinyText from "@/app/Animations/ShinyText";
 
@@ -29,15 +29,16 @@ export default function HomeAboutSection() {
 
   return (
     <section className="w-full py-24 bg-white dark:bg-neutral-950">
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
+      <div className="container mx-auto px-4 lg:px-28 xl:px-32">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* Left — text */}
           <div>
 
             {/* Tag */}
-            <p className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-6">
-              <span className="w-6 h-px bg-neutral-300 dark:bg-neutral-700" />
+            <p className="flex items-center gap-2 text-[12px] font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-6">
+              {/* <span className="w-6 h-px bg-neutral-300 dark:bg-neutral-700" /> */}
+              <CirclePile  />
               <ShinyText
                 text="About TSS"
                 speed={2.8}

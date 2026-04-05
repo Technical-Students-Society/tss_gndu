@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ShinyText from "@/app/Animations/ShinyText";
 
 const imgSrcs = [
   "/hero/greeky.jpg",
@@ -71,11 +72,16 @@ export default function HeroSection() {
       <div className="relative z-20 flex flex-col items-center justify-center min-h-screen text-center px-6 pb-24">
 
         {/* Badge */}
-        <div className="flex items-center gap-2 mb-6 text-xs text-neutral-500 dark:text-neutral-400 tracking-wide">
+        <div className="flex items-center gap-2 mb-6 text-xs text-neutral-500 dark:text-neutral-400 tracking-wide bg-[#0C0C0E] p-2 rounded-full">
           <span className="w-2 h-2 rounded-full bg-orange-400 inline-block" />
           <span className="w-2 h-2 rounded-full bg-orange-400 inline-block absolute animate-ping" />
+          <ShinyText
+            text="Technical Students' Society"
+            speed={2.8}
+            color="#b5b5b5"
+            shineColor="#ffffff"
+          />
 
-          Technical Students' Society
         </div>
 
         {/* Headline */}

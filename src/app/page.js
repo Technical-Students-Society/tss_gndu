@@ -16,7 +16,7 @@ import HomeTeamSection from "@/components/HomeTeamSection";
 import HomeAboutSection from "@/components/HomeAboutSection";
 import CountUp from "./Animations/CountUp";
 import ScrollToTop from "./ScrollToTop";
-
+import ShinyText from "./Animations/ShinyText";
 
 
 export default function Home() {
@@ -29,7 +29,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center">
-      <ScrollToTop/>
+      <ScrollToTop />
       <HeroSection />
 
       {/* Stats Section */}
@@ -77,15 +77,15 @@ export default function Home() {
 
       {/* Events Section */}
       <section className="w-full py-20 bg-neutral-50 dark:bg-neutral-900/50">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+        <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
+          <div className="flex flex-col md:flex-row justify-between items-start max-md:items-center mb-12 gap-4">
             <div className="space-y-4 text-center md:text-left">
-              <h2 className="text-3xl font-extrabold uppercase tracking-tight sm:text-4xl">Events Spotlight</h2>
+              <h2 className="text-3xl font-extrabold tracking-wide sm:text-4xl">Events Spotlight</h2>
               <p className="text-neutral-500 dark:text-neutral-400 max-w-xl">
                 Stay tuned with our upcoming highlights and ongoing competitions.
               </p>
             </div>
-            <Link href="/events" className="pb-2 inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm hover:underline underline-offset-4">
+            <Link href="/events" className="pt-2 inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm hover:underline underline-offset-4">
               All Events <Calendar className="h-4 w-4" />
             </Link>
           </div>
@@ -94,7 +94,13 @@ export default function Home() {
               <div key={event.title} className="p-8 border rounded-xl bg-white dark:bg-black dark:border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-6">
                 <div className="space-y-2 text-center sm:text-left">
                   <div className="inline-flex px-2 text-[10px] font-bold uppercase tracking-widest border border-neutral-200 dark:border-neutral-700 rounded text-neutral-400 mb-2">
-                    {event.badge}
+                    <ShinyText
+                      text={event.badge}
+                      speed={2.8}
+                      color="#b5b5b5"
+                      shineColor="#ffffff"
+                    />
+                    
                   </div>
                   <h3 className="text-2xl font-bold uppercase tracking-tight">{event.title}</h3>
                   <p className="text-sm font-semibold text-neutral-400 uppercase tracking-widest">{event.date}</p>
@@ -110,9 +116,9 @@ export default function Home() {
 
       {/* FAQ Section */}
       <section className="w-full py-20 bg-white dark:bg-black">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
+        <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
           <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl font-extrabold uppercase tracking-tight sm:text-4xl text-center">Common Questions</h2>
+            <h2 className="text-3xl font-extrabold uppercase tracking-wide sm:text-4xl text-center">Common Questions</h2>
             <p className="text-neutral-500 dark:text-neutral-400 mx-auto max-w-2xl">
               Everything you need to know about getting involved with TSS GNDU.
             </p>
@@ -148,9 +154,9 @@ export default function Home() {
 
       {/* Gallery Sneak Peak Section */}
       <section className="w-full py-20 bg-white dark:bg-black">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
+        <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
           <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl font-extrabold uppercase tracking-tight sm:text-4xl text-center">Gallery Sneak Peak</h2>
+            <h2 className="text-3xl font-extrabold uppercase tracking-wide sm:text-4xl text-center">Gallery Sneak Peak</h2>
             <p className="text-neutral-500 dark:text-neutral-400 mx-auto max-w-2xl">
               Capturing moments of innovation and community from our recent gatherings.
             </p>
@@ -166,7 +172,7 @@ export default function Home() {
           </div>
           <div className="text-center">
             <Link href="/gallery" className="inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm hover:underline underline-offset-4">
-              Explore Full Gallery <ArrowRight className="h-4 w-4" />
+              Explore Full Gallery <ArrowRight className="h-4 w-4 -rotate-45" />
             </Link>
           </div>
         </div>

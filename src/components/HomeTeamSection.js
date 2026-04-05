@@ -117,7 +117,7 @@ const teamCategories = [
 export default function HomeTeamSection() {
   return (
     <section className="w-full py-16 pt-30 bg-white dark:bg-black">
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
+      <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
         {/* Header row */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12">
           <div>
