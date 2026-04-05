@@ -4,12 +4,16 @@ export default function GalleryPage() {
   return (
     <div className="container mx-auto px-4 py-20">
       <div className="space-y-12 text-center">
-        <div className="space-y-4">
-          <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl uppercase">Gallery</h1>
-          <p className="text-xl text-neutral-500 dark:text-neutral-400 mx-auto max-w-2xl">
+        <div className="space-y-4 relative border-b border-neutral-200 dark:border-neutral-800 pb-12 mb-14">
+          <h1 className="text-4xl font-extrabold tracking-wide sm:text-5xl">Gallery</h1>
+          <p className="text-sm sm:text-base text-neutral-500 dark:text-neutral-400 mx-auto leading-relaxed">
             A visual journey of our achievements, events, and community spirit.
           </p>
+          
         </div>
+        
+        {/* Subtle Glow (premium touch) */}
+        <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[300px] h-[150px] bg-neutral-300/20 dark:bg-neutral-700/20 blur-3xl pointer-events-none" />
 
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {images.map((image) => (
@@ -24,6 +28,7 @@ export default function GalleryPage() {
           ))}
         </div>
       </div>
+
     </div>
   );
 }

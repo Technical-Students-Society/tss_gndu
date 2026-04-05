@@ -76,7 +76,7 @@ export default function Home() {
       <HomeTeamSection />
 
       {/* Events Section */}
-      <section className="w-full py-20 bg-neutral-50 dark:bg-neutral-900/50">
+      <section className="w-full py-20 bg-neutral-50 dark:bg-black">
         <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
           <div className="flex flex-col md:flex-row justify-between items-start max-md:items-center mb-12 gap-4">
             <div className="space-y-4 text-center md:text-left">
@@ -112,13 +112,15 @@ export default function Home() {
             ))}
           </div>
         </div>
+      <hr className="top-20 relative mx-15 dark:border-neutral-800" />
       </section>
+
 
       {/* FAQ Section */}
       <section className="w-full py-20 bg-white dark:bg-black">
         <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
           <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl font-extrabold uppercase tracking-wide sm:text-4xl text-center">Common Questions</h2>
+            <h2 className="text-3xl font-extrabold tracking-wide sm:text-4xl text-center">Common Questions</h2>
             <p className="text-neutral-500 dark:text-neutral-400 mx-auto max-w-2xl">
               Everything you need to know about getting involved with TSS GNDU.
             </p>
@@ -150,13 +152,15 @@ export default function Home() {
             </div>
           </div>
         </div>
+      <hr className="top-20 relative mx-15 dark:border-neutral-800" />
       </section>
+
 
       {/* Gallery Sneak Peak Section */}
       <section className="w-full py-20 bg-white dark:bg-black">
         <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
           <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl font-extrabold uppercase tracking-wide sm:text-4xl text-center">Gallery Sneak Peak</h2>
+            <h2 className="text-3xl font-extrabold tracking-wide sm:text-4xl text-center">Gallery Sneak Peak</h2>
             <p className="text-neutral-500 dark:text-neutral-400 mx-auto max-w-2xl">
               Capturing moments of innovation and community from our recent gatherings.
             </p>

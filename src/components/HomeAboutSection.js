@@ -28,7 +28,7 @@ export default function HomeAboutSection() {
   }, [next, isHovered]);
 
   return (
-    <section className="w-full py-24 bg-white dark:bg-neutral-950">
+    <section className="w-full py-24 bg-white dark:bg-black">
       <div className="container mx-auto px-4 lg:px-28 xl:px-32">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
@@ -176,6 +176,7 @@ export default function HomeAboutSection() {
           </div>
         </div>
       </div>
+      <hr className="top-20 relative mx-15 dark:border-neutral-800" />
     </section>
   );
 }
