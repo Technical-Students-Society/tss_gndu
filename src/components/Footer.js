@@ -17,10 +17,23 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wider mb-4 opacity-75">Quick Links</h4>
             <ul className="space-y-2">
-              <li><Link href="/" className="text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">Home</Link></li>
-              <li><Link href="/about" className="text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">About Us</Link></li>
-              <li><Link href="/events" className="text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">Events</Link></li>
-              <li><Link href="/team" className="text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">Our Team</Link></li>
+              {[
+                { name: "Home", link: "/" },
+                { name: "About", link: "/about" },
+                { name: "Events", link: "/events" },
+                { name: "Our Team", link: "/team" },
+              ].map((item, index) => (
+                <li key={index}>
+                  <Link
+                    href={item.link}
+                    className="group flex items-center gap-1 text-sm text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
+                  >
+                    <span>{item.name}</span>
+
+                    <ArrowRight className="h-4 w-4 -rotate-45 opacity-70 group-hover:translate-x-1 transition-all duration-200 dark:text-white" />
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
