@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useState, useEffect, useCallback } from "react";
 import { ArrowUpRight, Users, Sparkles } from "lucide-react";
 import CountUp from "@/app/Animations/CountUp";
+import ShinyText from "@/app/Animations/ShinyText";
 
 const SLIDES = [
   { label: "Annual Hackathon 2024", src: "/slide1.jpg" },
@@ -37,7 +38,12 @@ export default function HomeAboutSection() {
             {/* Tag */}
             <p className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-6">
               <span className="w-6 h-px bg-neutral-300 dark:bg-neutral-700" />
-              About TSS
+              <ShinyText
+                text="About TSS"
+                speed={2.8}
+                color="#b5b5b5"
+                shineColor="#ffffff"
+              />
             </p>
 
             {/* Heading */}

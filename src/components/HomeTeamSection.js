@@ -1,4 +1,6 @@
 import React from 'react';
+import { Users } from "lucide-react";
+import ShinyText from '@/app/Animations/ShinyText';
 
 // Visuals
 const TerminalVisual = () => (
@@ -119,8 +121,15 @@ export default function HomeTeamSection() {
         {/* Header row */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12">
           <div>
-            <p className="text-[11px] font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-3">
-              Our Teams
+            <p className="text-[12px] flex gap-2 items-center font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-3">
+              <Users />
+              <ShinyText
+                text="Our Teams"
+                speed={2.8}
+                color="#b5b5b5"
+                shineColor="#ffffff"
+              />
+              
             </p>
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-50 max-w-md leading-tight">
               The core team divisions of TSS with Executives
