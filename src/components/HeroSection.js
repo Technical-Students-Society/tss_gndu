@@ -115,7 +115,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full h-48 pointer-events-none bg-gradient-to-t from-white dark:from-neutral-950 to-transparent" />
+      <div className="absolute bottom-0 left-0 w-full h-48 pointer-events-none bg-linear-to-t from-white dark:from-neutral-950 to-transparent" />
     </section>
   );
 }

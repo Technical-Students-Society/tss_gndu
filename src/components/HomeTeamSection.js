@@ -37,7 +37,7 @@ const BarsVisual = () => (
 const DotsVisual = () => {
   const colors = ['#f87171', '#fb923c', '#facc15', '#4ade80', '#60a5fa', '#a78bfa', '#f472b6', '#34d399', '#fbbf24', '#818cf8', '#fb923c', '#4ade80', '#e879f9', '#38bdf8', '#f87171'];
   return (
-    <div className="flex flex-wrap gap-1.5 w-[100px]">
+    <div className="flex flex-wrap gap-1.5 w-25">
       {colors.map((c, i) => <div key={i} className="w-2.5 h-2.5 rounded-full" style={{ background: c }} />)}
     </div>
   );
@@ -80,7 +80,7 @@ const MediaVisual = () => (
     </svg>
     <div className="flex items-center gap-0.5 h-9">
       {[12, 24, 18, 32, 20, 14, 28, 16, 22].map((h, i) => (
-        <div key={i} className="w-[3px] rounded-full bg-neutral-300 dark:bg-neutral-700" style={{ height: `${h}px` }} />
+        <div key={i} className="w-0.75 rounded-full bg-neutral-300 dark:bg-neutral-700" style={{ height: `${h}px` }} />
       ))}
     </div>
   </div>
@@ -136,10 +136,10 @@ export default function HomeTeamSection() {
           {teamCategories.map((category) => (
             <div
               key={category.title}
-              className="group flex flex-col justify-between rounded-2xl border bg-neutral-100 border-neutral-200 dark:border-neutral-800  dark:bg-neutral-950 p-6 hover:border-neutral-400 dark:hover:border-neutral-600 hover:-translate-y-0.5 transition-all duration-200 min-h-[200px]"
+              className="group flex flex-col justify-between rounded-2xl border bg-neutral-100 border-neutral-200 dark:border-neutral-800  dark:bg-neutral-950 p-6 hover:border-neutral-400 dark:hover:border-neutral-600 hover:-translate-y-0.5 transition-all duration-200 min-h-50"
             >
               {/* Visual artifact area */}
-              <div className="h-[72px] flex items-center mb-5">
+              <div className="h-18 flex items-center mb-5">
                 <category.Visual />
               </div>
 

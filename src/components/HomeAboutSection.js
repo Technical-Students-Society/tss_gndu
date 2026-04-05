@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import React, { useState, useEffect, useCallback } from "react";
 import { ArrowUpRight, Users, Sparkles } from "lucide-react";
 import CountUp from "@/app/Animations/CountUp";
@@ -90,7 +89,7 @@ export default function HomeAboutSection() {
 
             {/* Image Card */}
             <div
-              className="group aspect-[4/3] rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800 relative"
+              className="group aspect-4/3 rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800 relative"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
@@ -104,18 +103,18 @@ export default function HomeAboutSection() {
                     pointerEvents: i === current ? "auto" : "none",
                   }}
                 >
-                  <Image
+                  <img
                     src={slide.src}
                     alt={slide.label}
-                    fill
+                    fill="true"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    priority={i === 0}
+                    priority="true"
                   />
                 </div>
               ))}
 
               {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
 
               {/* Indicators */}
               <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
@@ -154,7 +153,7 @@ export default function HomeAboutSection() {
                 <p className="text-lg font-semibold text-neutral-900 dark:text-white">
                   <CountUp
                     from={0}
-                    to={8}
+                    to={12}
                     separator=","
                     direction="up"
                     duration={1}

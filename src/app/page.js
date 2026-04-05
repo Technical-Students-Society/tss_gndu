@@ -49,7 +49,7 @@ export default function Home() {
               { value: "450+", label: "Student members including alumni" },
               { value: "50+", label: "Events hosted every year" },
               { value: "175+", label: "Placements facilitated" },
-              { value: "8", label: "Team divisions" },
+              { value: "12", label: "Team divisions" },
             ].map(({ value, label }) => (
               <div key={label} className="bg-neutral-100 dark:bg-neutral-900 rounded-2xl p-6 max-sm:p-3 flex flex-col justify-between min-h-40">
                 <span className="text-sm text-neutral-400">{label}</span>
