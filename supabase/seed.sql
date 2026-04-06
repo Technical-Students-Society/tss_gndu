@@ -11,7 +11,7 @@ VALUES
     'https://images.unsplash.com/photo-1540575467063-178a50c2df87', 
     'https://tech-fest.com/register',
     ARRAY['https://images.unsplash.com/photo-1540575467063-178a50c2df87', 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d'],
-    '[{"name": "Team Alpha", "position": "1st", "prize": "10k"}, {"name": "Team Beta", "position": "2nd", "prize": "5k"}]',
+    '[{"name": "Team Alpha", "position": "1st"}, {"name": "Team Beta", "position": "2nd"}]',
     '[{"name": "Sahildeep Singh", "role": "Lead"}, {"name": "Kartikay Sharma", "role": "Tech Head"}]'
   ),
   (

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { X, ChevronLeft, ChevronRight, Trophy, Users, HeartHandshake } from "lucide-react";
+import { formatEventDateTime } from "@/utils/dateFormatter";
 import gsap from "gsap";
 
 export default function EventModal({ event, onClose }) {
@@ -70,14 +71,6 @@ export default function EventModal({ event, onClose }) {
     setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
-  const formatDate = (dateStr) =>
-    dateStr
-      ? new Date(dateStr).toLocaleDateString("en-US", {
-          month: "long",
-          day: "numeric",
-          year: "numeric",
-        })
-      : "Date TBA";
 
   return (
     <div
@@ -96,7 +89,7 @@ export default function EventModal({ event, onClose }) {
               {event.title}
             </h2>
             <p className="text-sm font-semibold text-neutral-500 dark:text-neutral-400 mt-1 uppercase tracking-widest">
-              {formatDate(event.start_at)}
+              {formatEventDateTime(event.start_at, event.end_at)}
             </p>
           </div>
           <button
@@ -199,29 +192,26 @@ export default function EventModal({ event, onClose }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             
             {/* Winners */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 text-yellow-600 dark:text-yellow-500">
-                <Trophy size={20} />
-                <h3 className="text-sm font-bold uppercase tracking-widest text-neutral-900 dark:text-neutral-50">
-                  Winners
-                </h3>
-              </div>
-              <div className="space-y-3">
-                {winners.length > 0 ? (
-                  winners.map((winner, idx) => (
+            {winners.length > 0 && (
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 text-yellow-600 dark:text-yellow-500">
+                  <Trophy size={20} />
+                  <h3 className="text-sm font-bold uppercase tracking-widest text-neutral-900 dark:text-neutral-50">
+                    Winners
+                  </h3>
+                </div>
+                <div className="space-y-3">
+                  {winners.map((winner, idx) => (
                     <div key={idx} className="bg-neutral-50 dark:bg-neutral-800/50 p-3 rounded-lg border border-neutral-100 dark:border-neutral-800">
                       <p className="font-bold text-neutral-900 dark:text-neutral-50">{winner.name}</p>
                       <div className="flex justify-between items-center mt-1 text-xs text-neutral-500 dark:text-neutral-400">
                         <span>{winner.position} Position</span>
-                        {winner.prize && <span className="font-semibold text-green-600 dark:text-green-400">{winner.prize}</span>}
                       </div>
                     </div>
-                  ))
-                ) : (
-                  <p className="text-sm text-neutral-400 dark:text-neutral-500 italic">No data available.</p>
-                )}
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Organizers */}
             <div className="space-y-4">

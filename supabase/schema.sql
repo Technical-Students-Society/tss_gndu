@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS public.events (
   reg_link TEXT,
 
   image_set TEXT[],           -- array of URL strings
-  winners JSONB DEFAULT '[]', -- array of JSON objects
+  winners JSONB DEFAULT '[]', -- array of JSON objects: [{ name, position }]
   organizers JSONB DEFAULT '[]',
   volunteers JSONB DEFAULT '[]',
   

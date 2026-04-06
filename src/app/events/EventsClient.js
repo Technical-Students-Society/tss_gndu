@@ -30,26 +30,38 @@ export default function EventsClient({ events }) {
         key={event.id}
         className="group flex flex-col border-b border-neutral-200 dark:border-neutral-800 pb-8 last:border-0 last:pb-0"
       >
-        {/* Thumbnail */}
-        <div className="w-full aspect-video overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-900 mb-4 cursor-pointer" onClick={() => isPast && setSelectedEvent(event)}>
-          {event.thumbnail ? (
-            <img
-              src={event.thumbnail}
-              alt={event.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              loading="lazy"
-              decoding="async"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-neutral-400 text-xs font-semibold uppercase tracking-widest group-hover:scale-105 transition-transform duration-500">
-              No Preview
+        {/* Thumbnail and Category Badge */}
+        <div className="relative w-full aspect-video mb-4 cursor-pointer" onClick={() => (isPast ? setSelectedEvent(event) : null)}>
+          {/* Inner container with absolute inset-0 to force aspect-ratio, while allowing badge to overflow outside */}
+          <div className="absolute inset-0 overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-sm">
+            {event.thumbnail ? (
+              <img
+                src={event.thumbnail}
+                alt={event.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-neutral-400 text-xs font-semibold uppercase tracking-widest group-hover:scale-105 transition-transform duration-500">
+                No Preview
+              </div>
+            )}
+          </div>
+
+          {/* Category Badge (Only for Upcoming) */}
+          {!isPast && (
+            <div className="absolute top-0 right-0 z-20 translate-x-2 -translate-y-1/2">
+              <span className="px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.15em] backdrop-blur-xl rounded-xl border bg-purple-600 text-white border-purple-700 shadow-xl  ">
+                {category}
+              </span>
             </div>
           )}
         </div>
 
         {/* Meta */}
         <p suppressHydrationWarning className="text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-1">
-          {category}&nbsp;&nbsp;•&nbsp;&nbsp;{formatDate(event.start_at)}
+          {formatDate(event.start_at)}
         </p>
 
         {/* Title */}
@@ -157,7 +169,7 @@ export default function EventsClient({ events }) {
         {/* ── Upcoming Events ── */}
         {upcomingEvents.length > 0 && (
           <section id="upcoming" className="mb-16">
-            <h2 className="text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-8">
+            <h2 className=" font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-8">
               Upcoming
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
@@ -169,7 +181,7 @@ export default function EventsClient({ events }) {
         {/* ── Past Events ── */}
         {pastEvents.length > 0 && (
           <section>
-            <h2 className="text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-8">
+            <h2 className=" font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-8">
               Past Events
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
