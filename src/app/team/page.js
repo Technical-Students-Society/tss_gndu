@@ -55,7 +55,7 @@ export default async function TeamPage({ searchParams }) {
   });
 
   return (
-    <div className="container mx-auto px-6 md:px-12 lg:px-20 xl:px-32 sm:py-20 py-15">
+    <div className="container mx-auto px-6 py-20 max-w-7xl"> 
       <div className="space-y-12 md:space-y-20">
 
         {/* Page Header */}

@@ -29,8 +29,10 @@ export default function GalleryClient({ images }) {
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
           <div className="space-y-4 max-w-3xl">
             <p className="flex items-center justify-center sm:justify-start gap-2 text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-2">
-              <ImageIcon size={14} />
-              <ShinyText text="Visual Archive" speed={3} />
+              <ImageIcon size={20} />
+              <ShinyText text="Visual Archive" speed={2.8}
+                color="#b5b5b5"
+                shineColor="#ffffff" />
             </p>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900 dark:text-neutral-50 tracking-tight leading-[1.1]">
               Moments that <span className="text-neutral-400">define us</span>

@@ -13,6 +13,14 @@ export default function Footer() {
             <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-xs">
               Technical Student Society (TSS) at Guru Nanak Dev University. Bridging the gap between knowledge and career opportunities since its inception.
             </p>
+             <Link href='/verify'
+                className="group inline-flex items-center gap-2 text-xs font-semibold text-neutral-900 dark:text-neutral-50 border border-neutral-300 dark:border-neutral-700 rounded-full px-5 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
+              >
+                Verify Certificate
+                <span className="transform transition duration-300 group-hover:translate-x-1">
+                  <ArrowRight className="h-4 w-4"/>
+                </span>
+              </Link>
           </div>
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wider mb-4 opacity-75">Quick Links</h4>
@@ -22,7 +30,7 @@ export default function Footer() {
                 { name: "About", link: "/about" },
                 { name: "Events", link: "/events" },
                 { name: "Our Team", link: "/team" },
-                { name: "Verify Certificate", link: "/verify" },
+                // { name: "Verify Certificate", link: "/verify" },
               ].map((item, index) => (
                 <li key={index}>
                   <Link
