@@ -22,6 +22,7 @@ export default function Footer() {
                 { name: "About", link: "/about" },
                 { name: "Events", link: "/events" },
                 { name: "Our Team", link: "/team" },
+                { name: "Verify Certificate", link: "/verify" },
               ].map((item, index) => (
                 <li key={index}>
                   <Link
