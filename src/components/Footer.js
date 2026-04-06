@@ -6,21 +6,21 @@ export default function Footer() {
 
   return (
     <footer className="mt-auto border-t bg-white dark:bg-black dark:border-neutral-800">
-      <div className="mx-auto max-w-7xl px-4 md:px-12 lg:px-16 xl:px-24 pt-12 pb-8 max-sm:pb-3">
+      <div className="mx-auto  px-4 md:px-12 lg:px-16 xl:px-30 pt-12 pb-8 max-sm:pb-3">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-4">
             <h3 className="text-lg font-bold tracking-tight">Think. Build. Innovate.</h3>
             <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-xs">
               Technical Student Society (TSS) at Guru Nanak Dev University. Bridging the gap between knowledge and career opportunities since its inception.
             </p>
-             <Link href='/verify'
-                className="group inline-flex items-center gap-2 text-xs font-semibold text-neutral-900 dark:text-neutral-50 border border-neutral-300 dark:border-neutral-700 rounded-full px-5 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
-              >
-                Verify Certificate
-                <span className="transform transition duration-300 group-hover:translate-x-1">
-                  <ArrowRight className="h-4 w-4"/>
-                </span>
-              </Link>
+            <Link href='/verify'
+              className="group inline-flex items-center gap-2 text-xs font-semibold text-neutral-900 dark:text-neutral-50 border border-neutral-300 dark:border-neutral-700 rounded-full px-5 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
+            >
+              Verify Certificate
+              <span className="transform transition duration-300 group-hover:translate-x-1">
+                <ArrowRight className="h-4 w-4" />
+              </span>
+            </Link>
           </div>
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wider mb-4 opacity-75">Quick Links</h4>

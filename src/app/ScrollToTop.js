@@ -1,4 +1,7 @@
+"use client";
+
 import { useState, useEffect } from "react";
+
 import { ArrowUp } from "lucide-react";
 
 const ScrollToTop = () => {
@@ -30,7 +33,7 @@ const ScrollToTop = () => {
         >
             <ArrowUp className="dark:text-black text-white" />
         </button>
-        
+
     );
 };
 

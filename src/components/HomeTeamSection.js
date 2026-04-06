@@ -129,7 +129,7 @@ export default function HomeTeamSection() {
                 color="#b5b5b5"
                 shineColor="#ffffff"
               />
-              
+
             </p>
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-50 max-w-md leading-tight">
               The core team divisions of TSS with Executives
@@ -154,7 +154,7 @@ export default function HomeTeamSection() {
 
               {/* Text */}
               <div>
-                <h3 className="text-xs font-medium uppercase tracking-widest text-neutral-900 dark:text-neutral-50 mb-1.5">
+                <h3 className="text-lg  font-bold mt-5 uppercase tracking-widest text-neutral-900 dark:text-neutral-50 mb-1.5">
                   {category.title}
                 </h3>
                 <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">

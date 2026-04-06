@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 
 import HeroSection from "@/components/HeroSection";
+import HomeEventsSection from "@/components/HomeEventsSection";
+import HomeFaqSection from "@/components/HomeFaqSection";
 import HomeTeamSection from "@/components/HomeTeamSection";
 import HomeAboutSection from "@/components/HomeAboutSection";
 import CountUp from "./Animations/CountUp";
@@ -89,75 +91,16 @@ export default function Home() {
               All Events <Calendar className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid gap-8 lg:grid-cols-2 max-w-5xl mx-auto">
-            {upcomingEvents.map((event) => (
-              <div key={event.title} className="p-8 border rounded-xl bg-white dark:bg-black dark:border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-6">
-                <div className="space-y-2 text-center sm:text-left">
-                  <div className="inline-flex px-2 text-[10px] font-bold uppercase tracking-widest border border-neutral-200 dark:border-neutral-700 rounded text-neutral-400 mb-2">
-                    <ShinyText
-                      text={event.badge}
-                      speed={2.8}
-                      color="#b5b5b5"
-                      shineColor="#ffffff"
-                    />
-                    
-                  </div>
-                  <h3 className="text-2xl font-bold uppercase tracking-tight">{event.title}</h3>
-                  <p className="text-sm font-semibold text-neutral-400 uppercase tracking-widest">{event.date}</p>
-                </div>
-                <button className="px-6 py-2 bg-neutral-900 dark:bg-neutral-50 text-white dark:text-black rounded-md text-xs font-bold uppercase tracking-widest hover:opacity-90">
-                  Register
-                </button>
-              </div>
-            ))}
-          </div>
+          <HomeEventsSection />
         </div>
-      <hr className="top-20 relative mx-15 max-sm:mx-5 dark:border-neutral-800" />
+        <hr className="top-20 relative mx-15 max-sm:mx-5 dark:border-neutral-800" />
       </section>
 
-
-      {/* FAQ Section */}
-      <section className="w-full py-20 bg-white dark:bg-black">
-        <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl font-extrabold tracking-wide sm:text-4xl text-center">Common Questions</h2>
-            <p className="text-neutral-500 dark:text-neutral-400 mx-auto max-w-2xl">
-              Everything you need to know about getting involved with TSS GNDU.
-            </p>
-          </div>
-          <div className="grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
-            <div className="space-y-2 p-6 border rounded-xl dark:border-neutral-800">
-              <h3 className="text-lg font-bold uppercase tracking-tight">Who can join TSS?</h3>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                Any student currently enrolled in Guru Nanak Dev University with a passion for technology, design, or management is welcome to join our community.
-              </p>
-            </div>
-            <div className="space-y-2 p-6 border rounded-xl dark:border-neutral-800">
-              <h3 className="text-lg font-bold uppercase tracking-tight">Are there any membership fees?</h3>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                No, membership to the Technical Student Society is completely free. We focus on talent, dedication, and the collective growth of our members.
-              </p>
-            </div>
-            <div className="space-y-2 p-6 border rounded-xl dark:border-neutral-800">
-              <h3 className="text-lg font-bold uppercase tracking-tight">What kind of events do you host?</h3>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                We organize a variety of events including hands-on technical workshops, annual hackathons, coding competitions, and industrial guest lectures.
-              </p>
-            </div>
-            <div className="space-y-2 p-6 border rounded-xl dark:border-neutral-800">
-              <h3 className="text-lg font-bold uppercase tracking-tight">How can I stay updated?</h3>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                You can keep an eye on our "Events" page or follow our official social media handles for the latest announcements and registration links.
-              </p>
-            </div>
-          </div>
-        </div>
-      <hr className="top-20 relative mx-15 max-sm:mx-5 dark:border-neutral-800" />
-      </section>
+      <HomeFaqSection />
 
 
       {/* Gallery Sneak Peak Section */}
-      <section className="w-full py-20 bg-white dark:bg-black">
+      {/* <section className="w-full py-20 bg-white dark:bg-black">
         <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl font-extrabold tracking-wide sm:text-4xl text-center">Gallery Sneak Peak</h2>
@@ -180,7 +123,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
