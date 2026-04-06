@@ -91,7 +91,7 @@ export default function HeroSection() {
           >
             {imgSrc && (
               <div
-                className="absolute inset-0 p-1 rounded-2xl md:rounded-xl overflow-hidden z-10"
+                className="absolute inset-0 p-1 hidden md:block rounded-2xl md:rounded-xl overflow-hidden z-10"
                 style={{ boxShadow: "6px 2px 12px rgba(0,0,0,0.36)" }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
