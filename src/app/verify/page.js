@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ShieldCheck, ArrowLeft } from "lucide-react";
+import { ShieldCheck, ArrowRight } from "lucide-react";
 
 export default function VerifyPage() {
   return (
-    <main className="min-h-[80vh] flex flex-col items-center justify-center px-6 relative overflow-hidden">
+    <main className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden">
       {/* Background Ambient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-500/10 dark:bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
 
@@ -33,7 +33,7 @@ export default function VerifyPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-lg text-neutral-500 dark:text-neutral-400 mb-10 leading-relaxed"
+          className="text-neutral-500 dark:text-neutral-400 mb-10 leading-relaxed"
         >
           This feature will be available soon.
         </motion.p>
@@ -46,12 +46,13 @@ export default function VerifyPage() {
         >
 
 
-          <Link
-            href="/"
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-900 dark:bg-neutral-50 text-white dark:text-neutral-900 font-bold hover:opacity-90 transition-all"
+          <Link href='/'
+            className="group inline-flex items-center gap-2 text-sm font-semibold text-neutral-900 dark:text-neutral-50 border border-neutral-300 dark:border-neutral-700 rounded-full px-5 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
           >
-            <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
             Back to Home
+            <span className="transform transition duration-300 group-hover:translate-x-1">
+              <ArrowRight className="h-4 w-4" />
+            </span>
           </Link>
         </motion.div>
       </div>
