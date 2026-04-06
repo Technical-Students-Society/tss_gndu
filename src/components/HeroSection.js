@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import ShinyText from "@/app/Animations/ShinyText";
 
@@ -10,19 +13,51 @@ const imgSrcs = [
   "/hero/fatguy.jpg",
 ];
 
-const COLS = 15;
-const ROWS = 28;
+// Desktop values
+const DESKTOP_COLS = 15;
+const DESKTOP_ROWS = 28;
 
-const imagePositions = [
-  { row: 1, col: 2, imgIndex: 0 },
-  { row: 1, col: 12, imgIndex: 1 },
-  { row: 3, col: 3, imgIndex: 2 },
-  { row: 3, col: 11, imgIndex: 3 },
-  { row: 5, col: 5, imgIndex: 4 },
-  { row: 5, col: 9, imgIndex: 5 },
-];
+// Mobile values
+const MOBILE_COLS = 8;
+const MOBILE_ROWS = 15;
 
 export default function HeroSection() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check on mount
+    setIsMobile(window.innerWidth < 768);
+
+    // Update on resize
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const COLS = isMobile ? MOBILE_COLS : DESKTOP_COLS;
+  const ROWS = isMobile ? MOBILE_ROWS : DESKTOP_ROWS;
+
+  const imagePositions = isMobile
+    ? [
+      { row: 0, col: 1, imgIndex: 0 },
+      { row: 0, col: 5, imgIndex: 1 },
+      { row: 4, col: 0, imgIndex: 2 },
+      { row: 4, col: 7, imgIndex: 3 },
+      { row: 8, col: 1, imgIndex: 4 },
+      { row: 8, col: 6, imgIndex: 5 },
+    ]
+    : [
+      { row: 1, col: 2, imgIndex: 0 },
+      { row: 1, col: 12, imgIndex: 1 },
+      { row: 3, col: 3, imgIndex: 2 },
+      { row: 3, col: 11, imgIndex: 3 },
+      { row: 5, col: 5, imgIndex: 4 },
+      { row: 5, col: 9, imgIndex: 5 },
+    ];
+
   const imageMap = {};
   imagePositions.forEach(({ row, col, imgIndex }) => {
     imageMap[`${row}-${col}`] = imgSrcs[imgIndex];
@@ -36,30 +71,34 @@ export default function HeroSection() {
 
   return (
     <section className="relative w-full min-h-screen overflow-hidden bg-white dark:bg-zinc-950">
-
       {/* ── Grid background ── */}
       <div
         className="absolute inset-0 overflow-hidden p-2"
-        style={{ display: "grid", gridTemplateColumns: `repeat(${COLS}, 1fr)`, gap: "6px", alignContent: "start" }}
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${COLS}, 1fr)`,
+          gap: "6px",
+          alignContent: "start",
+        }}
       >
         {cells.map(({ row, col, imgSrc }, i) => (
           <div
             key={i}
-            className={`relative rounded-xl aspect-square ${(row + col) % 2 === 0
+            className={`relative rounded-2xl md:rounded-xl aspect-square ${(row + col) % 2 === 0
               ? "bg-neutral-100/70 dark:bg-zinc-900/20"
               : "bg-neutral-50 dark:bg-zinc-900/10"
               }`}
           >
             {imgSrc && (
               <div
-                className="absolute inset-0 p-1 rounded-xl overflow-hidden z-10"
+                className="absolute inset-0 p-1 rounded-2xl md:rounded-xl overflow-hidden z-10"
                 style={{ boxShadow: "6px 2px 12px rgba(0,0,0,0.36)" }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={imgSrc}
                   alt=""
-                  className="w-full rounded-lg h-full object-cover"
+                  className="w-full rounded-2xl opacity-50 md:opacity-100 md:rounded-lg h-full object-cover"
                 />
               </div>
             )}
@@ -67,10 +106,8 @@ export default function HeroSection() {
         ))}
       </div>
 
-
       {/* ── Main content ── */}
       <div className="relative z-20 flex flex-col items-center justify-center min-h-screen text-center px-6 pb-24">
-
         {/* Badge */}
         <div className="flex items-center gap-2 mb-6 text-xs text-neutral-500 dark:text-neutral-400 tracking-wide bg-[#0C0C0E] p-2 rounded-full">
           <span className="w-2 h-2 rounded-full bg-orange-400 inline-block" />
@@ -81,7 +118,6 @@ export default function HeroSection() {
             color="#b5b5b5"
             shineColor="#ffffff"
           />
-
         </div>
 
         {/* Headline */}
@@ -106,7 +142,6 @@ export default function HeroSection() {
           >
             <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-neutral-900 inline-block" />
             <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-neutral-900 inline-block absolute animate-ping" />
-
             View Events
           </Link>
           <Link
@@ -115,7 +150,6 @@ export default function HeroSection() {
           >
             <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-500 inline-block" />
             <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-500 inline-block absolute animate-ping" />
-
             Learn More
           </Link>
         </div>
