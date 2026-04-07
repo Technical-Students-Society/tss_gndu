@@ -52,7 +52,7 @@ export default function Footer() {
                 { name: "GitHub", link: "https://github.com/Technical-Students-Society" },
                 { name: "LinkedIn", link: "https://www.linkedin.com/company/technical-students-societies/" },
                 { name: "Instagram", link: "https://www.instagram.com/tss_gndu" },
-                { name: "Gmail", link: "mailto:tss.gndu@gmail.com" },
+                { name: "Gmail", link: "mailto:contact@tss-gndu.org" },
               ].map((item, index) => (
                 <li key={index}>
                   <Link
