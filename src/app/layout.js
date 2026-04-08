@@ -1,7 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import CursorTrail from "@/components/CursorTrail";
 import LayoutWrapper from "@/components/LayoutWrapper";
@@ -18,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Technical Students' Society GNDU | TSS GNDU Official",
-  
+
   description:
     "Official website of the Technical Students' Society (TSS) at Guru Nanak Dev University, Amritsar. Explore events, tech fests, workshops, and student initiatives.",
 
@@ -99,7 +97,6 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="flex flex-col antialiased selection:bg-neutral-200 dark:selection:bg-neutral-800">
-
         <CursorTrail />
         <SmoothScroll>
           <main className="flex-1">

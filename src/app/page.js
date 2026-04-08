@@ -18,6 +18,7 @@ import HomeTeamSection from "@/components/HomeTeamSection";
 import HomeAboutSection from "@/components/HomeAboutSection";
 import CountUp from "./Animations/CountUp";
 import ScrollToTop from "./ScrollToTop";
+import Preloader from "@/components/Preloader";
 
 export default function Home() {
 
@@ -29,6 +30,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center">
+      <Preloader/>
       <ScrollToTop />
       <HeroSection />
 
