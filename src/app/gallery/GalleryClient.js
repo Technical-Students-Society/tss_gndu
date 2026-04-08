@@ -25,10 +25,10 @@ export default function GalleryClient({ images }) {
   return (
     <div className="container mx-auto px-6 py-20 max-w-7xl">
       {/* Header Section */}
-      <div className="relative border-b border-neutral-200 dark:border-neutral-800 pb-12 mb-14 text-center sm:text-left">
+      <div className="relative border-b border-neutral-200 dark:border-neutral-800 pb-12 mb-14 text-left">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
           <div className="space-y-4 max-w-3xl">
-            <p className="flex items-center justify-center sm:justify-start gap-2 text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-2">
+            <p className="flex items-center justify-start gap-2 text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-2">
               <ImageIcon size={20} />
               <ShinyText text="Visual Archive" speed={2.8}
                 color="#b5b5b5"
@@ -42,7 +42,7 @@ export default function GalleryClient({ images }) {
             </p>
           </div>
 
-          <div className="hidden sm:block">
+          <div className="hidden md:block">
             <div className="text-xs font-bold uppercase tracking-widest text-neutral-400 bg-neutral-100 dark:bg-neutral-900 px-4 py-2 rounded-full border dark:border-neutral-800">
               {images.length} Captured Items
             </div>

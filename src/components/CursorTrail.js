@@ -23,7 +23,7 @@ export default function CursorTrail() {
     let hasMoved = false;
     const mouse = { x: 0, y: 0 };
     const pos = dots.map(() => ({ x: 0, y: 0, w: 10, h: 10 }));
-    
+
     let activeTarget = null;
     let hoveringInternal = false;
 
@@ -88,7 +88,7 @@ export default function CursorTrail() {
           // Trail logic: follow the previous dot (original behavior)
           targetX = pos[i - 1].x;
           targetY = pos[i - 1].y;
-          
+
           const baseSize = 12 - i * 0.8;
           targetW = Math.max(2, baseSize);
           targetH = Math.max(2, baseSize);
@@ -120,9 +120,9 @@ export default function CursorTrail() {
   }, []);
 
   return (
-    <div 
-      ref={containerRef} 
-      className="fixed inset-0 pointer-events-none z-9999 max-md:hidden opacity-0"
+    <div
+      ref={containerRef}
+      className="fixed inset-0 pointer-events-none z-9999 max-lg:hidden opacity-0"
     >
       {Array.from({ length: 12 }).map((_, i) => (
         <div
@@ -138,7 +138,7 @@ export default function CursorTrail() {
         >
           {i === 0 && (
             <div className={`transition-opacity duration-300 ${isHovering ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}>
-               <ArrowRight size={16} className="text-white dark:text-black stroke-[3px]" />
+              <ArrowRight size={16} className="text-white dark:text-black  -rotate-45" />
             </div>
           )}
         </div>

@@ -37,8 +37,8 @@ export default function MemberCard({
     <div
       className="group bg-neutral-100 border border-neutral-200 dark:border-neutral-700 font-gellix relative overflow-hidden rounded-2xl"
       style={{
-        width: 260,
-        height: 320,
+        width: 280,
+        height: 370,
         // boxShadow: '0 8px 32px rgba(0,0,0,0.18), 0 1.5px 4px rgba(0,0,0,0.10)',
         cursor: 'pointer',
       }}

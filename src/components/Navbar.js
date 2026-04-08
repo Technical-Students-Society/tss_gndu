@@ -68,7 +68,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-8">
             <div className="flex items-baseline space-x-8">
               {navLinks.map((link) => (
                 <Link
@@ -98,7 +98,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Right Actions */}
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-2 lg:hidden">
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 active:scale-95 transition-transform"
@@ -132,7 +132,7 @@ export default function Navbar() {
 
       {/* Mobile Navigation */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
+        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
         <div className="border-t dark:border-neutral-800 bg-white/90 dark:bg-black/90 backdrop-blur-lg px-3 py-4 space-y-2">
 
           {navLinks.map((link, index) => (
