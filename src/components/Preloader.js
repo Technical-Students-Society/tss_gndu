@@ -2,8 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import Link from "next/link";
-import ShinyText from "@/app/Animations/ShinyText";
 import TextType from "@/app/Animations/TextType";
 
 export default function Preloader({ loading, onFinish }) {
@@ -34,12 +32,7 @@ export default function Preloader({ loading, onFinish }) {
             <div className="flex items-center gap-2 mb-6 text-xs text-neutral-500 dark:text-neutral-400 tracking-wide bg-[#0C0C0E] p-2 rounded-full opacity-0">
                 <span className="w-2 h-2 rounded-full bg-orange-400 inline-block" />
                 <span className="w-2 h-2 rounded-full bg-orange-400 inline-block absolute animate-ping" />
-                <ShinyText
-                    text="Technical Students' Society"
-                    speed={2.8}
-                    color="#b5b5b5"
-                    shineColor="#ffffff"
-                />
+                Technical Students' Society
             </div>
 
             {/* Headline */}
@@ -49,7 +42,7 @@ export default function Preloader({ loading, onFinish }) {
                     typingSpeed={95}
                     pauseDuration={1500}
                     showCursor
-                    deletingSpeed={false}   
+                    deletingSpeed={false}
                     cursorBlinkDuration={0.5}
                 />
             </h1>
@@ -63,22 +56,20 @@ export default function Preloader({ loading, onFinish }) {
 
             {/* CTAs */}
             <div className="flex flex-wrap justify-center gap-3 opacity-0">
-                <Link
-                    href="/events"
+                <div
                     className="inline-flex items-center gap-2 h-11 px-7 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-sm font-medium hover:bg-neutral-700 dark:hover:bg-neutral-200 transition-colors"
                 >
                     <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-neutral-900 inline-block" />
                     <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-neutral-900 inline-block absolute animate-ping" />
                     View Events
-                </Link>
-                <Link
-                    href="/about"
+                </div>
+                <div
                     className="inline-flex items-center gap-2 h-11 px-7 rounded-full border border-neutral-300 dark:border-zinc-700 bg-white/70 dark:bg-zinc-800/70 backdrop-blur-sm text-neutral-700 dark:text-neutral-300 text-sm font-medium hover:bg-white dark:hover:bg-zinc-700 transition-colors"
                 >
                     <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-500 inline-block" />
                     <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-500 inline-block absolute animate-ping" />
                     Learn More
-                </Link>
+                </div>
             </div>
         </div>
     );

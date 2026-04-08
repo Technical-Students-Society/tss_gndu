@@ -78,7 +78,7 @@ export default function Home() {
       <HomeTeamSection />
 
       {/* Events Section */}
-      <section className="w-full py-20 bg-neutral-50 dark:bg-black">
+      <section className="w-full py-20 bg-transparent dark:bg-black">
         <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
           <div className="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
             <div className="space-y-4 text-left">
