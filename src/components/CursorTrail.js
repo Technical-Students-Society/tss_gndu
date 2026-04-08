@@ -14,10 +14,20 @@ export default function CursorTrail() {
     const xSetters = dots.map((dot) => gsap.quickSetter(dot, "x", "px"));
     const ySetters = dots.map((dot) => gsap.quickSetter(dot, "y", "px"));
 
+    let hasMoved = false;
     const mouse = { x: 0, y: 0 };
     const pos = dots.map(() => ({ x: 0, y: 0 }));
 
     const handleMouseMove = (e) => {
+      if (!hasMoved) {
+        hasMoved = true;
+        // Set all dots to starting position immediately to avoid trailing from (0,0)
+        pos.forEach((p) => {
+          p.x = e.clientX;
+          p.y = e.clientY;
+        });
+        gsap.set(containerRef.current, { opacity: 1 });
+      }
       mouse.x = e.clientX;
       mouse.y = e.clientY;
     };
@@ -51,7 +61,10 @@ export default function CursorTrail() {
   }, []);
 
   return (
-    <div ref={containerRef} className="fixed inset-0 pointer-events-none z-9999 max-md:hidden">
+    <div 
+      ref={containerRef} 
+      className="fixed inset-0 pointer-events-none z-9999 max-md:hidden opacity-0"
+    >
       {/* Create 12 trailing dots */}
       {Array.from({ length: 12 }).map((_, i) => (
         <div
