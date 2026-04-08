@@ -18,12 +18,11 @@ export default function CursorTrail() {
     const ySetters = dots.map((dot) => gsap.quickSetter(dot, "y", "px"));
     const widthSetters = dots.map((dot) => gsap.quickSetter(dot, "width", "px"));
     const heightSetters = dots.map((dot) => gsap.quickSetter(dot, "height", "px"));
-    const radiusSetters = dots.map((dot) => gsap.quickSetter(dot, "borderRadius", "px"));
     const opacitySetters = dots.map((dot) => gsap.quickSetter(dot, "opacity"));
 
     let hasMoved = false;
     const mouse = { x: 0, y: 0 };
-    const pos = dots.map(() => ({ x: 0, y: 0, w: 10, h: 10, r: 100 }));
+    const pos = dots.map(() => ({ x: 0, y: 0, w: 10, h: 10 }));
     
     let activeTarget = null;
     let hoveringInternal = false;
@@ -66,55 +65,48 @@ export default function CursorTrail() {
     // Animation Loop
     const ticker = gsap.ticker.add(() => {
       pos.forEach((p, i) => {
-        let targetX, targetY, targetW, targetH, targetR, targetOpacity;
+        let targetX, targetY, targetW, targetH, targetOpacity;
 
-        if (hoveringInternal && activeTarget) {
-          const rect = activeTarget.getBoundingClientRect();
-          
-          if (i === 0) {
-            // Main dot follows horizontally but stays below the link
-            targetX = mouse.x;
-            targetY = rect.bottom + 20; 
-            targetW = 32;
-            targetH = 32;
-            targetR = 100;
-            targetOpacity = 1;
-          } else {
-            // Trail dots cluster below and fade out
+        const isLead = i === 0;
+
+        if (isLead) {
+          if (hoveringInternal && activeTarget) {
+            const rect = activeTarget.getBoundingClientRect();
             targetX = mouse.x;
             targetY = rect.bottom + 20;
-            targetW = 0;
-            targetH = 0;
-            targetR = 100;
-            targetOpacity = 0;
+            targetW = 32;
+            targetH = 32;
+            targetOpacity = 1;
+          } else {
+            targetX = mouse.x;
+            targetY = mouse.y;
+            targetW = 12;
+            targetH = 12;
+            targetOpacity = 0.4;
           }
         } else {
-          // Normal trail behavior
-          targetX = i === 0 ? mouse.x : pos[i - 1].x;
-          targetY = i === 0 ? mouse.y : pos[i - 1].y;
+          // Trail logic: follow the previous dot (original behavior)
+          targetX = pos[i - 1].x;
+          targetY = pos[i - 1].y;
           
-          const baseSize = 8 - i * (8 / 12);
+          const baseSize = 12 - i * 0.8;
           targetW = Math.max(2, baseSize);
           targetH = Math.max(2, baseSize);
-          targetR = 100;
-          targetOpacity = 1 - (i * (1 / 12));
+          // Hide trail dots while hovering to keep the indicator clean, otherwise show normal trail
+          targetOpacity = hoveringInternal ? 0 : (0.4 - i * 0.03);
         }
 
-        // Adjust interpolation for smooth snapping
-        const dt = 1.0 - Math.pow(1.0 - (hoveringInternal ? 0.2 : 0.3), gsap.ticker.deltaRatio());
+        const dt = 1.0 - Math.pow(1.0 - (hoveringInternal && isLead ? 0.2 : 0.3), gsap.ticker.deltaRatio());
 
         p.x += (targetX - p.x) * dt;
         p.y += (targetY - p.y) * dt;
         p.w += (targetW - p.w) * dt;
         p.h += (targetH - p.h) * dt;
-        p.r += (targetR - p.r) * dt;
 
-        // Apply positions and styles
         xSetters[i](p.x);
         ySetters[i](p.y);
         widthSetters[i](p.w);
         heightSetters[i](p.h);
-        radiusSetters[i](p.r);
         opacitySetters[i](targetOpacity);
       });
     });
@@ -136,18 +128,17 @@ export default function CursorTrail() {
         <div
           key={i}
           ref={(el) => (dotsRef.current[i] = el)}
-          className="absolute top-0 left-0 bg-white mix-blend-difference will-change-[transform,width,height,border-radius,opacity] flex items-center justify-center overflow-hidden"
+          className="absolute top-0 left-0 rounded-full bg-neutral-900 dark:bg-neutral-100 will-change-[transform,width,height,opacity] flex items-center justify-center overflow-hidden transition-colors duration-300"
           style={{
             transform: `translate(-50%, -50%)`,
             width: '0px',
             height: '0px',
-            borderRadius: '100px',
             opacity: 0
           }}
         >
           {i === 0 && (
-            <div className={`transition-opacity duration-300 ${isHovering ? 'opacity-100' : 'opacity-0'}`}>
-               <ArrowRight size={16} className="text-black stroke-[3px]" />
+            <div className={`transition-opacity duration-300 ${isHovering ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}>
+               <ArrowRight size={16} className="text-white dark:text-black stroke-[3px]" />
             </div>
           )}
         </div>
@@ -155,5 +146,6 @@ export default function CursorTrail() {
     </div>
   );
 }
+
 
 
