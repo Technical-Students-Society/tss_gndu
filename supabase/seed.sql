@@ -31,3 +31,8 @@ INSERT INTO public.team_members (name, role, team_group, batch, linkedin_url, gi
 VALUES 
   ('Sahildeep Singh', 'Core Lead', 'Executives', '2025-2026', 'https://linkedin.com/in/sahil-deep', 'https://github.com/sahil-deep', 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sahil'),
   ('Kartikay Sharma', 'Technical Head', 'Technical', '2025-2026', 'https://linkedin.com/in/kartikay-sharma', 'https://github.com/kartikay', 'https://api.dicebear.com/7.x/avataaars/svg?seed=Kartikay');
+
+-- 3. Insert seed data into 'settings'
+INSERT INTO public.settings (id, maintenance_enabled)
+VALUES ('maintenance_mode', false)
+ON CONFLICT (id) DO NOTHING;

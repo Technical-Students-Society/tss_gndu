@@ -1,60 +1,73 @@
 "use client";
 
-import { Wrench, Clock } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Wrench, Clock, Heart, Shield } from "lucide-react";
 import ShinyText from "../Animations/ShinyText";
 
 export default function MaintenancePage() {
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    // Prevent hydration mismatch by not rendering dynamic animated parts until mounted
+    if (!mounted) {
+        return <div className="min-h-screen bg-[#070707]" />;
+    }
+
     return (
-        <div className="min-h-screen flex items-center justify-center bg-neutral-950 px-6">
+        <div className="min-h-screen flex items-center justify-center bg-[#070707] px-6 relative overflow-hidden">
+
+            {/* Background Grain/Noise or Gradient */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0,transparent_100%)] pointer-events-none" />
+            <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-neutral-800 to-transparent opacity-50" />
+            <div className="absolute bottom-0 left-0 w-full h-px bg-linear-to-r from-transparent via-neutral-800 to-transparent opacity-50" />
 
             {/* Container */}
-            <div className="max-w-2xl w-full text-center space-y-10">
+            <div className="max-w-3xl w-full text-center space-y-12 relative z-10">
 
-                {/* Icon */}
+                {/* Animated Icon Container */}
                 <div className="flex justify-center">
-                    <div className="p-5 rounded-2xl border dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900">
-                        <Wrench className="h-8 w-8 text-neutral-600 dark:text-neutral-300" />
+                    <div className="relative group">
+                        <div className="absolute -inset-4 bg-white/5 rounded-3xl blur-2xl group-hover:bg-white/10 transition-all duration-700" />
+                        <div className="relative p-6 rounded-3xl border border-neutral-800 bg-neutral-900/50 backdrop-blur-xl ring-1 ring-white/5">
+                            <Wrench className="h-10 w-10 text-white animate-[spin_4s_linear_infinite]" />
+                        </div>
                     </div>
                 </div>
 
-                {/* Heading */}
-                <div className="space-y-4">
-                    <h1 className="text-4xl sm:text-5xl font-extrabold text-neutral-900 dark:text-white">
-                        Under Maintenance
+                {/* Heading & Text */}
+                <div className="space-y-6">
+                    <h1 className="text-5xl sm:text-7xl font-bold text-white">
+                        We are under <br />
+                        <span className="text-neutral-500">a bit of Maintenance.</span>
                     </h1>
 
-                    <p className="text-sm sm:text-base text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-md mx-auto">
-                        We’re currently upgrading the experience to serve you better.
-                        Please check back shortly.
+                    <p className="text-base sm:text-lg text-neutral-400 font-light leading-relaxed max-w-sm mx-auto">
+                        We’re refining the technical core to bring you a smoother experience.
                     </p>
                 </div>
 
-                {/* Status Card */}
-                <div className="p-6 rounded-2xl border dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 space-y-4">
+                {/* Status Dashboard */}
 
-                    <div className="flex items-center justify-center gap-2 text-sm text-neutral-500 dark:text-neutral-400">
-                        <Clock className="h-4 w-4" />
-                        Expected downtime: <span className="font-medium text-neutral-700 dark:text-neutral-200">Few hours</span>
+
+                {/* Branding Footer */}
+                <div className="pt-4 flex flex-col items-center gap-2">
+                    <div className="flex items-center gap-2 text-neutral-600">
+                        <Heart className="h-3 w-3 fill-current" />
+                        <span className="text-[10px] uppercase tracking-[0.2em] font-medium">Built with precision</span>
                     </div>
-
-                    {/* Progress bar */}
-                    <div className="w-full h-1.5 bg-neutral-200 dark:bg-neutral-800 rounded-full overflow-hidden">
-                        <div className="h-full w-2/3 bg-neutral-900 dark:bg-white animate-pulse" />
-                    </div>
-
-                </div>
-
-                {/* Footer */}
-                <p className="text-xs text-neutral-400">
                     <ShinyText
                         text="Technical Students' Society • GNDU"
-                        speed={2.8}
-                        color="#b5b5b5"
+                        speed={3}
+                        color="#404040"
                         shineColor="#ffffff"
                     />
-                </p>
+                </div>
 
             </div>
+
         </div>
     );
 }

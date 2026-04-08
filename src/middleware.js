@@ -43,6 +43,25 @@ export async function middleware(request) {
 
     // Required to refresh the session
     await supabase.auth.getUser()
+
+    // 1. Fetch Maintenance Mode Setting
+    const { data: setting, error: fetchError } = await supabase
+      .from('settings')
+      .select('maintenance_enabled')
+      .eq('id', 'maintenance_mode')
+      .single()
+
+    if (!fetchError && setting?.maintenance_enabled) {
+      // 2. If Maintenance Mode is enabled and user is NOT on /maintenance page, redirect
+      if (!request.nextUrl.pathname.startsWith('/maintenance')) {
+        return NextResponse.redirect(new URL('/maintenance', request.url))
+      }
+    } else {
+      // 3. If Maintenance Mode is NOT enabled and user IS on /maintenance page, redirect to home
+      if (request.nextUrl.pathname.startsWith('/maintenance')) {
+        return NextResponse.redirect(new URL('/', request.url))
+      }
+    }
   } catch (error) {
     console.error('Supabase middleware error:', error)
   }

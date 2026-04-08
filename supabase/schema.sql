@@ -42,13 +42,22 @@ CREATE TABLE IF NOT EXISTS public.team_members (
  
 );
 
+-- 3. Create 'settings' table
+CREATE TABLE IF NOT EXISTS public.settings (
+  id TEXT PRIMARY KEY,
+  maintenance_enabled BOOLEAN DEFAULT false NOT NULL,
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+
 -- Enable Row Level Security (RLS)
 ALTER TABLE public.events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.team_members ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.settings ENABLE ROW LEVEL SECURITY;
 
 -- Create Policies (Allow anyone to read data)
 CREATE POLICY "Allow public read access for events" ON public.events FOR SELECT USING (true);
 CREATE POLICY "Allow public read access for team" ON public.team_members FOR SELECT USING (true);
+CREATE POLICY "Allow public read access for settings" ON public.settings FOR SELECT USING (true);
 
 -- Note: In a production app, you would add policies to allow only authenticated 
 -- users with 'admin' role to INSERT, UPDATE, and DELETE data.
