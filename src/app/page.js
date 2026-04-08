@@ -18,8 +18,6 @@ import HomeTeamSection from "@/components/HomeTeamSection";
 import HomeAboutSection from "@/components/HomeAboutSection";
 import CountUp from "./Animations/CountUp";
 import ScrollToTop from "./ScrollToTop";
-import ShinyText from "./Animations/ShinyText";
-
 
 export default function Home() {
 
@@ -80,8 +78,8 @@ export default function Home() {
       {/* Events Section */}
       <section className="w-full py-20 bg-neutral-50 dark:bg-black">
         <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
-          <div className="flex flex-col md:flex-row justify-between items-start max-md:items-center mb-12 gap-4">
-            <div className="space-y-4 text-center md:text-left">
+          <div className="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
+            <div className="space-y-4 text-left">
               <h2 className="text-3xl font-extrabold tracking-wide sm:text-4xl">Events Spotlight</h2>
               <p className="text-neutral-500 dark:text-neutral-400 max-w-xl">
                 Stay tuned with our upcoming highlights and ongoing competitions.
