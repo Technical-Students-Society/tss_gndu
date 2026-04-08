@@ -67,7 +67,7 @@ export default function ContactPage() {
         </div>
 
         {/* Form Section */}
-        <div className="p-8 border rounded-2xl dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/60 backdrop-blur-md shadow-sm">
+        <div className="bg-transparent">
           {formVisible && (
             <form className="space-y-6"
               onSubmit={handleSubmit}
@@ -75,11 +75,11 @@ export default function ContactPage() {
               method="POST">
 
               {/* Name */}
-              <div className="space-y-2">
-                <label className="text-sm font-bold uppercase tracking-widest">
+              <div className="flex flex-col">
+                <label className="text-sm font-bold uppercase tracking-widest mb-1">
                   Name
                 </label>
-                <div className="flex items-center border rounded-md px-3 bg-white dark:bg-black dark:border-neutral-800 focus-within:border-neutral-400 transition">
+                <div className="flex items-center border rounded-xl px-3 bg-white dark:bg-black dark:border-neutral-800 focus-within:border-neutral-400 transition">
                   <User className="h-4 w-4 text-neutral-400 mr-2" />
                   <input
                     type="text"
@@ -92,11 +92,11 @@ export default function ContactPage() {
               </div>
 
               {/* Email */}
-              <div className="space-y-2">
-                <label className="text-sm font-bold uppercase tracking-widest">
+              <div className="flex flex-col">
+                <label className="text-sm font-bold uppercase tracking-widest mb-1">
                   Email
                 </label>
-                <div className="flex items-center border rounded-md px-3 bg-white dark:bg-black dark:border-neutral-800 focus-within:border-neutral-400 transition">
+                <div className="flex items-center border rounded-xl px-3 bg-white dark:bg-black dark:border-neutral-800 focus-within:border-neutral-400 transition">
                   <Mail className="h-4 w-4 text-neutral-400 mr-2" />
                   <input
                     type="email"
@@ -109,15 +109,15 @@ export default function ContactPage() {
               </div>
 
               {/* Message */}
-              <div className="space-y-2">
-                <label className="text-sm font-bold uppercase tracking-widest">
+              <div className="flex flex-col">
+                <label className="text-sm font-bold uppercase tracking-widest mb-1">
                   Message
                 </label>
                 <textarea
                   rows={5}
                   name="message"
                   placeholder="How can we help?"
-                  className="w-full p-3 bg-white dark:bg-black border rounded-md dark:border-neutral-800 outline-none focus:border-neutral-400 transition"
+                  className="w-full p-3 bg-white dark:bg-black border rounded-xl dark:border-neutral-800 outline-none focus:border-neutral-400 transition resize-none"
                   required
                 />
               </div>
@@ -125,7 +125,7 @@ export default function ContactPage() {
               {/* Button */}
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 py-3 bg-neutral-900 dark:bg-neutral-50 text-white dark:text-black font-bold uppercase tracking-widest rounded-md hover:opacity-90 transition cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 py-3 bg-neutral-900 dark:bg-neutral-50 text-white dark:text-black font-bold uppercase tracking-widest rounded-xl hover:opacity-90 transition cursor-pointer"
               >
                 <Send className="h-4 w-4" />
                 Send Message
