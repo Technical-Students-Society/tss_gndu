@@ -14,8 +14,8 @@ async function getEvents() {
 }
 
 export const metadata = {
-  title: "Events | Technical Students' Society GNDU",
-  description: "Explore workshops, hackathons, and competitions at TSS GNDU."
+  title: "Events | Workshops, Hackathons & Competitions",
+  description: "Stay updated with TSS GNDU events including workshops, hackathons, coding competitions, and tech fests at Guru Nanak Dev University."
 }
 
 export const revalidate = 0;

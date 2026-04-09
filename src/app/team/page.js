@@ -21,7 +21,7 @@ async function getTeamMembers(batch) {
 }
 
 export const metadata = {
-  title: "Team | Technical Students' Society GNDU",
+  title: "Team | Core Members & Leaders",
   description: "Get to know the passionate team behind TSS GNDU. Explore our core members, technical teams, and student leaders working to build impactful tech events, workshops, and innovations at Guru Nanak Dev University."
 }
 
