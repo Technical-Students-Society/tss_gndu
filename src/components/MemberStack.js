@@ -47,12 +47,13 @@ export default function MemberStack({ members }) {
 
   return (
     <div className="relative group/stack isolate">
+      
       {/* Visual Stack Layers (Bottom-most) */}
       <div className="absolute top-0 left-0 w-full h-full bg-neutral-400 dark:bg-neutral-800 rounded-2xl border border-neutral-400 dark:border-neutral-900 -z-10 translate-y-5 scale-95 shadow-md" />
       <div className="absolute top-0 left-0 w-full h-full bg-neutral-200 dark:bg-neutral-900/80 rounded-2xl border border-neutral-300 dark:border-neutral-950 -z-20 translate-y-10 scale-90 shadow-sm" />
 
       {/* Animation Container */}
-      <div className="relative overflow-hidden rounded-2xl w-[260px] h-[320px]">
+      <div className="relative overflow-hidden rounded-2xl w-70 h-92.5">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentIndex}

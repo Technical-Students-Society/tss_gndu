@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { X, ChevronLeft, ChevronRight, Trophy, Users, HeartHandshake } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Trophy, Users, HeartHandshake, Cross } from "lucide-react";
 import { formatEventDateTime } from "@/utils/dateFormatter";
 import gsap from "gsap";
 
@@ -94,10 +94,10 @@ export default function EventModal({ event, onClose }) {
           </div>
           <button
             onClick={handleClose}
-            className="absolute top-6 right-6 p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-neutral-500"
+            className="absolute top-6 right-6 p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-neutral-500 cursor-pointer"
             aria-label="Close modal"
           >
-            <X size={24} />
+            <Cross className="rotate-45" />
           </button>
         </div>
 

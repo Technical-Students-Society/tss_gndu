@@ -43,6 +43,7 @@ export default function MemberCard({
         cursor: 'pointer',
       }}
     >
+      
       {/* Full-bleed avatar */}
       <div className="absolute rounded-2xl inset-0 w-full h-full">
         {avatar_url ? (

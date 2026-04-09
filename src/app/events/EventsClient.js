@@ -86,9 +86,9 @@ export default function EventsClient({ events }) {
               href={event.reg_link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm font-semibold text-neutral-900 dark:text-neutral-50 hover:opacity-60 transition-opacity"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-neutral-900 dark:text-neutral-50 hover:opacity-80 transition-opacity"
             >
-              Register Now <span aria-hidden>→</span>
+              Register Now <ArrowRight className="h-4 w-4"/>
             </a>
           ) : (
             <span className="inline-flex items-center gap-1 text-sm font-semibold text-neutral-400 cursor-not-allowed">
@@ -98,9 +98,9 @@ export default function EventsClient({ events }) {
         ) : (
           <button
             onClick={() => setSelectedEvent(event)}
-            className="inline-flex items-center self-start gap-1 text-sm font-semibold text-neutral-900 dark:text-neutral-50 hover:opacity-60 transition-opacity"
+            className="inline-flex items-center self-start gap-1 text-sm font-semibold text-neutral-900 dark:text-neutral-50 hover:opacity-60 transition-opacity cursor-pointer"
           >
-            View More <span aria-hidden>→</span>
+            View More <ArrowRight className="h-4 w-4"/>
           </button>
         )}
       </div>
