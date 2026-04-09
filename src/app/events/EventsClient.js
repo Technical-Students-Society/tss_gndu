@@ -109,7 +109,7 @@ export default function EventsClient({ events }) {
 
   return (
     <>
-      <div className="container mx-auto px-6 py-16 max-w-7xl">
+      <div className="container mx-auto px-6 py-20 max-w-7xl">
         {/* ── Page Header (two-column like reference) ── */}
         <div className="relative border-b border-neutral-200 dark:border-neutral-800 pb-12 mb-14">
 

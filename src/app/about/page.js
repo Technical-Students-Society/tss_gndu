@@ -2,7 +2,7 @@ import { Sparkles, Target, Activity } from "lucide-react";
 
 export default function AboutPage() {
   return (
-    <div className="container mx-auto px-4 py-15 max-w-5xl">
+    <div className="container mx-auto px-6 py-20 max-w-6xl">
 
       {/* Header */}
       <div className="text-center space-y-6 mb-16">
