@@ -8,7 +8,7 @@ export default function LayoutWrapper({ children }) {
   const pathname = usePathname();
 
   // hide navbar/footer on auth pages
-  const hideLayout = pathname.startsWith("/policies") || pathname.startsWith("/maintenance") || pathname.startsWith("/verify") || pathname === null;
+  const hideLayout = pathname.startsWith("/policies") || pathname.startsWith("/maintenance") || pathname.startsWith("/verify") || pathname.startsWith("/admin") || pathname === null;
 
   return (
     <>
