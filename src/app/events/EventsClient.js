@@ -144,7 +144,8 @@ export default function EventsClient({ events }) {
             <div className="flex flex-col items-start lg:items-end gap-4">
 
               <a
-                href="#upcoming"
+                href="https://forms.gle/YJGASGBnU6J2UZ1Z9"
+                target="_blank"
                 className="group inline-flex items-center gap-2 text-sm font-semibold text-neutral-900 dark:text-neutral-50 border border-neutral-300 dark:border-neutral-700 rounded-full px-5 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
               >
                 Suggest Event
