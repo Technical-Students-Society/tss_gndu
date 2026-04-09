@@ -20,6 +20,11 @@ async function getTeamMembers(batch) {
   }
 }
 
+export const metadata = {
+  title: "Team | Technical Students' Society GNDU",
+  description: "Get to know the passionate team behind TSS GNDU. Explore our core members, technical teams, and student leaders working to build impactful tech events, workshops, and innovations at Guru Nanak Dev University."
+}
+
 export default async function TeamPage({ searchParams }) {
   // Await searchParams as per Next.js 15+ requirements
   const params = await searchParams;
@@ -55,7 +60,7 @@ export default async function TeamPage({ searchParams }) {
   });
 
   return (
-    <div className="container mx-auto px-6 py-20 max-w-7xl"> 
+    <div className="container mx-auto px-6 py-20 max-w-7xl">
       <div className="space-y-12 md:space-y-20">
 
         {/* Page Header */}
@@ -64,13 +69,13 @@ export default async function TeamPage({ searchParams }) {
           {/* Top Tag */}
           <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-6">
             <Users />
-             <ShinyText
-                text="The Community"
-                speed={2.8}
-                color="#b5b5b5"
-                shineColor="#ffffff"
-              />
-            
+            <ShinyText
+              text="The Community"
+              speed={2.8}
+              color="#b5b5b5"
+              shineColor="#ffffff"
+            />
+
           </p>
 
           {/* Heading + Selector */}
@@ -95,7 +100,7 @@ export default async function TeamPage({ searchParams }) {
           </div>
 
           {/* Subtle Glow */}
-           <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-75 h-37.5 bg-neutral-300/20 dark:bg-neutral-700/20 blur-3xl pointer-events-none" />
+          <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-75 h-37.5 bg-neutral-300/20 dark:bg-neutral-700/20 blur-3xl pointer-events-none" />
 
         </div>
 

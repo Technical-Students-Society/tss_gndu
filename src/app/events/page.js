@@ -13,6 +13,11 @@ async function getEvents() {
   }
 }
 
+export const metadata = {
+  title: "Events | Technical Students' Society GNDU",
+  description: "Explore workshops, hackathons, and competitions at TSS GNDU."
+}
+
 export const revalidate = 0;
 
 export default async function EventsPage() {

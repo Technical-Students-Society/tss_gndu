@@ -40,6 +40,11 @@ async function getGalleryImages() {
   return images;
 }
 
+export const metadata = {
+  title: "Gallery | Technical Students' Society GNDU",
+  description: "Explore moments from workshops, hackathons, and events organized by the Technical Students' Society (TSS) at Guru Nanak Dev University."
+}
+
 export default async function GalleryPage() {
   const images = await getGalleryImages();
 
