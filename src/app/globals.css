@@ -86,7 +86,7 @@
   font-style: normal;
   font-display: swap;
 }
- 
+
 @font-face {
   font-family: "OpenAISans";
   src: url("/fonts/OpenAISans-Regular.woff2") format("woff2");
@@ -94,7 +94,7 @@
   font-style: normal;
   font-display: swap;
 }
- 
+
 @font-face {
   font-family: "OpenAISans";
   src: url("/fonts/OpenAISans-Medium.woff2") format("woff2");
@@ -102,7 +102,7 @@
   font-style: normal;
   font-display: swap;
 }
- 
+
 @font-face {
   font-family: "OpenAISans";
   src: url("/fonts/OpenAISans-Semibold.woff2") format("woff2");
@@ -187,7 +187,7 @@
   --font-mono: var(--font-geist-mono);
 
   /* Custom Colors */
-  --color-siteblack: #0C0C0E;
+  --color-siteblack: #050505;
 
   /* Custom Font Families */
   --font-gellix: "Gellix", sans-serif;
