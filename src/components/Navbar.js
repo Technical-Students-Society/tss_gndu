@@ -40,8 +40,8 @@ export default function Navbar() {
 
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-zinc-400 bg-white/80 backdrop-blur-md dark:bg-black/80 dark:border-neutral-800">
-      <div className="mx-auto px-1 md:px-12 lg:px-28 ">
+    <nav className="sticky top-0 z-50 w-full  border-zinc-400 bg-zinc-50  dark:bg-siteblack dark:border-neutral-800">
+      <div className="mx-auto px-1 md:px-12 lg:px-16 xl:px-30">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-3">
@@ -76,7 +76,7 @@ export default function Navbar() {
                   href={link.href}
                   className={`navlink-target text-sm font-medium transition-colors hover:text-neutral-900 dark:hover:text-neutral-100 ${pathname === link.href
                     ? "text-neutral-900 dark:text-neutral-100"
-                    : "text-neutral-500 dark:text-neutral-400"
+                    : "text-neutral-500 dark:text-neutral-500"
                     }`}
                 >
                   {link.name}
@@ -133,7 +133,7 @@ export default function Navbar() {
       {/* Mobile Navigation */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
-        <div className="border-t dark:border-neutral-800 bg-white/90 dark:bg-black/90 backdrop-blur-lg px-3 py-4 space-y-2">
+        <div className="border-t dark:border-neutral-800 bg-white/90 dark:bg-siteblack/90 backdrop-blur-lg px-3 py-4 space-y-2">
 
           {navLinks.map((link, index) => (
             <Link

@@ -29,13 +29,13 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col font-openai items-center">
       <Preloader />
       <ScrollToTop />
       <HeroSection />
 
       {/* Stats Section */}
-      <div className="w-full py-26 bg-white dark:bg-neutral-950">
+      <div className="w-full py-26 dark:bg-siteblack bg-linear-to-t from-zinc-50 to-white dark:from-siteblack dark:to-siteblack ">
         <div className=" mx-auto lg:mx-28 px-6 max-sm:px-3">
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-5">
 
@@ -53,10 +53,13 @@ export default function Home() {
               { value: "175+", label: "Placements facilitated" },
               { value: "12", label: "Team divisions" },
             ].map(({ value, label }) => (
-              <div key={label} className="bg-neutral-100 dark:bg-neutral-900 rounded-2xl p-6 max-sm:p-3 flex flex-col justify-between min-h-40">
+              <div
+                key={label}
+                className="bg-neutral-100 dark:bg-neutral-900 rounded-2xl p-6 max-sm:p-3 flex flex-col justify-between min-h-40"
+              >
                 <span className="text-sm text-neutral-400">{label}</span>
                 <span className="text-4xl max-sm:text-3xl font-semibold text-neutral-900 dark:text-neutral-50 tracking-tight leading-none">
-                  <CountUp
+                  <CountUp card background
                     from={0}
                     to={value}
                     separator=","
@@ -78,12 +81,12 @@ export default function Home() {
       <HomeTeamSection />
 
       {/* Events Section */}
-      <section className="w-full py-20 bg-transparent dark:bg-black">
+      <section className="w-full py-20 dark:bg-siteblack">
         <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
-          <div className="flex flex-col md:flex-row justify-between items-start mb-12 gap-4">
+          <div className="flex flex-col md:flex-row justify-between items-start mb-18 gap-4">
             <div className="space-y-4 text-left">
               <h2 className="text-3xl font-extrabold tracking-wide sm:text-4xl">Events Spotlight</h2>
-              <p className="text-neutral-500 dark:text-neutral-400 max-w-xl">
+              <p className="text-neutral-500 dark:text-neutral-400 ">
                 Stay tuned with our upcoming highlights and ongoing competitions.
               </p>
             </div>
@@ -93,14 +96,14 @@ export default function Home() {
           </div>
           <HomeEventsSection />
         </div>
-        <hr className="top-20 relative mx-15 max-sm:mx-5 dark:border-neutral-800" />
+        {/* <hr className="top-20 relative mx-15 max-sm:mx-5 dark:border-neutral-800" /> */}
       </section>
 
       <HomeFaqSection />
 
 
       {/* Gallery Sneak Peak Section */}
-      {/* <section className="w-full py-20 bg-white dark:bg-black">
+      {/* <section className="w-full py-20 bg-white dark:bg-siteblack">
         <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl font-extrabold tracking-wide sm:text-4xl text-center">Gallery Sneak Peak</h2>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React, { useState, useEffect, useCallback } from "react";
-import { ArrowUpRight, Users, Sparkles, CirclePile   } from "lucide-react";
+import { ArrowUpRight, Users, Sparkles, CirclePile } from "lucide-react";
 import CountUp from "@/app/Animations/CountUp";
 import ShinyText from "@/app/Animations/ShinyText";
 
@@ -28,7 +28,7 @@ export default function HomeAboutSection() {
   }, [next, isHovered]);
 
   return (
-    <section className="w-full py-24 bg-white dark:bg-black">
+    <section className="w-full py-24 dark:bg-siteblack">
       <div className="container mx-auto px-4 lg:px-28 xl:px-32">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
@@ -37,8 +37,7 @@ export default function HomeAboutSection() {
 
             {/* Tag */}
             <p className="flex items-center gap-2 text-[12px] font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-6">
-              {/* <span className="w-6 h-px bg-neutral-300 dark:bg-neutral-700" /> */}
-              <CirclePile  />
+              <CirclePile />
               <ShinyText
                 text="About TSS"
                 speed={2.8}
@@ -48,7 +47,7 @@ export default function HomeAboutSection() {
             </p>
 
             {/* Heading */}
-            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.1] text-neutral-900 dark:text-neutral-50 mb-8">
+            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.1] text-neutral-900 dark:text-neutral-50 mb-8 font-openai">
               Where curiosity<br />meets{" "}
               <span className="inline-flex items-center gap-2">
                 <em className="not-italic text-neutral-400 dark:text-neutral-500">
@@ -62,22 +61,22 @@ export default function HomeAboutSection() {
             <div className="space-y-5 text-[15px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
 
               <p className="flex items-start gap-3">
-                <Sparkles className="h-4 w-4 mt-1 text-neutral-400" />
-                Founded in 2007 at Guru Nanak Dev University, Amritsar, the Technical Students' Society is built around one idea - that the best learning happens beyond the classroom.
+                <Sparkles className="h-4 w-4 mt-1 text-neutral-400 shrink-0" />
+                Rooted in the MCA Department of Computer Science at Guru Nanak Dev University, TSS is the official student body dedicated to bridging academic curiosities with industry-leading innovation.
               </p>
 
               <p className="flex items-start gap-3">
-                <Sparkles className="h-4 w-4 mt-1 text-neutral-400" />
-                From hackathons and workshops to placement drives and cultural fests, TSS operates at every intersection of student life.
+                <Sparkles className="h-4 w-4 mt-1 text-neutral-400 shrink-0" />
+                As primary organizers of our extra-curricular landscape, we lead hackathons, workshops, and technical fests, ensuring our teams contribute specialized expertise to every major event in the department.
               </p>
 
               <p className="flex items-start gap-3">
-                <Sparkles className="h-4 w-4 mt-1 text-neutral-400" />
-                Eight specialized teams, one shared direction - carrying forward 19+ years of legacy.
+                <Sparkles className="h-4 w-4 mt-1 text-neutral-400 shrink-0" />
+                Though our legacy spans decades, our registration in 2026 marked a new era of official recognition and scaled impact across the university.
               </p>
 
               <p className="font-medium text-neutral-700 dark:text-neutral-300">
-                We don't just build events. We build the people who build things.
+                Diverse teams, one shared horizon — exploring the frontiers of what's possible.
               </p>
             </div>
 
@@ -121,7 +120,7 @@ export default function HomeAboutSection() {
               ))}
 
               {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-siteblack/30 to-transparent" />
 
               {/* Indicators */}
               <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
@@ -138,45 +137,9 @@ export default function HomeAboutSection() {
               </div>
             </div>
 
-            {/* Small stats cards (NEW 🔥) */}
-            <div className="grid grid-cols-2 gap-3">
-
-              <div className="p-4 rounded-xl border dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900">
-                <p className="text-lg font-semibold text-neutral-900 dark:text-white">
-                  <CountUp
-                    from={0}
-                    to={19}
-                    separator=","
-                    direction="up"
-                    duration={1}
-                    className="count-up-text"
-                    startCounting={false}
-                  />+
-                </p>
-                <p className="text-xs text-neutral-500">Years Legacy</p>
-              </div>
-
-              <div className="p-4 rounded-xl border dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900">
-                <p className="text-lg font-semibold text-neutral-900 dark:text-white">
-                  <CountUp
-                    from={0}
-                    to={12}
-                    separator=","
-                    direction="up"
-                    duration={1}
-                    className="count-up-text"
-                    startCounting={false}
-                  />
-                </p>
-                <p className="text-xs text-neutral-500">Teams</p>
-              </div>
-
-            </div>
-
           </div>
         </div>
       </div>
-      <hr className="top-20 relative mx-15 max-sm:mx-5 dark:border-neutral-800" />
     </section>
   );
 }

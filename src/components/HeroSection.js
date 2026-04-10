@@ -70,7 +70,7 @@ export default function HeroSection() {
   });
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-white dark:bg-zinc-950">
+    <section className="relative w-full min-h-screen font-openai overflow-hidden bg-white dark:bg-siteblack">
       {/* ── Grid background ── */}
       <div
         className="absolute inset-0 overflow-hidden p-2"
@@ -121,7 +121,7 @@ export default function HeroSection() {
         </div>
 
         {/* Headline */}
-        <h1 className="text-5xl pointer-events-none sm:text-6xl md:text-7xl lg:text-[5.5rem] font-rational font-extrabold tracking-tight leading-[1.05] text-neutral-900 dark:text-white max-w-3xl mb-5">
+        <h1 className="text-5xl pointer-events-none sm:text-6xl md:text-7xl lg:text-[5.5rem] font-openai font-extrabold tracking-tight leading-[1.05] text-neutral-900 dark:text-white max-w-3xl mb-5">
           Bridging Tech &amp;
           <br />
           Innovation
@@ -155,7 +155,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full h-48 pointer-events-none bg-linear-to-t from-white dark:from-neutral-950 to-transparent" />
+      <div className="absolute bottom-0 left-0 w-full h-48 pointer-events-none bg-linear-to-t from-white dark:from-siteblack to-transparent" />
     </section>
   );
 }

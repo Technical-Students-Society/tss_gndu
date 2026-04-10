@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 export default function CursorTrail() {
   const containerRef = useRef(null);
   const dotsRef = useRef([]);
-  const [hoverState, setHoverState] = useState("none"); // "none", "navlink", "flink", "event1", "event2"
+  const [hoverState, setHoverState] = useState("none"); // "none", "navlink", "flink", "event1", "event2", "gallery"
   const pathname = usePathname();
 
   // Use refs for ticker values to keep them in sync across effects
@@ -51,7 +51,7 @@ export default function CursorTrail() {
     };
 
     const handleMouseOver = (e) => {
-      const target = e.target.closest('.navlink-target, .flink-target, .event-target-1, .event-target-2');
+      const target = e.target.closest('.navlink-target, .flink-target, .event-target-1, .event-target-2, .gallery-target');
       if (target) {
         activeTargetRef.current = target;
         let type = "none";
@@ -59,6 +59,7 @@ export default function CursorTrail() {
         else if (target.classList.contains('flink-target')) type = 'flink';
         else if (target.classList.contains('event-target-1')) type = 'event1';
         else if (target.classList.contains('event-target-2')) type = 'event2';
+        else if (target.classList.contains('gallery-target')) type = 'gallery';
         
         currentHoverTypeRef.current = type;
         setHoverState(type);
@@ -66,7 +67,7 @@ export default function CursorTrail() {
     };
 
     const handleMouseOut = (e) => {
-      const target = e.target.closest('.navlink-target, .flink-target, .event-target-1, .event-target-2');
+      const target = e.target.closest('.navlink-target, .flink-target, .event-target-1, .event-target-2, .gallery-target');
       if (target && target === activeTargetRef.current) {
         activeTargetRef.current = null;
         currentHoverTypeRef.current = "none";
@@ -103,12 +104,17 @@ export default function CursorTrail() {
               targetW = 32;
               targetH = 32;
               targetOpacity = 1;
-            } else if (currentHoverType === 'event1' || currentHoverType === 'event2') {
-              // Pill effect for events
+            } else if (currentHoverType === 'event1' || currentHoverType === 'event2' || currentHoverType === 'gallery') {
+              // Pill effect for events and gallery
               targetX = mouse.x;
               targetY = mouse.y;
-              targetW = currentHoverType === 'event1' ? 140 : 120;
-              targetH = 40;
+              if (currentHoverType === 'gallery') {
+                  targetW = 80;
+                  targetH = 34;
+              } else {
+                  targetW = currentHoverType === 'event1' ? 140 : 120;
+                  targetH = 40;
+              }
               targetOpacity = 1;
             }
           } else {
@@ -185,6 +191,9 @@ export default function CursorTrail() {
               </div>
               <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${hoverState === 'event2' ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}>
                 <span className="text-[11px] font-bold uppercase tracking-wider text-white dark:text-black whitespace-nowrap">View More</span>
+              </div>
+              <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${hoverState === 'gallery' ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-white dark:text-black whitespace-nowrap">View</span>
               </div>
             </>
           )}

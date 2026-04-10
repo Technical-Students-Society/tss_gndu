@@ -76,7 +76,7 @@ export default function EventModal({ event, onClose }) {
     <div
       ref={overlayRef}
       onClick={handleOverlayClick}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 sm:p-6"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-siteblack/60 backdrop-blur-sm p-4 sm:p-6"
     >
       <div
         ref={modalRef}
@@ -139,13 +139,13 @@ export default function EventModal({ event, onClose }) {
                     <>
                       <button
                         onClick={prevImage}
-                        className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors backdrop-blur-md"
+                        className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-siteblack/50 hover:bg-siteblack/70 text-white rounded-full transition-colors backdrop-blur-md"
                       >
                         <ChevronLeft size={20} />
                       </button>
                       <button
                         onClick={nextImage}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors backdrop-blur-md"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-siteblack/50 hover:bg-siteblack/70 text-white rounded-full transition-colors backdrop-blur-md"
                       >
                         <ChevronRight size={20} />
                       </button>

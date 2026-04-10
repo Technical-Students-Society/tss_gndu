@@ -24,7 +24,7 @@ export default function FakeAdminPage() {
   return (
     <div
       onClick={handleClick}
-      className="min-h-screen flex items-center justify-center bg-black text-white text-center px-6 cursor-pointer"
+      className="min-h-screen flex items-center justify-center bg-siteblack text-white text-center px-6 cursor-pointer"
     >
       <audio ref={audioRef} src="/audio/fahhh.mp3" />
 

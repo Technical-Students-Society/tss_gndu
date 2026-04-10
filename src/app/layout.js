@@ -82,10 +82,10 @@ export default function RootLayout({ children }) {
               (function() {
                 try {
                   var theme = localStorage.getItem('theme');
-                  var supportDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  if (theme === 'dark' || (!theme && supportDark)) {
+                  if (!theme || theme === 'dark') {
                     document.documentElement.classList.add('dark');
-                  } else if (theme === 'light') {
+                    if (!theme) localStorage.setItem('theme', 'dark');
+                  } else {
                     document.documentElement.classList.add('light');
                   }
                 } catch (e) {}

@@ -116,10 +116,10 @@ const teamCategories = [
 
 export default function HomeTeamSection() {
   return (
-    <section className="w-full py-20 bg-white dark:bg-black">
+    <section className="w-full py-20 dark:bg-siteblack">
       <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
         {/* Header row */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
           <div>
             <p className="text-xs flex gap-2 items-center font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-3">
               <Users />
@@ -132,11 +132,11 @@ export default function HomeTeamSection() {
 
             </p>
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-50 max-w-md leading-tight">
-              The core team divisions of TSS with Executives
+              Our Core Team Divisions
             </h2>
           </div>
           <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-xs leading-relaxed md:text-right">
-            Eight specialized teams working in sync — each driving a different dimension of student life at GNDU.
+            Specialized teams working in sync — each driving a different dimension of student life at GNDU.
           </p>
         </div>
 
@@ -145,7 +145,7 @@ export default function HomeTeamSection() {
           {teamCategories.map((category) => (
             <div
               key={category.title}
-              className="group flex flex-col justify-between rounded-2xl border bg-neutral-100 border-neutral-200 dark:border-neutral-800  dark:bg-neutral-950 p-6 hover:border-neutral-400 dark:hover:border-neutral-600 hover:-translate-y-0.5 transition-all duration-200 min-h-50"
+              className="group flex flex-col justify-between rounded-2xl border bg-white shadow-sm border-neutral-200 dark:border-neutral-800  dark:bg-neutral-950 p-6 hover:border-neutral-400 dark:hover:border-neutral-600 hover:-translate-y-0.5 transition-all duration-200 min-h-50"
             >
               {/* Visual artifact area */}
               <div className="h-18 flex items-center mb-5">
@@ -165,7 +165,7 @@ export default function HomeTeamSection() {
           ))}
         </div>
       </div>
-      <hr className="top-20 relative mx-15 max-sm:mx-5 dark:border-neutral-800" />
+      {/* <hr className="top-20 relative mx-15 max-sm:mx-5 dark:border-neutral-800" /> */}
 
     </section>
   );

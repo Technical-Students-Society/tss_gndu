@@ -23,7 +23,7 @@ export default function GalleryClient({ images }) {
   };
 
   return (
-    <div className="container mx-auto px-6 py-20 max-w-7xl">
+    <div className="py-20 mx-auto font-openai dark:bg-siteblack px-4 md:px-12 lg:px-18 xl:px-30 max-sm:pb-3">
       {/* Header Section */}
       <div className="relative border-b border-neutral-200 dark:border-neutral-800 pb-12 mb-14 text-left">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
@@ -55,7 +55,7 @@ export default function GalleryClient({ images }) {
 
       {/* Gallery Grid */}
       {images.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {images.map((image, index) => (
             <motion.div
               key={image.id || image.src}
@@ -63,13 +63,13 @@ export default function GalleryClient({ images }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
-              className="group relative aspect-[4/3] rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-900 border dark:border-neutral-800 cursor-pointer"
+              className="group relative aspect-[4/3]  rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-900 border dark:border-neutral-800 cursor-pointer"
               onClick={() => openLightbox(index)}
             >
               <img
                 src={image.src}
                 alt={image.alt}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover gallery-target transition-transform duration-700 group-hover:scale-110"
                 loading="lazy"
               />
             </motion.div>
@@ -90,7 +90,7 @@ export default function GalleryClient({ images }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-sm p-4 sm:p-10"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-siteblack/95 backdrop-blur-sm p-4 sm:p-10"
             onClick={closeLightbox}
           >
             <button

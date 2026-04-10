@@ -9,7 +9,7 @@ export default function AboutPage() {
 
         {/* Logo */}
         <div className="flex justify-center">
-          <div className="relative w-20 h-20 rounded-xl overflow-hidden border dark:border-neutral-600 bg-white dark:bg-black">
+          <div className="relative w-20 h-20 rounded-xl overflow-hidden border dark:border-neutral-600 bg-white dark:bg-siteblack">
             <img
               src="/images/logos/about-logo.png"
               alt="TSS Logo"

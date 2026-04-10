@@ -60,11 +60,11 @@ export default async function TeamPage({ searchParams }) {
   });
 
   return (
-    <div className="container mx-auto px-6 py-20 max-w-7xl">
+    <div className="py-20 mx-auto font-openai  px-4 md:px-12 lg:px-18 xl:px-30 max-sm:pb-3">
       <div className="space-y-12 md:space-y-20">
 
         {/* Page Header */}
-        <div className="relative pb-10 border-b border-neutral-200 dark:border-neutral-800">
+        <div className="relative pb-10 ">
 
           {/* Top Tag */}
           <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-6">

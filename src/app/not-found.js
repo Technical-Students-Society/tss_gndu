@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="relative min-h-screen bg-black flex items-center justify-center px-6 overflow-hidden">
+    <div className="relative min-h-screen bg-siteblack flex items-center justify-center px-6 overflow-hidden">
 
       <div className="absolute inset-0">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-red-600/20 blur-[180px]" />

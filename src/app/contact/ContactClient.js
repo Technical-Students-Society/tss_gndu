@@ -79,7 +79,7 @@ export default function ContactPage() {
                 <label className="text-sm font-bold uppercase tracking-widest mb-1">
                   Name
                 </label>
-                <div className="flex items-center border rounded-xl px-3 bg-white dark:bg-black dark:border-neutral-800 focus-within:border-neutral-400 transition">
+                <div className="flex items-center border rounded-xl px-3 bg-white dark:bg-siteblack dark:border-neutral-800 focus-within:border-neutral-400 transition">
                   <User className="h-4 w-4 text-neutral-400 mr-2" />
                   <input
                     type="text"
@@ -96,7 +96,7 @@ export default function ContactPage() {
                 <label className="text-sm font-bold uppercase tracking-widest mb-1">
                   Email
                 </label>
-                <div className="flex items-center border rounded-xl px-3 bg-white dark:bg-black dark:border-neutral-800 focus-within:border-neutral-400 transition">
+                <div className="flex items-center border rounded-xl px-3 bg-white dark:bg-siteblack dark:border-neutral-800 focus-within:border-neutral-400 transition">
                   <Mail className="h-4 w-4 text-neutral-400 mr-2" />
                   <input
                     type="email"
@@ -117,7 +117,7 @@ export default function ContactPage() {
                   rows={5}
                   name="message"
                   placeholder="How can we help?"
-                  className="w-full p-3 bg-white dark:bg-black border rounded-xl dark:border-neutral-800 outline-none focus:border-neutral-400 transition resize-none"
+                  className="w-full p-3 bg-white dark:bg-siteblack border rounded-xl dark:border-neutral-800 outline-none focus:border-neutral-400 transition resize-none"
                   required
                 />
               </div>

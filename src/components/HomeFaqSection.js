@@ -30,7 +30,7 @@ const faqs = [
 
 export default function HomeFaqSection() {
   return (
-    <section className="w-full py-20 bg-white dark:bg-black">
+    <section className="w-full py-20  dark:bg-siteblack">
       <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
@@ -46,7 +46,7 @@ export default function HomeFaqSection() {
             return (
               <div
                 key={faq.question}
-                className="group p-7 border border-neutral-200 dark:border-neutral-800 rounded-xl bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-950 dark:to-black hover:border-neutral-300 dark:hover:border-neutral-700 hover:shadow-md dark:hover:shadow-neutral-950/30 transition-all duration-300 space-y-4"
+                className="group p-7 border border-neutral-200 dark:border-neutral-800 rounded-xl bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-950 dark:to-siteblack hover:border-neutral-300 dark:hover:border-neutral-700 hover:shadow-md dark:hover:shadow-neutral-950/30 transition-all duration-300 space-y-4"
               >
                 {/* Icon */}
                 <div className='flex items-center gap-4'>
@@ -70,7 +70,7 @@ export default function HomeFaqSection() {
           })}
         </div>
       </div>
-      <hr className="top-20 relative mx-15 max-sm:mx-5 dark:border-neutral-800" />
+      {/* <hr className="top-20 relative mx-15 max-sm:mx-5 " /> */}
     </section>
   );
 }

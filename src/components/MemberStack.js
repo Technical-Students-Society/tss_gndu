@@ -95,7 +95,7 @@ export default function MemberStack({ members }) {
             <div className="absolute top-1/2 -translate-y-1/2 left-3 flex items-center z-30">
               <button
                 onClick={moveToFormer}
-                className="p-1.5 bg-black/40 backdrop-blur-md border border-white/20 rounded-full shadow-xl opacity-100 lg:opacity-0 group-hover/stack:opacity-100 lg:-translate-x-2 lg:group-hover/stack:translate-x-0 transition-all duration-300 text-white active:scale-95"
+                className="p-1.5 bg-siteblack/40 backdrop-blur-md border border-white/20 rounded-full shadow-xl opacity-100 lg:opacity-0 group-hover/stack:opacity-100 lg:-translate-x-2 lg:group-hover/stack:translate-x-0 transition-all duration-300 text-white active:scale-95"
                 aria-label="View former member"
               >
                 <ChevronLeft size={18} />
@@ -108,7 +108,7 @@ export default function MemberStack({ members }) {
             <div className="absolute top-1/2 -translate-y-1/2 right-3 flex items-center z-30">
               <button
                 onClick={moveToNewer}
-                className="p-1.5 bg-black/40 backdrop-blur-md border border-white/20 rounded-full shadow-xl opacity-100 lg:opacity-0 group-hover/stack:opacity-100 lg:translate-x-2 lg:group-hover/stack:translate-x-0 transition-all duration-300 text-white active:scale-95"
+                className="p-1.5 bg-siteblack/40 backdrop-blur-md border border-white/20 rounded-full shadow-xl opacity-100 lg:opacity-0 group-hover/stack:opacity-100 lg:translate-x-2 lg:group-hover/stack:translate-x-0 transition-all duration-300 text-white active:scale-95"
                 aria-label="View newer member"
               >
                 <ChevronRight size={18} />
