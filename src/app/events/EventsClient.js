@@ -9,6 +9,15 @@ import EventCard from "@/components/EventCard";
 export default function EventsClient({ events }) {
   const [selectedEvent, setSelectedEvent] = useState(null);
 
+  const now = new Date();
+  const upcomingEvents = events
+    .filter((e) => new Date(e.start_at) >= now)
+    .sort((a, b) => new Date(a.start_at) - new Date(b.start_at));
+
+  const pastEvents = events
+    .filter((e) => new Date(e.start_at) < now)
+    .sort((a, b) => new Date(b.start_at) - new Date(a.start_at));
+
   return (
     <>
       <div className=" py-20 font-openai mx-auto px-4 md:px-12 lg:px-18 xl:px-30 max-sm:pb-3">
@@ -32,7 +41,7 @@ export default function EventsClient({ events }) {
             {/* Left */}
             <div className="space-y-5 max-w-xl">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-neutral-900 dark:text-neutral-50 leading-[1.1]">
-                What`s happening at the{" "}
+                What's happening at the{" "}
                 <span className="text-neutral-400">frontier</span>
               </h1>
 
@@ -69,14 +78,34 @@ export default function EventsClient({ events }) {
 
         </div>
 
-        {/* ── All Events ── */}
-        {events.length > 0 && (
-          <section className="mb-16">
-            <h2 className="font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-8">
-              Explore Events
+        {/* ── Upcoming Events ── */}
+        {upcomingEvents.length > 0 && (
+          <section className="mb-24">
+            <h2 className="font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-8 flex items-center gap-3">
+              Upcoming Events
+              {/* <span className="h-px flex-1 bg-neutral-200 dark:border-neutral-800" /> */}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
-              {events.map((event) => (
+              {upcomingEvents.map((event) => (
+                <EventCard
+                  key={event.id}
+                  event={event}
+                  onSelect={setSelectedEvent}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ── Past Events ── */}
+        {pastEvents.length > 0 && (
+          <section className="mb-16">
+            <h2 className="font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-8 flex items-center gap-3">
+              Past Events
+              {/* <span className="h-px flex-1 bg-neutral-200 dark:border-neutral-800" /> */}
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
+              {pastEvents.map((event) => (
                 <EventCard
                   key={event.id}
                   event={event}
