@@ -31,7 +31,7 @@ export default function EventsClient({ events }) {
         className="group flex flex-col border-b border-neutral-200 dark:border-neutral-800 pb-8 last:border-0 last:pb-0"
       >
         {/* Thumbnail and Category Badge */}
-        <div className="relative w-full aspect-video mb-4 cursor-pointer" onClick={() => (isPast ? setSelectedEvent(event) : null)}>
+        <div className={`relative w-full aspect-video mb-4 cursor-pointer ${isPast ? 'event-target-2' : 'event-target-1'}`} onClick={() => (isPast ? setSelectedEvent(event) : null)}>
           {/* Inner container with absolute inset-0 to force aspect-ratio, while allowing badge to overflow outside */}
           <div className="absolute inset-0 overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-sm">
             {event.thumbnail ? (

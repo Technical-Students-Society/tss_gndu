@@ -42,7 +42,7 @@ export default function HomeEventsSection() {
             >
               {/* Thumbnail and Badge */}
               <div
-                className="relative w-full aspect-video mb-4 cursor-pointer"
+                className={`relative w-full aspect-video mb-4 cursor-pointer ${isPast ? 'event-target-2' : 'event-target-1'}`}
                 onClick={() => (isPast ? setSelectedEvent(event) : null)}
               >
                 <div className="absolute inset-0 overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-sm">
