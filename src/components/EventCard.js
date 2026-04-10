@@ -28,7 +28,7 @@ export default function EventCard({ event, onSelect }) {
   return (
     <div className="group flex flex-col h-full">
       <div
-        className={`relative w-full aspect-video lg:aspect-auto lg:h-70 mb-3 cursor-pointer ${isPast ? 'event-target-2' : 'event-target-1'}`}
+        className={`relative w-full aspect-video   mb-3 cursor-pointer ${isPast ? 'event-target-2' : 'event-target-1'}`}
         onClick={handleInteraction}
       >
         <div className="absolute inset-0 overflow-hidden rounded-lg bg-neutral-100 dark:bg-neutral-900 shadow-sm">
