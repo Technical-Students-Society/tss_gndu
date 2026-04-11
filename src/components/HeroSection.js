@@ -120,11 +120,20 @@ export default function HeroSection() {
           />
         </div>
 
-        {/* Headline */}
-        <h1 className="text-5xl pointer-events-none sm:text-6xl md:text-7xl lg:text-[5.5rem] font-openai font-extrabold tracking-tight leading-[1.05] text-neutral-900 dark:text-white max-w-3xl mb-5">
-          Bridging Tech &amp;
-          <br />
-          Innovation
+        <h1 className="relative text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-openai font-extrabold tracking-tight leading-[1.05]  max-w-3xl mb-5 pointer-events-none">
+
+          <span className="relative z-10 bg-gradient-to-b from-[#ffffff] via-[#d4d4d4] to-[#737373] bg-clip-text text-transparent">
+            Bridging Tech & Innovation
+          </span>
+
+          {/* 3D Depth Layers */}
+          <span className="absolute inset-0 dark:text-neutral-400 blur-[1px] translate-x-[2px] translate-y-[2px] opacity-70">
+            Bridging Tech & Innovation
+          </span>
+
+          <span className="absolute inset-0 dark:text-neutral-600 translate-x-[4px] translate-y-[4px] opacity-50">
+            Bridging Tech & Innovation
+          </span>
         </h1>
 
         {/* Sub */}

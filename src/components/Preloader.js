@@ -40,9 +40,7 @@ export default function Preloader({ loading, onFinish }) {
                     text={["Bridging Tech & Innovation"]}
                     typingSpeed={95}
                     pauseDuration={1500}
-                    showCursor
                     deletingSpeed={false}
-                    cursorBlinkDuration={0.5}
                 />
             </h1>
 
