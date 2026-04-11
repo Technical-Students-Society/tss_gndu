@@ -3,6 +3,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CursorTrail from "@/components/CursorTrail";
 import LayoutWrapper from "@/components/LayoutWrapper";
+import Preloader from "@/components/Preloader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -97,6 +98,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="flex flex-col antialiased selection:bg-neutral-200 dark:selection:bg-neutral-800">
+        {/* <Preloader /> */}
         <CursorTrail />
         <SmoothScroll>
           <main className="flex-1">

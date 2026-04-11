@@ -2,12 +2,7 @@
 
 import Link from "next/link";
 import {
-  Code2,
-  Handshake,
-  Users,
-  Palette,
   Calendar,
-  ArrowRight,
   Image as ImageIcon
 } from "lucide-react";
 
@@ -22,15 +17,14 @@ import Preloader from "@/components/Preloader";
 
 export default function Home() {
 
-
   const upcomingEvents = [
     { title: "Tech-Fest 2025", date: "April 20, 2025", badge: "Flagship" },
     { title: "UI/UX Workshop", date: "May 15, 2025", badge: "Workshop" },
   ];
 
   return (
+    <>
     <div className="flex flex-col font-openai items-center">
-      <Preloader />
       <ScrollToTop />
       <HeroSection />
 
@@ -128,5 +122,6 @@ export default function Home() {
         </div>
       </section> */}
     </div>
+    </>
   );
 }
