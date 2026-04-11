@@ -60,7 +60,6 @@ export default function CursorTrail() {
         else if (target.classList.contains('event-target-1')) type = 'event1';
         else if (target.classList.contains('event-target-2')) type = 'event2';
         else if (target.classList.contains('gallery-target')) type = 'gallery';
-        
         currentHoverTypeRef.current = type;
         setHoverState(type);
       }
@@ -109,11 +108,11 @@ export default function CursorTrail() {
               targetX = mouse.x;
               targetY = mouse.y;
               if (currentHoverType === 'gallery') {
-                  targetW = 80;
-                  targetH = 34;
+                targetW = 80;
+                targetH = 34;
               } else {
-                  targetW = currentHoverType === 'event1' ? 140 : 120;
-                  targetH = 40;
+                targetW = currentHoverType === 'event1' ? 140 : 120;
+                targetH = 40;
               }
               targetOpacity = 1;
             }
@@ -184,7 +183,6 @@ export default function CursorTrail() {
               <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${(hoverState === 'navlink' || hoverState === 'flink') ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}>
                 <ArrowRight size={16} className="text-white dark:text-black -rotate-45" />
               </div>
-              
               {/* Text for Events */}
               <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${hoverState === 'event1' ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}>
                 <span className="text-[11px] font-bold uppercase tracking-wider text-white dark:text-black whitespace-nowrap">Register Now</span>
