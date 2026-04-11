@@ -20,7 +20,7 @@ export default function EventsClient({ events }) {
 
   return (
     <>
-      <div className=" py-20 font-openai mx-auto px-4 md:px-12 lg:px-18 xl:px-30 max-sm:pb-3">
+      <div className="dark:bg-siteblack py-20 font-openai mx-auto px-4 md:px-12 lg:px-18 xl:px-30 max-sm:pb-3">
         {/* ── Page Header (two-column like reference) ── */}
         <div className="relative border-b border-neutral-200 dark:border-neutral-800 pb-12 mb-14">
 

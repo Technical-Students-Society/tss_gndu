@@ -211,6 +211,7 @@ body {
 body {
   font-family: var(--font-sans), system-ui, sans-serif;
   min-height: 100vh;
+  background-color: #f7f8fa;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

@@ -29,7 +29,7 @@ export default function Home() {
       <HeroSection />
 
       {/* Stats Section */}
-      <div className="w-full py-26 dark:bg-siteblack bg-linear-to-t from-zinc-50 to-white dark:from-siteblack dark:to-siteblack ">
+      <div className="w-full py-26 dark:bg-siteblack dark:from-siteblack dark:to-siteblack ">
         <div className=" mx-auto lg:mx-28 px-6 max-sm:px-3">
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-5">
 
@@ -49,7 +49,7 @@ export default function Home() {
             ].map(({ value, label }) => (
               <div
                 key={label}
-                className="bg-neutral-100 dark:bg-neutral-900 rounded-2xl p-6 max-sm:p-3 flex flex-col justify-between min-h-40"
+                className="dark:bg-neutral-900 dark:border-none border border-gray-400 shadow-sm rounded-2xl p-6 max-sm:p-3 flex flex-col justify-between min-h-40"
               >
                 <span className="text-sm text-neutral-400">{label}</span>
                 <span className="text-4xl max-sm:text-3xl font-semibold text-neutral-900 dark:text-neutral-50 tracking-tight leading-none">

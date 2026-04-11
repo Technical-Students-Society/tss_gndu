@@ -43,7 +43,7 @@ export default function GalleryClient({ images }) {
           </div>
 
           <div className="hidden md:block">
-            <div className="text-xs font-bold uppercase tracking-widest text-neutral-400 bg-neutral-100 dark:bg-neutral-900 px-4 py-2 rounded-full border dark:border-neutral-800">
+            <div className="text-xs font-bold uppercase tracking-widest text-neutral-500 bg-neutral-100 dark:bg-neutral-900 px-4 py-2 rounded-full border dark:border-neutral-800">
               {images.length} Captured Items
             </div>
           </div>
@@ -63,7 +63,7 @@ export default function GalleryClient({ images }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
-              className="group relative aspect-[4/3]  rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-900 border dark:border-neutral-800 cursor-pointer"
+              className="group relative aspect-[4/3]  rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-900 dark:border-none border border-gray-400 cursor-pointer"
               onClick={() => openLightbox(index)}
             >
               <img
@@ -94,7 +94,7 @@ export default function GalleryClient({ images }) {
             onClick={closeLightbox}
           >
             <button
-              className="absolute top-6 right-6 p-2 text-white/50 hover:text-white transition-colors z-[110]"
+              className="absolute top-6 right-6 p-2 text-white/50 hover:text-white transition-colors z-[110] cursor-pointer"
               onClick={closeLightbox}
             >
               <X size={32} />

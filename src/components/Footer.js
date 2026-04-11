@@ -5,7 +5,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t dark:bg-siteblack dark:border-neutral-800">
+    <footer className="mt-auto border-t border-gray-400 dark:bg-siteblack dark:border-neutral-800">
       <div className="mx-auto  px-4 md:px-12 lg:px-16 xl:px-30 pt-12 pb-8 max-sm:pb-3">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-4">
@@ -69,7 +69,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t dark:border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="mt-12 pt-8 border-t border-gray-400 dark:border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-4">
 
           {/* Left Section */}
           <div className="flex flex-col items-center sm:items-start text-center sm:text-left max-sm:gap-2">

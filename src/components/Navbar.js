@@ -40,8 +40,8 @@ export default function Navbar() {
 
 
   return (
-    <nav className="sticky top-0 z-50 w-full  border-zinc-400 bg-zinc-50  dark:bg-siteblack dark:border-neutral-800">
-      <div className="mx-auto px-1 md:px-12 lg:px-16 xl:px-30 border-b border-zinc-900">
+    <nav className="sticky top-0 z-50 w-full border-gray-400 bg-zinc-50 dark:bg-siteblack dark:border-neutral-800">
+      <div className="mx-auto px-1 md:px-12 lg:px-16 xl:px-30 border-b border-gray-400 dark:border-neutral-800">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-3">

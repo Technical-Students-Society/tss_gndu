@@ -47,7 +47,7 @@ export default function TeamCategorySection({ title, members }) {
 
   return (
     <section className="space-y-6">
-      <div className="flex justify-between items-end border-b dark:border-neutral-800 pb-4">
+      <div className="flex justify-between items-end border-b border-gray-400 dark:border-neutral-800 pb-4">
         <h2 className="text-2xl font-extrabold uppercase text-neutral-900 dark:text-neutral-50 border-l-4 border-neutral-900 dark:border-neutral-50 pl-4">
           {title}
         </h2>

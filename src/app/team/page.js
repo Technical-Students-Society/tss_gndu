@@ -60,7 +60,7 @@ export default async function TeamPage({ searchParams }) {
   });
 
   return (
-    <div className="py-20 mx-auto font-openai  px-4 md:px-12 lg:px-18 xl:px-30 max-sm:pb-3">
+    <div className="py-20 mx-auto font-openai px-4 md:px-12 lg:px-18 xl:px-30 max-sm:pb-3 dark:bg-siteblack">
       <div className="space-y-12 md:space-y-20">
 
         {/* Page Header */}
@@ -101,7 +101,6 @@ export default async function TeamPage({ searchParams }) {
 
           {/* Subtle Glow */}
           <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-75 h-37.5 bg-neutral-300/20 dark:bg-neutral-700/20 blur-3xl pointer-events-none" />
-
         </div>
 
 
