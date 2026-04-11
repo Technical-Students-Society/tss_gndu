@@ -54,13 +54,13 @@ export default function TeamCategorySection({ title, members }) {
         <div className="flex gap-2">
           <button
             onClick={scrollLeft}
-            className="p-2 border rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors dark:border-neutral-800"
+            className="p-2 border rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors dark:border-neutral-800 cursor-pointer"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button
             onClick={scrollRight}
-            className="p-2 border rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors dark:border-neutral-800"
+            className="p-2 border rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors dark:border-neutral-800 cursor-pointer"
           >
             <ChevronRight className="h-5 w-5" />
           </button>

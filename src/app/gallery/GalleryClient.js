@@ -102,15 +102,13 @@ export default function GalleryClient({ images }) {
 
             {/* Navigation */}
             <button
-              className="absolute left-4 sm:left-10 p-4 text-white/30 hover:text-white transition-colors z-[110] bg-white/5 rounded-full hover:bg-white/10"
-              onClick={prevImage}
-            >
+              className="absolute left-4 sm:left-10 p-4 text-white/30 hover:text-white transition-colors z-[110] bg-white/5 rounded-full hover:bg-white/10 cursor-pointer"
+              onClick={prevImage}>
               <ChevronLeft size={32} />
             </button>
             <button
-              className="absolute right-4 sm:right-10 p-4 text-white/30 hover:text-white transition-colors z-[110] bg-white/5 rounded-full hover:bg-white/10"
-              onClick={nextImage}
-            >
+              className="absolute right-4 sm:right-10 p-4 text-white/30 hover:text-white transition-colors z-[110] bg-white/5 rounded-full hover:bg-white/10 cursor-pointer"
+              onClick={nextImage}>
               <ChevronRight size={32} />
             </button>
 

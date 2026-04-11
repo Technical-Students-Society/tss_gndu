@@ -31,7 +31,7 @@ export default function EventCard({ event, onSelect }) {
         className={`relative w-full aspect-video   mb-3 cursor-pointer ${isPast ? 'event-target-2' : 'event-target-1'}`}
         onClick={handleInteraction}
       >
-        <div className="absolute inset-0 overflow-hidden rounded-lg bg-neutral-100 dark:bg-neutral-900 shadow-sm">
+        <div className="absolute inset-0 overflow-hidden rounded-lg bg-neutral-100 dark:bg-neutral-900 shadow-lg">
           {event.thumbnail ? (
             <img
               src={event.thumbnail}

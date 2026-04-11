@@ -79,7 +79,7 @@ export default function MemberStack({ members }) {
               initial={{ opacity: 0, scale: 0.8, y: -10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: -10 }}
-              className="absolute top-2 right-2 bg-neutral-900 border border-neutral-700 dark:bg-neutral-50 text-white dark:text-black text-[10px] font-black px-2 py-1 rounded-lg shadow-lg uppercase tracking-widest z-10"
+              className="absolute top-2 right-2 text-white bg-black/60 border border-neutral-700 dark:bg-black/20 text-[10px] shadow-lg uppercase tracking-widest z-10 px-4 py-1.5 rounded-xl text-xs font-semibold backdrop-blur-md cursor-pointer"
             >
               Former
             </motion.div>
