@@ -27,14 +27,13 @@ export default function Preloader({ loading, onFinish }) {
     };
 
     return (
-        <div ref={preloaderRef} className="fixed inset-0 z-[9999] flex items-center justify-center bg-white dark:bg-siteblack pt-9 max-lg:pt-10 max-md:pt-8 pointer-events-none flex-col min-h-screen text-center px-6">
+        <div ref={preloaderRef} className="fixed inset-0 z-[9999] flex items-center justify-center bg-white dark:bg-siteblack pt-8 max-lg:pt-9 max-md:pt-8 pointer-events-none flex-col min-h-screen text-center px-6 font-openai">
             {/* Badge */}
             <div className="flex items-center gap-2 mb-6 text-xs text-neutral-500 dark:text-neutral-400 tracking-wide bg-[#0C0C0E] p-2 rounded-full opacity-0">
                 <span className="w-2 h-2 rounded-full bg-orange-400 inline-block" />
                 <span className="w-2 h-2 rounded-full bg-orange-400 inline-block absolute animate-ping" />
                 Technical Students' Society
             </div>
-
             {/* Headline */}
             <h1 className="text-5xl pointer-events-none sm:text-6xl md:text-7xl lg:text-[5.5rem] font-openai font-extrabold tracking-tight leading-[1.05] text-neutral-900 dark:text-white max-w-3xl mb-5 text-center">
                 <TextType
