@@ -51,13 +51,23 @@ export async function middleware(request) {
       .eq('id', 'maintenance_mode')
       .single()
 
-    if (!fetchError && setting?.maintenance_enabled) {
-      // 2. If Maintenance Mode is enabled and user is NOT on /maintenance page, redirect
+    const isMaintenanceMode = !fetchError && setting?.maintenance_enabled
+    const isDevelopment =
+      process.env.NODE_ENV === 'development' ||
+      request.nextUrl.hostname === 'localhost' ||
+      request.nextUrl.hostname === '127.0.0.1';
+
+    if (isDevelopment) {
+      // In development, we don't want maintenance mode to affect us.
+      return response;
+    }
+
+    // Production logic
+    if (isMaintenanceMode) {
       if (!request.nextUrl.pathname.startsWith('/maintenance')) {
         return NextResponse.redirect(new URL('/maintenance', request.url))
       }
     } else {
-      // 3. If Maintenance Mode is NOT enabled and user IS on /maintenance page, redirect to home
       if (request.nextUrl.pathname.startsWith('/maintenance')) {
         return NextResponse.redirect(new URL('/', request.url))
       }
