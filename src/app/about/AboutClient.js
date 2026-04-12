@@ -1,22 +1,14 @@
 "use client";
 
-import { Play, CirclePile } from "lucide-react";
 import CountUp from "../Animations/CountUp";
 import ShinyText from "../Animations/ShinyText";
-import { X, Image as ImageIcon } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
-import { useState } from "react";
+import { Sparkles, CirclePile } from "lucide-react";
 
 export default function AboutSection() {
-  const [selectedVideoIndex, setSelectedVideoIndex] = useState(null);
-
-  const openLightbox = () => setSelectedVideoIndex(0);
-  const closeLightbox = () => setSelectedVideoIndex(null);
-
   return (
     <section className="font-openai relative isolate overflow-hidden dark:bg-siteblack">
 
-      {/* <div className="absolute inset-0 bg-[url('/images/backgrounds/textured-surface.png')] bg-repeat-y bg-center opacity-25" /> */}
+      <div className="absolute inset-0 dark:bg-[url('/images/backgrounds/textured-surface.png')] bg-repeat-y bg-center opacity-25" />
 
       <div className="mx-auto px-6 py-20 max-w-6xl container relative z-10">
         <div className="grid lg:grid-cols-2 gap-14 items-start">
@@ -56,7 +48,9 @@ export default function AboutSection() {
                 alt=""
               />
             </div>
-
+            <p className="font-medium text-neutral-700 dark:text-neutral-300">
+              Diverse teams, one shared horizon — exploring the frontiers of what's possible.
+            </p>
           </div>
 
           {/* RIGHT */}
@@ -116,58 +110,21 @@ export default function AboutSection() {
 
             </div>
 
-            {/* Watch Intro */}
-            <div className="flex items-center pt-4">
 
-              <button onClick={() => openLightbox()} className="flex items-center gap-2 text-sm dark:text-neutral-300 dark:hover:text-white transition cursor-pointer ">
-                <span className="w-8 h-8 flex items-center justify-center rounded-full border border-neutral-600 hover:bg-white hover:text-black transition">
-                  <Play className="w-4 h-4" />
-                </span>
-                Watch Intro
-              </button>
+            {/* Description */}
+            <div className="space-y-5 text-[15px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
+
+              <p className="flex items-start gap-3">
+                <Sparkles className="h-4 w-4 mt-1 text-neutral-400 shrink-0" />
+                Rooted in the MCA Department of Computer Science at Guru Nanak Dev University, TSS is the official student body dedicated to bridging academic curiosities with industry-leading innovation.
+              </p>
+
+              <p className="flex items-start gap-3">
+                <Sparkles className="h-4 w-4 mt-1 text-neutral-400 shrink-0" />
+                Though our legacy spans decades, our registration in 2026 marked a new era of official recognition and scaled impact across the university.
+              </p>
+
             </div>
-
-           <div className="">
-             <AnimatePresence>
-              {selectedVideoIndex !== null && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="fixed inset-0 z-100 flex justify-center items-center bg-siteblack/95 backdrop-blur-lg"
-                  onClick={closeLightbox}
-                >
-                  <button
-                    className="absolute top-6 right-6 p-2 text-white/50 hover:text-white transition-colors z-[110] cursor-pointer"
-                    onClick={closeLightbox}
-                  >
-                    <X size={32} />
-                  </button>
-
-                  {/* Image Container */}
-                  <motion.div
-                    key={selectedVideoIndex}
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.9, opacity: 0 }}
-                    transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                    className="relative max-w-full max-h-full aspect-auto shadow-2xl rounded-lg overflow-hidden"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <video
-                      src="/videos/intro.mp4" autoPlay
-                      controls
-                      playsInline
-                      controlsList="nodownload noplaybackrate noremoteplayback"
-                      disablePictureInPicture
-                      alt="Intro"
-                      className="max-w-full max-h-[85vh] object-contain relative"
-                    />
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-           </div>
 
             <div className="p-5 rounded-2xl border dark:border-white/10 dark:bg-white/5 border-gray-400 backdrop-blur-md shadow-sm hover:shadow-lg transition ease-in-out duration-300">
               <p className="text-xs text-neutral-400 mb-2">Since 2007</p>
