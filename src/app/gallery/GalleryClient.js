@@ -23,7 +23,13 @@ export default function GalleryClient({ images }) {
   };
 
   return (
-    <div className="py-20 mx-auto font-openai dark:bg-siteblack px-4 md:px-12 lg:px-18 xl:px-30 max-sm:pb-3">
+    <div className="relative py-20 mx-auto font-openai dark:bg-siteblack px-4 md:px-12 lg:px-18 xl:px-30 max-sm:pb-3">
+
+      <div className="absolute inset-0 dark:bg-[url('/images/backgrounds/galaxy.jpg')] bg-repeat-y bg-center opacity-15"
+        style={{
+          backgroundSize: '100% 24rem'
+        }} />
+
       {/* Header Section */}
       <div className="relative border-b border-neutral-200 dark:border-neutral-800 pb-12 mb-14 text-left">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
