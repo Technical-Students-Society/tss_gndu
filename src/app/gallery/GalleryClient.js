@@ -5,6 +5,7 @@ import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, Image as ImageIcon } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import ShinyText from "../Animations/ShinyText";
+import SplitText from "../Animations/SplitText";
 
 export default function GalleryClient({ images }) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
@@ -41,7 +42,22 @@ export default function GalleryClient({ images }) {
                 shineColor="#ffffff" />
             </p>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900 dark:text-neutral-50 tracking-tight leading-[1.1]">
-              Moments that <span className="text-neutral-400">define us</span>
+              <SplitText
+                text={<>
+                  Moments that{" "}
+                  <span className="text-neutral-400">define us</span>
+                </>}
+                delay={45}
+                duration={1.25}
+                ease="power3.out"
+                splitType="chars"
+                from={{ opacity: 0, y: 40 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.1}
+                rootMargin="-100px"
+                textAlign="start"
+                showCallback={false}
+              />
             </h1>
             <p className="text-sm sm:text-base text-neutral-500 dark:text-neutral-400 leading-relaxed">
               A curated collection of memories from our workshops, hackathons, and community gatherings.

@@ -2,6 +2,7 @@ import TeamCategorySection from "@/components/TeamCategorySection";
 import BatchSelector from "@/components/BatchSelector";
 import api from "@/utils/api";
 import ShinyText from "../Animations/ShinyText";
+import SplitText from "../Animations/SplitText";
 import { Users } from "lucide-react";
 
 async function getTeamMembers(batch) {
@@ -83,7 +84,17 @@ export default async function TeamPage({ searchParams }) {
 
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 leading-[1.1]">
-                Meet the Team
+                <SplitText
+                  text="Meet the Team"
+                  delay={45}
+                  duration={1.25}
+                  ease="power3.out"
+                  splitType="chars"
+                  from={{ opacity: 0, y: 40 }}
+                  to={{ opacity: 1, y: 0 }}
+                  threshold={0.1}
+                  showCallback={false}
+                />
               </h1>
 
               <p className="text-sm md:text-base text-neutral-500 dark:text-neutral-400 max-w-xl leading-relaxed">
