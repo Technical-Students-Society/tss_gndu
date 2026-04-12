@@ -5,67 +5,69 @@ import ShinyText from '@/app/Animations/ShinyText';
 const teamCategories = [
   {
     title: 'Technical',
-    description: 'Hackathons, dev workshops, and the infrastructure behind every TSS event.',
+    description: 'Hackathons, workshops, and the infrastructure behind every TSS event.',
     textColor: 'text-white',
     bgClass: 'bg-center',
-    backgroundurl: '/images/gradientBase5.jpg',
-    illustration: '/images/illustrations/technical.png'
+    // backgroundurl: '/images/gradientBase5.jpg',
+    backgroundurl: '/images/gradientBase12.jpg',
+    illustration: '/images/illustrations/technical2.png'
   },
   {
     title: 'Sports',
-    description: 'Organizes inter-college sports events and builds a culture of athletic excellence.',
-    textColor: 'text-white',
+    description: 'Organizes inter-college sports events and builds athletic excellence.',
+    textColor: 'text-black dark:text-white',
     bgClass: 'bg-top',
-    backgroundurl: '/images/gradientBase4.jpg',
-    illustration: '/images/illustrations/technical.png'
+    backgroundurl: '/images/gradientBas.jpg',
+    illustration: '/images/illustrations/sports2.png'
   },
   {
     title: 'Placement',
-    description: 'Connects students with recruiters and prepares them for the professional world.',
+    description: 'Connects students with recruiters & prepares them for their career.',
     textColor: 'text-white',
-    bgClass: 'bg-[center_right]',
-    backgroundurl: '/images/gradientBase2.jpg',
-    illustration: '/images/illustrations/technical.png'
+    bgClass: 'bg-top',
+    backgroundurl: '/images/gradientBase4.jpg',
+    illustration: '/images/illustrations/placement.png'
   },
   {
     title: 'Cultural',
-    description: 'Fests, performances, and everything that makes campus life vibrant and memorable.',
+    description: 'Fests, performances, and everything that makes campus life memorable.',
     textColor: 'text-neutral-900',
     bgClass: 'bg-left',
-    backgroundurl: '/images/gradientBase4.jpg',
+    // backgroundurl: '/images/gradientBase4.jpg',
+    backgroundurl: '/images/gradientBase11.jpg',
     illustration: '/images/illustrations/cultural.png'
   },
   {
     title: 'Alumni',
-    description: 'Bridges graduating batches with current students through mentorship and networks.',
-    textColor: 'text-white',
-    bgClass: 'bg-right',
-    backgroundurl: '/images/gradientBase4.jpg',
-    illustration: '/images/illustrations/technical.png'
+    description: 'Bridges alumni with current students through mentorship and networks.',
+    textColor: 'text-black dark:text-white',
+    bgClass: 'bg-bottom',
+    backgroundurl: '/images/gradientBas3.jpg',
+    illustration: '/images/illustrations/almuni.png'
   },
   {
     title: 'Sponsorship',
     description: 'Secures partnerships and funds that keep TSS events running at full scale.',
     textColor: 'text-neutral-900',
-    bgClass: 'bg-[top_right]',
-    backgroundurl: '/images/gradientBase.jpg',
-    illustration: '/images/illustrations/technical.png'
+    bgClass: 'bg-top',
+    backgroundurl: '/images/gradientBase11.jpg',
+    illustration: '/images/illustrations/sponsorship2.png'
   },
   {
     title: 'Content & Media',
     description: 'Documents, shoots, and tells the story of TSS across every channel.',
     textColor: 'text-white',
     bgClass: 'bg-[center_right]',
-    backgroundurl: '/images/gradientBase4.jpg',
-    illustration: '/images/illustrations/content.png'
+    backgroundurl: '/images/gradientBase12.jpg',
+    illustration: '/images/illustrations/content2.png'
   },
   {
     title: 'Design',
-    description: 'Crafts the visual identity of TSS — from event creatives to the digital experience.',
-    textColor: 'text-neutral-900',
-    bgClass: 'bg-bottom',
-    backgroundurl: '/images/gradientBase7.jpg',
-    illustration: '/images/illustrations/design.png'
+    description: 'Crafts the visual identity of TSS from event creatives to the digital experience.',
+    textColor: 'text-black dark:text-white',
+    bgClass: 'bg-center',
+    backgroundurl: '/images/gradientBas.jpg',
+    illustration: '/images/illustrations/design2.png'
   },
 ];
 
@@ -99,7 +101,7 @@ export default function HomeTeamSectionSimple() {
           {teamCategories.map((category) => (
             <div
               key={category.title}
-              className="group relative flex flex-col justify-between rounded-xl border border-neutral-200 dark:border-neutral-800 p-6 hover:-translate-y-0.5 transition-all duration-300 aspect-square overflow-hidden shadow-lg shadow-neutral-200/50 dark:shadow-none"
+              className="group relative flex flex-col justify-between rounded-xl border border-neutral-400 dark:border-neutral-800 p-6 hover:-translate-y-0.5 transition-all duration-300 aspect-square overflow-hidden shadow-lg shadow-neutral-200/50 dark:shadow-none"
             >
               {/* Background Image */}
               <div
@@ -109,11 +111,11 @@ export default function HomeTeamSectionSimple() {
 
               {/* Dark Overlay */}
               {/* <div className="absolute inset-0 bg-black/5 dark:bg-black/20 group-hover:bg-transparent transition-colors duration-500" /> */}
-              <div className="absolute inset-0 bg-black/5 dark:bg-black/20 " />
+              <div className="absolute inset-0 bg-black/5 dark:bg-black/30 " />
 
               {/* Illustration at bottom center */}
               {category.illustration && (
-                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-52 h-52  group-hover:scale-105 transition-all duration-500 pointer-events-none z-10">
+                <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-52 h-52  group-hover:scale-105 transition-all duration-500 pointer-events-none z-10">
                   <img
                     src={category.illustration}
                     alt=""
@@ -124,10 +126,10 @@ export default function HomeTeamSectionSimple() {
 
               {/* Text Area at Top */}
               <div className={`relative z-20 ${category.textColor}`}>
-                <h3 className="text-xl font-bold uppercase tracking-wider mb-3">
+                <h3 className="text-2xl  font-openai   mb-2">
                   {category.title}
                 </h3>
-                <p className="text-xs leading-relaxed font-bold opacity-90">
+                <p className="text-sm leading-relaxed  opacity-90">
                   {category.description}
                 </p>
               </div>

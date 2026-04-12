@@ -9,8 +9,8 @@ import {
 import HeroSection from "@/components/HeroSection";
 import HomeEventsSection from "@/components/HomeEventsSection";
 import HomeFaqSection from "@/components/HomeFaqSection";
-// import HomeTeamSectionSimple from "@/components/HomeTeamSectionSimple";
-import HomeTeamSection from "@/components/HomeTeamSection";
+import HomeTeamSectionSimple from "@/components/HomeTeamSectionSimple";
+// import HomeTeamSection from "@/components/HomeTeamSection";
 import HomeAboutSection from "@/components/HomeAboutSection";
 import CountUp from "./Animations/CountUp";
 import ScrollToTop from "./ScrollToTop";
@@ -73,8 +73,8 @@ export default function Home() {
 
         <HomeAboutSection />
 
-        <HomeTeamSection />
-        {/* <HomeTeamSectionSimple /> */}
+        {/* <HomeTeamSection /> */}
+        <HomeTeamSectionSimple />
 
         {/* Events Section */}
         <section className="w-full py-20 dark:bg-siteblack">
