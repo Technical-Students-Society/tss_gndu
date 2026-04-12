@@ -5,6 +5,7 @@ import EventModal from "@/components/EventModal";
 import ShinyText from "../Animations/ShinyText";
 import { ArrowRight, Calendars } from 'lucide-react';
 import EventCard from "@/components/EventCard";
+import SplitText from "../Animations/SplitText";
 
 export default function EventsClient({ events }) {
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -41,8 +42,22 @@ export default function EventsClient({ events }) {
             {/* Left */}
             <div className="space-y-5 max-w-xl">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-neutral-900 dark:text-neutral-50 leading-[1.1]">
-                What's happening at the{" "}
-                <span className="text-neutral-400">frontier</span>
+                <SplitText
+                  text={<>
+                    What's happening at the{" "}
+                    <span className="text-neutral-400">frontier</span>
+                  </>}
+                  delay={25}
+                  duration={1.25}
+                  ease="power3.out"
+                  splitType="chars"
+                  from={{ opacity: 0, y: 40 }}
+                  to={{ opacity: 1, y: 0 }}
+                  threshold={0.1}
+                  rootMargin="-100px"
+                  textAlign="start"
+                  showCallback={false}
+                />
               </h1>
 
               <p className="text-sm sm:text-base text-neutral-500 dark:text-neutral-400 leading-relaxed">

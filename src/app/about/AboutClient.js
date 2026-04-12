@@ -3,12 +3,13 @@
 import CountUp from "../Animations/CountUp";
 import ShinyText from "../Animations/ShinyText";
 import { Sparkles, CirclePile } from "lucide-react";
+import SplitText from "../Animations/SplitText";
 
 export default function AboutSection() {
   return (
     <section className="font-openai relative isolate overflow-hidden dark:bg-siteblack">
 
-      <div className="absolute inset-0 dark:bg-[url('/images/backgrounds/textured-surface.png')] bg-repeat-y bg-center opacity-25" />
+      <div className="max-lg:hidden absolute inset-0 dark:bg-[url('/images/backgrounds/textured-surface.png')] bg-repeat-y bg-center opacity-25" />
 
       <div className="mx-auto px-6 py-20 max-w-6xl container relative z-10">
         <div className="grid lg:grid-cols-2 gap-14 items-start">
@@ -29,8 +30,22 @@ export default function AboutSection() {
 
             {/* Heading */}
             <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight">
-              Your Vision Our Expertise Your Success Get Noticed Generate{" "}
-              <span className="text-neutral-400">Leads Dominate.</span>
+              <SplitText
+                text={<>
+                  Your Vision Our Expertise Your Success Get Noticed Generate{" "}
+                  <span className="text-neutral-400">Leads Dominate.</span>
+                </>}
+                delay={20}
+                duration={1.25}
+                ease="power3.out"
+                splitType="words"
+                from={{ opacity: 0, y: 40 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.1}
+                rootMargin="-100px"
+                textAlign="start"
+                showCallback={false}
+              />
             </h2>
 
             {/* Paragraph */}
