@@ -113,24 +113,25 @@ export default function HomeTeamSectionSimple() {
               {/* <div className="absolute inset-0 bg-black/5 dark:bg-black/20 group-hover:bg-transparent transition-colors duration-500" /> */}
               <div className="absolute inset-0 bg-black/5 dark:bg-black/30 " />
 
-              {/* Illustration at bottom center */}
-              {category.illustration && (
-                <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-52 h-52  group-hover:scale-105 transition-all duration-500 pointer-events-none z-10">
-                  <img
-                    src={category.illustration}
-                    alt=""
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              )}
+
 
               {/* Text Area at Top */}
               <div className={`relative z-20 ${category.textColor}`}>
-                <h3 className="text-2xl  font-openai   mb-2">
+                <h3 className="text-2xl font-openai mb-2">
                   {category.title}
                 </h3>
-                <p className="text-sm leading-relaxed  opacity-90">
+                <p className="text-sm leading-relaxed opacity-90">
                   {category.description}
+                  {/* Illustration at bottom center */}
+                  {category.illustration && (
+                    <div className="relative max-sm:-bottom-5 left-1/2 -translate-x-1/2 w-52 h-52 group-hover:scale-105 transition-all duration-500 pointer-events-none z-10">
+                      <img
+                        src={category.illustration}
+                        alt=""
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  )}
                 </p>
               </div>
             </div>
