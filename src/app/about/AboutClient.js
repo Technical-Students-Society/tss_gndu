@@ -9,7 +9,7 @@ export default function AboutSection() {
   return (
     <section className="font-openai relative isolate overflow-hidden dark:bg-siteblack">
 
-      <div className="max-lg:hidden absolute inset-0 dark:bg-[url('/images/backgrounds/textured-surface.png')] bg-repeat-y bg-center opacity-25" />
+      <div className="max-lg:hidden absolute inset-0 dark:bg-[url('/images/backgrounds/textured-surface.webp')] bg-repeat-y bg-center opacity-25" />
 
       <div className="mx-auto px-6 py-20 max-w-6xl container relative z-10">
         <div className="grid lg:grid-cols-2 gap-14 items-start">

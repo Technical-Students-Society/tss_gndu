@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from 'next/script';
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CursorTrail from "@/components/CursorTrail";
@@ -73,11 +74,10 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
-    >
+      className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}>
 
       <head>
-        <script
+        <Script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
