@@ -14,7 +14,7 @@ import HomeTeamSectionSimple from "@/components/HomeTeamSectionSimple";
 import HomeAboutSection from "@/components/HomeAboutSection";
 import CountUp from "./Animations/CountUp";
 import ScrollToTop from "./ScrollToTop";
-import Preloader from "@/components/Preloader";
+import SplitText from "./Animations/SplitText";
 
 export default function Home() {
 
@@ -81,7 +81,15 @@ export default function Home() {
           <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
             <div className="flex flex-col md:flex-row justify-between items-start mb-18 gap-4">
               <div className="space-y-4 text-left">
-                <h2 className="text-3xl font-extrabold tracking-wide sm:text-4xl">Events Spotlight</h2>
+                <h2 className="text-3xl font-extrabold tracking-wide sm:text-4xl"> <SplitText text="Events Spotlight" delay={25}
+                  duration={1.25}
+                  ease="power3.out"
+                  splitType="chars"
+                  from={{ opacity: 0, y: 40 }}
+                  to={{ opacity: 1, y: 0 }}
+                  threshold={0.1}
+                  showCallback={false}
+                  textAlign="start" /></h2>
                 <p className="text-neutral-500 dark:text-neutral-400 ">
                   Stay tuned with our upcoming highlights and ongoing competitions.
                 </p>

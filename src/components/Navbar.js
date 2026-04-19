@@ -44,7 +44,7 @@ export default function Navbar() {
       <div className="mx-auto px-1 md:px-12 lg:px-16 xl:px-30 border-b border-gray-400 dark:border-neutral-800">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-2">
 
               {/* Logo */}
               <img

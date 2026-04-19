@@ -3,8 +3,8 @@
 import Link from "next/link";
 import React, { useState, useEffect, useCallback } from "react";
 import { ArrowUpRight, Users, Sparkles, CirclePile } from "lucide-react";
-import CountUp from "@/app/Animations/CountUp";
 import ShinyText from "@/app/Animations/ShinyText";
+import SplitText from "@/app/Animations/SplitText";
 
 const SLIDES = [
   { label: "Annual Hackathon 2024", src: "/slide1.jpg" },
@@ -48,13 +48,26 @@ export default function HomeAboutSection() {
 
             {/* Heading */}
             <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.1] text-neutral-900 dark:text-neutral-50 mb-8 font-openai">
-              Where curiosity<br />meets{" "}
-              <span className="inline-flex items-center gap-2">
-                <em className="not-italic text-neutral-400 dark:text-neutral-500">
-                  community
-                </em>
-                <Users className="h-5 w-5 text-neutral-400" />
-              </span>
+              <SplitText
+                text={<>
+                  Where curiosity<br />meets{" "}
+                  <span className="inline-flex items-center gap-2">
+                    <em className="not-italic text-neutral-400 dark:text-neutral-500">
+                      community
+                    </em>
+                    <Users className="h-5 w-5 text-neutral-400" />
+                  </span>
+                </>}
+                delay={25}
+                duration={1.25}
+                ease="power3.out"
+                splitType="chars"
+                from={{ opacity: 0, y: 40 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.1}
+                showCallback={false}
+                textAlign="start"
+              />
             </h2>
 
             {/* Description */}

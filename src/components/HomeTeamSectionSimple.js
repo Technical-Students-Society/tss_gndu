@@ -1,6 +1,7 @@
 import React from 'react';
 import { Users } from "lucide-react";
 import ShinyText from '@/app/Animations/ShinyText';
+import SplitText from '@/app/Animations/SplitText';
 
 const teamCategories = [
   {
@@ -88,7 +89,15 @@ export default function HomeTeamSectionSimple() {
               />
             </p>
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-50 max-w-md leading-tight">
-              Our Core Team Divisions
+               <SplitText text="Our Core Team Divisions" delay={25}
+              duration={1.25}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              showCallback={false}
+              textAlign="start" />
             </h2>
           </div>
           <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-xs leading-relaxed md:text-right">
