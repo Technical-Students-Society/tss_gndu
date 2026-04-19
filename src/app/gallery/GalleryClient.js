@@ -1,14 +1,57 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
+import { useState, useEffect } from "react";
 import { X, ChevronLeft, ChevronRight, Image as ImageIcon } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import ShinyText from "../Animations/ShinyText";
-import SplitText from "../Animations/SplitText";
+import { createClient } from "@/utils/supabase/client";
 
-export default function GalleryClient({ images }) {
+export default function GalleryClient() {
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+
+  useEffect(() => {
+    async function fetchImages() {
+      setLoading(true);
+      const supabase = createClient();
+      
+      try {
+        const { data, error } = await supabase.storage
+          .from("tss-bucket")
+          .list("event-images", {
+            limit: 100,
+            offset: 0,
+            sortBy: { column: "name", order: "desc" },
+          });
+
+        if (error) throw error;
+
+        const galleryImages = data
+          .filter((file) => file.name !== ".emptyKeep" && (file.name.endsWith('.jpg') || file.name.endsWith('.png') || file.name.endsWith('.webp') || file.name.endsWith('.jpeg')))
+          .map((file) => {
+            const { data: publicUrlData } = supabase.storage
+              .from("tss-bucket")
+              .getPublicUrl(`event-images/${file.name}`);
+
+            return {
+              id: file.id,
+              src: publicUrlData.publicUrl,
+              alt: file.name,
+              name: file.name,
+            };
+          });
+
+        setImages(galleryImages);
+      } catch (err) {
+        console.error("Error fetching gallery images:", err);
+        setImages([]);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchImages();
+  }, []);
 
   const openLightbox = (index) => setSelectedImageIndex(index);
   const closeLightbox = () => setSelectedImageIndex(null);
@@ -23,56 +66,22 @@ export default function GalleryClient({ images }) {
     setSelectedImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center py-32 space-y-4">
+        <div className="w-8 h-8 border-4 border-neutral-200 dark:border-neutral-800 border-t-neutral-900 dark:border-t-neutral-50 rounded-full animate-spin"></div>
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-neutral-400">Archiving Memories...</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="relative py-20 mx-auto font-openai dark:bg-siteblack px-4 md:px-12 lg:px-18 xl:px-30 max-sm:pb-3">
-
-      <div className="absolute inset-0 dark:bg-[url('/images/backgrounds/galaxy.jpg')] bg-repeat-y bg-center opacity-15"
-        style={{
-          backgroundSize: '100% 24rem'
-        }} />
-
-      {/* Header Section */}
-      <div className="relative border-b border-neutral-200 dark:border-neutral-800 pb-12 mb-14 text-left">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
-          <div className="space-y-4 max-w-3xl">
-            <p className="flex items-center justify-start gap-2 text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-2">
-              <ImageIcon size={20} />
-              <ShinyText text="Visual Archive" speed={2.8}
-                color="#b5b5b5"
-                shineColor="#ffffff" />
-            </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-900 dark:text-neutral-50 tracking-tight leading-[1.1]">
-              <SplitText
-                text={<>
-                  Moments that{" "}
-                  <span className="text-neutral-400">define us</span>
-                </>}
-                delay={45}
-                duration={1.25}
-                ease="power3.out"
-                splitType="chars"
-                from={{ opacity: 0, y: 40 }}
-                to={{ opacity: 1, y: 0 }}
-                threshold={0.1}
-                rootMargin="-100px"
-                textAlign="start"
-                showCallback={false}
-              />
-            </h1>
-            <p className="text-sm sm:text-base text-neutral-500 dark:text-neutral-400 leading-relaxed">
-              A curated collection of memories from our workshops, hackathons, and community gatherings.
-            </p>
-          </div>
-
-          <div className="hidden md:block">
-            <div className="text-xs font-bold uppercase tracking-widest text-neutral-500 bg-neutral-100 dark:bg-neutral-900 px-4 py-2 rounded-full border dark:border-neutral-800">
-              {images.length} Captured Items
-            </div>
-          </div>
+    <>
+      {/* Metrics (Optional, now shown after loading) */}
+      <div className="mb-8 flex justify-end">
+        <div className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 bg-neutral-100 dark:bg-neutral-900/50 px-4 py-2 rounded-full border dark:border-neutral-800 backdrop-blur-sm">
+          {images.length} Captured Items
         </div>
-
-        {/* Subtle Glow */}
-        <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[300px] h-[150px] bg-neutral-300/20 dark:bg-neutral-700/20 blur-3xl pointer-events-none" />
       </div>
 
       {/* Gallery Grid */}
@@ -85,7 +94,7 @@ export default function GalleryClient({ images }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
-              className="group relative aspect-[4/3]  rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-900 dark:border-none border border-gray-400 cursor-pointer"
+              className="group relative aspect-[4/3] rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-900/40 dark:border-none border border-gray-400 cursor-pointer shadow-lg"
               onClick={() => openLightbox(index)}
             >
               <img
@@ -112,7 +121,7 @@ export default function GalleryClient({ images }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-siteblack/95 backdrop-blur-sm p-4 sm:p-10"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-siteblack/95 backdrop-blur-md p-4 sm:p-10"
             onClick={closeLightbox}
           >
             <button
@@ -125,12 +134,14 @@ export default function GalleryClient({ images }) {
             {/* Navigation */}
             <button
               className="absolute left-4 sm:left-10 p-4 text-white/30 hover:text-white transition-colors z-[110] bg-white/5 rounded-full hover:bg-white/10 cursor-pointer"
-              onClick={prevImage}>
+              onClick={prevImage}
+            >
               <ChevronLeft size={32} />
             </button>
             <button
               className="absolute right-4 sm:right-10 p-4 text-white/30 hover:text-white transition-colors z-[110] bg-white/5 rounded-full hover:bg-white/10 cursor-pointer"
-              onClick={nextImage}>
+              onClick={nextImage}
+            >
               <ChevronRight size={32} />
             </button>
 
@@ -153,7 +164,6 @@ export default function GalleryClient({ images }) {
           </motion.div>
         )}
       </AnimatePresence>
-
-    </div>
+    </>
   );
 }

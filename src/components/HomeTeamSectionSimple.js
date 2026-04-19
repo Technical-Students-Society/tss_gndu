@@ -120,8 +120,10 @@ export default function HomeTeamSectionSimple() {
                 <h3 className="text-2xl font-openai mb-2">
                   {category.title}
                 </h3>
-                <p className="text-sm leading-relaxed opacity-90">
-                  {category.description}
+                <div className="opacity-90">
+                  <p className="text-sm leading-relaxed">
+                    {category.description}
+                  </p>
                   {/* Illustration at bottom center */}
                   {category.illustration && (
                     <div className="relative max-sm:-bottom-5 left-1/2 -translate-x-1/2 w-52 h-52 group-hover:scale-105 transition-all duration-500 pointer-events-none z-10">
@@ -132,7 +134,7 @@ export default function HomeTeamSectionSimple() {
                       />
                     </div>
                   )}
-                </p>
+                </div>
               </div>
             </div>
           ))}
