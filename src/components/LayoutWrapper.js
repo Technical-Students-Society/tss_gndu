@@ -14,9 +14,9 @@ export default function LayoutWrapper({ children }) {
   return (
     <>
       {!hideLayout && <Navbar />}
-      <PageTransition>
+      {/* <PageTransition> */}
         {children}
-      </PageTransition>
+      {/* </PageTransition> */}
       {!hideLayout && <Footer />}
 
     </>

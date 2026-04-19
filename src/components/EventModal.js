@@ -75,13 +75,13 @@ export default function EventModal({ event, onClose }) {
   };
 
 
-   if (!mounted) return null;
+  if (!mounted) return null;
 
   return createPortal(
     <div
       ref={overlayRef}
       onClick={handleOverlayClick}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-siteblack/60 backdrop-blur-sm p-4 sm:p-6"
+      className="fixed inset-0 z-[100] flex font-openai items-center justify-center bg-siteblack/60 backdrop-blur-sm p-4 sm:p-6"
     >
       <div
         ref={modalRef}
@@ -89,11 +89,11 @@ export default function EventModal({ event, onClose }) {
       >
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-neutral-200 dark:border-neutral-800 shrink-0">
-          <div>
-            <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50 pr-8">
+          <div className="w-60 sm:w-full">
+            <h2 className=" text-lg  sm:text-xl font-bold text-neutral-900 dark:text-neutral-50 pr-8">
               {event.title}
             </h2>
-            <p className="text-sm font-semibold text-neutral-500 dark:text-neutral-400 mt-1 uppercase tracking-widest">
+            <p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 mt-1 uppercase tracking-widest">
               {formatEventDateTime(event.start_at, event.end_at)}
             </p>
           </div>
