@@ -17,12 +17,14 @@ export function formatEventDateTime(startAt, endAt) {
     month: "long",
     day: "numeric",
     year: "numeric",
+    timeZone: "UTC",
   };
 
   const timeOptions = {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
+    timeZone: "UTC",
   };
 
   const startDateStr = start.toLocaleDateString("en-US", dateOptions);
@@ -33,9 +35,9 @@ export function formatEventDateTime(startAt, endAt) {
   }
 
   const isSameDay = 
-    start.getFullYear() === end.getFullYear() &&
-    start.getMonth() === end.getMonth() &&
-    start.getDate() === end.getDate();
+    start.getUTCFullYear() === end.getUTCFullYear() &&
+    start.getUTCMonth() === end.getUTCMonth() &&
+    start.getUTCDate() === end.getUTCDate();
 
   if (isSameDay) {
     let endTimeStr = end.toLocaleTimeString("en-US", timeOptions).replace(":00", "").toLowerCase();

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { X, ChevronLeft, ChevronRight, Trophy, Users, HeartHandshake, Cross } from "lucide-react";
 import { formatEventDateTime } from "@/utils/dateFormatter";
 import gsap from "gsap";
@@ -9,6 +10,7 @@ export default function EventModal({ event, onClose }) {
   const overlayRef = useRef(null);
   const modalRef = useRef(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   // Initialize data arrays safely
   const images = event.image_set || [];
@@ -17,6 +19,7 @@ export default function EventModal({ event, onClose }) {
   const volunteers = Array.isArray(event.volunteers) ? event.volunteers : [];
 
   useEffect(() => {
+    setMounted(true);
     // Prevent scrolling on the body when modal is open
     document.body.style.overflow = "hidden";
 
@@ -72,11 +75,13 @@ export default function EventModal({ event, onClose }) {
   };
 
 
-  return (
+   if (!mounted) return null;
+
+  return createPortal(
     <div
       ref={overlayRef}
       onClick={handleOverlayClick}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-siteblack/60 backdrop-blur-sm p-4 sm:p-6"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-siteblack/60 backdrop-blur-sm p-4 sm:p-6"
     >
       <div
         ref={modalRef}
@@ -103,7 +108,7 @@ export default function EventModal({ event, onClose }) {
 
         {/* Scrollable Content */}
         <div data-lenis-prevent="true" className="overflow-y-auto overscroll-none flex-1 p-6 space-y-8">
-          
+
           {/* Main Content Grid: Description & Slider */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Left: Info */}
@@ -158,11 +163,10 @@ export default function EventModal({ event, onClose }) {
                       <button
                         key={idx}
                         onClick={() => setCurrentImageIndex(idx)}
-                        className={`w-2 h-2 rounded-full transition-all ${
-                          idx === currentImageIndex
-                            ? "bg-neutral-900 dark:bg-neutral-100 w-6"
-                            : "bg-neutral-300 dark:bg-neutral-700"
-                        }`}
+                        className={`w-2 h-2 rounded-full transition-all ${idx === currentImageIndex
+                          ? "bg-neutral-900 dark:bg-neutral-100 w-6"
+                          : "bg-neutral-300 dark:bg-neutral-700"
+                          }`}
                         aria-label={`Go to slide ${idx + 1}`}
                       />
                     ))}
@@ -170,17 +174,13 @@ export default function EventModal({ event, onClose }) {
                 )}
               </div>
             )}
-            {images.length === 0 && event.thumbnail && (
+            {images.length === 0 && (
               <div className="space-y-4">
                 <h3 className="text-sm font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
                   Images from the event
                 </h3>
-                 <div className="relative aspect-4/3 rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-800">
-                  <img
-                    src={event.thumbnail}
-                    alt={`${event.title} thumbnail`}
-                    className="w-full h-full object-cover"
-                  />
+                <div className="relative aspect-4/3 rounded-xl overflow-hidden bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-800 flex items-center justify-center">
+                  <p className="text-sm text-neutral-400 dark:text-neutral-500 italic">No images available.</p>
                 </div>
               </div>
             )}
@@ -190,7 +190,7 @@ export default function EventModal({ event, onClose }) {
 
           {/* Details Grid: Winners, Organizers, Volunteers */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            
+
             {/* Winners */}
             {winners.length > 0 && (
               <div className="space-y-4">
@@ -260,6 +260,7 @@ export default function EventModal({ event, onClose }) {
 
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
