@@ -144,22 +144,29 @@ export default function HeroSection() {
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-wrap justify-center gap-4">
+          {/* Primary Button */}
           <Link
             href="/events"
-            className="inline-flex items-center gap-2 h-11 px-7 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-sm font-medium hover:bg-neutral-700 dark:hover:bg-neutral-200 transition-colors"
+            className="group inline-flex items-center gap-2 h-11 px-7 rounded-full border border-neutral-300 dark:border-zinc-700 bg-siteblack dark:bg-zinc-800/70 backdrop-blur-sm text-neutral-400 dark:text-neutral-300 text-sm font-semibold dark:hover:bg-zinc-700 transition-colors"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-neutral-900 inline-block" />
-            <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-neutral-900 inline-block absolute animate-ping" />
-            View Events
+            <span className="relative z-10 flex items-center gap-2">
+              View Events
+              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </span>
+
+            {/* Glow effect */}
+            <span className="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover:opacity-100 blur-md transition duration-300"></span>
           </Link>
+
+          {/* Secondary Button */}
           <Link
             href="/about"
-            className="inline-flex items-center gap-2 h-11 px-7 rounded-full border border-neutral-300 dark:border-zinc-700 bg-white/70 dark:bg-zinc-800/70 backdrop-blur-sm text-neutral-700 dark:text-neutral-300 text-sm font-medium hover:bg-white dark:hover:bg-zinc-700 transition-colors"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-500 inline-block" />
-            <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-500 inline-block absolute animate-ping" />
-            Learn More
+            className="group inline-flex items-center gap-2 h-11 px-7 rounded-full border border-neutral-300 dark:border-zinc-700 bg-siteblack dark:bg-zinc-800/70 backdrop-blur-sm text-neutral-400 dark:text-neutral-300 text-sm font-semibold dark:hover:bg-zinc-700 transition-colors">
+            <span className="flex items-center gap-2">
+              Learn More
+              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </span>
           </Link>
         </div>
       </div>
