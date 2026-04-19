@@ -18,7 +18,7 @@ Built with a modern tech stack, the platform focuses on **performance, scalabili
 ## 🚀 Live Website
 
 Experience the live version here:  
-👉 **Coming Soon**
+👉 https://tss-gndu.org/
 
 ---
 
