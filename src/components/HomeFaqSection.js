@@ -1,5 +1,6 @@
 import React from 'react';
 import { HelpCircle, Users, Gift, Zap, Bell } from 'lucide-react';
+import SplitText from '@/app/Animations/SplitText';
 
 const faqs = [
   {
@@ -34,7 +35,15 @@ export default function HomeFaqSection() {
       <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
-            Common Questions
+            <SplitText text="Common Questions" delay={25}
+              duration={1.25}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              showCallback={false}
+              textAlign="start" />
           </h2>
           <p className="text-neutral-600 dark:text-neutral-400 mx-auto max-w-2xl text-base">
             Everything you need to know about getting involved with TSS GNDU.

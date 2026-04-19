@@ -148,7 +148,7 @@ export default function HeroSection() {
           {/* Primary Button */}
           <Link
             href="/events"
-            className="group inline-flex items-center gap-2 h-11 px-7 rounded-full border border-neutral-300 dark:border-zinc-700 bg-siteblack dark:bg-zinc-800/70 backdrop-blur-sm text-neutral-400 dark:text-neutral-300 text-sm font-semibold dark:hover:bg-zinc-700 transition-colors"
+            className="group inline-flex items-center gap-2 h-11 px-6 rounded-full border border-neutral-300 dark:border-zinc-700 bg-siteblack dark:bg-zinc-800/70 backdrop-blur-sm text-neutral-400 dark:text-neutral-300 text-sm font-semibold dark:hover:bg-zinc-700 transition-colors"
           >
             <span className="relative z-10 flex items-center gap-2">
               View Events
@@ -162,7 +162,7 @@ export default function HeroSection() {
           {/* Secondary Button */}
           <Link
             href="/about"
-            className="group inline-flex items-center gap-2 h-11 px-7 rounded-full border border-neutral-300 dark:border-zinc-700 bg-siteblack dark:bg-zinc-800/70 backdrop-blur-sm text-neutral-400 dark:text-neutral-300 text-sm font-semibold dark:hover:bg-zinc-700 transition-colors">
+            className="group inline-flex items-center gap-2 h-11 px-6 rounded-full border border-neutral-300 dark:border-zinc-700 bg-siteblack dark:bg-zinc-800/70 backdrop-blur-sm text-neutral-400 dark:text-neutral-300 text-sm font-semibold dark:hover:bg-zinc-700 transition-colors">
             <span className="flex items-center gap-2">
               Learn More
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
