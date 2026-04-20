@@ -124,8 +124,6 @@ export default function HomeTeamSectionSimple() {
               {/* <div className="absolute inset-0 bg-black/5 dark:bg-black/20 group-hover:bg-transparent transition-colors duration-500" /> */}
               <div className="absolute inset-0 bg-black/5 dark:bg-black/30 " />
 
-
-
               {/* Text Area at Top */}
               <div className={`relative z-20 ${category.textColor}`}>
                 <h3 className="text-2xl font-openai mb-2">

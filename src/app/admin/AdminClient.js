@@ -59,7 +59,7 @@ export default function FakeAdminPage() {
                 </div>
 
                 <h1 className="text-xl font-bold text-white text-center">
-                  Hello TSS Admin
+                  Welcome Back Admin
                 </h1>
 
                 <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400 max-w-xs">
