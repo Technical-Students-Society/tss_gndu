@@ -72,9 +72,11 @@ const teamCategories = [
   },
 ];
 
+const marquee = [...teamCategories, ...teamCategories]
+
 export default function HomeTeamSectionSimple() {
   return (
-    <section className="w-full py-20 dark:bg-siteblack">
+    <section className="w-full py-20 dark:bg-siteblack overflow-hidden">
       <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
         {/* Header row */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
@@ -106,8 +108,8 @@ export default function HomeTeamSectionSimple() {
         </div>
 
         {/* Cards grid */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {teamCategories.map((category) => (
+        <div className="flex flex-row h-80 gap-4 slide-animation overflow-hidden">
+          {marquee.map((category) => (
             <div
               key={category.title}
               className="group relative flex flex-col justify-between rounded-xl border border-neutral-400 dark:border-neutral-800 p-6 hover:-translate-y-0.5 transition-all duration-300 aspect-square overflow-hidden shadow-lg shadow-neutral-200/50 dark:shadow-none"
