@@ -65,7 +65,7 @@ export default function VerifyPage() {
             placeholder="Enter Certificate ID"
             value={certificateId}
             onChange={(e) => setCertificateId(e.target.value)}
-            className="w-full mt-2 mb-6 px-4 py-3 rounded-xl border border-neutral-700 bg-transparent focus:outline-none focus:ring-2 focus:ring-[00ff40] uppercase"
+            className="w-full mt-2 mb-6 px-4 py-3 rounded-xl border border-neutral-700 bg-transparent focus:outline-none focus:ring-2 focus:ring-[00ff40] uppercase text-white"
           />
 
           <button
@@ -80,7 +80,7 @@ export default function VerifyPage() {
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
-          className="p-8 rounded-3xl border border-neutral-800 bg-white/60 dark:bg-neutral-900/40 backdrop-blur flex flex-col justify-center"
+          className="p-8 rounded-3xl border border-neutral-800 bg-neutral-900/40 backdrop-blur flex flex-col justify-center"
         >
           {!result ? (
             <p className="text-neutral-500 text-center">
