@@ -70,7 +70,7 @@ export default function HeroSection() {
   });
 
   return (
-    <section className="relative w-full min-h-screen font-openai overflow-hidden bg-white dark:bg-siteblack">
+    <section className="relative w-full min-h-[100dvh] font-openai overflow-hidden bg-white dark:bg-siteblack">
       {/* ── Grid background ── */}
       <div
         className="absolute inset-0 overflow-hidden p-2"
@@ -107,7 +107,7 @@ export default function HeroSection() {
       </div>
 
       {/* ── Main content ── */}
-      <div className="relative z-20 flex flex-col items-center justify-center min-h-screen text-center px-6 pb-24">
+      <div className="relative z-20 flex flex-col items-center justify-center min-h-[100dvh] text-center px-6 pb-24">
         {/* Badge */}
         <div className="flex items-center gap-2 mb-6 text-xs font-medium text-neutral-500 dark:text-neutral-400 tracking-wide bg-[#0C0C0E] p-2 rounded-full">
           <span className="w-2 h-2 rounded-full bg-orange-400 inline-block" />

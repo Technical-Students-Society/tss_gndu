@@ -57,11 +57,11 @@ export default function Preloader({ loading, onFinish }) {
     return (
         <div
             ref={preloaderRef}
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-zinc-900 pointer-events-none"
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-zinc-900 pointer-events-none min-h-[100dvh]"
         >
             <div
                 ref={innerRef}
-                className={`relative w-full h-full scale-80 rounded-xl pt-32 bg-siteblack flex flex-col items-center justify-center text-center px-6 pb-24 font-openai transition-opacity duration-500 ${fontsLoaded ? "opacity-100" : "opacity-0"}`}
+                className={`relative w-full h-full md:scale-80 rounded-xl pt-32 bg-siteblack flex flex-col items-center justify-center text-center px-6 pb-24 font-openai transition-opacity duration-500 min-h-[100dvh] ${fontsLoaded ? "opacity-100" : "opacity-0"}`}
             >
                 {/* Badge */}
                 <div className="flex items-center gap-2 mb-6 text-xs font-medium text-neutral-500 dark:text-neutral-400 tracking-wide bg-[#0C0C0E] p-2 rounded-full">
@@ -93,23 +93,23 @@ export default function Preloader({ loading, onFinish }) {
                     excellence.
                 </p>
 
-                {/* CTAs */}
-                <div className="flex flex-wrap opacity-0 pointer-events-none justify-center gap-3">
+                {/* CTAs - Perfectly synced with HeroSection classes to ensure identical height/wrapping */}
+                <div className="flex flex-wrap opacity-0 pointer-events-none justify-center gap-4">
                     <div
-                        // href="/events"
-                        className="inline-flex items-center gap-2 h-11 px-7 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-sm font-medium hover:bg-neutral-700 dark:hover:bg-neutral-200 transition-colors"
+                        className="group inline-flex items-center gap-2 h-11 px-6 rounded-full border border-neutral-300 dark:border-zinc-700 bg-siteblack dark:bg-zinc-800/70 backdrop-blur-sm text-neutral-400 dark:text-neutral-300 text-sm font-semibold transition-colors"
                     >
-                        <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-neutral-900 inline-block" />
-                        <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-neutral-900 inline-block absolute animate-ping" />
-                        View Events
+                        <span className="relative z-10 flex items-center gap-2">
+                            View Events
+                            <span>→</span>
+                        </span>
                     </div>
                     <div
-                        // href="/about"
-                        className="inline-flex items-center gap-2 h-11 px-7 rounded-full border border-neutral-300 dark:border-zinc-700 bg-white/70 dark:bg-zinc-800/70 backdrop-blur-sm text-neutral-700 dark:text-neutral-300 text-sm font-medium hover:bg-white dark:hover:bg-zinc-700 transition-colors"
+                        className="group inline-flex items-center gap-2 h-11 px-6 rounded-full border border-neutral-300 dark:border-zinc-700 bg-siteblack dark:bg-zinc-800/70 backdrop-blur-sm text-neutral-400 dark:text-neutral-300 text-sm font-semibold transition-colors"
                     >
-                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-500 inline-block" />
-                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-500 inline-block absolute animate-ping" />
-                        Learn More
+                        <span className="flex items-center gap-2">
+                            Learn More
+                            <span>→</span>
+                        </span>
                     </div>
                 </div>
 
