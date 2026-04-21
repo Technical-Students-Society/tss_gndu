@@ -205,7 +205,7 @@ export default function EventModal({ event, onClose }) {
                     <div key={idx} className="bg-neutral-50 dark:bg-neutral-800/50 p-3 rounded-lg border border-neutral-100 dark:border-neutral-800">
                       <p className="font-bold text-neutral-900 dark:text-neutral-50">{winner.name}</p>
                       <div className="flex justify-between items-center mt-1 text-xs text-neutral-500 dark:text-neutral-400">
-                        <span>{winner.position} Position</span>
+                        <span>{winner.position}</span>
                       </div>
                     </div>
                   ))}

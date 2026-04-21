@@ -108,11 +108,11 @@ export default function HomeTeamSectionSimple() {
         </div>
 
         {/* Cards grid */}
-        <div className="flex flex-row h-80 gap-4 slide-animation overflow-hidden">
-          {marquee.map((category) => (
+        <div className="flex flex-row h-80 gap-4 slide-animation">
+          {marquee.map((category, index) => (
             <div
-              key={category.title}
-              className="group relative flex flex-col justify-between rounded-xl border border-neutral-400 dark:border-neutral-800 p-6 hover:-translate-y-0.5 transition-all duration-300 aspect-square overflow-hidden shadow-lg shadow-neutral-200/50 dark:shadow-none"
+              key={`${category.title}-${index}`}
+              className="group relative flex flex-col justify-between rounded-xl border border-neutral-400 dark:border-neutral-800 p-6 hover:-translate-y-0.5 transition-all duration-300 aspect-square overflow-hidden shadow-lg shadow-neutral-200/50 dark:shadow-none shrink-0"
             >
               {/* Background Image */}
               <div

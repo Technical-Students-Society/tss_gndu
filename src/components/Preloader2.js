@@ -61,7 +61,7 @@ export default function Preloader({ loading, onFinish }) {
         >
             <div
                 ref={innerRef}
-                className={`relative w-full h-full md:scale-80 rounded-xl pt-32 bg-siteblack flex flex-col items-center justify-center text-center px-6 pb-24 font-openai transition-opacity duration-500 min-h-[100dvh] ${fontsLoaded ? "opacity-100" : "opacity-0"}`}
+                className={`relative w-full h-full scale-80 rounded-xl pt-32 bg-siteblack flex flex-col items-center justify-center text-center px-6 pb-24 font-openai transition-opacity duration-500 min-h-[100dvh] ${fontsLoaded ? "opacity-100" : "opacity-0"}`}
             >
                 {/* Badge */}
                 <div className="flex items-center gap-2 mb-6 text-xs font-medium text-neutral-500 dark:text-neutral-400 tracking-wide bg-[#0C0C0E] p-2 rounded-full">
