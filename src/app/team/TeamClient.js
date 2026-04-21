@@ -33,10 +33,11 @@ export default function TeamClient({ batch }) {
     fetchMembers();
   }, [batch]);
 
-  // Grouping and Sorting Logic (Kept consistent with original page.js)
+  // Grouping and Sorting Logic
   const { groupedTeam, sortedGroups } = useMemo(() => {
     if (!members.length) return { groupedTeam: {}, sortedGroups: [] };
 
+    // 1. Group members by team_group
     const grouped = members.reduce((acc, member) => {
       let rawGroup = (member.team_group || "Other").trim();
 
@@ -49,6 +50,38 @@ export default function TeamClient({ batch }) {
       return acc;
     }, {});
 
+    // 2. Sort members within each group based on role
+    Object.keys(grouped).forEach(groupName => {
+      grouped[groupName].sort((a, b) => {
+        const roleA = (a.role || "").trim().toLowerCase();
+        const roleB = (b.role || "").trim().toLowerCase();
+
+        const getPriority = (role, group) => {
+          const lowerGroup = group.toLowerCase();
+          if (lowerGroup === "executives") {
+            if (role === "president") return 1;
+            if (role === "vice-president" || role === "vice president") return 2;
+            return 3;
+          } else {
+            if (role === "head") return 1;
+            if (role === "co-head" || role === "co head") return 2;
+            return 3;
+          }
+        };
+
+        const priorityA = getPriority(roleA, groupName);
+        const priorityB = getPriority(roleB, groupName);
+
+        if (priorityA !== priorityB) {
+          return priorityA - priorityB;
+        }
+
+        // Maintain relative order for same-priority roles
+        return 0;
+      });
+    });
+
+    // 3. Sort the groups themselves based on groupOrder
     const sorted = Object.keys(grouped).sort((a, b) => {
       const indexA = groupOrder.indexOf(a);
       const indexB = groupOrder.indexOf(b);
