@@ -76,14 +76,12 @@ export default function EventCard({ event, onSelect }) {
         <div className="mt-auto">
           {!isPast ? (
             event.reg_link ? (
-              <a
-                href={event.reg_link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-sm font-semibold text-neutral-900 dark:text-neutral-50 hover:opacity-80 transition-opacity"
+              <button
+                onClick={() => onSelect(event)}
+                className="inline-flex items-center self-start gap-1 text-sm font-semibold text-neutral-900 dark:text-neutral-50 hover:opacity-60 transition-opacity cursor-pointer"
               >
-                Register Now <ArrowRight className="h-4 w-4" />
-              </a>
+                View More <ArrowRight className="h-4 w-4" />
+              </button>
             ) : (
               <span className="inline-flex items-center gap-1 text-sm font-semibold text-neutral-400 cursor-not-allowed">
                 Registration Closed
