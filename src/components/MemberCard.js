@@ -35,7 +35,7 @@ export default function MemberCard({
 
   return (
     <div
-      className="group bg-neutral-100 border border-neutral-200 dark:border-neutral-700 font-gellix relative overflow-hidden rounded-2xl"
+      className="group bg-zinc-900 border border-neutral-200 dark:border-neutral-900 font-gellix relative overflow-hidden rounded-2xl"
       style={{
         width: 280,
         height: 370,
@@ -43,9 +43,9 @@ export default function MemberCard({
         cursor: 'pointer',
       }}
     >
-      
+
       {/* Full-bleed avatar */}
-      <div className="absolute rounded-2xl inset-0 w-full h-full">
+      <div className="absolute inset-0 w-full h-full">
         {avatar_url ? (
           <img
             src={avatar_url}
@@ -61,7 +61,7 @@ export default function MemberCard({
 
       {/* Gradient vanish + blur overlay at bottom */}
       <div
-        className="absolute inset-x-0 rounded-2xl bottom-0"
+        className="absolute inset-x-0  bottom-0"
         style={{
           height: '52%',
           background: 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.72) 38%, rgba(0,0,0,0.18) 72%, transparent 100%)',
