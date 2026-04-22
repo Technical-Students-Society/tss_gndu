@@ -16,7 +16,7 @@ export default function VerifyPage() {
   const handleVerify = () => {
     setLoading(true);
     setResult(null);
-    setMessageVisible(false);
+    setMessageVisible(true);
 
     setTimeout(() => {
       if (certificateId === "CERT123") {
@@ -74,7 +74,7 @@ export default function VerifyPage() {
             type="text"
             placeholder="Enter Certificate ID"
             value={certificateId}
-            onChange={(e) => setCertificateId(e.target.value)}
+            onChange={(e) => setCertificateId(e.target.value.toUpperCase())}
             className="w-full mt-2 mb-6 px-4 py-3 rounded-xl border border-neutral-700 bg-transparent focus:outline-none focus:ring-2 focus:ring-[00ff40] uppercase text-white"
           />
           <button
@@ -93,6 +93,7 @@ export default function VerifyPage() {
             )}
 
           </button>
+          
         </motion.div>
 
         {/* RIGHT SIDE - RESULT */}
