@@ -14,21 +14,31 @@ export default function VerifyPage() {
   const [messageVisible, setMessageVisible] = useState(false);
 
   const handleVerify = () => {
-    if (certificateId === "CERT123") {
-      setResult({
-        name: "Kartikay Sharma",
-        class: "MCA Final Year",
-        event: "Tech Fest 2026",
-        download: "#",
-      })
-      setLoading(true);;
-    } else {
-      setResult(null);
-      setMessageVisible(true);
+    setLoading(true);
+    setResult(null);
+    setMessageVisible(false);
+
+    setTimeout(() => {
+      if (certificateId === "CERT123") {
+        setResult({
+          name: "Kartikay Sharma",
+          course: "MCA Final Year",
+          event: "Tech Fest 2026",
+          role: "Winner",
+          issuedBy: "Technical Students' Society",
+          certificateId: "TSS-2026-00123",
+          issueDate: "15 March 2026",
+          verificationDate: new Date().toLocaleDateString(),
+          status: "Valid"
+        });
+      } else {
+        setResult(null);
+        toast.error("Certificate not found!");
+      }
+
       setLoading(false);
-      toast.error("Certificate not found!");
-    }
-  };
+    }, 1500);
+  }
 
   return (
     <main className="min-h-screen relative flex items-center justify-center px-6 bg-siteblack overflow-hidden">
@@ -43,13 +53,13 @@ export default function VerifyPage() {
           warpAmount={0}
         />
       </div>
-      <div className="grid md:grid-cols-2 gap-10 w-full max-w-5xl">
+      <div className="grid lg:grid-cols-2 gap-10 w-full max-w-5xl">
 
         {/* LEFT SIDE - FORM */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
-          className="p-8 rounded-3xl border border-neutral-800 bg-neutral-900/40 backdrop-blur"
+          className="p-8 rounded-3xl border border-neutral-800 bg-neutral-900/40 backdrop-blur items-center"
         >
           <div className="flex items-center gap-3 mb-6">
             <ShieldCheck className="text-[#00ff40]" />
@@ -67,12 +77,21 @@ export default function VerifyPage() {
             onChange={(e) => setCertificateId(e.target.value)}
             className="w-full mt-2 mb-6 px-4 py-3 rounded-xl border border-neutral-700 bg-transparent focus:outline-none focus:ring-2 focus:ring-[00ff40] uppercase text-white"
           />
-
           <button
+            type="submit"
+            disabled={loading}
             onClick={handleVerify}
-            className="w-full py-3 rounded-xl bg-[#06be34] text-white font-semibold hover:bg-[#00ff40cc] transition cursor-pointer"
+            className={`w-full py-3 rounded-xl bg-[#06be34] text-white font-semibold hover:bg-[#00ff40cc] transition flex justify-center items-center ${loading ? "cursor-not-allowed opacity-80" : "active:scale-[0.98] cursor-pointer"}`}
           >
-            Verify Certificate
+            {loading ? (
+              <>
+                <span className="bg-[#06be34] text-white font-semibold gap-2 transition-all duration-300 shadow-md w-6 h-6 border-2 border-black/30 border-t-white rounded-full animate-spin"></span>
+
+              </>
+            ) : (
+              "Verify Certificate"
+            )}
+
           </button>
         </motion.div>
 
@@ -80,7 +99,7 @@ export default function VerifyPage() {
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
-          className="p-8 rounded-3xl border border-neutral-800 bg-neutral-900/40 backdrop-blur flex flex-col justify-center"
+          className="p-8 max-sm:p-2 rounded-3xl border border-neutral-800 bg-neutral-900/40 backdrop-blur flex flex-col justify-center"
         >
           {!result ? (
             <p className="text-neutral-500 text-center">
@@ -89,33 +108,82 @@ export default function VerifyPage() {
               This page is currently under development phase
             </p>
           ) : (
-            <div className="space-y-4">
-              <h3 className="flex items-center gap-2 text-2xl font-bold text-[#00ff40] animate-pulse">
-                Verified <CircleCheck />
-              </h3>
+            <div className="p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-sm space-y-5">
 
-              <div>
-                <p className="text-sm text-neutral-500">Participant Name</p>
-                <p className="font-semibold">{result.name}</p>
+              {/* Header */}
+              <div className="flex items-center justify-between">
+                <h3 className="flex items-center gap-2 text-xl font-semibold text-green-600 dark:text-green-400">
+                  <CircleCheck className="w-5 h-5" />
+                  Certificate Verified
+                </h3>
+
+                {/* Status Badge */}
+                <span className="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 animate-pulse">
+                  Valid
+                </span>
               </div>
 
-              <div>
-                <p className="text-sm text-neutral-500">Class</p>
-                <p className="font-semibold">{result.class}</p>
+              {/* Info Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                <div>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Participant</p>
+                  <p className="font-medium text-base">{result.name}</p>
+                </div>
+
+                <div>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Course</p>
+                  <p className="font-medium text-base">{result.course}</p>
+                </div>
+
+                <div>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Event</p>
+                  <p className="font-medium text-base">{result.event}</p>
+                </div>
+
+                <div>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Role</p>
+                  <p className="font-medium text-base">{result.role}</p>
+                </div>
+
+                <div>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Issued By</p>
+                  <p className="font-medium text-base">{result.issuedBy}</p>
+                </div>
+
+                <div>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Certificate ID</p>
+                  <p className="font-mono text-sm bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded inline-block">
+                    {result.certificateId}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Issue Date</p>
+                  <p className="font-medium text-base">{result.issueDate}</p>
+                </div>
+
+                <div>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Verified On</p>
+                  <p className="font-medium text-base">{result.verificationDate}</p>
+                </div>
+
               </div>
 
-              <div>
-                <p className="text-sm text-neutral-500">Event</p>
-                <p className="font-semibold">{result.event}</p>
-              </div>
+              {/* Divider */}
+              <div className="h-px bg-neutral-200 dark:bg-neutral-800" />
 
-              <a
-                href={result.download}
-                className="inline-flex items-center gap-2 mt-4 px-5 py-2 rounded-xl bg-[#06be34] text-white hover:bg-[#00ff40cc] transition"
-              >
-                <Download size={18} />
-                Download Certificate
-              </a>
+              {/* Footer Note */}
+              <p className="text-sm text-neutral-500">
+                If you lose your certificate, contact us at{" "} <br />
+                <a
+                  href="mailto:contact@tss-gndu.org"
+                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  contact@tss-gndu.org
+                </a>
+              </p>
+
             </div>
           )}
         </motion.div>
