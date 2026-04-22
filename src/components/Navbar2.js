@@ -65,7 +65,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed z-50 transition-transform duration-500 ease-in-out transform-gpu will-change-transform
+      className={`fixed  z-50 transition-transform duration-500 ease-in-out transform-gpu will-change-transform
         /* Mobile: Sticky-like full width at top */
         top-0 left-0 w-full md:top-4 md:left-1/2 md:-translate-x-1/2 md:w-[95%] lg:w-[85%] max-w-7xl
         /* Visibility toggle */

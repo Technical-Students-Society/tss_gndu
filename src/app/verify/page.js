@@ -26,7 +26,7 @@ export default function VerifyPage() {
           event: "Tech Fest 2026",
           role: "Winner",
           issuedBy: "Technical Students' Society",
-          certificateId: "TSS-2026-00123",
+          certificateId: "CERT123",
           issueDate: "15 March 2026",
           verificationDate: new Date().toLocaleDateString(),
           status: "Valid"
@@ -93,7 +93,14 @@ export default function VerifyPage() {
             )}
 
           </button>
-          
+          {/* Divider */}
+          <div className="flex items-center my-6 h-px bg-white/10" />
+
+          {/* Footer */}
+          <p className="text-center text-xs text-zinc-400 dark:text-zinc-400">
+            Powered by <span className='text-zinc-300'>TSS GNDU Development Team</span>
+          </p>
+
         </motion.div>
 
         {/* RIGHT SIDE - RESULT */}
@@ -175,7 +182,7 @@ export default function VerifyPage() {
               <div className="h-px bg-neutral-200 dark:bg-neutral-800" />
 
               {/* Footer Note */}
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-center text-neutral-500">
                 If you lose your certificate, contact us at{" "} <br />
                 <a
                   href="mailto:contact@tss-gndu.org"
