@@ -61,3 +61,27 @@ CREATE POLICY "Allow public read access for settings" ON public.settings FOR SEL
 
 -- Note: In a production app, you would add policies to allow only authenticated 
 -- users with 'admin' role to INSERT, UPDATE, and DELETE data.
+
+
+-- 4. Create 'certificates' table
+CREATE TABLE IF NOT EXISTS public.certificates (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  cert_number TEXT UNIQUE NOT NULL,
+  recipient_name TEXT NOT NULL,
+  recipient_email TEXT,
+  event_id UUID REFERENCES public.events(id) ON DELETE SET NULL,
+  issue_date DATE DEFAULT CURRENT_DATE,
+  certificate_type TEXT NOT NULL,
+  metadata JSONB DEFAULT '{}',
+  is_revoked BOOLEAN DEFAULT false,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- Enable RLS for certificates
+ALTER TABLE public.certificates ENABLE ROW LEVEL SECURITY;
+
+-- Create Policies for certificates
+CREATE POLICY "Allow public read access for certificates" ON public.certificates FOR SELECT USING (true);
+CREATE POLICY "Allow authenticated users to insert certificates" ON public.certificates FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Allow authenticated users to update certificates" ON public.certificates FOR UPDATE USING (auth.role() = 'authenticated');
+CREATE POLICY "Allow authenticated users to delete certificates" ON public.certificates FOR DELETE USING (auth.role() = 'authenticated');
