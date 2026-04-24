@@ -85,3 +85,23 @@ CREATE POLICY "Allow public read access for certificates" ON public.certificates
 CREATE POLICY "Allow authenticated users to insert certificates" ON public.certificates FOR INSERT WITH CHECK (auth.role() = 'authenticated');
 CREATE POLICY "Allow authenticated users to update certificates" ON public.certificates FOR UPDATE USING (auth.role() = 'authenticated');
 CREATE POLICY "Allow authenticated users to delete certificates" ON public.certificates FOR DELETE USING (auth.role() = 'authenticated');
+
+-- 5. Create 'announcements' table
+CREATE TABLE IF NOT EXISTS public.announcements (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  title TEXT NOT NULL,
+  content TEXT,
+  thumbnail TEXT,
+  type TEXT NOT NULL DEFAULT 'info',
+  link TEXT,
+  is_active BOOLEAN DEFAULT false,
+  expires_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- Enable RLS for announcements
+ALTER TABLE public.announcements ENABLE ROW LEVEL SECURITY;
+
+-- Create Policies for announcements
+CREATE POLICY "Allow public read access for announcements" ON public.announcements FOR SELECT USING (true);
+CREATE POLICY "Allow authenticated users to manage announcements" ON public.announcements FOR ALL USING (auth.role() = 'authenticated');

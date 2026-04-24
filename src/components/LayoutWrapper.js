@@ -7,6 +7,7 @@ import Preloader from "./Preloader2";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import PageTransition from "@/app/PageTransition";
+import AnnouncementToasts from "./AnnouncementToasts";
 
 export default function LayoutWrapper({ children }) {
   const pathname = usePathname();
@@ -43,7 +44,8 @@ export default function LayoutWrapper({ children }) {
       {children}
       {/* </PageTransition> */}
       {!hideLayout && <Footer />}
-
+      <AnnouncementToasts isReady={!isHomePage || preloaderFinished} />
     </>
+
   );
 }
