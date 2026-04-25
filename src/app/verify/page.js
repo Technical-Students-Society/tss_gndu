@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState, useEffect, Suspense, useRef } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
 import { ShieldCheck, Download, CircleCheck, Loader2 } from "lucide-react";
 import Link from "next/link";
@@ -10,25 +10,37 @@ import DarkVeil from "../Animations/DarkVeil";
 import { createClient } from "@/utils/supabase/client";
 
 function VerifyContent() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const [certificateId, setCertificateId] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [messageVisible, setMessageVisible] = useState(true); // Always true for toasts
+  const lastVerifiedId = useRef(null);
 
   useEffect(() => {
     const idFromQuery = searchParams.get("id") || searchParams.get("cert");
-    if (idFromQuery) {
+    if (idFromQuery && idFromQuery !== lastVerifiedId.current) {
       setCertificateId(idFromQuery);
-      handleVerify(idFromQuery);
+      handleVerify(idFromQuery, false);
     }
   }, [searchParams]);
 
-  const handleVerify = async (idToVerify = certificateId) => {
+  const handleVerify = async (idToVerify = certificateId, shouldPush = true) => {
     const targetId = typeof idToVerify === 'string' ? idToVerify.trim() : certificateId.trim();
     if (!targetId) {
       toast.error("Please enter a Certificate ID");
       return;
+    }
+
+    if (targetId === lastVerifiedId.current && !shouldPush) return;
+    lastVerifiedId.current = targetId;
+
+    // Update URL params only if requested (to avoid loop)
+    if (shouldPush) {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set('id', targetId);
+      router.push(`/verify?${params.toString()}`, { scroll: false });
     }
 
     setLoading(true);
@@ -88,7 +100,7 @@ function VerifyContent() {
   };
 
   return (
-    <main className="min-h-screen relative flex items-center justify-center px-6 bg-siteblack overflow-hidden py-10">
+    <main className="min-h-[80vh] relative flex items-center justify-center px-6 bg-siteblack overflow-hidden pt-32 pb-20">
       <div className="absolute inset-0 z-0 pointer-events-none max-md:hidden">
         <DarkVeil
           hueShift={106}
@@ -132,7 +144,7 @@ function VerifyContent() {
               value={certificateId}
               onChange={(e) => setCertificateId(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleVerify()}
-              className="w-full mt-2 mb-6 px-4 py-3 rounded-xl border border-neutral-400 bg-transparent focus:outline-none focus:ring-2 focus:ring-[#00ff40] uppercase text-white transition-all"
+              className="w-full mt-2 mb-6 px-4 py-3 rounded-xl border border-neutral-400 bg-transparent focus:outline-none focus:ring-2 focus:ring-[#00ff40] text-white transition-all"
             />
 
             <button
