@@ -9,14 +9,13 @@ const teamCategories = [
     description: 'Hackathons, workshops, and the infrastructure behind every TSS event.',
     textColor: 'text-white',
     bgClass: 'bg-center',
-    // backgroundurl: '/images/gradientBase5.jpg',
     backgroundurl: '/images/gradientBase12.jpg',
     illustration: '/images/illustrations/technical2.png'
   },
   {
     title: 'Sports',
     description: 'Organizes inter-college sports events and builds athletic excellence.',
-    textColor: 'text-black dark:text-white',
+    textColor: 'dark:text-white text-white',
     bgClass: 'bg-top',
     backgroundurl: '/images/gradientBas.jpg',
     illustration: '/images/illustrations/sports2.png'
@@ -32,16 +31,15 @@ const teamCategories = [
   {
     title: 'Cultural',
     description: 'Fests, performances, and everything that makes campus life memorable.',
-    textColor: 'text-neutral-900',
+    textColor: 'text-black',
     bgClass: 'bg-left',
-    // backgroundurl: '/images/gradientBase4.jpg',
     backgroundurl: '/images/gradientBase11.jpg',
     illustration: '/images/illustrations/cultural.png'
   },
   {
     title: 'Alumni',
     description: 'Bridges alumni with current students through mentorship and networks.',
-    textColor: 'text-black dark:text-white',
+    textColor: 'dark:text-white text-white',
     bgClass: 'bg-bottom',
     backgroundurl: '/images/gradientBas3.jpg',
     illustration: '/images/illustrations/almuni.png'
@@ -49,7 +47,7 @@ const teamCategories = [
   {
     title: 'Sponsorship',
     description: 'Secures partnerships and funds that keep TSS events running at full scale.',
-    textColor: 'text-neutral-900',
+    textColor: 'text-black',
     bgClass: 'bg-top',
     backgroundurl: '/images/gradientBase11.jpg',
     illustration: '/images/illustrations/sponsorship2.png'
@@ -91,15 +89,15 @@ export default function HomeTeamSectionSimple() {
               />
             </p>
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-50 max-w-md leading-tight">
-               <SplitText text="Our Core Team Divisions" delay={25}
-              duration={1.25}
-              ease="power3.out"
-              splitType="chars"
-              from={{ opacity: 0, y: 40 }}
-              to={{ opacity: 1, y: 0 }}
-              threshold={0.1}
-              showCallback={false}
-              textAlign="start" />
+              <SplitText text="Our Core Team Divisions" delay={25}
+                duration={1.25}
+                ease="power3.out"
+                splitType="chars"
+                from={{ opacity: 0, y: 40 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.1}
+                showCallback={false}
+                textAlign="start" />
             </h2>
           </div>
           <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-xs leading-relaxed md:text-right">
@@ -108,11 +106,11 @@ export default function HomeTeamSectionSimple() {
         </div>
 
         {/* Cards grid */}
-        <div className="flex flex-row h-80 gap-4 slide-animation">
+        <div className="flex flex-row h-72 sm:h-80 lg:h-90 gap-4 sm:gap-6 slide-animation">
           {marquee.map((category, index) => (
             <div
               key={`${category.title}-${index}`}
-              className="group relative flex flex-col justify-between rounded-xl border border-neutral-400 dark:border-neutral-800 p-6 hover:-translate-y-0.5 transition-all duration-300 aspect-square overflow-hidden shadow-lg shadow-neutral-200/50 dark:shadow-none shrink-0"
+              className="group relative flex flex-col justify-between rounded-2xl bg-neutral-900 border border-neutral-400 dark:border-neutral-800 p-4 sm:p-7 hover:-translate-y-0.5 transition-all duration-300 w-64 h-72 sm:w-72 sm:h-80 lg:w-80 lg:h-90 overflow-hidden shadow-lg shadow-neutral-200/50 dark:shadow-none shrink-0"
             >
               {/* Background Image */}
               <div
@@ -121,29 +119,33 @@ export default function HomeTeamSectionSimple() {
               />
 
               {/* Dark Overlay */}
-              {/* <div className="absolute inset-0 bg-black/5 dark:bg-black/20 group-hover:bg-transparent transition-colors duration-500" /> */}
-              <div className="absolute inset-0 bg-black/5 dark:bg-black/30 " />
+              <div className="absolute inset-0 bg-black/5 dark:bg-black/30" />
 
-              {/* Text Area at Top */}
+              {/* Title at top */}
               <div className={`relative z-20 ${category.textColor}`}>
-                <h3 className="text-2xl font-openai mb-2">
+                <h3 className="text-lg sm:text-2xl uppercase font-bold font-openai">
                   {category.title}
                 </h3>
-                <div className="opacity-90">
-                  <p className="text-sm leading-relaxed">
-                    {category.description}
-                  </p>
-                  {/* Illustration at bottom center */}
-                  {category.illustration && (
-                    <div className="relative max-sm:-bottom-5 left-1/2 -translate-x-1/2 w-52 h-52 group-hover:scale-105 transition-all duration-500 pointer-events-none z-10">
-                      <img
-                        src={category.illustration}
-                        alt=""
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                  )}
+              </div>
+
+              {/* Illustration centered in card */}
+              {category.illustration && (
+                <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                  <div className="w-36 h-36 sm:w-40 sm:h-40 lg:w-52 lg:h-52 group-hover:scale-105 transition-all duration-500">
+                    <img
+                      src={category.illustration}
+                      alt=""
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
                 </div>
+              )}
+
+              {/* Description pinned to bottom */}
+              <div className={`relative z-20 ${category.textColor}`}>
+                <p className="text-xs sm:text-sm leading-relaxed opacity-90">
+                  {category.description}
+                </p>
               </div>
             </div>
           ))}
