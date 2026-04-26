@@ -43,8 +43,8 @@ export default function Home() {
 
               {/* Stat cards */}
               {[
-                { value: "450+", label: "Student members including alumni" },
-                { value: "50+", label: "Events hosted every year" },
+                { value: "50+", label: "Student members including alumni" },
+                { value: "20+", label: "Events hosted every year" },
                 { value: "175+", label: "Placements facilitated" },
                 { value: "12", label: "Team divisions" },
               ].map(({ value, label }) => (

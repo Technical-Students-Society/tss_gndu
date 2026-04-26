@@ -6,8 +6,6 @@ import { ListFilter } from "lucide-react";
 const batches = [
   "2025-2026",
   "2024-2025",
-  "2023-2024",
-  "2022-2023",
 ];
 
 export default function BatchSelector() {
@@ -27,11 +25,11 @@ export default function BatchSelector() {
   };
 
   return (
-    <div className="inline-flex items-center bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 px-6 py-2 rounded-full text-lg shadow-sm transition-all hover:border-neutral-300 dark:hover:border-neutral-600">
+    <div className="inline-flex items-center bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 px-6 py-2 rounded-full shadow-sm transition-all hover:border-neutral-300 dark:hover:border-neutral-600">
       <select
         value={currentBatch}
         onChange={handleBatchChange}
-        className="bg-transparent text-[14px] font-black uppercase tracking-widest text-neutral-900 dark:text-neutral-50 focus:outline-none cursor-pointer pr-1"
+        className="bg-transparent text-xs max-sm:text-[10px] font-black uppercase tracking-widest text-neutral-900 dark:text-neutral-50 focus:outline-none cursor-pointer pr-1"
       >
         {batches.map((batch) => (
           <option key={batch} value={batch} className="bg-white dark:bg-neutral-900">

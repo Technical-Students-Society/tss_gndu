@@ -1,6 +1,5 @@
 "use client";
 
-import CountUp from "../Animations/CountUp";
 import ShinyText from "../Animations/ShinyText";
 import { Sparkles, CirclePile } from "lucide-react";
 import SplitText from "../Animations/SplitText";
@@ -92,39 +91,8 @@ export default function AboutSection() {
               careers.
             </p>
 
-            {/* Stats */}
-            <div className="flex flex-wrap gap-8 max-sm:gap-7 pt-2">
-
-              <div>
-                <h3 className="text-2xl font-bold">
-                  <CountUp from={0} to={10} duration={1.8} />+
-                </h3>
-                <p className="text-xs text-neutral-500">Projects</p>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-bold">
-                  <CountUp from={0} to={50} duration={1} />+
-                </h3>
-                <p className="text-xs text-neutral-500">Students</p>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-bold">
-                  <CountUp from={0} to={10} duration={1.7} />+
-                </h3>
-                <p className="text-xs text-neutral-500">Experience</p>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-bold">
-                  <CountUp from={0} to={5} duration={2} />+
-                </h3>
-                <p className="text-xs text-neutral-500">Workshops</p>
-              </div>
-
-            </div>
-
+             {/* Divider */}
+              <div className="h-px bg-neutral-200 dark:bg-neutral-800" />
 
             {/* Description */}
             <div className="space-y-5 text-[15px] text-neutral-500 dark:text-neutral-400 leading-relaxed">

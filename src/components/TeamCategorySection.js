@@ -9,7 +9,7 @@ export default function TeamCategorySection({ title, members }) {
   const scrollRef = useRef(null);
 
   // Group members into individuals vs stacks
-  const displayItems = useMemo(() => {
+  const displayItems = useMemo(() => {p
     const roleGroups = members.reduce((acc, member) => {
       const role = member.role.trim();
       if (!acc[role]) acc[role] = [];
