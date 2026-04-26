@@ -13,10 +13,13 @@ export default function AnnouncementToasts({ isReady }) {
   // Sync isReady with shouldShow with a slight delay for better UX
   useEffect(() => {
     if (isReady) {
-      const timer = setTimeout(() => setShouldShow(true), 800);
+      setShouldShow(true);
+
+      const timer = setTimeout(() => {
+        setShouldShow(false);
+      }, 9000);
+
       return () => clearTimeout(timer);
-    } else {
-      setShouldShow(false);
     }
   }, [isReady]);
 
@@ -63,6 +66,10 @@ export default function AnnouncementToasts({ isReady }) {
   const visibleAnnouncements = announcements.filter(a => !dismissedIds.includes(a.id));
 
   if (!shouldShow || visibleAnnouncements.length === 0) return null;
+
+  console.log("isReady: ", isReady)
+  console.log("shouldshow: ", shouldShow)
+
 
   return (
     <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:bottom-6 sm:right-6 z-[9999] font-openai flex flex-col gap-4 sm:gap-5 max-w-none sm:max-w-[400px] w-auto sm:w-full pointer-events-none">

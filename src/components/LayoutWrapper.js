@@ -44,7 +44,7 @@ export default function LayoutWrapper({ children }) {
       {children}
       {/* </PageTransition> */}
       {!hideLayout && <Footer />}
-      <AnnouncementToasts isReady={!isHomePage || preloaderFinished} />
+      <AnnouncementToasts isReady={preloaderFinished} />
     </>
 
   );
