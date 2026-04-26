@@ -100,7 +100,8 @@ function VerifyContent() {
   };
 
   return (
-    <main className="min-h-[80vh] relative flex items-center justify-center px-6 bg-siteblack overflow-hidden pt-32 pb-20">
+    <main className="min-h-screen relative flex items-center justify-center px-6 bg-siteblack overflow-hidden">
+
       <div className="absolute inset-0 z-0 pointer-events-none max-md:hidden">
         <DarkVeil
           hueShift={106}
@@ -111,147 +112,195 @@ function VerifyContent() {
           warpAmount={0}
         />
       </div>
+      <div className="grid lg:grid-cols-2 gap-10 w-full max-w-5xl">
 
-      <div className="grid md:grid-cols-2 gap-8 w-full max-w-5xl z-10">
         {/* LEFT SIDE - FORM */}
-        <div className="flex flex-col">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="p-8 rounded-3xl border border-neutral-800 bg-neutral-900/40 backdrop-blur self-start w-full"
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="p-8 rounded-3xl border border-neutral-800 bg-neutral-900/40 backdrop-blur items-center"
+        >
+          <div className="flex flex-col items-center gap-3 mb-6">
+            <ShieldCheck className="text-[#00ff40]" />
+            <h2 className="text-xl font-semibold">Verify Certificate</h2>
+            <p className="uppercase font-medium text-xs">Technical Students' Society</p>
+          </div>
+
+          <label className="text-sm text-neutral-500">
+            Certificate ID
+          </label>
+
+          <input
+            type="text"
+            placeholder="Enter Certificate ID"
+            value={certificateId}
+            onChange={(e) => setCertificateId(e.target.value.toUpperCase())}
+            className="w-full mt-2 mb-6 px-4 py-3 rounded-xl border border-neutral-700 bg-transparent focus:outline-none focus:ring-2 focus:ring-[00ff40] uppercase text-white"
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            onClick={handleVerify}
+            className={`w-full py-3 rounded-xl bg-[#06be34] text-white font-semibold hover:bg-[#00ff40cc] transition flex justify-center items-center ${loading ? "cursor-not-allowed opacity-80" : "active:scale-[0.98] cursor-pointer"}`}
           >
-            <div className="flex items-center gap-4 mb-8">
-              <div className="bg-zinc-950 p-[2px] rounded-xl ">
-                <img
-                  src="/images/logos/tss-logo.png"
-                  alt="TSS Logo"
-                  className="h-12 w-auto"
-                />
-              </div>
-              <div className="flex flex-col">
-                <h2 className="text-xl font-bold text-white leading-none">Verify Certificate</h2>
-                <span className="text-[9px] text-neutral-300 uppercase tracking-widest font-bold mt-1">Technical Students Society</span>
-              </div>
-            </div>
+            {loading ? (
+              <>
+                <span className="bg-[#06be34] text-white font-semibold gap-2 transition-all duration-300 shadow-md w-6 h-6 border-2 border-black/30 border-t-white rounded-full animate-spin"></span>
 
-            <label className="text-sm text-neutral-300">
-              Enter the Certificate ID
-            </label>
+              </>
+            ) : (
+              "Verify Certificate"
+            )}
 
-            <input
-              type="text"
-              placeholder="e.g. TSS-2024-EV-001"
-              value={certificateId}
-              onChange={(e) => setCertificateId(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleVerify()}
-              className="w-full mt-2 mb-6 px-4 py-3 rounded-xl border border-neutral-400 bg-transparent focus:outline-none focus:ring-2 focus:ring-[#00ff40] text-white transition-all"
-            />
+          </button>
+          {/* Divider */}
+          <div className="flex items-center my-6 h-px bg-white/10" />
 
-            <button
-              onClick={() => handleVerify()}
-              disabled={loading}
-              className="w-full py-3 rounded-xl bg-[#06be34] text-white font-semibold hover:bg-[#00ff40cc] transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-            >
-              {loading ? <Loader2 className="animate-spin h-5 w-5" /> : "Verify Certificate"}
-            </button>
-          </motion.div>
+          {/* Footer */}
+          <p className="text-center text-xs text-zinc-400 dark:text-zinc-400">
+            Powered by <span className='text-zinc-300'>TSS GNDU Development Team</span>
+          </p>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="mt-6 text-sm text-neutral-500 text-center"
-          >
-            Can't find your certificate? <Link href="/contact" className="text-[#00ff40] hover:underline font-medium transition-all">Contact for certificate support</Link>
-          </motion.p>
-        </div>
-
+        </motion.div>
 
         {/* RIGHT SIDE - RESULT */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
-          className="p-8 rounded-3xl border border-neutral-800 bg-neutral-900/40 backdrop-blur min-h-[300px] flex flex-col justify-center"
+          className="p-8 max-sm:p-2 rounded-3xl border border-neutral-800 bg-neutral-900/40 backdrop-blur flex flex-col justify-center"
         >
           {!result ? (
-            <div className="text-center space-y-4">
+            <div className="text-center space-y-6">
               <p className="text-neutral-500">
                 {loading ? "Verifying authenticity..." : "Enter a Certificate ID to see verification details."}
               </p>
+
               {!loading && (
                 <div className="h-20 w-20 mx-auto border-2 border-dashed border-neutral-800 rounded-2xl flex items-center justify-center">
                   <ShieldCheck size={32} className="text-neutral-800" />
                 </div>
               )}
+
+              {/* Footer Note */}
+              {loading ? (
+                <p/>
+              ) : (
+                <p className="text-sm text-center text-neutral-500">
+                  If you lose your certificate, contact us at{" "} <br />
+                  <a
+                    href="mailto:contact@tss-gndu.org"
+                    className="text-blue-400 hover:underline"
+                  >
+                    contact@tss-gndu.org
+                  </a>
+                </p>
+              )}
             </div>
           ) : (
-            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-500">
-              <h3 className="flex items-center gap-2 text-2xl font-bold text-[#00ff40]">
-                Verified <CircleCheck />
-              </h3>
+            <div className="p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-sm space-y-5">
 
-              <div className="grid grid-cols-2 gap-x-4 gap-y-5">
-                <div className="col-span-2">
-                  <p className="text-[10px] text-neutral-500 uppercase tracking-widest font-bold">Recipient Name</p>
-                  <p className="text-xl font-semibold text-white">{result.name}</p>
+              {/* Header */}
+              <div className="flex items-center justify-between">
+                <h3 className="flex items-center gap-2 text-xl font-semibold text-green-600 dark:text-green-400">
+                  <CircleCheck className="w-5 h-5" />
+                  Certificate Verified
+                </h3>
+
+                {/* Status Badge */}
+                <span className="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 animate-pulse">
+                  Valid
+                </span>
+              </div>
+
+              {/* Info Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                <div>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Participant</p>
+                  <p className="font-medium text-sm capitalize">{result.name}</p>
                 </div>
 
                 <div>
-                  <p className="text-[10px] text-neutral-500 uppercase tracking-widest font-bold">Type</p>
-                  <p className="font-medium text-neutral-200">{result.type}</p>
+                  {result.metadata && Object.entries(result.metadata).map(([key, value]) => (
+                    <div key={key}>
+                      <p className="text-[10px] text-neutral-500 uppercase tracking-widest font-bold">{key.replace(/_/g, ' ')}</p>
+                      <p className="font-medium text-neutral-200 ">{String(value)}</p>
+                    </div>
+                  ))}
                 </div>
 
                 <div>
-                  <p className="text-[10px] text-neutral-500 uppercase tracking-widest font-bold">Issue Date</p>
-                  <p className="font-medium text-neutral-200">{result.date}</p>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Event</p>
+                  <p className="font-medium text-sm">{result.event}</p>
                 </div>
 
-                <div className="col-span-2">
-                  <p className="text-[10px] text-neutral-500 uppercase tracking-widest font-bold">Event</p>
-                  <p className="font-medium text-neutral-200">{result.event}</p>
+                <div>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Role</p>
+                  <p className="font-medium text-sm">{result.type}</p>
                 </div>
 
-                {/* DYNAMIC METADATA RENDER - INTEGRATED */}
-                {result.metadata && Object.entries(result.metadata).map(([key, value]) => (
-                  <div key={key}>
-                    <p className="text-[10px] text-neutral-500 uppercase tracking-widest font-bold">{key.replace(/_/g, ' ')}</p>
-                    <p className="font-medium text-neutral-200">{String(value)}</p>
-                  </div>
-                ))}
-
-                <div className="col-span-2 pt-2 border-t border-neutral-800/50">
-                  <p className="text-[10px] text-neutral-500 uppercase tracking-widest font-bold mb-1">Official ID</p>
-                  <p className="text-[10px] font-mono text-neutral-500 break-all">{result.number}</p>
+                <div>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Issued By</p>
+                  <p className="font-medium text-sm">{result.issuedBy}</p>
                 </div>
+
+                <div>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Certificate ID</p>
+                  <p className="font-mono text-sm bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded inline-block">
+                    {result.number}
+                  </p>
+                </div>
+
+
+
+                <div>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Issue Date</p>
+                  <p className="font-medium text-sm">{result.issueDate}</p>
+                </div>
+
+                <div>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Verified On</p>
+                  <p className="font-medium text-sm">{result.date}</p>
+                </div>
+
               </div>
 
-              <div className="pt-6 flex justify-center">
-                <div className="w-full px-5 py-4 rounded-2xl border border-neutral-800/50 bg-neutral-950/20 text-xs text-neutral-400 flex items-center justify-center gap-3 uppercase tracking-widest font-bold">
-                  <ShieldCheck size={16} className="text-[#00ff40]" />
-                  Official Verified Record
-                </div>
-              </div>
+              {/* Divider */}
+              <div className="h-px bg-neutral-200 dark:bg-neutral-800" />
+
+              {/* Footer Note */}
+              <p className="text-sm text-center text-neutral-500">
+                If you lose your certificate, contact us at{" "} <br />
+                <a
+                  href="mailto:contact@tss-gndu.org"
+                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  contact@tss-gndu.org
+                </a>
+              </p>
+
             </div>
           )}
         </motion.div>
       </div>
+      {messageVisible && (
+        <Toaster position="top-center"
+          toastOptions={{
+            duration: 2000,
+            style: {
+              borderRadius: "14px",
+              background: "rgba(10, 10, 15, 0.88)",
+              color: "#fff",
+              border: "1px solid rgba(255,255,255,0.18)",
+              backdropFilter: "blur(12px)",
+              fontFamily: "ClashDisplay, sans-serif",
+              fontSize: "14px",
+            },
+            success: { style: { border: "1px solid rgba(34,197,94,0.8)", }, },
+            error: { style: { border: "1px solid rgba(239,68,68,0.8)", }, },
+          }} />
+      )}
 
-      <Toaster position="top-center"
-        toastOptions={{
-          duration: 3000,
-          style: {
-            borderRadius: "14px",
-            background: "rgba(10, 10, 15, 0.88)",
-            color: "#fff",
-            border: "1px solid rgba(255,255,255,0.18)",
-            backdropFilter: "blur(12px)",
-            fontFamily: "inherit",
-            fontSize: "14px",
-          },
-          success: { style: { border: "1px solid rgba(34,197,94,0.8)", }, },
-          error: { style: { border: "1px solid rgba(239,68,68,0.8)", }, },
-        }}
-      />
     </main>
   );
 }
