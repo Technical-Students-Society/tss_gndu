@@ -10,7 +10,7 @@ const SLIDES = [
   { label: "Annual Hackathon 2024", src: "/slide1.jpg" },
   { label: "Workshop Series", src: "/slide2.jpg" },
   { label: "Placement Drive", src: "/slide3.jpg" },
-  { label: "Cultural Fest", src: "/slide5.jpeg" },
+  { label: "Cultural Fest", src: "/slide6.jpeg" },
 ];
 
 export default function HomeAboutSection() {
@@ -59,7 +59,7 @@ export default function HomeAboutSection() {
                   </span>
                 </>}
                 delay={25}
-                duration={1.25}
+                duration={1}
                 ease="power3.out"
                 splitType="chars"
                 from={{ opacity: 0, y: 40 }}
