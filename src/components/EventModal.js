@@ -144,13 +144,13 @@ export default function EventModal({ event, onClose }) {
                     <>
                       <button
                         onClick={prevImage}
-                        className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-siteblack/50 hover:bg-siteblack/70 text-white rounded-full transition-colors backdrop-blur-md"
+                        className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-siteblack/50 hover:bg-siteblack/70 text-white rounded-full transition-colors backdrop-blur-md cursor-pointer"
                       >
                         <ChevronLeft size={20} />
                       </button>
                       <button
                         onClick={nextImage}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-siteblack/50 hover:bg-siteblack/70 text-white rounded-full transition-colors backdrop-blur-md"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-siteblack/50 hover:bg-siteblack/70 text-white rounded-full transition-colors backdrop-blur-md cursor-pointer"
                       >
                         <ChevronRight size={20} />
                       </button>

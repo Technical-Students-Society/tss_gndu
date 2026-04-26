@@ -100,7 +100,7 @@ function VerifyContent() {
   };
 
   return (
-    <main className="min-h-screen relative flex items-center justify-center px-6 bg-siteblack overflow-hidden">
+    <main className="min-h-screen py-10 relative flex items-center justify-center px-6 bg-siteblack overflow-hidden">
 
       <div className="absolute inset-0 z-0 pointer-events-none max-md:hidden">
         <DarkVeil
@@ -170,7 +170,7 @@ function VerifyContent() {
           className="p-8 max-sm:p-2 rounded-3xl border border-neutral-800 bg-neutral-900/40 backdrop-blur flex flex-col justify-center"
         >
           {!result ? (
-            <div className="text-center space-y-6">
+            <div className="text-center space-y-6 max-sm:p-5">
               <p className="text-neutral-500">
                 {loading ? "Verifying authenticity..." : "Enter a Certificate ID to see verification details."}
               </p>
@@ -183,7 +183,7 @@ function VerifyContent() {
 
               {/* Footer Note */}
               {loading ? (
-                <p/>
+                <p />
               ) : (
                 <p className="text-sm text-center text-neutral-500">
                   If you lose your certificate, contact us at{" "} <br />
@@ -241,7 +241,7 @@ function VerifyContent() {
 
                 <div>
                   <p className="text-xs text-neutral-500 uppercase tracking-wide">Issued By</p>
-                  <p className="font-medium text-sm">{result.issuedBy}</p>
+                  <p className="font-medium text-sm">Technical Students' Society</p>
                 </div>
 
                 <div>
@@ -269,14 +269,9 @@ function VerifyContent() {
               <div className="h-px bg-neutral-200 dark:bg-neutral-800" />
 
               {/* Footer Note */}
-              <p className="text-sm text-center text-neutral-500">
-                If you lose your certificate, contact us at{" "} <br />
-                <a
-                  href="mailto:contact@tss-gndu.org"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
-                >
-                  contact@tss-gndu.org
-                </a>
+              <p className="text-sm text-center text-neutral-500 leading-relaxed">
+                It is securely issued and recognized as a genuine certificate
+                under the <span className="text-white">Technical Students' Society (TSS), GNDU</span>.
               </p>
 
             </div>
