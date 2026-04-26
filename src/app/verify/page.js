@@ -167,7 +167,7 @@ function VerifyContent() {
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
-          className="p-8 max-sm:p-2 rounded-3xl border border-neutral-800 bg-neutral-900/40 backdrop-blur flex flex-col justify-center"
+          className="rounded-3xl border border-neutral-800 bg-neutral-900/40 backdrop-blur flex flex-col justify-center"
         >
           {!result ? (
             <div className="text-center space-y-6 max-sm:p-5">
@@ -197,7 +197,7 @@ function VerifyContent() {
               )}
             </div>
           ) : (
-            <div className="p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-sm space-y-5">
+            <div className="p-10 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-sm space-y-5">
 
               {/* Header */}
               <div className="flex items-center justify-between">
@@ -255,13 +255,13 @@ function VerifyContent() {
 
                 <div>
                   <p className="text-xs text-neutral-500 uppercase tracking-wide">Issue Date</p>
-                  <p className="font-medium text-sm">{result.issueDate}</p>
-                </div>
-
-                <div>
-                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Verified On</p>
                   <p className="font-medium text-sm">{result.date}</p>
                 </div>
+
+                {/* <div>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Verified On</p>
+                  <p className="font-medium text-sm">{result.date}</p>
+                </div> */}
 
               </div>
 

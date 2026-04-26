@@ -15,7 +15,7 @@ export default function LayoutWrapper({ children }) {
   const [preloaderFinished, setPreloaderFinished] = useState(false);
 
   // hide navbar/footer on auth pages
-  const hideLayout = pathname.startsWith("/verify") || pathname.startsWith("/policies") || pathname.startsWith("/maintenance") || pathname.startsWith("/admin") || pathname === null;
+  const hideLayout = pathname.startsWith("/policies") || pathname.startsWith("/maintenance") || pathname.startsWith("/admin") || pathname === null;
 
   const lenis = useLenis();
 

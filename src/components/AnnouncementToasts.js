@@ -78,8 +78,8 @@ export default function AnnouncementToasts({ isReady }) {
           >
             {/* Visual Accents - Adjusted opacity for light/dark */}
             <div className={`absolute -left-12 -top-12 h-32 w-32 blur-[40px] opacity-10 dark:opacity-20 transition-all group-hover:opacity-20 dark:group-hover:opacity-30 ${a.type === 'warning' ? 'bg-orange-500' :
-                a.type === 'urgent' ? 'bg-red-500' :
-                  'bg-[#00ff40]'
+              a.type === 'urgent' ? 'bg-red-500' :
+                'bg-[#00ff40]'
               }`} />
 
             <div className="relative flex gap-4 sm:gap-5">
@@ -123,7 +123,7 @@ export default function AnnouncementToasts({ isReady }) {
               {/* Dismiss Button */}
               <button
                 onClick={() => dismiss(a.id)}
-                className="absolute -right-2 -top-2 p-3 text-zinc-400 hover:text-zinc-900 dark:text-neutral-600 dark:hover:text-white transition-colors"
+                className="absolute -right-2 -top-2 p-3 text-zinc-400 hover:text-zinc-900 dark:text-neutral-600 dark:hover:text-white transition-colors cursor-pointer"
                 aria-label="Dismiss"
               >
                 <X size={14} />
