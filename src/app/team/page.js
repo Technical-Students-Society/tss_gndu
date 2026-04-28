@@ -3,6 +3,7 @@ import TeamClient from "./TeamClient";
 import BatchSelector from "@/components/BatchSelector";
 import ShinyText from "../Animations/ShinyText";
 import SplitText from "../Animations/SplitText";
+import api from "@/utils/api";
 
 
 // Data fetching is now handled on the client-side in TeamClient.js
@@ -16,7 +17,29 @@ export const metadata = {
 export default async function TeamPage({ searchParams }) {
   // Await searchParams as per Next.js 15+ requirements
   const params = await searchParams;
-  const currentBatch = params.batch || "2025-2026";
+
+  // Fetch all unique batch years from the database
+  let availableBatches = [];
+  try {
+    const response = await api.get("/team_members", {
+      params: {
+        select: "start_year,end_year"
+      }
+    });
+
+    const data = response.data || [];
+    // Extract unique YYYY-YYYY strings and filter out any null/undefined
+    availableBatches = [...new Set(data
+      .filter(m => m.start_year && m.end_year)
+      .map(m => `${m.start_year}-${m.end_year}`)
+    )].sort((a, b) => b.localeCompare(a)); // Newest first
+
+  } catch (error) {
+    console.error("Error fetching dynamic batches:", error);
+    availableBatches = ["2025-2026", "2024-2025"]; // Fallback
+  }
+
+  const currentBatch = params.batch || (availableBatches.length > 0 ? availableBatches[0] : "2025-2026");
 
 
   return (
@@ -64,7 +87,7 @@ export default async function TeamPage({ searchParams }) {
 
             {/* Selector */}
             <div>
-              <BatchSelector />
+              <BatchSelector availableBatches={availableBatches} />
             </div>
 
           </div>

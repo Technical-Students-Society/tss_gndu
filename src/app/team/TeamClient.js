@@ -15,10 +15,12 @@ export default function TeamClient({ batch }) {
     async function fetchMembers() {
       setLoading(true);
       try {
+        const [start_year, end_year] = batch.split('-');
         const response = await api.get("/team_members", {
           params: {
             select: "*",
-            batch: `eq.${batch}`,
+            start_year: `eq.${start_year}`,
+            end_year: `eq.${end_year}`,
             order: "created_at.desc",
           },
         });

@@ -3,15 +3,12 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { ListFilter } from "lucide-react";
 
-const batches = [
-  "2025-2026",
-  "2024-2025",
-];
-
-export default function BatchSelector() {
+export default function BatchSelector({ availableBatches = [] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const currentBatch = searchParams.get("batch") || "2025-2026";
+  
+  // Default to the first available batch if not specified in URL
+  const currentBatch = searchParams.get("batch") || (availableBatches.length > 0 ? availableBatches[0] : "2025-2026");
 
   const handleBatchChange = (e) => {
     const selectedBatch = e.target.value;
@@ -31,7 +28,7 @@ export default function BatchSelector() {
         onChange={handleBatchChange}
         className="bg-transparent text-xs max-sm:text-[10px] font-black uppercase tracking-widest text-neutral-900 dark:text-neutral-50 focus:outline-none cursor-pointer pr-1"
       >
-        {batches.map((batch) => (
+        {availableBatches.map((batch) => (
           <option key={batch} value={batch} className="bg-white dark:bg-neutral-900">
             {batch}
           </option>
