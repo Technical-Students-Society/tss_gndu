@@ -65,8 +65,14 @@ export default function EventCard({ event, onSelect }) {
           {event.title}
         </h3>
 
-        <p className="text-sm text-neutral-500 dark:text-neutral-600 mb-1">
-          {event.location || "Location TBA"} ({formatDate(event.start_at)})
+        <p className="text-sm gap-1 flex text-neutral-500 dark:text-neutral-600 mb-1">
+          {event.location || "Location TBA"}  {
+            event.is_coming_soon ? (<p className='text-neutral-500'>
+              (Coming Soon)
+            </p>) : (<p className='text-neutral-500'>(
+              {formatDate(event.start_at, event.end_at)})
+            </p>)
+          }
         </p>
 
         <p className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2 mb-4">

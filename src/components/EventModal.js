@@ -93,9 +93,14 @@ export default function EventModal({ event, onClose }) {
             <h2 className=" text-lg  sm:text-xl font-bold text-neutral-900 dark:text-neutral-50 pr-8">
               {event.title}
             </h2>
-            <p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 mt-1 uppercase tracking-widest">
-              {formatEventDateTime(event.start_at, event.end_at)}
-            </p>
+            {
+              event.is_coming_soon ? (<p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 mt-1 uppercase tracking-widest">
+                Coming Soon
+              </p>) : (<p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 mt-1 uppercase tracking-widest">
+                {formatEventDateTime(event.start_at, event.end_at)}
+              </p>)
+            }
+
           </div>
           <button
             onClick={handleClose}
