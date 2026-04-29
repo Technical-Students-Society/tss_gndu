@@ -59,6 +59,7 @@ export default function EventsClient() {
           <h2 className="font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-8 flex items-center gap-3">
             Upcoming Events
           </h2>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
             {upcomingEvents.map((event) => (
               <EventCard

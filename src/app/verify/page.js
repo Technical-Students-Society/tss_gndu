@@ -78,6 +78,7 @@ function VerifyContent() {
       } else {
         setResult({
           name: data.recipient_name,
+          class: data.recipient_class,
           type: data.certificate_type,
           event: data.events?.title || "Special Event",
           date: new Date(data.issue_date).toLocaleDateString('en-GB', {
@@ -219,14 +220,9 @@ function VerifyContent() {
                   <p className="text-xs text-neutral-500 uppercase tracking-wide">Participant</p>
                   <p className="font-medium text-sm capitalize">{result.name}</p>
                 </div>
-
                 <div>
-                  {result.metadata && Object.entries(result.metadata).map(([key, value]) => (
-                    <div key={key}>
-                      <p className="text-[10px] text-neutral-500 uppercase tracking-widest font-bold">{key.replace(/_/g, ' ')}</p>
-                      <p className="font-medium text-neutral-200 ">{String(value)}</p>
-                    </div>
-                  ))}
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Course</p>
+                  <p className="font-medium text-sm capitalize">{result.class}</p>
                 </div>
 
                 <div>
@@ -235,7 +231,7 @@ function VerifyContent() {
                 </div>
 
                 <div>
-                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Role</p>
+                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Role/Position</p>
                   <p className="font-medium text-sm">{result.type}</p>
                 </div>
 
@@ -251,17 +247,19 @@ function VerifyContent() {
                   </p>
                 </div>
 
-
-
                 <div>
                   <p className="text-xs text-neutral-500 uppercase tracking-wide">Issue Date</p>
                   <p className="font-medium text-sm">{result.date}</p>
                 </div>
 
-                {/* <div>
-                  <p className="text-xs text-neutral-500 uppercase tracking-wide">Verified On</p>
-                  <p className="font-medium text-sm">{result.date}</p>
-                </div> */}
+                <div>
+                  {result.metadata && Object.entries(result.metadata).map(([key, value]) => (
+                    <div key={key}>
+                      <p className="text-[10px] text-neutral-500 uppercase tracking-widest font-bold">{key.replace(/_/g, ' ')}</p>
+                      <p className="font-medium text-neutral-200 ">{String(value)}</p>
+                    </div>
+                  ))}
+                </div>
 
               </div>
 
