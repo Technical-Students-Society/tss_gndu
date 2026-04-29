@@ -14,7 +14,7 @@ export default function GalleryClient() {
     async function fetchImages() {
       setLoading(true);
       const supabase = createClient();
-      
+
       try {
         const { data, error } = await supabase.storage
           .from("tss-bucket")
@@ -66,6 +66,15 @@ export default function GalleryClient() {
     setSelectedImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
+  const [expanded, setExpanded] = useState(6);
+
+  const loadimages = () => {
+    setExpanded((prev) => prev + 6); // load 6 more imgs
+  }
+  const collapseimg = () => {
+    setExpanded(6); // reset to 6 imgs
+  }
+
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-32 space-y-4">
@@ -87,7 +96,7 @@ export default function GalleryClient() {
       {/* Gallery Grid */}
       {images.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {images.map((image, index) => (
+          {images.slice(0, expanded).map((image, index) => (
             <motion.div
               key={image.id || image.src}
               initial={{ opacity: 0, y: 20 }}
@@ -163,6 +172,15 @@ export default function GalleryClient() {
             </motion.div>
           </motion.div>
         )}
+        {expanded < images.length &&
+          (<div className="pt-5 flex justify-center">
+            <button onClick={loadimages} className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 hover:text-neutral-400 duration-300 bg-neutral-100 dark:bg-neutral-900/50 px-4 py-2 rounded-full border dark:border-neutral-800 backdrop-blur-sm cursor-pointer">Load more</button>
+          </div>)}
+
+        {expanded > images.length &&
+          (<div className="pt-5 flex justify-center">
+            <button onClick={collapseimg} className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 hover:text-neutral-400 duration-300 bg-neutral-100 dark:bg-neutral-900/50 px-4 py-2 rounded-full border dark:border-neutral-800 backdrop-blur-sm cursor-pointer">Show Less</button>
+          </div>)}
       </AnimatePresence>
     </>
   );
