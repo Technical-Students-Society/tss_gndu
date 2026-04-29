@@ -136,6 +136,7 @@ export default function HomeTeamSectionSimple() {
                       src={category.illustration}
                       alt=""
                       className="w-full h-full object-contain"
+                      loading='lazy'
                     />
                   </div>
                 </div>

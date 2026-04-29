@@ -8,6 +8,7 @@ import { createClient } from "@/utils/supabase/client";
 export default function GalleryClient() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [expanded, setExpanded] = useState(6);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
   useEffect(() => {
@@ -65,8 +66,6 @@ export default function GalleryClient() {
     e?.stopPropagation();
     setSelectedImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
-
-  const [expanded, setExpanded] = useState(6);
 
   const loadimages = () => {
     setExpanded((prev) => prev + 6); // load 6 more imgs
@@ -168,6 +167,7 @@ export default function GalleryClient() {
                 src={images[selectedImageIndex].src}
                 alt={images[selectedImageIndex].alt}
                 className="max-w-full max-h-[85vh] object-contain"
+                loading="lazy"
               />
             </motion.div>
           </motion.div>

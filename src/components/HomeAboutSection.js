@@ -128,6 +128,7 @@ export default function HomeAboutSection() {
                     fill="true"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     priority="true"
+                    loading="lazy"
                   />
                 </div>
               ))}
