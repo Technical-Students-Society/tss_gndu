@@ -77,7 +77,7 @@ export default function MemberCard({
         {/* Name + role */}
         <div>
           <h3
-            className="text-white font-bold tracking-tight leading-tight"
+            className="text-white font-bold tracking-tight leading-tight capitalize"
             style={{
               fontSize: 21,
               textShadow: '0 1px 8px rgba(0,0,0,0.4)',

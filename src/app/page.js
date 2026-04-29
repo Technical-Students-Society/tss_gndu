@@ -13,7 +13,6 @@ import HomeTeamSectionSimple from "@/components/HomeTeamSectionSimple";
 // import HomeTeamSection from "@/components/HomeTeamSection";
 import HomeAboutSection from "@/components/HomeAboutSection";
 import CountUp from "./Animations/CountUp";
-import ScrollToTop from "./ScrollToTop";
 import SplitText from "./Animations/SplitText";
 
 export default function Home() {
@@ -26,7 +25,6 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-col font-openai items-center">
-        <ScrollToTop />
         <HeroSection />
 
         {/* Stats Section */}

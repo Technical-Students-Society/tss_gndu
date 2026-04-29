@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CursorTrail from "@/components/CursorTrail";
 import LayoutWrapper from "@/components/LayoutWrapper";
+import ScrollToTop from "./ScrollToTop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -114,6 +115,7 @@ export default function RootLayout({ children }) {
         <CursorTrail />
         <SmoothScroll>
           <main className="flex-1">
+            <ScrollToTop/>
             <LayoutWrapper>{children}</LayoutWrapper>
           </main>
         </SmoothScroll>
