@@ -144,6 +144,7 @@ export default function EventModal({ event, onClose }) {
                     src={images[currentImageIndex]}
                     alt={`${event.title} image ${currentImageIndex + 1}`}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                   {images.length > 1 && (
                     <>

@@ -60,6 +60,7 @@ export default function AboutSection() {
                 src="/images/photos/photo.jpg"
                 className="w-full max-sm:h-56 h-70 object-cover transition-transform duration-500 group-hover:scale-105"
                 alt=""
+                loading="lazy"
               />
             </div>
             <p className="font-medium text-neutral-700 dark:text-neutral-300">
@@ -73,14 +74,16 @@ export default function AboutSection() {
             {/* Top Images */}
             <div className="flex max-sm:flex-col gap-4 max-sm:hidden">
               <img
-                src="/images/photos/group-image.jfif"
+                src="/images/photos/group-image.jpg"
                 className="w-full h-40 object-cover rounded-xl transition-transform duration-500 hover:scale-105"
                 alt=""
+                loading="lazy"
               />
               <img
                 src="/images/photos/noor-mela.jfif"
                 className="w-1/2 h-40 max-sm:w-full object-cover rounded-xl transition-transform duration-500 hover:scale-105"
-                alt=""
+                alt="noor-mela"
+                loading="lazy"
               />
             </div>
 
