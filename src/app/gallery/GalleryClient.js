@@ -174,12 +174,12 @@ export default function GalleryClient() {
         )}
         {expanded < images.length &&
           (<div className="pt-5 flex justify-center">
-            <button onClick={loadimages} className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 hover:text-neutral-400 duration-300 bg-neutral-100 dark:bg-neutral-900/50 px-4 py-2 rounded-full border dark:border-neutral-800 backdrop-blur-sm cursor-pointer">Load more</button>
+            <button onClick={loadimages} className="gallery-btns">Load more</button>
           </div>)}
 
         {expanded > images.length &&
           (<div className="pt-5 flex justify-center">
-            <button onClick={collapseimg} className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 hover:text-neutral-400 duration-300 bg-neutral-100 dark:bg-neutral-900/50 px-4 py-2 rounded-full border dark:border-neutral-800 backdrop-blur-sm cursor-pointer">Show Less</button>
+            <button onClick={collapseimg} className="gallery-btns">Show Less</button>
           </div>)}
       </AnimatePresence>
     </>

@@ -38,13 +38,7 @@ export default function AboutSection() {
                 duration={1.25}
                 ease="power3.out"
                 splitType="words"
-                from={{ opacity: 0, y: 40 }}
-                to={{ opacity: 1, y: 0 }}
-                threshold={0.1}
-                rootMargin="-100px"
-                textAlign="start"
-                showCallback={false}
-              />
+                showCallback={false} />
             </h2>
 
             {/* Paragraph */}
@@ -94,8 +88,8 @@ export default function AboutSection() {
               careers.
             </p>
 
-             {/* Divider */}
-              <div className="h-px bg-neutral-200 dark:bg-neutral-800" />
+            {/* Divider */}
+            <div className="h-px bg-neutral-200 dark:bg-neutral-800" />
 
             {/* Description */}
             <div className="space-y-5 text-[15px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
@@ -120,10 +114,8 @@ export default function AboutSection() {
               </p>
             </div>
           </div>
-
         </div>
       </div>
-
     </section>
   );
 }
