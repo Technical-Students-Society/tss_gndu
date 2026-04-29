@@ -39,11 +39,7 @@ export default function HomeFaqSection() {
               duration={1.25}
               ease="power3.out"
               splitType="chars"
-              from={{ opacity: 0, y: 40 }}
-              to={{ opacity: 1, y: 0 }}
-              threshold={0.1}
-              showCallback={false}
-              textAlign="start" />
+              showCallback={false}/>
           </h2>
           <p className="text-neutral-600 dark:text-neutral-400 mx-auto max-w-2xl text-base">
             Everything you need to know about getting involved with TSS GNDU.
@@ -55,8 +51,7 @@ export default function HomeFaqSection() {
             return (
               <div
                 key={faq.question}
-                className="group p-7 border border-neutral-200 dark:border-neutral-800 rounded-xl bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-950 dark:to-siteblack hover:border-neutral-300 dark:hover:border-neutral-700 hover:shadow-md dark:hover:shadow-neutral-950/30 transition-all duration-300 space-y-4"
-              >
+                className="group p-7 border border-neutral-200 dark:border-neutral-800 rounded-xl bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-950 dark:to-siteblack hover:border-neutral-300 dark:hover:border-neutral-700 hover:shadow-md dark:hover:shadow-neutral-950/30 transition-all duration-300 space-y-4">
                 {/* Icon */}
                 <div className='flex items-center gap-4'>
 

@@ -62,12 +62,7 @@ export default function HomeAboutSection() {
                 duration={1}
                 ease="power3.out"
                 splitType="chars"
-                from={{ opacity: 0, y: 40 }}
-                to={{ opacity: 1, y: 0 }}
-                threshold={0.1}
-                showCallback={false}
-                textAlign="start"
-              />
+                showCallback={false} />
             </h2>
 
             {/* Description */}
@@ -145,8 +140,7 @@ export default function HomeAboutSection() {
                     className={`h-1.5 rounded-full transition-all duration-300 ${i === current
                       ? "w-6 bg-white"
                       : "w-2 bg-white/50 hover:bg-white/80"
-                      }`}
-                  />
+                      }`} />
                 ))}
               </div>
             </div>

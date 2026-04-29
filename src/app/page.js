@@ -83,11 +83,7 @@ export default function Home() {
                   duration={1.25}
                   ease="power3.out"
                   splitType="chars"
-                  from={{ opacity: 0, y: 40 }}
-                  to={{ opacity: 1, y: 0 }}
-                  threshold={0.1}
-                  showCallback={false}
-                  textAlign="start" /></h2>
+                  showCallback={false} /></h2>
                 <p className="text-neutral-500 dark:text-neutral-400 ">
                   Stay tuned with our upcoming highlights and ongoing competitions.
                 </p>
