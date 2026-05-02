@@ -8,7 +8,7 @@
  * @returns {string} Formatted date-time string
  */
 export function formatEventDateTime(startAt, endAt) {
-  if (!startAt) return "Date TBA";
+  if (!startAt) return "Dates will be announced soon";
 
   const start = new Date(startAt);
   const end = endAt ? new Date(endAt) : null;

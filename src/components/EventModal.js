@@ -95,7 +95,7 @@ export default function EventModal({ event, onClose }) {
             </h2>
             {
               event.is_coming_soon ? (<p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 mt-1 uppercase tracking-widest">
-                Coming Soon
+                Dates will be announced soon
               </p>) : (<p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 mt-1 uppercase tracking-widest">
                 {formatEventDateTime(event.start_at, event.end_at)}
               </p>)
@@ -115,7 +115,7 @@ export default function EventModal({ event, onClose }) {
         <div data-lenis-prevent="true" className="overflow-y-auto overscroll-none flex-1 p-6 space-y-8">
 
           {/* Main Content Grid: Description & Slider */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className={`grid grid-cols-1 ${!event.is_coming_soon ? 'lg:grid-cols-2' : ''} gap-8`}>
             {/* Left: Info */}
             <div className="space-y-4">
               <h3 className="text-sm font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
@@ -124,7 +124,7 @@ export default function EventModal({ event, onClose }) {
               <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed text-sm sm:text-base">
                 {event.description}
               </p>
-              {event.location && (
+              {event.location && !event.is_coming_soon && (
                 <div className="pt-2">
                   <span className="text-xs font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 wrap-break-word">
                     Location: <span className="text-neutral-900 dark:text-neutral-50">{event.location}</span>
@@ -134,7 +134,7 @@ export default function EventModal({ event, onClose }) {
             </div>
 
             {/* Right: Image Slider */}
-            {images.length > 0 && (
+            {!event.is_coming_soon && images.length > 0 && (
               <div className="space-y-4">
                 <h3 className="text-sm font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
                   Images from the event
@@ -180,7 +180,7 @@ export default function EventModal({ event, onClose }) {
                 )}
               </div>
             )}
-            {images.length === 0 && (
+            {!event.is_coming_soon && images.length === 0 && (
               <div className="space-y-4">
                 <h3 className="text-sm font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
                   Images from the event

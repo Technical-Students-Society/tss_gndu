@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 
 export default function EventCard({ event, onSelect }) {
   const now = new Date();
-  const isPast = new Date(event.start_at) < now;
+  const isPast = !event.is_coming_soon && event.start_at && new Date(event.start_at) < now;
   const category = isPast ? "Past Event" : "New";
 
   const formatDate = (dateStr) =>
@@ -15,10 +15,10 @@ export default function EventCard({ event, onSelect }) {
         day: "numeric",
         year: "numeric",
       })
-      : "Date TBA";
+      : "Dates will be announced soon";
 
   const handleInteraction = () => {
-    if (isPast) {
+    if (isPast || event.is_coming_soon) {
       onSelect(event);
     } else if (event.reg_link) {
       window.open(event.reg_link, "_blank", "noopener,noreferrer");
@@ -28,7 +28,7 @@ export default function EventCard({ event, onSelect }) {
   return (
     <div className="group flex flex-col h-full">
       <div
-        className={`relative w-full aspect-video mb-3 cursor-pointer ${isPast ? 'event-target-2' : 'event-target-1'}`}
+        className={`relative w-full aspect-video mb-3 cursor-pointer ${(isPast || event.is_coming_soon) ? 'event-target-2' : 'event-target-1'}`}
         onClick={handleInteraction}
       >
         <div className="absolute inset-0 overflow-hidden rounded-lg bg-neutral-100 dark:bg-neutral-900 shadow-lg">
@@ -67,11 +67,11 @@ export default function EventCard({ event, onSelect }) {
 
         <p className="text-sm gap-1 flex text-neutral-500 dark:text-neutral-600 mb-1">
           {event.location || "Location TBA"}  {
-            event.is_coming_soon ? (<p className='text-neutral-500'>
+            event.is_coming_soon ? (<span className='text-neutral-500'>
               (Coming Soon)
-            </p>) : (<p className='text-neutral-500'>(
+            </span>) : (<span className='text-neutral-500'>(
               {formatDate(event.start_at, event.end_at)})
-            </p>)
+            </span>)
           }
         </p>
 
@@ -81,7 +81,7 @@ export default function EventCard({ event, onSelect }) {
 
         <div className="mt-auto">
           {!isPast ? (
-            event.reg_link ? (
+            (event.reg_link || event.is_coming_soon) ? (
               <button
                 onClick={() => onSelect(event)}
                 className="inline-flex items-center self-start gap-1 text-sm font-semibold text-neutral-900 dark:text-neutral-50 hover:opacity-60 transition-opacity cursor-pointer"

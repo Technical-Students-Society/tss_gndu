@@ -30,12 +30,22 @@ export default function EventsClient() {
 
   const { upcomingEvents, pastEvents } = useMemo(() => {
     const now = new Date();
+    
     const upcoming = events
-      .filter((e) => new Date(e.start_at) >= now)
-      .sort((a, b) => new Date(a.start_at) - new Date(b.start_at));
+      .filter((e) => e.is_coming_soon || (e.start_at && new Date(e.start_at) >= now))
+      .sort((a, b) => {
+        // Coming soon events (without dates) should appear at the top or based on priority
+        if (a.is_coming_soon && !b.is_coming_soon) return -1;
+        if (!a.is_coming_soon && b.is_coming_soon) return 1;
+        
+        // If both are coming soon or both have dates, sort by date
+        const dateA = a.start_at ? new Date(a.start_at) : new Date(0);
+        const dateB = b.start_at ? new Date(b.start_at) : new Date(0);
+        return dateA - dateB;
+      });
 
     const past = events
-      .filter((e) => new Date(e.start_at) < now)
+      .filter((e) => !e.is_coming_soon && e.start_at && new Date(e.start_at) < now)
       .sort((a, b) => new Date(b.start_at) - new Date(a.start_at));
 
     return { upcomingEvents: upcoming, pastEvents: past };
