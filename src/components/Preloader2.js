@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Link from "next/link";
+import ShinyText from "@/app/Animations/ShinyText";
+
 
 export default function Preloader({ loading, onFinish }) {
     const preloaderRef = useRef();
@@ -64,11 +66,16 @@ export default function Preloader({ loading, onFinish }) {
                 className={`relative w-full h-full scale-80 rounded-xl pt-32 bg-siteblack flex flex-col items-center justify-center text-center px-6 pb-24 font-openai transition-opacity duration-500 min-h-[100dvh] ${fontsLoaded ? "opacity-100" : "opacity-0"}`}
             >
                 {/* Badge */}
-                <div className="flex items-center gap-2 mb-6 text-xs font-medium text-neutral-500 dark:text-neutral-400 tracking-wide bg-[#0C0C0E] p-2 rounded-full">
-                    <span className="w-2 h-2 rounded-full bg-orange-400 inline-block" />
-                    <span className="w-2 h-2 rounded-full bg-orange-400 inline-block absolute animate-ping" />
-                    Technical Students' Society
-                </div>
+                <div className="flex items-center gap-2 mb-6 text-xs font-medium text-neutral-500 dark:text-neutral-400 tracking-wide bg-[#0C0C0E] dark:bg-zinc-950 dark:border dark:border-zinc-900 py-2 px-5 rounded-full">
+                          <span className="w-2 h-2 rounded-full bg-orange-400 inline-block" />
+                          <span className="w-2 h-2 rounded-full bg-orange-400 inline-block absolute animate-ping" />
+                          <ShinyText
+                            text="Technical Students' Society"
+                            speed={2.8}
+                            color="#b5b5b5"
+                            shineColor="#ffffff"
+                          />
+                        </div>
 
                 <h1 className="relative text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-openai font-extrabold tracking-tight leading-[1.05]  max-w-3xl mb-5 pointer-events-none">
 
