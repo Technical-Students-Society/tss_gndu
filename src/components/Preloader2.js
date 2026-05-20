@@ -77,13 +77,13 @@ export default function Preloader({ loading, onFinish }) {
                     </span>
 
                     {/* 3D Depth Layers */}
-                    <span className="absolute inset-0 dark:text-neutral-400 blur-[1px] translate-x-[2px] translate-y-[2px] opacity-70">
+                    {/* <span className="absolute inset-0 dark:text-neutral-400 blur-[1px] translate-x-[2px] translate-y-[2px] opacity-70">
                         Bridging Tech & Innovation
                     </span>
 
                     <span className="absolute inset-0 dark:text-neutral-600 translate-x-[4px] translate-y-[4px] opacity-50">
                         Bridging Tech & Innovation
-                    </span>
+                    </span> */}
                 </h1>
 
                 {/* Sub */}

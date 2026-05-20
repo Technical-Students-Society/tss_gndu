@@ -1,6 +1,6 @@
 import EventsClient from "./EventsClient";
 import ShinyText from "../Animations/ShinyText";
-import { ArrowRight, Calendars } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Calendar } from 'lucide-react';
 import SplitText from "../Animations/SplitText";
 
 export const metadata = {
@@ -18,7 +18,7 @@ export default function EventsPage() {
 
         {/* Top Tag */}
         <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-6">
-          <Calendars />
+          <Calendar />
           <ShinyText
             text="Events"
             speed={2.8}

@@ -1,5 +1,5 @@
-import React from 'react';
-import { HelpCircle, Users, Gift, Zap, Bell } from 'lucide-react';
+import React, { useState } from 'react';
+import { ChevronDown, CircleHelp } from 'lucide-react';
 import SplitText from '@/app/Animations/SplitText';
 
 const faqs = [
@@ -7,74 +7,84 @@ const faqs = [
     question: "Who can join TSS?",
     answer:
       "Any student currently enrolled in Guru Nanak Dev University with a passion for technology, design, or management is welcome to join our community.",
-    icon: Users,
   },
   {
     question: "Are there any membership fees?",
     answer:
       "No, membership to the Technical Student Society is completely free. We focus on talent, dedication, and the collective growth of our members.",
-    icon: Gift,
   },
   {
     question: "What kind of events do you host?",
     answer:
       "We organize a variety of events including hands-on technical workshops, annual hackathons, coding competitions, and industrial guest lectures.",
-    icon: Zap,
   },
   {
     question: "How can I stay updated?",
     answer:
       'You can keep an eye on our "Events" page or follow our official social media handles for the latest announcements and registration links.',
-    icon: Bell,
   },
 ];
 
 export default function HomeFaqSection() {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggle = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
-    <section className="w-full py-20  dark:bg-siteblack">
+    <section className="w-full py-20 dark:bg-siteblack">
       <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
-            <SplitText text="Common Questions" delay={25}
+            <SplitText
+              text="Common Questions"
+              delay={25}
               duration={1.25}
               ease="power3.out"
               splitType="chars"
-              showCallback={false}/>
+              showCallback={false}
+            />
           </h2>
           <p className="text-neutral-600 dark:text-neutral-400 mx-auto max-w-2xl text-base">
             Everything you need to know about getting involved with TSS GNDU.
           </p>
         </div>
-        <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto">
-          {faqs.map((faq) => {
-            const Icon = faq.icon;
-            return (
-              <div
-                key={faq.question}
-                className="group p-7 border border-neutral-200 dark:border-neutral-800 rounded-xl bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-950 dark:to-siteblack hover:border-neutral-300 dark:hover:border-neutral-700 hover:shadow-md dark:hover:shadow-neutral-950/30 transition-all duration-300 space-y-4">
-                {/* Icon */}
-                <div className='flex items-center gap-4'>
 
-                  <div className="inline-flex p-2.5 rounded-lg bg-neutral-100 dark:bg-neutral-900 group-hover:bg-indigo-100 dark:group-hover:bg-indigo-950 transition-colors duration-300">
-                    <Icon className="w-5 h-5 text-neutral-700 dark:text-neutral-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors" />
+        <div className="max-w-3xl mx-auto flex flex-col divide-y divide-neutral-200 dark:divide-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden">
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
+
+            return (
+              <div key={faq.question} className="bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-950 dark:to-siteblack">
+                <button
+                  onClick={() => toggle(index)}
+                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+                >
+                  <div className="flex items-center gap-3">
+                    <CircleHelp className={`w-5 h-5 shrink-0 transition-colors duration-300 ${isOpen ? 'text-indigo-500 dark:text-blue-500' : 'text-neutral-400 dark:text-neutral-500'}`} />
+                    <span className={`text-base font-semibold transition-colors duration-300 ${isOpen ? 'text-indigo-600 dark:text-blue-500' : 'text-neutral-900 dark:text-neutral-50'}`}>
+                      {faq.question}
+                    </span>
                   </div>
 
-                  {/* Question */}
-                  <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-50 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                    {faq.question}
-                  </h3>
-                </div>
+                  <ChevronDown
+                    className={`w-5 h-5 shrink-0 text-neutral-400 dark:text-neutral-500 transition-transform duration-300 ${isOpen ? 'rotate-180 text-indigo-500' : ''}`}
+                  />
+                </button>
 
-                {/* Answer */}
-                <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                  {faq.answer}
-                </p>
+                <div className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+                  <div className="overflow-hidden">
+                    <p className="px-6 pb-5 pl-14 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
               </div>
             );
           })}
         </div>
       </div>
-      {/* <hr className="top-20 relative mx-15 max-sm:mx-5 " /> */}
     </section>
   );
 }

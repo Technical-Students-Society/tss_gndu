@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowUpRight, ArrowRight } from 'lucide-react';
 
 export default function EventCard({ event, onSelect }) {
   const now = new Date();
@@ -64,9 +64,9 @@ export default function EventCard({ event, onSelect }) {
         >
           {event.title}
         </h3>
-
         <p className="text-sm gap-1 flex text-neutral-500 dark:text-neutral-600 mb-1">
-          {event.location || "Location TBA"}  {
+          {event.location || "Location TBA"}  
+          {
             event.is_coming_soon ? (<span className='text-neutral-500'>
               (Coming Soon)
             </span>) : (<span className='text-neutral-500'>(
@@ -74,6 +74,8 @@ export default function EventCard({ event, onSelect }) {
             </span>)
           }
         </p>
+
+
 
         <p className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2 mb-4">
           {event.description}
@@ -86,7 +88,7 @@ export default function EventCard({ event, onSelect }) {
                 onClick={() => onSelect(event)}
                 className="inline-flex items-center self-start gap-1 text-sm font-semibold text-neutral-900 dark:text-neutral-50 hover:opacity-60 transition-opacity cursor-pointer"
               >
-                View More <ArrowRight className="h-4 w-4" />
+                View More <ArrowUpRight className="h-4 w-4" />
               </button>
             ) : (
               <span className="inline-flex items-center gap-1 text-sm font-semibold text-neutral-400 cursor-not-allowed">
@@ -98,7 +100,7 @@ export default function EventCard({ event, onSelect }) {
               onClick={() => onSelect(event)}
               className="inline-flex items-center self-start gap-1 text-sm font-semibold text-neutral-900 dark:text-neutral-50 hover:opacity-60 transition-opacity cursor-pointer"
             >
-              View More <ArrowRight className="h-4 w-4" />
+              View More <ArrowUpRight className="h-4 w-4" />
             </button>
           )}
         </div>

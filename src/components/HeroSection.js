@@ -85,13 +85,13 @@ export default function HeroSection() {
           <div
             key={i}
             className={`relative rounded-2xl md:rounded-xl aspect-square ${(row + col) % 2 === 0
-              ? "bg-neutral-100/70 dark:bg-zinc-900/20"
+              ? "bg-neutral-100/70 dark:bg-zinc-900/20 "
               : "bg-neutral-50 dark:bg-zinc-900/10"
               }`}
           >
             {imgSrc && (
               <div
-                className="absolute inset-0 p-1 hidden md:block rounded-2xl md:rounded-xl overflow-hidden z-10"
+                className="absolute inset-0 p-1 hidden md:block rounded-2xl md:rounded-xl bg-zinc-100 dark:bg-zinc-900 overflow-hidden z-10"
                 style={{ boxShadow: "6px 2px 12px rgba(0,0,0,0.36)" }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -109,7 +109,7 @@ export default function HeroSection() {
       {/* ── Main content ── */}
       <div className="relative z-20 flex flex-col items-center justify-center min-h-[100dvh] text-center px-6 pb-24">
         {/* Badge */}
-        <div className="flex items-center gap-2 mb-6 text-xs font-medium text-neutral-500 dark:text-neutral-400 tracking-wide bg-[#0C0C0E] p-2 rounded-full">
+        <div className="flex items-center gap-2 mb-6 text-xs font-medium text-neutral-500 dark:text-neutral-400 tracking-wide bg-[#0C0C0E] dark:bg-zinc-950 dark:border dark:border-zinc-900 py-2 px-5 rounded-full">
           <span className="w-2 h-2 rounded-full bg-orange-400 inline-block" />
           <span className="w-2 h-2 rounded-full bg-orange-400 inline-block absolute animate-ping" />
           <ShinyText
@@ -122,18 +122,18 @@ export default function HeroSection() {
 
         <h1 className="relative text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-openai font-extrabold tracking-tight leading-[1.05]  max-w-3xl mb-5 pointer-events-none">
 
-          <span className="relative z-10 bg-gradient-to-b from-[#ffffff] via-[#d4d4d4] to-[#737373] bg-clip-text text-transparent">
+          <span className="relative z-10 bg-gradient-to-b from-neutral-950 via-neutral-800 to-neutral-600 dark:from-[#ffffff] dark:via-[#d4d4d4] dark:to-[#737373] bg-clip-text text-transparent">
             Bridging Tech & Innovation
           </span>
 
           {/* 3D Depth Layers */}
-          <span className="absolute inset-0 dark:text-neutral-400 blur-[1px] translate-x-[2px] translate-y-[2px] opacity-70">
+          {/* <span className="absolute inset-0 text-neutral-200 dark:text-neutral-400 blur-[1px] translate-x-[2px] translate-y-[2px] opacity-70">
             Bridging Tech & Innovation
           </span>
 
-          <span className="absolute inset-0 dark:text-neutral-600 translate-x-[4px] translate-y-[4px] opacity-50">
+          <span className="absolute inset-0 text-neutral-300 dark:text-neutral-600 translate-x-[4px] translate-y-[4px] opacity-50">
             Bridging Tech & Innovation
-          </span>
+          </span> */}
         </h1>
 
         {/* Sub */}
