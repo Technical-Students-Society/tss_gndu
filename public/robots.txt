@@ -1,4 +1,91 @@
-User-agent: *
+# Domain: https://tss-gndu.org/
+# Last Updated: 2026-05-22
+
+# Allow CSS, JS, images for proper rendering
+Allow: /assets/
+Allow: /images/
+
+# Development & source files
+Disallow: /src/
+Disallow: /node_modules/
+
+# Prevent indexing of test/dev pages
+Disallow: /*test*
+Disallow: /*dev*
+Disallow: /*backup*
+Disallow: /*temp*
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Block website download tools
+
+User-agent: HTTrack
 Disallow: /
 
-// Currently not indexed due to development phase
+User-agent: WebCopier
+Disallow: /
+
+User-agent: Teleport
+Disallow: /
+
+User-agent: WebZIP
+Disallow: /
+
+User-agent: Offline Explorer
+Disallow: /
+
+User-agent: SiteSucker
+Disallow: /
+
+User-agent: WebReaper
+Disallow: /
+
+User-agent: wget
+Disallow: /
+
+User-agent: curl
+Disallow: /
+
+# Block aggressive/malicious bots
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: Sogou
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://tss-gndu.org/sitemap.xml

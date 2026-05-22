@@ -35,35 +35,19 @@ export const metadata = {
   authors: [{ name: "Technical Students' Society GNDU" }],
   creator: "TSS GNDU",
 
-  // icons: {
-  //   icon: "/favicon.ico",
-  //   shortcut: "/favicon.ico",
-  //   apple: "/apple-touch-icon.png",
-  // },
-
   openGraph: {
     title: "TSS GNDU | Technical Students' Society",
     description:
       "Join Technical Students' Society at GNDU. Discover events, workshops, and innovation.",
     url: "https://tss-gndu.org/",
     siteName: "TSS GNDU",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "TSS GNDU",
-      },
-    ],
     type: "website",
   },
 
   twitter: {
-    card: "summary_large_image",
     title: "TSS GNDU",
     description:
       "Official Technical Students' Society of Guru Nanak Dev University.",
-    images: ["/og-image.png"],
   },
 
   metadataBase: new URL("https://tss-gndu.org/"),
