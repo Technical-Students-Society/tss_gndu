@@ -148,10 +148,10 @@ export default function RegisterSection() {
             </span>
           </h2>
 
-          <p className="font-barlow text-zinc-600 font-normal tracking-wide mb-16 text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto">
+          {/* <p className="font-barlow text-zinc-600 font-normal tracking-wide mb-16 text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto">
             Problem statements drop in 1 day. Register your team, submit a proposal,
             <br className="hidden md:block" />get shortlisted — then build for 30 hours straight.
-          </p>
+          </p> */}
         </div>
 
         <a

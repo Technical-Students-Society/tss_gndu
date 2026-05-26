@@ -12,9 +12,9 @@ export default function PrizesSection() {
         <p className="font-mono text-xs tracking-widest text-zinc-400 mb-4"></p>
 
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-14">
-          <h2 className="font-gellix text-[40px] leading-none text-zinc-900">
+          <h2 className="font-gellix  text-[60px] leading-none text-zinc-900">
             PRIZE POOL WORTH
-            <span className="text-amber-500 font-lowres-pixel"> ₹50k</span>
+            <span className="text-amber-500 font-gellix font-bold"> ₹50k</span>
           </h2>
           <p className="text-sm text-zinc-400 max-w-xs leading-relaxed md:text-right">
             Top 3 teams take home real money.<br />No vouchers. No merch-only. Cash.
