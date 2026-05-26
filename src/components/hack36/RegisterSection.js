@@ -100,15 +100,31 @@ export default function RegisterSection() {
         style={{ paddingLeft: 40, paddingRight: 40 }}
         className="hidden lg:flex absolute left-0 w-full items-center justify-between pointer-events-none z-0 -translate-y-1/2"
       >
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center relative">
+          <img
+            src="/hack36/cat-2.png"
+            alt="Cat Left"
+            className="absolute -top-18 left-6 w-18 h-18 object-contain pointer-events-none"
+          />
           <div ref={dot1Ref} className="rotate-45 w-4 h-4 bg-yellow-500" />
-          <div className="bg-black  backdrop-blur-sm  text-yellow-300 border border-zinc-200 px-3 rounded-md uppercase py-1 text-lg tracking-wider font-mono-dm">
+          <div
+            style={{ transform: "none" }}
+            className="bg-white/80 backdrop-blur-sm text-zinc-700 border border-zinc-200 px-3 rounded-md uppercase py-1 text-lg tracking-wider font-mono-dm"
+          >
             BUILD
           </div>
         </div>
 
-        <div className="flex gap-4 items-center">
-          <div className="bg-black  backdrop-blur-sm text-yellow-300 px-3 border border-zinc-200 rounded-md uppercase py-1 text-lg tracking-wider font-mono-dm">
+        <div className="flex gap-4 items-center relative">
+          <img
+            src="/hack36/cat-1.png"
+            alt="Cat Right"
+            className="absolute -top-18 right-6 w-18 h-18 object-contain pointer-events-none"
+          />
+          <div
+            style={{ transform: "none" }}
+            className="bg-white/80 backdrop-blur-sm text-zinc-700 px-3 border border-zinc-200 rounded-md uppercase py-1 text-lg tracking-wider font-mono-dm"
+          >
             ACHIEVE
           </div>
           <div ref={dot2Ref} className="rotate-45 w-4 h-4 bg-yellow-500" />
@@ -156,9 +172,13 @@ export default function RegisterSection() {
 
         <a
           href="#"
-          className="clip-cta inline-flex items-center justify-center gap-4 px-14 md:px-20 py-6 md:py-8 bg-yellow-400 text-black font-anton text-2xl md:text-4xl tracking-wider no-underline hover:bg-yellow-300 transition-colors mb-16 w-full sm:w-auto shadow-2xl"
+          className=" relative inline-flex rounded-lg items-center justify-center gap-4 px-14  py-6 bg-yellow-400 text-yellow-900 uppercase  font-anton text-xl md:text-2xl tracking-wider no-underline hover:bg-yellow-300 transition-colors mb-16 w-full sm:w-auto shadow-2xl"
         >
-          Register Your Team →
+          <span className="absolute top-3 right-3 w-3 h-3 bg-amber-950/30 rounded-full"></span>
+          <span className="absolute top-3 left-3 w-3 h-3 bg-amber-950/30 rounded-full"></span>
+          <span className="absolute bottom-3 right-3 w-3 h-3 bg-amber-950/30 rounded-full"></span>
+          <span className="absolute bottom-3 left-3 w-3 h-3 bg-amber-950/30 rounded-full"></span>
+          Register Your Team
         </a>
 
         {/* Badges */}
