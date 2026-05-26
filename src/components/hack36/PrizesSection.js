@@ -1,7 +1,7 @@
 const PRIZES = [
-  { place: "01", label: "First Place", amount: "₹25,000", accent: "from-yellow-400 to-amber-300", text: "text-amber-500", bg: "bg-amber-50", border: "border-amber-200", num: "text-amber-100", img: "/hack36/hack30-golden.png" },
-  { place: "02", label: "Second Place", amount: "₹15,000", accent: "from-gray-400 to-slate-300", text: "text-gray-400", bg: "bg-gray-50", border: "border-gray-200", num: "text-gray-100", img: "/hack36/hack30-silvered.png" },
-  { place: "03", label: "Third Place", amount: "₹10,000", accent: "from-orange-700 to-orange-500", text: "text-orange-700", bg: "bg-orange-50", border: "border-orange-200", num: "text-orange-100", img: "/hack36/hack30-wood.png" },
+  { place: "01", label: "First Place", amount: "₹25,000", accent: "from-yellow-400 to-amber-300", text: "text-amber-500", bg: "bg-amber-50", border: "border-amber-200", num: "text-amber-200", img: "/hack36/hack30-golden.png" },
+  { place: "02", label: "Second Place", amount: "₹15,000", accent: "from-gray-400 to-slate-300", text: "text-gray-400", bg: "bg-gray-50", border: "border-gray-200", num: "text-gray-200", img: "/hack36/hack30-silvered.png" },
+  { place: "03", label: "Third Place", amount: "₹10,000", accent: "from-orange-700 to-orange-500", text: "text-orange-700", bg: "bg-orange-50", border: "border-orange-200", num: "text-orange-200", img: "/hack36/hack30-wood.png" },
 ];
 
 export default function PrizesSection() {
@@ -21,13 +21,13 @@ export default function PrizesSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {PRIZES.map(({ place, label, amount, accent, text, bg, border, num, img }) => (
             <div key={place} className={`relative rounded-2xl border ${border} ${bg} p-8 overflow-hidden group hover:-translate-y-1 transition-transform duration-300`}>
 
               <div className={`absolute top-0 left-0 right-0 h-1 rounded-t-2xl bg-gradient-to-r ${accent}`} />
 
-              <div className={` absolute -right-3 top-3 leading-none select-none pointer-events-none ${num}`} style={{ fontSize: "120px" }}>
+              <div className={` font-satoshi font-bold absolute -right-3 top-3 leading-none select-none pointer-events-none ${num}`} style={{ fontSize: "120px" }}>
                 {place}
               </div>
 

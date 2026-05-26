@@ -58,7 +58,7 @@ export default function Hack30Page() {
       <ScheduleSection />
       <PrizesSection />
       <RegisterSection />
-      <Ticker />
+      {/* <Ticker /> */}
       <Footer />
     </>
   );

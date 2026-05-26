@@ -5,9 +5,9 @@ export default function Footer() {
         HACK<span className="text-yellow-400">30</span>
       </div>
       <div className="font-mono-dm text-xs md:text-sm tracking-widest text-zinc-600">
-        GNDU Campus · Amritsar · 2025
+        GNDU Campus · Amritsar · 2026
       </div>
-      <div className="font-mono-dm text-xs md:text-sm text-zinc-700">© 2025 Hack30</div>
+      <div className="font-mono-dm text-xs md:text-sm text-zinc-700">© 2026 Hack30</div>
     </footer>
   );
 }
