@@ -125,6 +125,30 @@
   font-display: block;
 }
 
+@font-face {
+  font-family: "BrokenConsole";
+  src: url("/fonts/hack36/Broken Console Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ByteBounce";
+  src: url("/fonts/hack36/ByteBounce.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "LowresPixel";
+  src: url("/fonts/hack36/LowresPixel-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @keyframes slide {
   from {
     transform: translateX(0);
@@ -225,6 +249,11 @@
   --font-plex: "Plex", monospace;
   --font-mono-custom: "CustomMono", monospace;
   --font-openai: "OpenAISans", sans-serif;
+
+  /* Hack36 Fonts */
+  --font-broken-console: "BrokenConsole", monospace;
+  --font-byte-bounce: "ByteBounce", monospace;
+  --font-lowres-pixel: "LowresPixel", monospace;
 }
 
 html,

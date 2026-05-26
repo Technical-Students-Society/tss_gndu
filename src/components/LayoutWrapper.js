@@ -2,12 +2,10 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useLenis } from "lenis/react";
 import Preloader from "./Preloader2";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import PageTransition from "@/app/PageTransition";
-import AnnouncementToasts from "./AnnouncementToasts";
 
 export default function LayoutWrapper({ children }) {
   const pathname = usePathname();
@@ -15,24 +13,15 @@ export default function LayoutWrapper({ children }) {
   const [preloaderFinished, setPreloaderFinished] = useState(false);
 
   // hide navbar/footer on auth pages
-  const hideLayout = pathname.startsWith("/verify") || pathname.startsWith("/policies") || pathname.startsWith("/maintenance") || pathname.startsWith("/admin") || pathname === null;
-
-  const lenis = useLenis();
+  const hideLayout = pathname?.startsWith("/policies") || pathname?.startsWith("/maintenance") || pathname?.startsWith("/verify") || pathname?.startsWith("/admin") || pathname?.startsWith("/hack30") || pathname === null;
 
   useEffect(() => {
-    // Force scroll to top on refresh and navigation
+    // Force scroll to top on refresh
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
-
-    // Reset native scroll
     window.scrollTo(0, 0);
-
-    // Reset Lenis scroll if available
-    if (lenis) {
-      lenis.scrollTo(0, { immediate: true });
-    }
-  }, [pathname, lenis]);
+  }, []);
 
   return (
     <>
@@ -44,8 +33,6 @@ export default function LayoutWrapper({ children }) {
       {children}
       {/* </PageTransition> */}
       {!hideLayout && <Footer />}
-      <AnnouncementToasts isReady={preloaderFinished} />
     </>
-
   );
 }
