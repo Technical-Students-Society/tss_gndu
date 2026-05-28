@@ -1,14 +1,14 @@
 const PILLS = [
   { label: "30 hours", cls: "tag-green", desktopStyle: { transform: "rotate(-5deg)", bottom: -18, left: 0 } },
-  { label: "GNDU", cls: "tag-amber", desktopStyle: { transform: "rotate(4deg)", bottom: -52, left: 110 } },
   { label: "30 teams", cls: "tag-indigo", desktopStyle: { transform: "rotate(-3deg)", bottom: -52, left: 230 } },
+  { label: "GNDU", cls: "tag-amber", desktopStyle: { transform: "rotate(4deg)", bottom: -52, left: 110 } },
   { label: "offline", cls: "tag-purple", desktopStyle: { transform: "rotate(6deg)", bottom: -8, left: 330 } },
   { label: "50K Prize pool", cls: "tag-purple", desktopStyle: { transform: "rotate(-6deg)", bottom: 20, left: 130 } },
 ];
 
 export default function AboutSection() {
   return (
-    <section className="px-4 md:px-12 lg:px-20 py-24 md:py-32 mx-auto">
+    <section className="px-4 md:px-12 lg:px-20 pt-16 pb-14 md:pt-10 md:pb-16 mx-auto">
       <div className="bg-zinc-950 rounded-[2.5rem]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pt-10 lg:gap-14 items-start">
 
@@ -20,7 +20,7 @@ export default function AboutSection() {
 
             {/* Heading — no relative/absolute on mobile */}
             <h2
-              className="font-gellix text-zinc-50 leading-[1.2] mb-6"
+              className="font-gellix text-zinc-50 leading-[1.1] md:leading-[1.2] mb-6"
               style={{ fontSize: "clamp(44px,7vw,78px)", letterSpacing: "-.01em" }}
             >
               Hack30<br />
@@ -33,7 +33,7 @@ export default function AboutSection() {
               {PILLS.map(({ label, cls }) => (
                 <span
                   key={label}
-                  className={`tag ${cls} inline-flex items-center gap-1 px-4 py-1.5 rounded-full text-[15px] font-medium border-[1.5px] whitespace-nowrap`}
+                  className={`tag ${cls} inline-flex items-center gap-1 px-4 py-1.5 rounded-full text-[12px] font-medium border-[1.5px] whitespace-nowrap`}
                 >
                   {label}
                 </span>

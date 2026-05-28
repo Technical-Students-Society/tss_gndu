@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import BrickButton from "./BrickButton";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -56,7 +57,7 @@ export default function HeroSection() {
   const pad = (n) => String(n).padStart(2, "0");
 
   return (
-    <section id="overview" className="bg-zinc-100 relative min-h-screen flex flex-col justify-center overflow-hidden pt-0 pb-20">
+    <section id="overview" className="bg-purple-100 relative min-h-screen flex flex-col justify-center overflow-hidden pt-0 pb-20">
 
       {/* Top Corner Action Items */}
       <div className="absolute top-18 left-1/2 -translate-x-1/2 w-full max-w-[90rem] px-4 md:px-12 flex flex-col sm:flex-row justify-between items-center gap-3 z-20">
@@ -75,17 +76,18 @@ export default function HeroSection() {
         </div>
 
         {/* CTA */}
-        <a
+        <BrickButton
           href="#register"
-          className="clip-cta bg-purple-600 hover:bg-purple-700 text-black font-gellix font-semibold tracking-wider py-2 px-6 md:px-8 text-sm md:text-base transition-colors shadow-md select-none no-underline"
+          size="sm"
+          className="select-none"
         >
-          Register Now →
-        </a>
+          Register Now
+        </BrickButton>
       </div>
 
       {/* Hero Title */}
-      <h1 className="font-mono-dm font-medium tracking-[0.25em] text-center -mt-20 mb-3 text-[10px] sm:text-xs md:text-sm leading-none text-nowrap text-zinc-500">
-        TSS@GNDU PRESENTS
+      <h1 className="font-mono-dm font-medium tracking-[0.25em] text-center -mt-20 mb-3 text-[10px] sm:text-xs md:text-sm leading-none text-nowrap text-zinc-700">
+        TSS-GNDU PRESENTS
       </h1>
       <div className="w-full flex justify-center">
         <h1 className="font-lowres-pixel text-[23vw] leading-none text-nowrap text-zinc-900">HACK 30</h1>
@@ -94,37 +96,37 @@ export default function HeroSection() {
       {/* Decorative Overlapping Bottom Images */}
       <div
         ref={containerRef}
-        className="absolute -bottom-10 md:-bottom-34 left-1/2 -translate-x-1/2 w-full flex justify-center items-end pointer-events-none z-0"
+        className="absolute -bottom-10 md:-bottom-34 left-[16px] md:left-1/2 md:-translate-x-1/2 w-full flex justify-center items-end pointer-events-none z-0"
       >
         <img
           src="/hack36/hhack36-greek.png"
           alt="greek statue"
-          className="levitate-img pointer-events-auto cursor-pointer w-[65vw] md:w-[26vw] max-w-[500px] shrink-0 object-contain -mx-[22%] md:-mx-[8%] z-50 mb-4 md:mb-0"
+          className="levitate-img pointer-events-auto cursor-pointer w-[65vw] md:w-[26vw] max-w-[500px] shrink-0 object-contain -mx-[26%] md:-mx-[8%] z-50 -mb-4 md:mb-0"
         />
         <img
           src="/hack36/hack36-rocket.png"
           alt="rocket"
-          className="-mb-16 md:-mb-15 levitate-img pointer-events-auto cursor-pointer w-[70vw] md:w-[35vw] max-w-[500px] shrink-0 object-contain -mx-[24%] md:-mx-[8%] z-20"
+          className=" md:-mb-15 -mb-36 levitate-img pointer-events-auto cursor-pointer w-[90vw] md:w-[35vw] max-w-[500px] shrink-0 object-contain -mx-[30%] md:-mx-[8%] z-20"
         />
         <img
           src="/hack36/hack30-comp.png"
           alt="computer"
-          className="levitate-img pointer-events-auto cursor-pointer w-[68vw] md:w-[26vw] max-w-[500px] shrink-0 object-contain -mx-[22%] md:-mx-[6%] z-40 mb-6 md:mb-0"
+          className="levitate-img pointer-events-auto cursor-pointer w-[68vw] md:w-[26vw] max-w-[500px] shrink-0 object-contain -ml-[42%] -mx-[38%] md:-mx-[6%] z-20 mb-12 md:mb-0"
         />
         <img
           src="/hack36/hack36-clock.png"
           alt="clock"
-          className="-mb-12 md:-mb-15 levitate-img pointer-events-auto cursor-pointer w-[65vw] md:w-[30vw] max-w-[500px] shrink-0 object-contain -mx-[22%] md:-mx-[6%] z-20"
+          className="-mb-12 md:-mb-15 levitate-img pointer-events-auto cursor-pointer w-[65vw] md:w-[30vw] max-w-[500px] shrink-0 object-contain -mx-[15%] -mr-[28%] md:-mx-[6%] z-40"
         />
         <img
           src="/hack36/hack36-mascot.png"
           alt="mascot"
-          className="levitate-img pointer-events-auto cursor-pointer w-[72vw] md:w-[30vw] max-w-[500px] shrink-0 object-contain -mx-[25%] md:-mx-[12%] z-30 scale-110 mb-8 md:mb-8"
+          className="levitate-img pointer-events-auto cursor-pointer w-[72vw] md:w-[30vw] max-w-[500px] shrink-0 object-contain -mx-[16%] -mr-[28%] md:-mx-[12%] z-30 scale-110 mb-14 md:mb-8"
         />
         <img
           src="/hack36/hack36-dino.png"
           alt="dino"
-          className="-mb-6 md:mb-0 levitate-img pointer-events-auto cursor-pointer w-[65vw] md:w-[28vw] max-w-[500px] shrink-0 object-contain -mx-[22%] md:-mx-[7%] z-10"
+          className="-mb-10 md:mb-0 levitate-img pointer-events-auto cursor-pointer w-[65vw] md:w-[28vw] max-w-[500px] shrink-0 object-contain -mx-[28%] md:-mx-[7%] z-10"
         />
       </div>
     </section>

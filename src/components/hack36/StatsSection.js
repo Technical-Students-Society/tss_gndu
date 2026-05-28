@@ -1,47 +1,44 @@
 const FACTS = [
   { n: "30", l: "Teams compete", img: "/hack36/stats-team.jpg" },
   { n: "30", l: "Hours straight", img: "/hack36/hack36-clock.png" },
-  { n: "₹50K", l: "Total prizes", img: "/hack36/stats-prize.jpg" },
-  { n: "24H", l: "Coding window", img: "/hack36/stats-code.jpg" },
+  { n: "₹50K", l: "Total prizes", img: "/hack36/stat-rich.jpg", cat: true },
+  { n: "24H", l: "Coding window", img: "/hack36/stat-code.jpg" },
 ];
 
 export default function StatsSection() {
   return (
-    <section className="px-4 md:px-12 lg:px-20 py-12 md:py-20 mx-auto">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
-        {FACTS.map(({ n, l, img }, index) => (
-          <div key={l} className="group relative">
-            {/* Cat peeks above the card — needs enough top clearance */}
-            {index === 2 && (
+    <section className="px-4 md:px-12 lg:px-20 py-8 md:py-14 mx-auto">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
+        {FACTS.map(({ n, l, img, cat }) => (
+          <div
+            key={l}
+            className="group relative flex flex-col bg-[#0c0c0f] rounded-[14px] border border-white/[0.07] hover:border-violet-500/40 hover:-translate-y-0.5 transition-all duration-300"
+          >
+            {cat && (
               <img
                 src="/hack36/cat-amaze.png"
-                alt="Amazed Cat"
-                className="absolute -top-16 left-1/2 -translate-x-1/2 w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain z-30 pointer-events-none"
+                alt="Amazed cat mascot"
+                className="absolute bottom-0 right-4 w-12 z-30 pointer-events-none drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)] transition-transform duration-300 ease-out group-hover:scale-110 "
               />
             )}
 
-            <div className="relative bg-zinc-950 rounded-[1.5rem] md:rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden min-h-[180px] sm:min-h-[220px] md:min-h-[280px] lg:min-h-[320px] flex flex-col justify-end p-5 sm:p-6 md:p-8 lg:p-10 border border-zinc-900 transition-all hover:border-zinc-800">
-              <div className="absolute inset-x-0 top-0 h-1 bg-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20" />
+            {/* Fixed-height image */}
+            <div className="h-[120px] md:h-[160px] overflow-hidden rounded-t-[14px] flex-shrink-0">
+              <img
+                src={img} alt="" aria-hidden="true"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+              />
+            </div>
 
-              {img && (
-                <img
-                  src={img}
-                  alt={l}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:opacity-50 group-hover:scale-105 transition-all duration-700 ease-out"
-                />
-              )}
-              {!img && (
-                <div className="absolute inset-0 bg-gradient-to-br from-zinc-900/30 to-zinc-950" />
-              )}
-
-              <div className="relative z-20">
-                <div className="font-anton text-zinc-50 leading-none mb-2 md:mb-4 drop-shadow-lg text-[36px] sm:text-[44px] md:text-[52px] lg:text-[60px]">
-                  {n}
-                </div>
-                <div className="font-mono text-[10px] sm:text-[11px] md:text-[13px] lg:text-[15px] tracking-[.12em] md:tracking-[.15em] text-zinc-300 uppercase drop-shadow-md">
-                  {l}
-                </div>
-              </div>
+            {/* Inline stat row */}
+            <div className="flex items-baseline gap-2.5 px-3.5 pt-2.5 pb-3 border-t border-white/[0.06] relative">
+              <div className="absolute top-0 inset-x-3.5 h-px bg-violet-500/0 group-hover:bg-violet-500/50 transition-colors duration-300" />
+              <span className="font-['Bebas_Neue'] text-[20px] md:text-[32px] leading-none text-zinc-50 tracking-wide">
+                {n}
+              </span>
+              <span className="text-[8px] text-nowrap md:text-[10px] tracking-[0.13em] text-zinc-500 uppercase font-medium">
+                {l}
+              </span>
             </div>
           </div>
         ))}

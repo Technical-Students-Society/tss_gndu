@@ -94,6 +94,13 @@ export default function RootLayout({ children }) {
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        <link
+          rel="preload"
+          href="/fonts/hack36/LowresPixel-Regular.otf"
+          as="font"
+          type="font/otf"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="flex flex-col antialiased selection:bg-neutral-200 dark:selection:bg-neutral-800">
         <CursorTrail />

@@ -1,6 +1,11 @@
 "use client";
 import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
+import BrickButton from "./BrickButton";
+import sticker1 from "./stickers/sticker1.png";
+import sticker2 from "./stickers/sticker2.png";
+import sticker3 from "./stickers/sticker3.png";
+import sticker4 from "./stickers/sticker4.png";
 
 export default function RegisterSection() {
   const boxRef = useRef(null);
@@ -84,15 +89,25 @@ export default function RegisterSection() {
     <section
       id="register"
       ref={sectionRef}
-      className="px-4 md:px-12 lg:px-20 xl:px-32 py-16 md:py-24 md:pt-32 border-t border-zinc-200 relative overflow-hidden bg-zinc-200"
+      className="px-4 md:px-12 lg:px-20 xl:px-32 py-16 md:py-24 md:pt-32  relative overflow-hidden bg-purple-100"
     >
       {/* Background large text */}
       <div
-        className="bg-text absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-35 leading-none pointer-events-none select-none"
-        style={{ fontSize: "clamp(100px,25vw,400px)", WebkitTextStroke: "1px #e4e4e7" }}
+        className=" absolute top-1/2 left-1/2 -translate-x-1/2 font-lowres-pixel text-purple-300/50 -translate-y-1/2 opacity-35 leading-none pointer-events-none select-none"
+
+        style={{ fontSize: "clamp(100px,25vw,400px)", }}
       >
-        REG
+        REGISTER
       </div>
+
+      {/* Background Stickers */}
+
+      <img
+        src={sticker3.src}
+        alt=""
+        className="absolute bottom-6 md:bottom-10 right-8 md:right-10 w-18 md:w-36 h-auto object-contain pointer-events-none select-none  rotate-12 z-0"
+      />
+
 
       {/* Dot bar — desktop only */}
       <div
@@ -106,7 +121,7 @@ export default function RegisterSection() {
             alt="Cat Left"
             className="absolute -top-18 left-6 w-18 h-18 object-contain pointer-events-none"
           />
-          <div ref={dot1Ref} className="rotate-45 w-4 h-4 bg-yellow-500" />
+          <div ref={dot1Ref} className="rotate-45 w-4 h-4 bg-purple-500" />
           <div
             style={{ transform: "none" }}
             className="bg-white/80 backdrop-blur-sm text-zinc-700 border border-zinc-200 px-3 rounded-md uppercase py-1 text-lg tracking-wider font-mono-dm"
@@ -127,7 +142,7 @@ export default function RegisterSection() {
           >
             ACHIEVE
           </div>
-          <div ref={dot2Ref} className="rotate-45 w-4 h-4 bg-yellow-500" />
+          <div ref={dot2Ref} className="rotate-45 w-4 h-4 bg-purple-500" />
         </div>
       </div>
 
@@ -142,19 +157,19 @@ export default function RegisterSection() {
         >
           <h2
             className="font-lowres-pixel font-bold text-zinc-900 tracking-wider leading-[0.9] mb-8 md:mb-12 flex flex-col items-center select-none"
-            style={{ fontSize: "clamp(42px, 9vw, 140px)" }}
+            style={{ fontSize: "clamp(52px, 9vw, 140px)" }}
           >
             <span>READY TO</span>
             <span className="flex items-center gap-3 md:gap-6 text-purple-600">
               <span>BUILD?</span>
               <span
                 ref={boxRef}
-                className="w-0 h-16 md:h-30 hidden md:flex justify-center overflow-hidden bg-zinc-400 rounded-xl flex-shrink-0"
+                className="w-0 h-16 md:h-30 hidden md:flex justify-center overflow-hidden bg-zinc-500 rounded-xl flex-shrink-0"
                 style={{ transition: "width 0.1s ease-out" }}
               >
                 <img
-                  className="min-w-[14rem] h-auto object-cover"
-                  src="/hack36/stats-code.jpg"
+                  className="min-w-[12rem] h-auto object-cover"
+                  src="/hack36/hhack36-greek.png"
                   alt="Team Coding"
                 />
               </span>
@@ -162,19 +177,16 @@ export default function RegisterSection() {
           </h2>
         </div>
 
-        <a
+        <BrickButton
           href="#"
-          className="relative inline-flex rounded-lg items-center justify-center gap-4 px-8 md:px-14 py-5 md:py-6 bg-yellow-400 text-yellow-900 uppercase font-anton text-lg md:text-2xl tracking-wider no-underline hover:bg-yellow-300 transition-colors mb-10 md:mb-16 w-full sm:w-auto shadow-2xl"
+          size="responsive"
+          className="mb-10 md:mb-16 py-3 px-4  sm:w-auto"
         >
-          <span className="absolute top-3 right-3 w-3 h-3 bg-amber-950/30 rounded-full"></span>
-          <span className="absolute top-3 left-3 w-3 h-3 bg-amber-950/30 rounded-full"></span>
-          <span className="absolute bottom-3 right-3 w-3 h-3 bg-amber-950/30 rounded-full"></span>
-          <span className="absolute bottom-3 left-3 w-3 h-3 bg-amber-950/30 rounded-full"></span>
-          Register Your Team
-        </a>
+          Register Now
+        </BrickButton>
 
         {/* Badges */}
-        <div className="flex flex-wrap justify-center gap-3 md:gap-6 mt-6 md:mt-8">
+        {/* <div className="flex flex-wrap justify-center gap-3 md:gap-6 mt-6 md:mt-8">
           {["🍕 Food Included", "⏱ 24H Coding Sprint", "💻 Creative Workspace", "🔥 Mentorship"].map((t) => (
             <span
               key={t}
@@ -183,7 +195,7 @@ export default function RegisterSection() {
               {t}
             </span>
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );

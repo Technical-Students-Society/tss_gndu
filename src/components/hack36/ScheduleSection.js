@@ -5,48 +5,57 @@ import { useEffect, useRef, useState } from "react";
 const scheduleEvents = [
   {
     id: 1,
-    date: "Mar 1 · 10:00 AM",
+    date: "30 May 2026 · 10:00 AM",
     sublabel: "Registrations Open",
-    label: 'Their "normal" became my new baseline.',
-    description: "Doors open for all aspiring innovators. Sign up and form your dream team before spots fill up.",
+    label: 'Registrations are open.',
+    description: "Registrations open for all aspiring developers. Team leaders will submit the team details",
     size: "sm",
-    image: "/hack36/hack36-rocket.png",
+    image: "/hack36/card_patterns/pattern (6).jpg",
   },
   {
     id: 2,
-    date: "Mar 15 · 9:00 AM",
-    sublabel: "Inauguration Ceremony",
-    label: "Their problems became my new targets.",
-    description: "The journey begins. Opening keynotes, rule briefings, and the official hackathon kickoff.",
+    date: "10 June 2026 · 10:00 AM",
+    sublabel: "Shortlisting",
+    label: "Shortlisted teams will be announced",
+    description: "Teams will be shortlisted based on their registration details, their github profiles and previous projects.",
     size: "md",
-    image: "/hack36/hack36-mascot.png",
+    image: "/hack36/card_patterns/pattern (5).jpg",
   },
   {
     id: 3,
-    date: "Mar 15 · 11:00 AM",
-    sublabel: "Hacking Begins & Mentorship",
-    label: "Their thinking became my new standard.",
-    description: "48 hours of pure innovation. Industry mentors guide teams through roadblocks and sharpen ideas.",
+    date: "10 June 2026 · 11:00 AM",
+    sublabel: "Purchase passes",
+    label: "Purchase passes for the offline event(optional)",
+    description: "Purchase passes for the offline hackathon event. Pass will include food, stay and other benefits.",
     size: "lg",
-    image: "/hack36/hack36-comp.png",
+    image: "/hack36/card_patterns/pattern (9).jpg",
   },
   {
     id: 4,
-    date: "Mar 17 · 10:00 AM",
-    sublabel: "Final Submissions",
-    label: "Final submissions & judging day.",
-    description: "Time's up. Submit your project and pitch your solution to a panel of top judges.",
+    date: "18 June 2026 · 10:00 AM",
+    sublabel: " Problem statements released",
+    label: "The hackathon starts()",
+    description: "The hackathon starts, teams must be present at campus and be given 24 hours to build and submit their projects",
     size: "md",
-    image: "/hack36/hack36-dino.png",
+    image: "/hack36/card_patterns/pattern (3).jpg",
   },
   {
     id: 5,
-    date: "Mar 17 · 6:00 PM",
-    sublabel: "Results & Closing",
-    label: "Results announced. Champions crowned.",
-    description: "Winners revealed, prizes awarded, and an epic chapter comes to a close.",
+    date: "19 June 2026 · 10:00 AM",
+    sublabel: "Coding time will be over.",
+    label: "Coding phase ends() ",
+    description: "Teams will be given 2 hours to prepare for their pitches and refresh. After this, no one will be allowed to code. ",
     size: "sm",
-    image: "/hack36/hack36-clock.png",
+    image: "/hack36/card_patterns/pattern (2).jpg",
+  },
+  {
+    id: 6,
+    date: "19 June 2026 · 3:00 PM",
+    label: "Results and prize distribution. ",
+    sublabel: "The moment of thruth",
+    description: "Winners will be announced and prizes will be distributed. Certificates will be given to everyone ",
+    size: "sm",
+    image: "/hack36/card_patterns/pattern (10).jpg",
   },
 ];
 
@@ -54,7 +63,7 @@ const NODE_SIZES = { sm: 13, md: 20, lg: 30 };
 // SVG is centered in the layout. Cards go left or right of it.
 const SVG_W = 300;
 const SVG_CX = SVG_W / 2;
-const ROW_H = 320;
+const ROW_H = 280;
 const TOTAL = scheduleEvents.length;
 const SVG_H = 60 + (TOTAL - 1) * ROW_H + 60;
 
@@ -80,29 +89,33 @@ function buildPath(isMobile) {
   return d;
 }
 
-const DOT_COLORS = ["#6c5ce7", "#7b6ef0", "#8b7cf8", "#9d8ef8", "#b0a4f8"];
+const DOT_COLORS = ["#6c5ce7", "#7b6ef0", "#8b7cf8", "#9d8ef8", "#b0a4f8", "#c2b6f8"];
 
 function TimelineCard({ ev }) {
   return (
-    <div className="tl-card-inner">
-      <span className="inline-block text-xs font-medium px-2 py-0.5 rounded-full mb-2" style={{ background: "rgba(139,124,248,0.12)", color: "#8b7cf8", fontFamily: "'DM Sans',sans-serif" }}>
+    <div className="tl-card-inner hover:border hover:border-purple-500 hover:bg-purple-950/20 bg-zinc-950">
+      <span className="inline-block text-xs font-medium px-2 py-0.5 rounded-full mb-2"
+        style={{
+          background: "rgba(139,124,248,0.12)",
+          color: "#8b7cf8", fontFamily: "'DM Sans',sans-serif"
+        }}>
         {ev.date}
       </span>
-      <p className="font-bold text-white leading-snug mb-1" style={{ fontFamily: "'Syne',sans-serif", fontSize: "clamp(0.88rem,1.5vw,1rem)", letterSpacing: "-0.01em" }}>
+      <p className="font-bold text-white leading-snug mb-2" style={{ fontFamily: "'Syne',sans-serif", fontSize: "clamp(0.88rem,1.5vw,1.2rem)", letterSpacing: "-0.01em" }}>
         {ev.label}
       </p>
       <p className="text-xs font-medium mb-2" style={{ color: "#8b7cf8", fontFamily: "'DM Sans',sans-serif" }}>
         {ev.sublabel}
       </p>
-      <p className="text-xs leading-relaxed" style={{ color: "#5a5a7a", fontFamily: "'DM Sans',sans-serif", fontStyle: "italic", fontWeight: 300 }}>
+      <p className="text-xs md:text-sm leading-relaxed text-zinc-500" style={{ fontFamily: "'DM Sans',sans-serif", fontStyle: "italic", fontWeight: 300 }}>
         {ev.description}
       </p>
       {ev.image && (
-        <div className="mt-4 -mx-5 -mb-[18px] overflow-hidden">
+        <div className="mt-4 -mx-5 -mb-[18px] border-t border-zinc-700 overflow-hidden">
           <img
             src={ev.image}
             alt={ev.sublabel}
-            className="w-full h-22 object-cover"
+            className="w-full h-12 md:h-16 object-cover"
           />
         </div>
       )}
@@ -158,7 +171,7 @@ export default function ScheduleSection() {
       return o;
     });
     return () => obs.forEach(o => o && o.disconnect());
-  }, []);
+  }, [scheduleEvents.length]);
 
   return (
     <section
@@ -185,18 +198,16 @@ export default function ScheduleSection() {
         .tl-card.visible    { opacity: 1; transform: translateX(0) translateY(0); }
 
         .tl-card-inner {
-          background: rgba(255,255,255,0.03);
+          // background: rgba(255,255,255);
           border: 1px solid rgba(139,124,248,0.15);
           border-radius: 16px;
           padding: 18px 20px;
-          backdrop-filter: blur(8px);
+          // backdrop-filter: blur(8px);
+
           transition: border-color 0.3s, background 0.3s;
           overflow: hidden;
         }
-        .tl-card-inner:hover {
-          background: rgba(139,124,248,0.07);
-          border-color: rgba(139,124,248,0.35);
-        }
+        
 
         .connector-line {
           position: absolute;
@@ -209,6 +220,15 @@ export default function ScheduleSection() {
         }
       `}</style>
 
+      {/* Background large text */}
+      <div
+        className=" absolute top-1/2 left-1/2 -translate-x-1/2 font-lowres-pixel text-purple-200/10 -translate-y-1/2 opacity-35 leading-none pointer-events-none select-none"
+
+        style={{ fontSize: "clamp(100px,25vw,400px)", }}
+      >
+        SCHEDULE
+      </div>
+
       {/* Ambient glows */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute rounded-full" style={{ width: 500, height: 500, top: "-5%", left: "50%", transform: "translateX(-50%)", background: "radial-gradient(circle,rgba(108,92,231,0.09) 0%,transparent 65%)" }} />
@@ -217,7 +237,11 @@ export default function ScheduleSection() {
 
       {/* Heading */}
       <div className="relative z-10 text-center mb-16 px-4 max-w-3xl mx-auto">
-        <span className="block text-xs font-medium tracking-widest uppercase mb-4" style={{ color: "#8b7cf8", fontFamily: "'DM Sans',sans-serif" }}>
+        <span className="block text-xs text-purple-800 font-medium tracking-widest uppercase mb-4"
+          style={{
+            // color: "#8b7cf8", 
+            fontFamily: "'DM Sans',sans-serif"
+          }}>
           Set your calendars up for the ultimate
         </span>
         {/* <h2 className="font-extrabold text-white leading-tight" style={{ fontSize: "clamp(1.8rem,4vw,3rem)", letterSpacing: "-0.02em" }}>
@@ -225,9 +249,11 @@ export default function ScheduleSection() {
           with Designers <span style={{ color: "#8b7cf8" }}>10x my level</span>,<br />
           everything changed.
         </h2> */}
-        <h2 className="font-extrabold text-white leading-tight" style={{ fontSize: "clamp(1.8rem,4vw,3rem)", letterSpacing: "-0.02em" }}>
+        <h2 className=" text-3xl md:text-6xl font-gellix md:tracking-[10px] text-white leading-tight">
           Hack30
-          <span style={{ color: "#8b7cf8" }}> Roadmap</span>,<br />
+          <span className=" md:ml-4 text-purple-600"
+          // style={{ color: "#8b7cf8" }}
+          > Timeline</span><br />
 
         </h2>
       </div>
@@ -309,11 +335,10 @@ export default function ScheduleSection() {
               >
                 <div
                   ref={el => { cardRefs.current[i] = el; }}
-                  className={`tl-card ${isLeft ? "from-left" : "from-right"}${visible.has(i) ? " visible" : ""} col-start-2 ${
-                    isLeft
-                      ? "md:col-start-1 md:justify-self-end md:pr-6"
-                      : "md:col-start-3 md:justify-self-start md:pl-6"
-                  } justify-self-start w-full pr-4 md:pr-0 max-w-[300px] md:max-w-[360px]`}
+                  className={`tl-card ${isLeft ? "from-left" : "from-right"}${visible.has(i) ? " visible" : ""} col-start-2 ${isLeft
+                    ? "md:col-start-1 md:justify-self-end md:pr-6"
+                    : "md:col-start-3 md:justify-self-start md:pl-6"
+                    } justify-self-start w-full pr-4 md:pr-0 max-w-[300px] md:max-w-[360px]`}
                   style={{ transitionDelay: `${i * 80}ms` }}
                 >
                   <TimelineCard ev={ev} />
