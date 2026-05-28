@@ -1,186 +1,328 @@
-const SCHEDULE = [
-  { n: "01", time: "Day 1 · 09:00", label: "Doors Open", sub: "Check-in & team registration at GNDU Campus" },
-  { n: "02", time: "Day 1 · 10:00", label: "Problem Statements Drop", sub: "Opening ceremony. Problems revealed. Clock starts soon." },
-  { n: "03", time: "Day 1 · 11:00", label: "24H Coding Begins", sub: "All 30 teams start simultaneously. Food served all night." },
-  { n: "04", time: "Day 2 · 11:00", label: "Submit & Freeze", sub: "Code commits locked. Presentations begin." },
-  { n: "05", time: "Day 2 · 12:00", label: "Team Demos", sub: "Each team presents to the judging panel." },
-  { n: "06", time: "Day 2 · 15:00", label: "Results & Prize Ceremony", sub: "Winners announced. ₹50,000 distributed on stage." },
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+const scheduleEvents = [
+  {
+    id: 1,
+    date: "Mar 1 · 10:00 AM",
+    sublabel: "Registrations Open",
+    label: 'Their "normal" became my new baseline.',
+    description: "Doors open for all aspiring innovators. Sign up and form your dream team before spots fill up.",
+    size: "sm",
+    image: "/hack36/hack36-rocket.png",
+  },
+  {
+    id: 2,
+    date: "Mar 15 · 9:00 AM",
+    sublabel: "Inauguration Ceremony",
+    label: "Their problems became my new targets.",
+    description: "The journey begins. Opening keynotes, rule briefings, and the official hackathon kickoff.",
+    size: "md",
+    image: "/hack36/hack36-mascot.png",
+  },
+  {
+    id: 3,
+    date: "Mar 15 · 11:00 AM",
+    sublabel: "Hacking Begins & Mentorship",
+    label: "Their thinking became my new standard.",
+    description: "48 hours of pure innovation. Industry mentors guide teams through roadblocks and sharpen ideas.",
+    size: "lg",
+    image: "/hack36/hack36-comp.png",
+  },
+  {
+    id: 4,
+    date: "Mar 17 · 10:00 AM",
+    sublabel: "Final Submissions",
+    label: "Final submissions & judging day.",
+    description: "Time's up. Submit your project and pitch your solution to a panel of top judges.",
+    size: "md",
+    image: "/hack36/hack36-dino.png",
+  },
+  {
+    id: 5,
+    date: "Mar 17 · 6:00 PM",
+    sublabel: "Results & Closing",
+    label: "Results announced. Champions crowned.",
+    description: "Winners revealed, prizes awarded, and an epic chapter comes to a close.",
+    size: "sm",
+    image: "/hack36/hack36-clock.png",
+  },
 ];
 
-const STEP_ICONS = [
-  <><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></>,
-  <><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><circle cx="12" cy="16" r=".6" fill="#1a1000" /></>,
-  <><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></>,
-  <><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" /></>,
-  <><rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" /></>,
-  <><path d="M6 9H2v2a4 4 0 004 4" /><path d="M18 9h4v2a4 4 0 01-4 4" /><path d="M8 21h8" /><path d="M12 17v4" /><path d="M6 3v6a6 6 0 0012 0V3" /></>,
-];
+const NODE_SIZES = { sm: 13, md: 20, lg: 30 };
+// SVG is centered in the layout. Cards go left or right of it.
+const SVG_W = 300;
+const SVG_CX = SVG_W / 2;
+const ROW_H = 320;
+const TOTAL = scheduleEvents.length;
+const SVG_H = 60 + (TOTAL - 1) * ROW_H + 60;
 
-// ─── SVG coordinate space ───────────────────────────────────────────────────
-// Wide canvas so the S-curves have room to breathe
-const VW = 1200;
-const VH = 1400;
-const ROAD_W = 80;   // asphalt band width
+// Curved path - nodes weave left and right alternatingly on desktop, straight on mobile
+function getNodeX(i, isMobile) {
+  if (isMobile) return 30; // Centered straight path inside the 60px viewBox
+  const amplitude = 140;
+  return i % 2 === 0 ? SVG_CX - amplitude : SVG_CX + amplitude;
+}
+function getNodeY(i) { return 60 + i * ROW_H; }
 
-// The six milestone nodes — far left & far right so the curve spans wide
-const NODE_R = 30;
-const RX = VW * 0.72;   // right column  (72% across)
-const LX = VW * 0.28;   // left  column  (28% across)
-const NODE_Y = [160, 370, 570, 770, 970, 1160];
-
-// ─── Road path: hand-crafted cubic beziers ──────────────────────────────────
-// Each segment is a C (cubic) command giving perfectly smooth wide turns.
-// Strategy: the road enters each node vertically, so control points are
-// directly above/below the nodes.  The horizontal travel happens in the
-// middle of each segment where the cp's fan out to the opposite side.
-const TENSION = 220; // vertical length of the tangent arms
-
-function buildRoadPath() {
-  const pts = NODE_Y.map((y, i) => ({ x: i % 2 === 0 ? RX : LX, y }));
-
-  // entry point: above first node, same X
-  let d = `M ${pts[0].x} ${NODE_Y[0] - 120}`;
-
-  for (let i = 0; i < pts.length - 1; i++) {
-    const p1 = pts[i];
-    const p2 = pts[i + 1];
-
-    // control points: pull straight down/up from each node
-    // then the horizontal leap is encoded in the bezier's middle
-    const cp1x = p1.x;
-    const cp1y = p1.y + TENSION;
-    const cp2x = p2.x;
-    const cp2y = p2.y - TENSION;
-
-    d += ` C ${cp1x} ${cp1y} ${cp2x} ${cp2y} ${p2.x} ${p2.y}`;
+function buildPath(isMobile) {
+  if (isMobile) {
+    return `M 30 60 L 30 ${60 + (TOTAL - 1) * ROW_H}`;
   }
-
-  // exit below last node
-  const last = pts[pts.length - 1];
-  d += ` C ${last.x} ${last.y + TENSION} ${last.x} ${last.y + 120} ${last.x} ${last.y + 120}`;
-
+  // Gentle S-curve along the vertical center
+  const pts = scheduleEvents.map((_, i) => ({ x: getNodeX(i, false), y: getNodeY(i) }));
+  let d = `M ${pts[0].x} ${pts[0].y}`;
+  for (let i = 1; i < pts.length; i++) {
+    const p = pts[i - 1], c = pts[i];
+    d += ` C ${p.x} ${p.y + ROW_H * 0.5}, ${c.x} ${c.y - ROW_H * 0.5}, ${c.x} ${c.y}`;
+  }
   return d;
 }
 
-const ROAD_PATH = buildRoadPath();
+const DOT_COLORS = ["#6c5ce7", "#7b6ef0", "#8b7cf8", "#9d8ef8", "#b0a4f8"];
 
-// ─── Component ──────────────────────────────────────────────────────────────
-export default function RoadTimeline() {
+function TimelineCard({ ev }) {
+  return (
+    <div className="tl-card-inner">
+      <span className="inline-block text-xs font-medium px-2 py-0.5 rounded-full mb-2" style={{ background: "rgba(139,124,248,0.12)", color: "#8b7cf8", fontFamily: "'DM Sans',sans-serif" }}>
+        {ev.date}
+      </span>
+      <p className="font-bold text-white leading-snug mb-1" style={{ fontFamily: "'Syne',sans-serif", fontSize: "clamp(0.88rem,1.5vw,1rem)", letterSpacing: "-0.01em" }}>
+        {ev.label}
+      </p>
+      <p className="text-xs font-medium mb-2" style={{ color: "#8b7cf8", fontFamily: "'DM Sans',sans-serif" }}>
+        {ev.sublabel}
+      </p>
+      <p className="text-xs leading-relaxed" style={{ color: "#5a5a7a", fontFamily: "'DM Sans',sans-serif", fontStyle: "italic", fontWeight: 300 }}>
+        {ev.description}
+      </p>
+      {ev.image && (
+        <div className="mt-4 -mx-5 -mb-[18px] overflow-hidden">
+          <img
+            src={ev.image}
+            alt={ev.sublabel}
+            className="w-full h-22 object-cover"
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function ScheduleSection() {
+  const pathRef = useRef(null);
+  const sectionRef = useRef(null);
+  const cardRefs = useRef([]);
+  const [visible, setVisible] = useState(new Set());
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    setIsMobile(media.matches);
+    const listener = (e) => setIsMobile(e.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, []);
+
+  useEffect(() => {
+    const p = pathRef.current;
+    if (!p) return;
+
+    const totalLength = p.getTotalLength();
+    p.style.strokeDasharray = totalLength;
+    p.style.strokeDashoffset = totalLength;
+
+    const onScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const scrollable = sectionRef.current.offsetHeight - window.innerHeight;
+      const scrolled = Math.max(0, -rect.top);
+      const progress = Math.min(scrolled / Math.max(scrollable, 1), 1);
+      p.style.strokeDashoffset = totalLength * (1 - progress);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isMobile]);
+
+  useEffect(() => {
+    const obs = cardRefs.current.map((el, i) => {
+      if (!el) return null;
+      const o = new IntersectionObserver(
+        ([e]) => { if (e.isIntersecting) setVisible(p => new Set([...p, i])); },
+        { threshold: 0.2 }
+      );
+      o.observe(el);
+      return o;
+    });
+    return () => obs.forEach(o => o && o.disconnect());
+  }, []);
+
   return (
     <section
-      id="schedule"
-      style={{
-        background: "#060606",
-        borderTop: "1px solid #131313",
-        padding: "80px 0 120px",
-        overflow: "hidden",
-      }}
+      ref={sectionRef}
+      className="relative bg-black overflow-hidden py-24"
+      style={{ fontFamily: "'Syne', sans-serif" }}
     >
-      {/* Header */}
-      <div className="px-20">
-        <p style={{ fontFamily: "'DM Mono',monospace", fontSize: 11, letterSpacing: ".18em", color: "#3a3a3a", marginBottom: 16 }}>
-          // 02 SCHEDULE
-        </p>
-        <h2 style={{ fontFamily: "'Anton',sans-serif", lineHeight: .92, color: "#fff", fontSize: "clamp(48px,6.5vw,110px)", margin: 0 }}>
-          HOW IT<br /><span style={{ color: "#facc15" }}>UNFOLDS.</span>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+        .tl-card {
+          opacity: 0;
+          transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1);
+        }
+        @media (max-width: 767px) {
+          .tl-card.from-left, .tl-card.from-right {
+            transform: translateY(20px);
+          }
+        }
+        @media (min-width: 768px) {
+          .tl-card.from-left  { transform: translateX(-36px); }
+          .tl-card.from-right { transform: translateX(36px); }
+        }
+        .tl-card.visible    { opacity: 1; transform: translateX(0) translateY(0); }
+
+        .tl-card-inner {
+          background: rgba(255,255,255,0.03);
+          border: 1px solid rgba(139,124,248,0.15);
+          border-radius: 16px;
+          padding: 18px 20px;
+          backdrop-filter: blur(8px);
+          transition: border-color 0.3s, background 0.3s;
+          overflow: hidden;
+        }
+        .tl-card-inner:hover {
+          background: rgba(139,124,248,0.07);
+          border-color: rgba(139,124,248,0.35);
+        }
+
+        .connector-line {
+          position: absolute;
+          top: 50%;
+          height: 1px;
+          background: linear-gradient(to right, transparent, rgba(139,124,248,0.3), transparent);
+          transform: translateY(-50%);
+          width: 100%;
+          pointer-events: none;
+        }
+      `}</style>
+
+      {/* Ambient glows */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute rounded-full" style={{ width: 500, height: 500, top: "-5%", left: "50%", transform: "translateX(-50%)", background: "radial-gradient(circle,rgba(108,92,231,0.09) 0%,transparent 65%)" }} />
+        <div className="absolute rounded-full" style={{ width: 400, height: 400, bottom: "5%", left: "50%", transform: "translateX(-50%)", background: "radial-gradient(circle,rgba(90,70,200,0.06) 0%,transparent 65%)" }} />
+      </div>
+
+      {/* Heading */}
+      <div className="relative z-10 text-center mb-16 px-4 max-w-3xl mx-auto">
+        <span className="block text-xs font-medium tracking-widest uppercase mb-4" style={{ color: "#8b7cf8", fontFamily: "'DM Sans',sans-serif" }}>
+          Set your calendars up for the ultimate
+        </span>
+        {/* <h2 className="font-extrabold text-white leading-tight" style={{ fontSize: "clamp(1.8rem,4vw,3rem)", letterSpacing: "-0.02em" }}>
+          When I joined my first mastermind<br />
+          with Designers <span style={{ color: "#8b7cf8" }}>10x my level</span>,<br />
+          everything changed.
+        </h2> */}
+        <h2 className="font-extrabold text-white leading-tight" style={{ fontSize: "clamp(1.8rem,4vw,3rem)", letterSpacing: "-0.02em" }}>
+          Hack30
+          <span style={{ color: "#8b7cf8" }}> Roadmap</span>,<br />
+
         </h2>
       </div>
 
-      {/* Road diagram */}
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 20px", position: "relative" }}>
-        <svg
-          viewBox={`0 0 ${VW} ${VH}`}
-          width="100%"
-          style={{ display: "block" }}
-          aria-hidden="true"
+      {/* Timeline */}
+      <div className="relative z-10 mx-auto" style={{ maxWidth: 1000, padding: "0 16px" }}>
+
+        {/* Absolute SVG Spine Container */}
+        <div
+          className="absolute top-0 bottom-0 left-0 md:left-1/2 md:-translate-x-1/2 flex-shrink-0 w-[60px] md:w-[300px]"
+          style={{ pointerEvents: "none" }}
         >
-          {/* ── Road layers ── */}
-          {/* kerb / outer glow */}
-          <path d={ROAD_PATH} fill="none" stroke="#252525" strokeWidth={ROAD_W + 14} strokeLinecap="round" strokeLinejoin="round" />
-          {/* asphalt */}
-          <path d={ROAD_PATH} fill="none" stroke="#181818" strokeWidth={ROAD_W} strokeLinecap="round" strokeLinejoin="round" />
-          {/* subtle inner sheen */}
-          <path d={ROAD_PATH} fill="none" stroke="#202020" strokeWidth={ROAD_W - 24} strokeLinecap="round" strokeLinejoin="round" />
-          {/* centre dashes */}
-          <path d={ROAD_PATH} fill="none" stroke="#facc15" strokeWidth={3} strokeLinecap="round" strokeDasharray="22 16" opacity={0.3} />
+          <svg
+            width="100%"
+            height={SVG_H}
+            viewBox={`0 0 ${isMobile ? 60 : 300} ${SVG_H}`}
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ overflow: "visible", display: "block" }}
+          >
+            <defs>
+              <linearGradient id="pg" x1="0" y1="0" x2="0" y2={SVG_H} gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
+                <stop offset="20%" stopColor="#a89cf8" stopOpacity="0.9" />
+                <stop offset="40%" stopColor="#ffffff" stopOpacity="0.9" />
+                <stop offset="60%" stopColor="#7b68ee" stopOpacity="0.9" />
+                <stop offset="80%" stopColor="#ffffff" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#5b4fd4" stopOpacity="0.9" />
+              </linearGradient>
+              <filter id="dg" x="-80%" y="-80%" width="260%" height="260%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b" />
+                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+            </defs>
 
-          {/* ── START label ── */}
-          <g transform={`translate(${RX - 14}, ${NODE_Y[0] - 148})`}>
-            {/* runner */}
-            <g fill="none" stroke="#aaa" strokeWidth={1.5} strokeLinecap="round">
-              <circle cx="10" cy="6" r="4" />
-              <path d="M7 13l-3 8h5l1 6 5-6h-4l2-8z" />
-            </g>
-            <text x="30" y="14" fill="#888" fontSize="15" fontFamily="Anton,sans-serif" letterSpacing="4">START</text>
-          </g>
+            {/* Dim rail */}
+            <path d={buildPath(isMobile)} stroke="#1e1e30" strokeWidth="2" fill="none" strokeLinecap="round" />
 
-          {/* ── GOAL label ── */}
-          <g transform={`translate(${LX - 70}, ${NODE_Y[5] + 96})`}>
-            <text x="0" y="0" fill="#888" fontSize="15" fontFamily="Anton,sans-serif" letterSpacing="4">GOAL</text>
-            <g fill="none" stroke="#facc15" strokeWidth={1.8} strokeLinecap="round" transform="translate(80,-14)">
-              <line x1="4" y1="0" x2="4" y2="34" />
-              <path d="M4 2 L24 10 L4 18z" fill="#facc1530" />
-            </g>
-          </g>
+            {/* Animated lit path */}
+            <path
+              ref={pathRef}
+              id="timeline-path"
+              d={buildPath(isMobile)}
+              stroke="url(#pg)"
+              strokeWidth="2"
+              fill="none"
+              strokeLinecap="round"
+              strokeDasharray="9999"
+              strokeDashoffset="9999"
+              style={{ transition: "stroke-dashoffset 0.1s ease-out" }}
+            />
 
-          {/* ── Connector ticks from node to card ── */}
-          {NODE_Y.map((y, i) => {
-            const isRight = i % 2 === 0;
-            const nx = isRight ? RX : LX;
-            const x1 = isRight ? nx + NODE_R + 4 : nx - NODE_R - 4;
-            const x2 = isRight ? nx + NODE_R + 80 : nx - NODE_R - 80;
-            return <line key={i} x1={x1} y1={y} x2={x2} y2={y} stroke="#282828" strokeWidth={1.5} />;
-          })}
-
-          {/* ── Milestone nodes ── */}
-          {NODE_Y.map((y, i) => {
-            const x = i % 2 === 0 ? RX : LX;
-            return (
-              <g key={i}>
-                <circle cx={x} cy={y} r={NODE_R + 10} fill="#facc1510" />
-                <circle cx={x} cy={y} r={NODE_R + 4} fill="none" stroke="#facc1530" strokeWidth={1.5} />
-                <circle cx={x} cy={y} r={NODE_R} fill="#facc15" />
-                <g transform={`translate(${x - 11},${y - 11})`} fill="none" stroke="#1a1000" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-                  <svg width="22" height="22" viewBox="0 0 24 24">{STEP_ICONS[i]}</svg>
+            {/* Dots */}
+            {scheduleEvents.map((ev, i) => {
+              const x = getNodeX(i, isMobile);
+              const y = getNodeY(i);
+              const r = NODE_SIZES[ev.size] / 2;
+              const fill = DOT_COLORS[i] || "#8b7cf8";
+              const isTop = i === 0;
+              return (
+                <g key={ev.id}>
+                  {isTop && <circle cx={x} cy={y} r={r + 9} fill="#6c5ce7" opacity="0.15" />}
+                  <circle cx={x} cy={y} r={r} fill={fill} filter={isTop ? "url(#dg)" : undefined} />
                 </g>
-              </g>
+              );
+            })}
+          </svg>
+        </div>
+
+        {/* Rows wrapper */}
+        <div className="flex flex-col gap-0 w-full relative">
+          {scheduleEvents.map((ev, i) => {
+            const isLeft = i % 2 === 0;
+            return (
+              <div
+                key={ev.id}
+                className="grid grid-cols-[60px_1fr] md:grid-cols-[1fr_300px_1fr] items-center w-full"
+                style={{ height: ROW_H }}
+              >
+                <div
+                  ref={el => { cardRefs.current[i] = el; }}
+                  className={`tl-card ${isLeft ? "from-left" : "from-right"}${visible.has(i) ? " visible" : ""} col-start-2 ${
+                    isLeft
+                      ? "md:col-start-1 md:justify-self-end md:pr-6"
+                      : "md:col-start-3 md:justify-self-start md:pl-6"
+                  } justify-self-start w-full pr-4 md:pr-0 max-w-[300px] md:max-w-[360px]`}
+                  style={{ transitionDelay: `${i * 80}ms` }}
+                >
+                  <TimelineCard ev={ev} />
+                </div>
+              </div>
             );
           })}
-        </svg>
+        </div>
 
-        {/* ── HTML cards overlaid ── */}
-        {SCHEDULE.map((item, i) => {
-          const isRight = i % 2 === 0;
-          const yPct = (NODE_Y[i] / VH) * 100;
-          const xFrac = (isRight ? RX : LX) / VW;
-
-          return (
-            <div
-              key={item.n}
-              style={{
-                position: "absolute",
-                top: `${yPct}%`,
-                transform: "translateY(-50%)",
-                ...(isRight
-                  ? { left: `calc(${xFrac * 100}% + ${NODE_R + 26}px)` }
-                  : { right: `calc(${(1 - xFrac) * 100}% + ${NODE_R + 26}px)` }
-                ),
-                width: "clamp(200px, 22%, 280px)",
-                zIndex: 2,
-              }}
-            >
-              <div
-                style={{ background: "#0a0a0a", border: "1px solid #1e1e1e", borderRadius: 12, padding: "16px 20px", transition: "border-color .2s,background .2s", cursor: "default" }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = "#333"; e.currentTarget.style.background = "#0d0d0d"; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = "#1e1e1e"; e.currentTarget.style.background = "#0a0a0a"; }}
-              >
-                <p style={{ fontFamily: "'DM Mono',monospace", fontSize: 10, letterSpacing: ".14em", color: "#facc15", opacity: .7, margin: "0 0 5px" }}>{item.time}</p>
-                <p style={{ fontFamily: "'Anton',sans-serif", fontSize: "clamp(15px,1.6vw,21px)", color: "#fff", letterSpacing: ".04em", lineHeight: 1.1, margin: "0 0 8px" }}>{item.label}</p>
-                <p style={{ fontFamily: "'Barlow',sans-serif", fontSize: 12, color: "#4a4a4a", lineHeight: 1.55, margin: 0 }}>{item.sub}</p>
-              </div>
-            </div>
-          );
-        })}
       </div>
     </section>
   );
