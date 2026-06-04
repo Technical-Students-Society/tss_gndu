@@ -1,5 +1,5 @@
 export default function Ticker() {
-  const txt = "HACK30 · GNDU AMRITSAR · 30 TEAMS · 30 HOURS · ₹50,000 IN PRIZES · REGISTRATIONS OPEN · FOOD PROVIDED · ";
+  const txt = "HACK30 · GNDU AMRITSAR · 30 TEAMS · 30 HOURS · ₹50,000 IN PRIZES · 19-20th JUNE · FOOD PROVIDED ";
   return (
     <div className="overflow-hidden bg-purple-600 border-t-2 border-b-2 border-black py-2.5">
       <div className="flex whitespace-nowrap animate-ticker">

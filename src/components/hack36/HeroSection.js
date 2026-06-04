@@ -12,7 +12,7 @@ if (typeof window !== "undefined") {
 
 export default function HeroSection() {
   const containerRef = useRef(null);
-  const target = new Date("2026-06-12T09:00:00");
+  const target = new Date("2026-06-19T10:00:00");
   const [time, setTime] = useState({ d: 0, h: 0, m: 0, s: 0 });
 
   useEffect(() => {
