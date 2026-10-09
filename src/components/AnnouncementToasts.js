@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Megaphone, X, ExternalLink, Bell, AlertTriangle, Info } from "lucide-react";
 
 export default function AnnouncementToasts({ isReady }) {

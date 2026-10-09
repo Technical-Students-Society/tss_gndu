@@ -1,92 +1,64 @@
 import EventsClient from "./EventsClient";
-import ShinyText from "../Animations/ShinyText";
-import { ArrowRight, ArrowUpRight, Calendar } from 'lucide-react';
-import SplitText from "../Animations/SplitText";
+import { Calendar, ArrowUpRight, Rocket } from "lucide-react";
 
 export const metadata = {
-  title: "Events | Workshops, Hackathons & Competitions",
-  description: "Stay updated with TSS GNDU events including workshops, hackathons, coding competitions, and tech fests at Guru Nanak Dev University."
-}
+  title: "Events | TSS GNDU",
+  description: "Workshops, hackathons, and competitions at Guru Nanak Dev University — stay updated with TSS GNDU events.",
+};
 
 export const revalidate = 0;
 
 export default function EventsPage() {
   return (
-    <div className="dark:bg-siteblack py-20 font-openai mx-auto px-4 md:px-12 lg:px-18 xl:px-30 max-sm:pb-3">
-      {/* ── Page Header (Static Shell) ── */}
-      <div className="relative border-b border-neutral-200 dark:border-neutral-800 pb-12 mb-14">
+    <div className="dark:bg-siteblack min-h-screen font-openai px-4 sm:px-8 md:px-12 lg:px-20">
+      {/* Header */}
+      <div className="pt-16 md:pt-24 pb-4  border-neutral-200/80 dark:border-neutral-800/80">
 
-        {/* Top Tag */}
-        <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-6">
-          <Calendar />
-          <ShinyText
-            text="Events"
-            speed={2.8}
-            color="#b5b5b5"
-            shineColor="#ffffff"
-          />
-        </p>
+        {/* Pill tag */}
+        <div className="flex items-center gap-2 mb-8">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-medium uppercase tracking-widest bg-neutral-100 dark:bg-neutral-800/90 text-neutral-600 dark:text-neutral-400 border border-neutral-200/60 dark:border-neutral-700/60">
+            <Calendar className="w-3.5 h-3.5" />
+            Events Schedule
+          </span>
+        </div>
 
-        {/* Main Content */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-
-          {/* Left */}
-          <div className="space-y-5 max-w-xl">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-neutral-900 dark:text-neutral-50 leading-[1.1]">
-              <SplitText
-                text={<>
-                  What's happening at the{" "}
-                  <span className="text-neutral-400">frontier</span>
-                </>}
-                delay={25}
-                duration={1.25}
-                ease="power3.out"
-                splitType="chars"
-                from={{ opacity: 0, y: 40 }}
-                to={{ opacity: 1, y: 0 }}
-                threshold={0.1}
-                rootMargin="-100px"
-                textAlign="start"
-                showCallback={false}
-              />
+        {/* Heading + right col */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end">
+          <div className="lg:col-span-7">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 leading-[1.08]">
+              <span className="inline-flex items-center gap-2.5 sm:gap-3 flex-wrap">
+                <span>Building,</span>
+                <span>learning </span>
+                <span className="inline-flex items-center justify-center w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 text-white shadow-md shadow-cyan-500/20">
+                  <Rocket className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
+                </span>
+              </span>
+              <br />
+              <span className="text-neutral-400 dark:text-neutral-500">competing.</span>
             </h1>
-
-            <p className="text-sm sm:text-base text-neutral-500 dark:text-neutral-400 leading-relaxed">
-              Workshops, hackathons, and competitions — stay updated with our
-              latest technical events and community gatherings.
-            </p>
           </div>
 
-          {/* Right CTA */}
-          <div className="flex flex-col items-start lg:items-end gap-4">
-
+          <div className="lg:col-span-5 flex flex-col items-start lg:items-end gap-5">
+            <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed lg:text-right max-w-xs">
+              Hackathons, workshops, and tech events - all in one place for our students.
+            </p>
             <a
               href="https://forms.gle/YJGASGBnU6J2UZ1Z9"
               target="_blank"
-              className="group inline-flex items-center gap-2 text-sm font-semibold text-neutral-900 dark:text-neutral-50 border border-neutral-300 dark:border-neutral-700 rounded-full px-5 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 text-xs font-semibold text-neutral-900 dark:text-neutral-100 border border-neutral-300 dark:border-neutral-700 rounded-full px-5 py-2.5 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-200"
             >
-              Suggest Event
-              <span className="transform transition duration-300 group-hover:translate-x-0.5">
-                <ArrowRight className="h-4 w-4" />
-              </span>
+              Suggest an event
+              <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
-
-            {/* Optional small info */}
-            <p className="text-xs text-neutral-400">
-              Updated regularly • Don’t miss out
-            </p>
-
           </div>
         </div>
-
-        {/* Subtle Glow (premium touch) */}
-        <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[300px] h-[150px] bg-neutral-300/20 dark:bg-neutral-700/20 blur-3xl pointer-events-none" />
-
       </div>
 
-      {/* ── Dynamic Content ── */}
-      <EventsClient />
+      {/* Events grid */}
+      <div className="py-14 md:py-20">
+        <EventsClient />
+      </div>
     </div>
   );
 }
-

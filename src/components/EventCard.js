@@ -1,110 +1,109 @@
 "use client";
 
-import React from 'react';
-import { ArrowUpRight, ArrowRight } from 'lucide-react';
+import React from "react";
+import { ArrowUpRight } from "lucide-react";
 
-export default function EventCard({ event, onSelect }) {
+const formatDate = (dateStr) =>
+  dateStr
+    ? new Date(dateStr).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    })
+    : null;
+
+export default function EventCard({ event, onSelect, thumbnailHeight = "h-66" }) {
   const now = new Date();
-  const isPast = !event.is_coming_soon && event.start_at && new Date(event.start_at) < now;
-  const category = isPast ? "Past Event" : "New";
+  const isPast =
+    !event.is_coming_soon && event.start_at && new Date(event.start_at) < now;
+  const isUpcoming = !isPast && !event.is_coming_soon;
 
-  const formatDate = (dateStr) =>
-    dateStr
-      ? new Date(dateStr).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      })
-      : "Dates will be announced soon";
-
-  const handleInteraction = () => {
+  const handleCardClick = () => {
     if (isPast || event.is_coming_soon) {
       onSelect(event);
-    } else if (event.reg_link) {
-      window.open(event.reg_link, "_blank", "noopener,noreferrer");
+    } else {
+      onSelect(event);
     }
   };
 
   return (
-    <div className="group flex flex-col h-full">
-      <div
-        className={`relative w-full aspect-video mb-3 cursor-pointer ${(isPast || event.is_coming_soon) ? 'event-target-2' : 'event-target-1'}`}
-        onClick={handleInteraction}
-      >
-        <div className="absolute inset-0 overflow-hidden rounded-lg bg-neutral-100 dark:bg-neutral-900 shadow-lg">
-          {event.thumbnail ? (
-            <img
-              src={event.thumbnail}
-              alt={event.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              loading="lazy"
-              decoding="async"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-neutral-400 text-xs font-semibold uppercase tracking-widest group-hover:scale-105 transition-transform duration-500">
-              No Preview
-            </div>
-          )}
-        </div>
-
-        {!isPast && (
-          <div className="absolute top-0 left-0 z-20 -translate-x-2 -translate-y-1/2">
-            <span className="px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.15em] backdrop-blur-xl rounded-xl border bg-purple-600 text-white border-purple-700 shadow-xl">
-              {category}
+    <article className="group cursor-pointer" onClick={handleCardClick}>
+      {/* Thumbnail */}
+      <div className={`relative w-full ${thumbnailHeight} overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-900 mb-5`}>
+        {event.thumbnail ? (
+          <img
+            src={event.thumbnail}
+            alt={event.title}
+            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-300 dark:text-neutral-700">
+              No preview
             </span>
           </div>
         )}
+
+        {/* "New" label for upcoming events */}
+        {isUpcoming && (
+          <div className="absolute top-3 left-3">
+            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-mono font-semibold uppercase tracking-wider bg-neutral-950/80 text-white backdrop-blur-sm border border-white/10">
+              New
+            </span>
+          </div>
+        )}
+
+        {/* Subtle dark overlay on hover */}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 rounded-xl" />
       </div>
 
-      {/* Content */}
-      <div className="flex flex-col grow">
-        <h3
-          className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 leading-snug mb-1 line-clamp-2 cursor-pointer "
-          onClick={handleInteraction}
+      {/* Title */}
+      <h3 className="text-base sm:text-lg font-semibold text-neutral-900 dark:text-neutral-50 leading-snug mb-1.5 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors">
+        {event.title}
+      </h3>
+
+      {/* Caption */}
+      {event.caption && (
+        <p className="text-[15px] font-semibold text-neutral-500 dark:text-neutral-400 mb-2 leading-snug truncate">
+          {event.caption}
+        </p>
+      )}
+
+      {/* Date */}
+      <p className="text-[12px] font-semibold text-neutral-400 dark:text-neutral-600 tracking-wide mb-4">
+        {event.is_coming_soon
+          ? "Coming Soon"
+          : event.start_at
+            ? formatDate(event.start_at)
+            : "Date TBA"}
+      </p>
+
+      {/* Action buttons */}
+      <div className="flex items-center gap-2 flex-wrap">
+        {/* Register — upcoming with reg_link */}
+        {isUpcoming && event.reg_link && (
+          <a
+            href={event.reg_link}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-neutral-900 dark:bg-neutral-50 text-white dark:text-neutral-900 hover:bg-neutral-700 dark:hover:bg-neutral-200 transition-colors duration-200"
+          >
+            Register Now
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </a>
+        )}
+
+        {/* View Details — always */}
+        <button
+          onClick={(e) => { e.stopPropagation(); onSelect(event); }}
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200"
         >
-          {event.title}
-        </h3>
-        <p className="text-sm gap-1 flex text-neutral-500 dark:text-neutral-600 mb-1">
-          {event.location || "Location TBA"}  
-          {
-            event.is_coming_soon ? (<span className='text-neutral-500'>
-              (Coming Soon)
-            </span>) : (<span className='text-neutral-500'>(
-              {formatDate(event.start_at, event.end_at)})
-            </span>)
-          }
-        </p>
-
-
-
-        <p className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2 mb-4">
-          {event.description}
-        </p>
-
-        <div className="mt-auto">
-          {!isPast ? (
-            (event.reg_link || event.is_coming_soon) ? (
-              <button
-                onClick={() => onSelect(event)}
-                className="inline-flex items-center self-start gap-1 text-sm font-semibold text-neutral-900 dark:text-neutral-50 hover:opacity-60 transition-opacity cursor-pointer"
-              >
-                View More <ArrowUpRight className="h-4 w-4" />
-              </button>
-            ) : (
-              <span className="inline-flex items-center gap-1 text-sm font-semibold text-neutral-400 cursor-not-allowed">
-                Registration Closed
-              </span>
-            )
-          ) : (
-            <button
-              onClick={() => onSelect(event)}
-              className="inline-flex items-center self-start gap-1 text-sm font-semibold text-neutral-900 dark:text-neutral-50 hover:opacity-60 transition-opacity cursor-pointer"
-            >
-              View More <ArrowUpRight className="h-4 w-4" />
-            </button>
-          )}
-        </div>
+          View Details
+        </button>
       </div>
-    </div>
+    </article>
   );
 }

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder-supabase.co";
+const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder-anon-key";
 
 // Create an Axios instance with pre-configured headers for Supabase access
 const api = axios.create({
@@ -14,3 +14,4 @@ const api = axios.create({
 });
 
 export default api;
+

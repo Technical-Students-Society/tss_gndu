@@ -235,8 +235,8 @@
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans, "OpenAISans", "Satoshi", system-ui, sans-serif);
+  --font-mono: var(--font-geist-mono, "Plex", monospace);
 
   /* Custom Colors */
   --color-siteblack: #050505;

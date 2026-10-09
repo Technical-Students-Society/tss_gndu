@@ -2,7 +2,7 @@
 
 import { useState, useEffect, Suspense, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { ShieldCheck, Download, CircleCheck, Loader2 } from "lucide-react";
 import Link from "next/link";
 import toast, { Toaster } from 'react-hot-toast';
