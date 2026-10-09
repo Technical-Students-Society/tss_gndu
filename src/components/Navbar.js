@@ -41,21 +41,22 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-gray-400 bg-zinc-50 dark:bg-siteblack dark:border-neutral-800">
-      <div className="mx-auto px-1 md:px-12 lg:px-16 xl:px-30 border-b border-gray-400 dark:border-neutral-800">
+      <div className="mx-auto px-1 md:px-12 lg:px-16 xl:px-20  border-gray-400 dark:border-neutral-800">
         <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center">
+          {/* logo */}
+          <div className="flex items-center -mb-1.5 ">
             <Link href="/" className="flex items-center gap-2">
 
               {/* Logo */}
               <img
                 src="/images/logos/tss-logo.png"
                 alt="Logo"
-                className="h-12 invert dark:invert-0 lg:h-16 w-auto object-contain"
+                className="h-12 invert dark:invert-0 lg:h-14 w-auto object-contain"
               />
 
               {/* Text Content */}
               <div className="flex flex-col leading-tight ">
-                <span className="text-sm sm:text-lg lg:text-lg font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
+                <span className="text-sm sm:text-base font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
                   Technical Students' Society
                 </span>
 
@@ -86,7 +87,7 @@ export default function Navbar() {
 
             <button
               onClick={toggleTheme}
-              className="group p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-all duration-300 transform active:scale-95 cursor-pointer"
+              className="group p-2 rounded-full border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-all duration-300 transform active:scale-95 cursor-pointer"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? (
@@ -121,7 +122,7 @@ export default function Navbar() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               ) : (
-               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
               )}
             </button>
           </div>

@@ -72,8 +72,8 @@ export default async function TeamPage({ searchParams }) {
 
             <div className="lg:col-span-5 flex flex-col items-start lg:items-end justify-between gap-6">
               <p className="text-sm md:text-base text-neutral-500 dark:text-neutral-400 leading-relaxed lg:text-right max-w-sm">
-                The specialized minds and leaders shaping the technical ecosystem, hackathons, and
-                creative community at Guru Nanak Dev University.
+                The curious minds shaping the student activities ecosystem and
+                creative community at campus.
               </p>
 
               <div>
