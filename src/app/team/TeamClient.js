@@ -171,13 +171,12 @@ function MemberAvatar({ member, isDarkCard }) {
       {/* Avatar Circle */}
 
       <div
-        className={`relative w-12 h-12 sm:w-14 sm:h-14 lg:h-20 lg:w-20 rounded-full cursor-pointer transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 shadow-sm ${
-          isLead
-            ? "ring-2 ring-blue-500 p-1 shadow-md"
-            : isDarkCard
-              ? "border-2 border-neutral-800 bg-neutral-900"
-              : "border-2 border-white dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-800"
-        }`}
+        className={`relative w-12 h-12 sm:w-14 sm:h-14 lg:h-20 lg:w-20 rounded-full cursor-pointer transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 shadow-sm ${isLead
+          ? "ring-2 ring-blue-500 p-1 shadow-md"
+          : isDarkCard
+            ? "border-2 border-neutral-800 bg-neutral-900"
+            : "border-2 border-white dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-800"
+          }`}
       >
         <div className="w-full h-full rounded-full overflow-hidden">
           {member.avatar_url ? (
@@ -202,7 +201,7 @@ function MemberAvatar({ member, isDarkCard }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.95 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 z-50 w-64 sm:w-72 overflow-hidden rounded-[24px] bg-neutral-950/95 dark:bg-neutral-900/95 text-white backdrop-blur-xl border border-white/15 shadow-2xl shadow-black/60 pointer-events-auto"
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 z-50 w-64 sm:w-72 overflow-hidden rounded-[20px] bg-neutral-950/95 dark:bg-neutral-900/95 text-white backdrop-blur-xl border border-neutral-200 dark:border-neutral-700 shadow-2xl shadow-black/60 pointer-events-auto"
           >
             {/* Full-width Image Area (Larger & Taller) */}
             <div className="relative w-full h-52 sm:h-56 overflow-hidden bg-neutral-900">
@@ -219,7 +218,7 @@ function MemberAvatar({ member, isDarkCard }) {
               )}
 
               {/* Subtle gradient shadow overlay at bottom of photo */}
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent" />
+              <div className="absolute inset-0" />
 
               {/* Lead badge on image */}
               {isLead && (
@@ -232,13 +231,13 @@ function MemberAvatar({ member, isDarkCard }) {
             </div>
 
             {/* Single Compact Bottom Row: Details on Left, Socials on Right */}
-            <div className="p-3.5 px-4 flex items-center justify-between gap-3 relative z-10 bg-neutral-950/95 dark:bg-neutral-900/95 border-t border-white/10">
+            <div className="p-3.5 px-4 flex items-center justify-between gap-3 relative z-10 bg-white dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800">
               {/* Left: Name & Role */}
               <div className="min-w-0 flex-1">
-                <h4 className="text-xs sm:text-sm font-bold text-white tracking-tight truncate leading-tight">
+                <h4 className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-white tracking-tight truncate capitalize leading-tight">
                   {member.name}
                 </h4>
-                <p className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-neutral-400 truncate mt-0.5">
+                <p className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 truncate mt-0.5">
                   {member.role}
                 </p>
               </div>
@@ -251,7 +250,7 @@ function MemberAvatar({ member, isDarkCard }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${member.name}'s LinkedIn`}
-                    className="w-6 h-6 rounded-md flex items-center justify-center text-neutral-300 hover:text-white hover:bg-white/15 transition-colors"
+                    className="w-6 h-6 rounded-md flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                   >
                     <LinkedinIcon size={12} />
                   </a>
@@ -262,7 +261,7 @@ function MemberAvatar({ member, isDarkCard }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${member.name}'s GitHub`}
-                    className="w-6 h-6 rounded-md flex items-center justify-center text-neutral-300 hover:text-white hover:bg-white/15 transition-colors"
+                    className="w-6 h-6 rounded-md flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                   >
                     <GithubIcon size={12} />
                   </a>
@@ -273,13 +272,13 @@ function MemberAvatar({ member, isDarkCard }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${member.name}'s Instagram`}
-                    className="w-6 h-6 rounded-md flex items-center justify-center text-neutral-300 hover:text-white hover:bg-white/15 transition-colors"
+                    className="w-6 h-6 rounded-md flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                   >
                     <InstagramIcon size={12} />
                   </a>
                 )}
                 {!member.linkedin_url && !member.github_url && !member.instagram_url && (
-                  <span className="text-[9px] font-mono text-neutral-500">TSS</span>
+                  <span className="text-[9px] font-mono text-neutral-400 dark:text-neutral-500">TSS</span>
                 )}
               </div>
             </div>
@@ -407,50 +406,54 @@ export default function TeamClient({ batch }) {
           return (
             <div
               key={groupKey}
-              className={`rounded-[32px] border transition-all duration-300 p-8 sm:p-10 flex flex-col justify-between min-h-[380px] md:min-h-[420px] ${isDarkCard
-                ? "bg-neutral-950 text-white border-neutral-800 shadow-xl shadow-black/10 dark:bg-neutral-900/90 dark:border-neutral-800"
-                : "bg-white/80 dark:bg-neutral-900/50 backdrop-blur-sm text-neutral-900 dark:text-neutral-100 border-neutral-200/80 dark:border-neutral-800/80 shadow-sm hover:shadow-md"
+              className={`rounded-[28px] border transition-all duration-300 p-8 sm:p-10 flex flex-col justify-between min-h-[380px] md:min-h-[450px] ${isDarkCard
+                ? "bg-neutral-900 text-white border-neutral-800 shadow-xl shadow-black/10 dark:bg-neutral-900/90 dark:border-neutral-800"
+                : "bg-neutral-200/60 dark:bg-neutral-900/50 backdrop-blur-sm text-neutral-900 dark:text-neutral-100 border-neutral-200/80 dark:border-neutral-800/80 shadow-sm hover:shadow-md"
                 }`}
             >
               {/* Top Row: Icon Badge & Member Count Pill */}
-              <div className="flex items-center justify-between">
-                <div
-                  className={`w-13 h-13 rounded-2xl flex items-center justify-center transition-transform duration-300 hover:scale-105 ${isDarkCard
-                    ? "bg-neutral-900 text-white border border-neutral-800"
-                    : "bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 border border-neutral-200/60 dark:border-neutral-700/60"
-                    }`}
-                >
-                  <Icon className="w-6 h-6" />
+              <div className="flex flex-col ">
+
+
+                <div className="flex items-center justify-between">
+                  <div
+                    className={`w-13 h-13 rounded-2xl flex items-center justify-center transition-transform duration-300 hover:scale-105 ${isDarkCard
+                      ? "bg-neutral-100 text-black border border-neutral-800"
+                      : "bg-neutral-300 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 border border-neutral-200/60 dark:border-neutral-700/60"
+                      }`}
+                  >
+                    <Icon className="w-6 h-6" />
+                  </div>
+
+                  <span
+                    className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs    font-medium tracking-wide ${isDarkCard
+                      ? "bg-neutral-900 text-neutral-300 border border-neutral-800"
+                      : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200/60 dark:border-neutral-700/60"
+                      }`}
+                  >
+                    {groupMembers.length} {groupMembers.length === 1 ? "Member" : "Members"}
+                  </span>
                 </div>
 
-                <span
-                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium tracking-wide ${isDarkCard
-                    ? "bg-neutral-900 text-neutral-300 border border-neutral-800"
-                    : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200/60 dark:border-neutral-700/60"
-                    }`}
-                >
-                  {groupMembers.length} {groupMembers.length === 1 ? "Member" : "Members"}
-                </span>
-              </div>
-
-              {/* Middle Row: Title & Subtitle */}
-              <div className="my-6 space-y-2.5">
-                <h3
-                  className={`text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight ${isDarkCard ? "text-white" : "text-neutral-900 dark:text-neutral-50"
-                    }`}
-                >
-                  {meta.title}
-                </h3>
-                <p
-                  className={`text-xs sm:text-sm leading-relaxed max-w-md font-normal ${isDarkCard ? "text-neutral-400" : "text-neutral-500 dark:text-neutral-400"
-                    }`}
-                >
-                  {meta.description}
-                </p>
+                {/* Middle Row: Title & Subtitle */}
+                <div className="my-6 space-y-2.5">
+                  <h3
+                    className={`text-2xl  sm:text-3xl lg:text-4xl font-semibold tracking-tight ${isDarkCard ? "text-white" : "text-neutral-900 dark:text-neutral-50"
+                      }`}
+                  >
+                    {meta.title}
+                  </h3>
+                  <p
+                    className={`text-xs sm:text-sm leading-relaxed max-w-md font-normal ${isDarkCard ? "text-neutral-400" : "text-neutral-500 dark:text-neutral-400"
+                      }`}
+                  >
+                    {meta.description}
+                  </p>
+                </div>
               </div>
 
               {/* Bottom Row: All Members Interactive Avatars with Hover Details */}
-              <div className="pt-6 border-t border-dashed border-neutral-200/50 dark:border-neutral-800/70 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div className="pt-6  border-dashed border-neutral-400 dark:border-neutral-800/70 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 {/* Member Avatars Row */}
                 <div className="flex items-center flex-wrap gap-2.5">
                   {groupMembers.map((member) => (
@@ -462,13 +465,7 @@ export default function TeamClient({ batch }) {
                   ))}
                 </div>
 
-                {/* Micro Hint */}
-                {/* <span
-                  className={`text-[10px] font-mono uppercase tracking-widest hidden sm:inline-block shrink-0 ${isDarkCard ? "text-neutral-500" : "text-neutral-400"
-                    }`}
-                >
-                  Hover for details
-                </span> */}
+
               </div>
             </div>
           );

@@ -40,8 +40,8 @@ export default async function TeamPage({ searchParams }) {
     params.batch || (availableBatches.length > 0 ? availableBatches[0] : "2025-2026");
 
   return (
-    <div className="py-16 md:py-24 font-openai px-4 sm:px-8 md:px-12 lg:px-20 dark:bg-siteblack min-h-screen">
-      <div className="mx-auto space-y-16 md:space-y-24">
+    <div className="py-16 md:py-24 font-openai  px-4 sm:px-8 md:px-12 lg:px-20 dark:bg-siteblack min-h-screen">
+      <div className="mx-auto space-y-16 md:space-y-10">
         {/* Page Header (OpenAI Minimalist & Reference-Inspired) */}
         <div className="relative  border-neutral-200/80 dark:border-neutral-800/80 pb-5">
           {/* Subtle Glow */}
@@ -49,7 +49,7 @@ export default async function TeamPage({ searchParams }) {
 
           {/* Top Pill */}
           <div className="flex items-center gap-2 mb-8">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-medium uppercase tracking-widest bg-neutral-100 dark:bg-neutral-800/90 text-neutral-600 dark:text-neutral-400 border border-neutral-200/60 dark:border-neutral-700/60">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium uppercase  bg-neutral-100 dark:bg-neutral-800/90 text-neutral-600 dark:text-neutral-400 border border-neutral-200/60 dark:border-neutral-700/60">
               <Users className="w-3.5 h-3.5" />
               Community Groups
             </span>
