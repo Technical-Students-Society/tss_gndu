@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import React, { useState, useEffect, useCallback } from "react";
-import { ArrowUpRight, Users, Sparkles, CirclePile } from "lucide-react";
-import ShinyText from "@/app/Animations/ShinyText";
+import { ArrowUpRight, Users, CirclePile } from "lucide-react";
 import SplitText from "@/app/Animations/SplitText";
 
 const SLIDES = [
@@ -28,34 +27,37 @@ export default function HomeAboutSection() {
   }, [next, isHovered]);
 
   return (
-    <section className="w-full py-24 dark:bg-siteblack">
-      <div className="container mx-auto px-4 lg:px-28 xl:px-32">
+    <section className="relative w-full py-24 bg-blue-100 dark:bg-siteblack overflow-hidden">
+      {/* Background snake pattern overlay */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0 flex items-center justify-center"
+      >
+
+      </div>
+
+      <div className="container relative z-10 mx-auto px-4 lg:px-20">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* Left — text */}
           <div>
 
             {/* Tag */}
-            <p className="flex items-center gap-2 text-[12px] font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-6">
-              <CirclePile />
-              <ShinyText
-                text="About TSS"
-                speed={2.8}
-                color="#b5b5b5"
-                shineColor="#ffffff"
-              />
+            <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-neutral-700 dark:text-neutral-400 mb-6">
+              <CirclePile className="h-4 w-4 text-neutral-600 dark:text-neutral-400" />
+              About TSS
             </p>
 
             {/* Heading */}
-            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.1] text-neutral-900 dark:text-neutral-50 mb-8 font-openai">
+            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.1] text-neutral-900 dark:text-neutral-50 mb-6 font-openai">
               <SplitText
                 text={<>
                   Where curiosity<br />meets{" "}
                   <span className="inline-flex items-center gap-2">
-                    <em className="not-italic text-neutral-400 dark:text-neutral-500">
+                    <em className="not-italic text-blue-600 dark:text-neutral-400">
                       community
                     </em>
-                    <Users className="h-5 w-5 text-neutral-400" />
+                    {/* <Users className="h-5 w-5 text-neutral-600 dark:text-neutral-400" /> */}
                   </span>
                 </>}
                 delay={25}
@@ -66,36 +68,25 @@ export default function HomeAboutSection() {
             </h2>
 
             {/* Description */}
-            <div className="space-y-5 text-[15px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
-
-              <p className="flex items-start gap-3">
-                <Sparkles className="h-4 w-4 mt-1 text-neutral-400 shrink-0" />
-                Rooted in the MCA Department of Computer Science at Guru Nanak Dev University, TSS is the official student body dedicated to bridging academic curiosities with industry-leading innovation.
+            <div className="space-y-3.5 text-[15px] sm:text-base text-neutral-800 dark:text-neutral-300 leading-relaxed max-w-lg">
+              <p>
+                The official student body of Computer Science at GNDU, bridging academic knowledge with industry-level innovation.
               </p>
-
-              <p className="flex items-start gap-3">
-                <Sparkles className="h-4 w-4 mt-1 text-neutral-400 shrink-0" />
-                As primary organizers of our extra-curricular landscape, we lead hackathons, workshops, and technical fests, ensuring our teams contribute specialized expertise to every major event in the department.
-              </p>
-
-              <p className="flex items-start gap-3">
-                <Sparkles className="h-4 w-4 mt-1 text-neutral-400 shrink-0" />
-                Though our legacy spans decades, our registration in 2026 marked a new era of official recognition and scaled impact across the university.
-              </p>
-
-              <p className="font-medium text-neutral-700 dark:text-neutral-300">
-                Diverse teams, one shared horizon — exploring the frontiers of what's possible.
+              <p className="text-neutral-600 dark:text-neutral-400">
+                We empower students through flagship hackathons, technical workshops, and real-world collaborative building.
               </p>
             </div>
 
             {/* CTA */}
-            <Link
-              href="/about"
-              className="group inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-neutral-900 dark:text-neutral-50 border-b border-neutral-300 dark:border-neutral-700 pb-1 mt-8 hover:border-neutral-900 dark:hover:border-neutral-50 transition"
-            >
-              Full story
-              <ArrowUpRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
-            </Link>
+            <div className="mt-8">
+              <Link
+                href="/about"
+                className="group inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-white bg-blue-700 hover:bg-blue-700 active:bg-blue-800 rounded-full px-5 py-2.5 transition-all duration-200 shadow-sm hover:shadow-md"
+              >
+                <span>Read More</span>
+                <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </div>
           </div>
 
           {/* Right — visual */}
@@ -103,7 +94,7 @@ export default function HomeAboutSection() {
 
             {/* Image Card */}
             <div
-              className="group aspect-4/3 rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800 relative"
+              className="group aspect-4/3 m-6 rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800 relative"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >

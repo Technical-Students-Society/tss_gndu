@@ -28,12 +28,12 @@ export default function Home() {
         <HeroSection />
 
         {/* Stats Section */}
-        <div className="w-full py-26 dark:bg-siteblack dark:from-siteblack dark:to-siteblack ">
-          <div className=" mx-auto lg:mx-28 px-6 max-sm:px-3">
+        <div className="w-full py-26 bg-white dark:bg-siteblack dark:from-siteblack dark:to-siteblack ">
+          <div className=" mx-auto lg:px-20 px-6 max-sm:px-3">
             <div className="grid grid-cols-2 lg:grid-cols-5 gap-5">
 
               {/* Hero card */}
-              <div className="col-span-2 sm:col-span-1 bg-neutral-900 dark:bg-neutral-50 rounded-2xl p-7 flex items-end min-h-40">
+              <div className="col-span-2 sm:col-span-1 bg-neutral-900 dark:bg-neutral-50 rounded-2xl p-7 flex items-end min-h-32">
                 <p className="text-[20px] font-semibold text-white dark:text-neutral-900 leading-snug">
                   Shaping student life at GNDU since day one
                 </p>
@@ -41,16 +41,16 @@ export default function Home() {
 
               {/* Stat cards */}
               {[
-                { value: "50+", label: "Student members including alumni" },
-                { value: "20+", label: "Events hosted every year" },
-                { value: "175+", label: "Placements facilitated" },
-                { value: "12", label: "Team divisions" },
+                { value: "30+", label: "Student members selected every year" },
+                { value: "25+", label: "Events hosted every year" },
+                { value: "150+", label: "Placements facilitated" },
+                { value: "10+", label: "Team divisions" },
               ].map(({ value, label }) => (
                 <div
                   key={label}
-                  className="dark:bg-neutral-900 dark:border-none border border-gray-400 shadow-sm rounded-2xl p-6 max-sm:p-3 flex flex-col justify-between min-h-40"
+                  className="dark:bg-neutral-900 dark:border-none border border-gray-400  rounded-2xl p-6 max-sm:p-3 flex flex-col justify-between min-h-32"
                 >
-                  <span className="text-sm text-neutral-400">{label}</span>
+                  <span className="text-sm text-neutral-700 dark:text-neutral-300">{label}</span>
                   <span className="text-4xl max-sm:text-3xl font-semibold text-neutral-900 dark:text-neutral-50 tracking-tight leading-none">
                     <CountUp card background
                       from={0}
@@ -76,20 +76,21 @@ export default function Home() {
 
         {/* Events Section */}
         <section className="w-full py-20 dark:bg-siteblack">
-          <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
-            <div className="flex flex-col md:flex-row justify-between items-start mb-18 gap-4">
-              <div className="space-y-4 text-left">
-                <h2 className="text-3xl font-extrabold tracking-wide sm:text-4xl"> <SplitText text="Events Spotlight" delay={25}
-                  duration={1.25}
-                  ease="power3.out"
-                  splitType="chars"
-                  showCallback={false} /></h2>
-                <p className="text-neutral-500 dark:text-neutral-400 ">
+          <div className="container mx-auto px-4 md:px-12 lg:px-20 ">
+            <div className="flex flex-col md:flex-row justify-between items-start mb-14 gap-4">
+              <div className="space-y-2 text-left">
+                <h2 className="text-3xl font-extrabold sm:text-4xl ">
+                  <SplitText text="Events Spotlight" delay={25}
+                    duration={1.25}
+                    ease="power3.out"
+                    splitType="chars"
+                    showCallback={false} /></h2>
+                <p className="text-neutral-600 dark:text-neutral-400 ">
                   Stay tuned with our upcoming highlights and ongoing competitions.
                 </p>
               </div>
-              <Link href="/events" className="pt-2 inline-flex items-center gap-2 font-bold uppercase tracking-widest text-sm hover:underline underline-offset-4">
-                All Events <Calendar className="h-4 w-4" />
+              <Link href="/events" className="pt-2 inline-flex items-center gap-2 font-semibold  tracking-wider text-sm hover:underline underline-offset-4">
+                Explore All Events <Calendar className="h-4 w-4" />
               </Link>
             </div>
             <HomeEventsSection />

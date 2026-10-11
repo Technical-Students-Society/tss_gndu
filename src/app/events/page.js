@@ -27,14 +27,14 @@ export default function EventsPage() {
           <div className="lg:col-span-7">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 leading-[1.08]">
               <span className="inline-flex items-center gap-2.5 sm:gap-3 flex-wrap">
-                <span>Building,</span>
-                <span>learning </span>
+                <span>Build,</span>
+                <span>learn </span>
                 <span className="inline-flex items-center justify-center w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 text-white shadow-md shadow-cyan-500/20">
                   <Rocket className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
                 </span>
               </span>
               <br />
-              <span className="text-neutral-400 dark:text-neutral-500">competing.</span>
+              <span className="text-neutral-400 dark:text-neutral-500">compete.</span>
             </h1>
           </div>
 

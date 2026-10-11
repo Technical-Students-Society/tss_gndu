@@ -63,7 +63,7 @@ const teamCategories = [
   {
     title: 'Design',
     description: 'Crafts the visual identity of TSS from event creatives to the digital experience.',
-    textColor: 'text-black dark:text-white',
+    textColor: 'text-white dark:text-white',
     bgClass: 'bg-center',
     backgroundurl: '/images/gradientBas.jpg',
     illustration: '/images/illustrations/design2.png'
@@ -74,19 +74,14 @@ const marquee = [...teamCategories, ...teamCategories]
 
 export default function HomeTeamSectionSimple() {
   return (
-    <section className="w-full py-20 dark:bg-siteblack overflow-hidden">
-      <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
+    <section className="w-full py-32 dark:bg-siteblack overflow-hidden">
+      <div className="container mx-auto px-4 md:px-12 lg:px-20 ">
         {/* Header row */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
           <div>
-            <p className="text-xs flex gap-2 items-center font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-3">
+            <p className="text-xs flex gap-2 items-center font-medium uppercase  text-neutral-700 dark:text-neutral-400 mb-3">
               <Users size={16} />
-              <ShinyText
-                text="Our Teams"
-                speed={2.8}
-                color="#b5b5b5"
-                shineColor="#ffffff"
-              />
+              Our teams
             </p>
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-50 max-w-md leading-tight">
               <SplitText text="Our Core Team Divisions" delay={25}
@@ -100,7 +95,7 @@ export default function HomeTeamSectionSimple() {
                 textAlign="start" />
             </h2>
           </div>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-xs leading-relaxed md:text-right">
+          <p className="text-sm text-neutral-700 dark:text-neutral-300 max-w-xs leading-relaxed md:text-right">
             Specialized teams working in sync — each driving a different dimension of student life at GNDU.
           </p>
         </div>
@@ -129,7 +124,7 @@ export default function HomeTeamSectionSimple() {
               </div>
 
               {/* Illustration centered in card */}
-              {category.illustration && (
+              {/* {category.illustration && (
                 <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
                   <div className="w-36 h-36 sm:w-40 sm:h-40 lg:w-52 lg:h-52 group-hover:scale-105 transition-all duration-500">
                     <img
@@ -140,7 +135,7 @@ export default function HomeTeamSectionSimple() {
                     />
                   </div>
                 </div>
-              )}
+              )} */}
 
               {/* Description pinned to bottom */}
               <div className={`relative z-20 ${category.textColor}`}>
