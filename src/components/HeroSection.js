@@ -1,117 +1,21 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import ShinyText from "@/app/Animations/ShinyText";
-
-const imgSrcs = [
-  "/hero/greeky.jpg",
-  "/hero/mazed.jpg",
-  "/hero/philip.jpeg",
-  "/hero/pixie.jpg",
-  "/hero/sahil_12.png",
-  "/hero/fatguy.jpg",
-];
-
-// Desktop values
-const DESKTOP_COLS = 15;
-const DESKTOP_ROWS = 28;
-
-// Mobile values
-const MOBILE_COLS = 8;
-const MOBILE_ROWS = 15;
+import HeroPlanet from "@/components/HeroPlanet";
 
 export default function HeroSection() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    // Check on mount
-    setIsMobile(window.innerWidth < 768);
-
-    // Update on resize
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const COLS = isMobile ? MOBILE_COLS : DESKTOP_COLS;
-  const ROWS = isMobile ? MOBILE_ROWS : DESKTOP_ROWS;
-
-  const imagePositions = isMobile
-    ? [
-      { row: 0, col: 1, imgIndex: 0 },
-      { row: 0, col: 5, imgIndex: 1 },
-      { row: 4, col: 0, imgIndex: 2 },
-      { row: 4, col: 7, imgIndex: 3 },
-      { row: 8, col: 1, imgIndex: 4 },
-      { row: 8, col: 6, imgIndex: 5 },
-    ]
-    : [
-      { row: 1, col: 2, imgIndex: 0 },
-      { row: 1, col: 12, imgIndex: 1 },
-      { row: 3, col: 3, imgIndex: 2 },
-      { row: 3, col: 11, imgIndex: 3 },
-      { row: 5, col: 5, imgIndex: 4 },
-      { row: 5, col: 9, imgIndex: 5 },
-    ];
-
-  const imageMap = {};
-  imagePositions.forEach(({ row, col, imgIndex }) => {
-    imageMap[`${row}-${col}`] = imgSrcs[imgIndex];
-  });
-
-  const cells = Array.from({ length: ROWS * COLS }, (_, i) => {
-    const row = Math.floor(i / COLS);
-    const col = i % COLS;
-    return { row, col, imgSrc: imageMap[`${row}-${col}`] };
-  });
-
   return (
-    <section className="relative w-full min-h-[100dvh] font-openai overflow-hidden bg-white dark:bg-siteblack">
-      {/* ── Grid background ── */}
-      <div
-        className="absolute inset-0 overflow-hidden p-2"
-        style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${COLS}, 1fr)`,
-          gap: "6px",
-          alignContent: "start",
-        }}
-      >
-        {cells.map(({ row, col, imgSrc }, i) => (
-          <div
-            key={i}
-            className={`relative rounded-2xl md:rounded-xl aspect-square ${(row + col) % 2 === 0
-              ? "bg-neutral-100/70 dark:bg-zinc-900/20 "
-              : "bg-neutral-50 dark:bg-zinc-900/10"
-              }`}
-          >
-            {imgSrc && (
-              <div
-                className="absolute inset-0 p-1 hidden md:block rounded-2xl md:rounded-xl bg-zinc-100 dark:bg-zinc-900 overflow-hidden z-10"
-                style={{ boxShadow: "6px 2px 12px rgba(0,0,0,0.36)" }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={imgSrc}
-                  alt=""
-                  className="w-full rounded-2xl opacity-50 md:opacity-100 md:rounded-lg h-full object-cover"
-                />
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+    <section className="relative w-full min-h-[100dvh] font-openai overflow-hidden bg-[#06080e] dark:bg-siteblack text-white selection:bg-emerald-400 selection:text-black">
+      {/* ── Interactive Pixel Art Planet with Emitting Aura Background ── */}
+      <HeroPlanet />
 
       {/* ── Main content ── */}
-      <div className="relative z-20 flex flex-col items-center justify-center min-h-[100dvh] text-center px-6 pb-24">
+      <div className="relative z-20 flex flex-col items-center justify-center min-h-[100dvh] text-center px-6 pt-16 pb-28 pointer-events-none">
         {/* Badge */}
-        <div className="flex items-center gap-2 mb-6 text-xs font-medium text-neutral-500 dark:text-neutral-400 tracking-wide bg-[#0C0C0E] dark:bg-zinc-950 dark:border dark:border-zinc-900 py-2 px-5 rounded-full">
-          <span className="w-2 h-2 rounded-full bg-orange-400 inline-block" />
-          <span className="w-2 h-2 rounded-full bg-orange-400 inline-block absolute animate-ping" />
+        <div className="pointer-events-auto flex items-center gap-2 mb-6 text-xs font-medium text-neutral-300 dark:text-neutral-400 tracking-wide bg-zinc-950/80 backdrop-blur-md border border-white/10 dark:border-zinc-800/80 py-2 px-5 rounded-full shadow-lg shadow-emerald-950/20">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />
+          <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block absolute animate-ping" />
           <ShinyText
             text="Technical Students' Society"
             speed={2.8}
@@ -120,48 +24,41 @@ export default function HeroSection() {
           />
         </div>
 
-        <h1 className="relative text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-openai font-extrabold tracking-tight leading-[1.05]  max-w-3xl mb-5 pointer-events-none">
-
-          <span className="relative z-10 bg-gradient-to-b from-neutral-950 via-neutral-800 to-neutral-600 dark:from-[#ffffff] dark:via-[#d4d4d4] dark:to-[#737373] bg-clip-text text-transparent">
-            Bridging Tech & Innovation
+        {/* Heading */}
+        <h1 className="relative text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-openai font-extrabold tracking-tight leading-[1.05] max-w-4xl mb-5 drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
+          <span className="relative z-10 bg-gradient-to-b from-white via-zinc-100 to-zinc-400 dark:from-[#ffffff] dark:via-[#d4d4d4] dark:to-[#8a8a8a] bg-clip-text text-transparent">
+            Curiosity Is Our Common Language
           </span>
-
-          {/* 3D Depth Layers */}
-          {/* <span className="absolute inset-0 text-neutral-200 dark:text-neutral-400 blur-[1px] translate-x-[2px] translate-y-[2px] opacity-70">
-            Bridging Tech & Innovation
-          </span>
-
-          <span className="absolute inset-0 text-neutral-300 dark:text-neutral-600 translate-x-[4px] translate-y-[4px] opacity-50">
-            Bridging Tech & Innovation
-          </span> */}
         </h1>
 
-        {/* Sub */}
-        <p className="max-w-xl text-sm md:text-base text-neutral-500 dark:text-neutral-400 leading-relaxed mb-9">
+        {/* Subtitle */}
+        <p className="max-w-xl text-sm md:text-base text-zinc-300/90 dark:text-neutral-400 leading-relaxed mb-9 drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
           Official Technical Student Society of Guru Nanak Dev University. We
           empower students through workshops, hackathons, and technical
           excellence.
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="pointer-events-auto flex flex-wrap justify-center gap-4 relative z-30">
           {/* Primary Button */}
           <Link
             href="/events"
-            className="hero-btns group">
-            <span className="relative z-10 flex items-center gap-2">
+            className="hero-btns group relative overflow-hidden shadow-lg shadow-emerald-950/40 hover:shadow-emerald-500/20 hover:border-emerald-400/50 transition-all duration-300"
+          >
+            <span className="relative z-10 flex items-center gap-2 text-white">
               View Events
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </span>
 
             {/* Glow effect */}
-            <span className="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover:opacity-100 blur-md transition duration-300"></span>
+            <span className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-500/20 to-teal-500/20 opacity-0 group-hover:opacity-100 blur-md transition duration-300 pointer-events-none" />
           </Link>
 
           {/* Secondary Button */}
           <Link
             href="/about"
-            className="hero-btns group">
+            className="hero-btns group hover:border-zinc-500 transition-all duration-300"
+          >
             <span className="flex items-center gap-2">
               Learn More
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -170,7 +67,8 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full h-48 pointer-events-none bg-linear-to-t from-white dark:from-siteblack to-transparent" />
+      {/* ── Seamless Bottom Anchor Fade ── */}
+      <div className="absolute bottom-0 left-0 w-full h-24 pointer-events-none bg-gradient-to-t from-[#06080e] dark:from-siteblack via-transparent to-transparent" />
     </section>
   );
 }
