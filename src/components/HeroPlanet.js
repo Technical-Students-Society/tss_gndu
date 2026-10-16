@@ -143,7 +143,6 @@ export default function HeroPlanet() {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
 
-  const mouseRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
   const dragRef = useRef({ isDragging: false, startX: 0, rotOffset: 0, dragVelocity: 0 });
   const shockwaveRef = useRef({ active: false, x: 0, y: 0, r: 0, progress: 1 });
 
@@ -199,11 +198,6 @@ export default function HeroPlanet() {
       const bufW = bufCanvas.width;
       const bufH = bufCanvas.height;
 
-      // Mouse smoothing
-      const mouse = mouseRef.current;
-      mouse.x += (mouse.targetX - mouse.x) * 0.05;
-      mouse.y += (mouse.targetY - mouse.y) * 0.05;
-
       // Drag inertia and continuous planet rotation
       const drag = dragRef.current;
       if (!drag.isDragging) {
@@ -230,8 +224,8 @@ export default function HeroPlanet() {
       // Half-shown at the bottom of the hero section!
       // Crest peaks around 54-58% of viewport height, matching reference composition
       const R = Math.floor(Math.max(bufW * 0.38, bufH * 0.72));
-      const cx = Math.floor(bufW * 0.5 + mouse.x * (bufW * 0.02));
-      const cy = Math.floor(bufH * 0.56 + R + mouse.y * (bufH * 0.015));
+      const cx = Math.floor(bufW * 0.5);
+      const cy = Math.floor(bufH * 0.56 + R);
 
       const R2 = R * R;
       const rimThreshR2 = (R - 2) * (R - 2);
@@ -374,14 +368,6 @@ export default function HeroPlanet() {
 
   // Mouse & Touch interactions
   const handleMouseMove = useCallback((e) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    const ny = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-
-    mouseRef.current.targetX = nx;
-    mouseRef.current.targetY = ny;
-
     if (dragRef.current.isDragging) {
       const deltaX = e.clientX - dragRef.current.startX;
       dragRef.current.dragVelocity = deltaX * 0.0004;
@@ -423,8 +409,6 @@ export default function HeroPlanet() {
       onMouseUp={handleMouseUp}
       onMouseLeave={() => {
         dragRef.current.isDragging = false;
-        mouseRef.current.targetX = 0;
-        mouseRef.current.targetY = 0;
       }}
       className="absolute inset-0 w-full h-full overflow-hidden pointer-events-auto cursor-grab active:cursor-grabbing select-none"
     >
