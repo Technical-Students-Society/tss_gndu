@@ -32,11 +32,11 @@ export default function HeroSection() {
         </h1>
 
         {/* Subtitle */}
-        <p className="max-w-xl text-sm md:text-base text-zinc-300/90 dark:text-neutral-400 leading-relaxed mb-9 drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+        {/* <p className="max-w-xl text-sm md:text-base text-zinc-300/90 dark:text-neutral-400 leading-relaxed mb-9 drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
           Official Technical Student Society of Guru Nanak Dev University. We
           empower students through workshops, hackathons, and technical
           excellence.
-        </p>
+        </p> */}
 
         {/* CTAs */}
         <div className="pointer-events-auto flex flex-wrap justify-center gap-4 relative z-30">

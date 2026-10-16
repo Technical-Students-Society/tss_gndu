@@ -163,6 +163,29 @@
   animation: slide 50s linear infinite;
 }
 
+@keyframes auraPulsate {
+  0% {
+    transform: translate(-50%, 0) scale(0.97);
+    opacity: 0.82;
+  }
+  100% {
+    transform: translate(-50%, -8px) scale(1.04);
+    opacity: 1;
+  }
+}
+
+@keyframes floatDebris {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(-16px);
+  }
+}
+
 :root {
   --background: oklch(0.985 0 0);
   --foreground: oklch(0.145 0 0);
