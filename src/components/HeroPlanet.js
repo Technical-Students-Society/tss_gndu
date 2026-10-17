@@ -136,8 +136,28 @@ const COLOR_WATER_DEEP = 0xff704b19;    // #194b70 - marine abyss
 const COLOR_WATER_TRENCH = 0xff45290b;  // #0b2945 - deepest ocean trench
 
 // Clouds
-const COLOR_CLOUD_WHITE = 0xffffffff;   // #ffffff - brilliant white cloud
-const COLOR_CLOUD_SHADOW = 0xffede8db;  // #dbe8ed - cloud shaded rim
+const COLOR_CLOUD_WHITE = 0xfffafbfc;   // #fcfbfa - bright white cloud tops
+const COLOR_CLOUD_SHADOW = 0xffd5c4b4;  // #b4c4d5 - soft shaded cloud underside
+
+// ════════════════════════════════════════════════════════════════════════════
+// 🪐 PLANET SIZE & POSITION CONFIGURATION (EDIT HERE TO CONTROL WIDTH/SCALE)
+// ════════════════════════════════════════════════════════════════════════════
+//
+// • PLANET_WIDTH_SCALE:
+//   Controls the width / overall size of the planet.
+//   - Aspect ratio is 100% locked (always a mathematically perfect circle).
+//   - Default: 0.56
+//   - Increase (e.g., 0.62, 0.68, 0.75) to make the planet WIDER / BIGGER across the screen.
+//   - Decrease (e.g., 0.50, 0.45, 0.40) to make the planet NARROWER / SMALLER.
+const PLANET_WIDTH_SCALE = 0.50;
+
+// • PLANET_CREST_TOP:
+//   Controls the vertical height of the top crest on initial screen load.
+//   - Default: 0.56 (peaks ~56% down the screen, comfortably below the CTA buttons).
+//   - Decrease (e.g., 0.50) to move the planet higher up.
+//   - Increase (e.g., 0.62) to move the planet lower down.
+const PLANET_CREST_TOP = 0.58;
+// ════════════════════════════════════════════════════════════════════════════
 
 export default function HeroPlanet() {
   const containerRef = useRef(null);
@@ -178,6 +198,8 @@ export default function HeroPlanet() {
     let bufCanvas = document.createElement("canvas");
     let bufCtx = bufCanvas.getContext("2d");
 
+    let vpH = typeof window !== "undefined" ? window.innerHeight : 800;
+
     const resize = () => {
       const container = containerRef.current;
       if (!container) return;
@@ -189,6 +211,7 @@ export default function HeroPlanet() {
 
       bufCanvas.width = Math.max(60, Math.floor(rect.width / PIXEL_SIZE));
       bufCanvas.height = Math.max(40, Math.floor(rect.height / PIXEL_SIZE));
+      vpH = window.innerHeight;
     };
 
     resize();
@@ -221,15 +244,15 @@ export default function HeroPlanet() {
       const data32 = new Uint32Array(imgData.data.buffer);
 
       // Planet geometry:
-      // Half-shown at the bottom of the hero section!
-      // Crest peaks around 54-58% of viewport height, matching reference composition
-      const R = Math.floor(Math.max(bufW * 0.38, bufH * 0.72));
+      // Uses PLANET_WIDTH_SCALE and PLANET_CREST_TOP while preserving true 1:1 circular aspect ratio
+      const vpHBuf = vpH / PIXEL_SIZE;
+      const R = Math.floor(Math.max(bufW * PLANET_WIDTH_SCALE, vpHBuf * (PLANET_WIDTH_SCALE * 1.5)));
       const cx = Math.floor(bufW * 0.5);
-      const cy = Math.floor(bufH * 0.56 + R);
+      const cy = Math.floor(vpHBuf * PLANET_CREST_TOP + R);
 
       const R2 = R * R;
-      const rimThreshR2 = (R - 2) * (R - 2);
-      const rimThreshR3 = (R - 4) * (R - 4);
+      const rimThreshOuter = (R - 1.2) * (R - 1.2);
+      const rimThreshInner = (R - 2.4) * (R - 2.4);
 
       // Sun lighting direction (angled from top-left)
       const sunX = -0.42;
@@ -252,28 +275,24 @@ export default function HeroPlanet() {
           const dist2 = dx * dx + dy2;
 
           // Check if pixel is within the planet sphere
-          if (dist2 <= R2) {
+          // (dy > -R removes the isolated single-pixel apex dot sticking out at the crest)
+          if (dist2 <= R2 && dy > -R) {
             // Normal components in sphere space
             const nx = dx / R;
             const ny = dy / R;
             const nz = Math.sqrt(Math.max(0, 1.0 - nx * nx - ny * ny));
 
-            // Atmospheric sunlit rim (stepped pixel edge highlight matching reference)
-            if (dist2 >= rimThreshR2 && ny < 0.1) {
-              if (ny < -0.45) {
-                data32[row + px] = COLOR_RIM_CREAM;
-              } else if (ny < -0.2) {
-                data32[row + px] = COLOR_RIM_LIME;
-              } else {
-                data32[row + px] = COLOR_RIM_CYAN;
+            // Thicker, soft faded-white atmospheric rim along the outer boundary
+            if (ny < 0.08) {
+              if (dist2 >= rimThreshOuter) {
+                // Outer crisp faded white
+                data32[row + px] = ny < -0.3 ? 0xaff5f8fb : 0x75d8e8eb;
+                continue;
+              } else if (dist2 >= rimThreshInner) {
+                // Inner softly blended faded white/ice-mist
+                data32[row + px] = ny < -0.3 ? 0x65e2f0f4 : 0x48c8dde2;
+                continue;
               }
-              continue;
-            }
-
-            // Secondary atmosphere blend ring
-            if (dist2 >= rimThreshR3 && ny < -0.6) {
-              data32[row + px] = COLOR_RIM_LIME;
-              continue;
             }
 
             // Direct 3D spherical rotation for continents (ZERO pole stretching)
@@ -412,9 +431,21 @@ export default function HeroPlanet() {
       }}
       className="absolute inset-0 w-full h-full overflow-hidden pointer-events-auto cursor-grab active:cursor-grabbing select-none"
     >
-      {/* ── Retro Sci-Fi Grid Overlay (Matching Reference) ── */}
+      {/* ── Retro Grid Overlay (Light & Dark Compatible) ── */}
+      {/* Light mode grid */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.14] dark:opacity-[0.11]"
+        className="absolute inset-0 pointer-events-none opacity-[0.06] dark:hidden"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(0, 0, 0, 0.9) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 1px, transparent 1px)
+          `,
+          backgroundSize: "36px 36px",
+        }}
+      />
+      {/* Dark mode grid */}
+      <div
+        className="absolute inset-0 pointer-events-none hidden dark:block opacity-[0.11]"
         style={{
           backgroundImage: `
             linear-gradient(to right, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
@@ -424,43 +455,13 @@ export default function HeroPlanet() {
         }}
       />
 
-      {/* ── Retro Cyber Terminal Badges (Matching Reference Top Header) ── */}
-      {/* <div className="absolute top-24 left-0 w-full px-6 md:px-14 pointer-events-none flex justify-between items-center text-[10px] md:text-xs font-mono tracking-widest uppercase">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-[2px] bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]" />
-          <span className="text-emerald-400 font-semibold tracking-wider">COMMUNITY + + +</span>
-        </div>
-        <div className="hidden lg:flex flex-col items-end text-[9px] text-zinc-500 font-mono tracking-wider space-y-0.5">
-          <span className="text-zinc-400 font-medium">TSS GNDU // NODE.01</span>
-          <span className="text-zinc-600">ORBIT 31.6340° N, 74.8723° E</span>
-        </div>
-      </div> */}
-
-      {/* ── Floating Dark Space Debris Pixels (From Reference Image) ── */}
-      {/* {floatingPixels.map((item, i) => (
-        <div
-          key={i}
-          className="absolute bg-zinc-800/80 dark:bg-zinc-900/90 border border-white/5 pointer-events-none"
-          style={{
-            top: item.top,
-            ...(item.left ? { left: item.left } : { right: item.right }),
-            width: `${item.size}px`,
-            height: `${item.size}px`,
-            opacity: item.opacity,
-            boxShadow: "0 2px 6px rgba(0,0,0,0.6)",
-            animation: "floatDebris 6s ease-in-out infinite alternate",
-            animationDelay: item.delay,
-          }}
-        />
-      ))} */}
-
       {/* ── Volumetric Radiant Emitting Aura Behind Planet Rim ── */}
       <div
-        className="absolute top-[38%] left-1/2 -translate-x-1/2 w-[120vw] max-w-[1200px] h-[55vh] pointer-events-none"
+        className="absolute top-[30vh] left-1/2 -translate-x-1/2 w-[140vw] max-w-[1450px] h-[55vh] pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 60% 45% at 50% 40%, rgba(74, 222, 128, 0.28) 0%, rgba(34, 211, 238, 0.2) 35%, rgba(56, 189, 248, 0.08) 60%, transparent 80%),
-            radial-gradient(circle at 50% 38%, rgba(167, 243, 208, 0.25) 0%, transparent 50%)
+            radial-gradient(ellipse 60% 45% at 50% 40%, rgba(52, 211, 153, 0.28) 0%, rgba(34, 211, 238, 0.22) 35%, rgba(56, 189, 248, 0.1) 60%, transparent 80%),
+            radial-gradient(circle at 50% 38%, rgba(167, 243, 208, 0.26) 0%, transparent 50%)
           `,
           filter: "blur(46px)",
           animation: "auraPulsate 5s ease-in-out infinite alternate",
@@ -469,10 +470,10 @@ export default function HeroPlanet() {
 
       {/* ── Intense Atmospheric Crown Highlight Behind The Crest ── */}
       <div
-        className="absolute top-[48%] left-1/2 -translate-x-1/2 w-[80vw] max-w-[800px] h-[25vh] pointer-events-none"
+        className="absolute top-[44vh] left-1/2 -translate-x-1/2 w-[95vw] max-w-[1050px] h-[25vh] pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 70% 30% at 50% 50%, rgba(134, 239, 172, 0.38) 0%, rgba(6, 182, 212, 0.25) 35%, transparent 70%)
+            radial-gradient(ellipse 70% 30% at 50% 50%, rgba(110, 231, 183, 0.35) 0%, rgba(6, 182, 212, 0.22) 35%, transparent 70%)
           `,
           filter: "blur(28px)",
         }}
@@ -487,8 +488,39 @@ export default function HeroPlanet() {
         }}
       />
 
-      {/* ── Subtle Bottom Transition Fade ── */}
-      <div className="absolute bottom-0 left-0 w-full h-16 md:h-24 pointer-events-none bg-gradient-to-t from-[#06080e] dark:from-siteblack via-[#06080e]/50 dark:via-siteblack/50 to-transparent" />
+      {/* ── Progressive Smooth Bottom Fade Transition (Expanded Height) ── */}
+      {/* Light mode smooth fade */}
+      <div
+        className="absolute bottom-0 left-0 w-full h-64 sm:h-80 md:h-96 lg:h-[400px] pointer-events-none dark:hidden z-10"
+        style={{
+          background: `linear-gradient(to top, 
+            rgba(255, 255, 255, 1) 0%, 
+            rgba(255, 255, 255, 0.96) 15%, 
+            rgba(255, 255, 255, 0.85) 30%, 
+            rgba(255, 255, 255, 0.65) 48%, 
+            rgba(255, 255, 255, 0.42) 65%, 
+            rgba(255, 255, 255, 0.20) 80%, 
+            rgba(255, 255, 255, 0.06) 92%, 
+            rgba(255, 255, 255, 0) 100%
+          )`,
+        }}
+      />
+      {/* Dark mode smooth fade */}
+      <div
+        className="absolute bottom-0 left-0 w-full h-64 sm:h-80 md:h-96 lg:h-[400px] pointer-events-none hidden dark:block z-10"
+        style={{
+          background: `linear-gradient(to top, 
+            rgba(5, 5, 5, 1) 0%, 
+            rgba(5, 5, 5, 0.96) 15%, 
+            rgba(5, 5, 5, 0.85) 30%, 
+            rgba(5, 5, 5, 0.65) 48%, 
+            rgba(5, 5, 5, 0.42) 65%, 
+            rgba(5, 5, 5, 0.20) 80%, 
+            rgba(5, 5, 5, 0.06) 92%, 
+            rgba(5, 5, 5, 0) 100%
+          )`,
+        }}
+      />
     </div>
   );
 }
