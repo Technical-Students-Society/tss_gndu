@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, CircleHelp } from 'lucide-react';
 import SplitText from '@/app/Animations/SplitText';
+import FaqBackgroundAnimation from './FaqBackgroundAnimation';
 
 const faqs = [
   {
@@ -33,8 +34,11 @@ export default function HomeFaqSection() {
   };
 
   return (
-    <section className="w-full pt-20 pb-36 dark:bg-siteblack">
-      <div className="container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
+    <section className="relative w-full pt-20 pb-36 dark:bg-siteblack overflow-hidden">
+      {/* Full-width minimal background animation behind FAQs */}
+      <FaqBackgroundAnimation />
+
+      <div className="relative z-10 container mx-auto px-4 md:px-12 lg:px-20 xl:px-32">
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
             <SplitText
@@ -51,12 +55,12 @@ export default function HomeFaqSection() {
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto flex flex-col divide-y divide-neutral-200 dark:divide-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden">
+        <div className="max-w-3xl mx-auto flex flex-col divide-y divide-neutral-200 dark:divide-neutral-800 border border-neutral-200/90 dark:border-neutral-800 rounded-xl overflow-hidden backdrop-blur-md bg-white/80 dark:bg-neutral-950/80 shadow-xl shadow-black/5 dark:shadow-none">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
 
             return (
-              <div key={faq.question} className="bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-950 dark:to-siteblack">
+              <div key={faq.question} className="bg-gradient-to-br from-neutral-50/90 to-white/90 dark:from-neutral-950/90 dark:to-siteblack/90">
                 <button
                   onClick={() => toggle(index)}
                   className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left cursor-pointer">
