@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useEffect } from 'react';
 import { Renderer, Program, Mesh, Triangle, Vec2 } from 'ogl';
 
@@ -73,6 +75,109 @@ void main(){
 }
 `;
 
+// ── Fallback 2D Canvas Fluid Aurora Animation (Guaranteed 60FPS on any device) ──
+function run2DCanvasVeil(canvas, parent, speed) {
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return () => {};
+
+  let frame = 0;
+  let width = parent.clientWidth || window.innerWidth || 1200;
+  let height = parent.clientHeight || window.innerHeight || 800;
+
+  const resize = () => {
+    width = parent.clientWidth || window.innerWidth || 1200;
+    height = parent.clientHeight || window.innerHeight || 800;
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  let time = 0;
+
+  const render = () => {
+    time += 0.007 * (speed || 0.5);
+    ctx.clearRect(0, 0, width, height);
+
+    // Deep dark backdrop
+    ctx.fillStyle = '#050505';
+    ctx.fillRect(0, 0, width, height);
+
+    // Fluid organic aurora layers (Cyber Emerald & Tech Green tones)
+    const layers = [
+      { yRatio: 0.32, amp: 85, freq: 0.0016, color: 'rgba(16, 185, 129, 0.15)', offset: 0 },
+      { yRatio: 0.48, amp: 110, freq: 0.0012, color: 'rgba(34, 197, 94, 0.18)', offset: 2.1 },
+      { yRatio: 0.62, amp: 95, freq: 0.0018, color: 'rgba(5, 150, 105, 0.14)', offset: 4.2 },
+      { yRatio: 0.42, amp: 65, freq: 0.0022, color: 'rgba(52, 211, 153, 0.11)', offset: 1.2 },
+    ];
+
+    layers.forEach((l) => {
+      ctx.beginPath();
+      const baseY = height * l.yRatio;
+      ctx.moveTo(0, height);
+      ctx.lineTo(0, baseY);
+
+      const step = 24;
+      for (let x = 0; x <= width + step; x += step) {
+        const waveY =
+          baseY +
+          Math.sin(x * l.freq + time * 1.6 + l.offset) * l.amp +
+          Math.cos(x * l.freq * 0.7 - time * 0.9 + l.offset) * (l.amp * 0.45);
+        ctx.lineTo(x, waveY);
+      }
+
+      ctx.lineTo(width, height);
+      ctx.closePath();
+
+      const grad = ctx.createLinearGradient(0, baseY - l.amp, 0, height);
+      grad.addColorStop(0, l.color);
+      grad.addColorStop(0.5, l.color.replace(/0\.\d+/, (m) => String(parseFloat(m) * 0.5)));
+      grad.addColorStop(1, 'rgba(5, 5, 5, 0)');
+      ctx.fillStyle = grad;
+      ctx.fill();
+    });
+
+    // Central ambient green glow
+    const cx = width * 0.5;
+    const cy = height * 0.48;
+    const glowRad = Math.min(width * 0.48, 500) + Math.sin(time * 2) * 25;
+    const radial = ctx.createRadialGradient(cx, cy, 0, cx, cy, glowRad);
+    radial.addColorStop(0, 'rgba(34, 197, 94, 0.09)');
+    radial.addColorStop(0.5, 'rgba(16, 185, 129, 0.03)');
+    radial.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = radial;
+    ctx.fillRect(0, 0, width, height);
+
+    frame = requestAnimationFrame(render);
+  };
+
+  render();
+
+  return () => {
+    cancelAnimationFrame(frame);
+    window.removeEventListener('resize', resize);
+  };
+}
+
+function checkWebGLSupport() {
+  if (typeof window === 'undefined') return false;
+  try {
+    const testCanvas = document.createElement('canvas');
+    const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl');
+    if (gl) {
+      const lose = gl.getExtension('WEBGL_lose_context');
+      if (lose) lose.loseContext();
+      return true;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+}
+
 export default function DarkVeil({
   hueShift = 0,
   noiseIntensity = 0,
@@ -83,64 +188,114 @@ export default function DarkVeil({
   resolutionScale = 1
 }) {
   const ref = useRef(null);
+
   useEffect(() => {
     const canvas = ref.current;
+    if (!canvas) return;
+
     const parent = canvas.parentElement;
+    if (!parent) return;
 
-    const renderer = new Renderer({
-      dpr: Math.min(window.devicePixelRatio, 2),
-      canvas
-    });
+    let cleanup = null;
+    let gl = null;
 
-    const gl = renderer.gl;
-    const geometry = new Triangle(gl);
+    // Check WebGL availability first to avoid ogl 'unable to create webgl context' console errors
+    const webglAvailable = checkWebGLSupport();
 
-    const program = new Program(gl, {
-      vertex,
-      fragment,
-      uniforms: {
-        uTime: { value: 0 },
-        uResolution: { value: new Vec2() },
-        uHueShift: { value: hueShift },
-        uNoise: { value: noiseIntensity },
-        uScan: { value: scanlineIntensity },
-        uScanFreq: { value: scanlineFrequency },
-        uWarp: { value: warpAmount }
+    if (!webglAvailable) {
+      cleanup = run2DCanvasVeil(canvas, parent, speed);
+      return () => {
+        if (cleanup) cleanup();
+      };
+    }
+
+    // Try WebGL Shader First
+    try {
+      const renderer = new Renderer({
+        dpr: Math.min(window.devicePixelRatio || 1, 1.5),
+        canvas,
+        alpha: true,
+        depth: false,
+        stencil: false,
+        antialias: false,
+        powerPreference: 'default'
+      });
+
+      gl = renderer.gl;
+
+      if (!gl) {
+        throw new Error('WebGL context unavailable');
       }
-    });
 
-    const mesh = new Mesh(gl, { geometry, program });
+      const geometry = new Triangle(gl);
+      const program = new Program(gl, {
+        vertex,
+        fragment,
+        uniforms: {
+          uTime: { value: 0 },
+          uResolution: { value: new Vec2() },
+          uHueShift: { value: hueShift },
+          uNoise: { value: noiseIntensity },
+          uScan: { value: scanlineIntensity },
+          uScanFreq: { value: scanlineFrequency },
+          uWarp: { value: warpAmount }
+        }
+      });
 
-    const resize = () => {
-      const w = parent.clientWidth,
-        h = parent.clientHeight;
-      renderer.setSize(w * resolutionScale, h * resolutionScale);
-      program.uniforms.uResolution.value.set(w, h);
-    };
+      const mesh = new Mesh(gl, { geometry, program });
 
-    window.addEventListener('resize', resize);
-    resize();
+      const resize = () => {
+        if (!parent || !renderer || !program) return;
+        const w = parent.clientWidth || 300;
+        const h = parent.clientHeight || 150;
+        renderer.setSize(w * resolutionScale, h * resolutionScale);
+        program.uniforms.uResolution.value.set(w, h);
+      };
 
-    const start = performance.now();
-    let frame = 0;
+      window.addEventListener('resize', resize);
+      resize();
 
-    const loop = () => {
-      program.uniforms.uTime.value = ((performance.now() - start) / 1000) * speed;
-      program.uniforms.uHueShift.value = hueShift;
-      program.uniforms.uNoise.value = noiseIntensity;
-      program.uniforms.uScan.value = scanlineIntensity;
-      program.uniforms.uScanFreq.value = scanlineFrequency;
-      program.uniforms.uWarp.value = warpAmount;
-      renderer.render({ scene: mesh });
-      frame = requestAnimationFrame(loop);
-    };
+      const start = performance.now();
+      let frame = 0;
 
-    loop();
+      const loop = () => {
+        try {
+          program.uniforms.uTime.value = ((performance.now() - start) / 1000) * speed;
+          program.uniforms.uHueShift.value = hueShift;
+          program.uniforms.uNoise.value = noiseIntensity;
+          program.uniforms.uScan.value = scanlineIntensity;
+          program.uniforms.uScanFreq.value = scanlineFrequency;
+          program.uniforms.uWarp.value = warpAmount;
+          renderer.render({ scene: mesh });
+          frame = requestAnimationFrame(loop);
+        } catch {
+          // If WebGL fails mid-flight, fallback to 2D
+          cancelAnimationFrame(frame);
+          cleanup = run2DCanvasVeil(canvas, parent, speed);
+        }
+      };
+
+      loop();
+
+      cleanup = () => {
+        cancelAnimationFrame(frame);
+        window.removeEventListener('resize', resize);
+        if (gl) {
+          const loseContext = gl.getExtension('WEBGL_lose_context');
+          if (loseContext) {
+            loseContext.loseContext();
+          }
+        }
+      };
+    } catch {
+      // WebGL not available or context creation failed -> seamlessly run 2D Canvas Fluid Veil
+      cleanup = run2DCanvasVeil(canvas, parent, speed);
+    }
 
     return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener('resize', resize);
+      if (cleanup) cleanup();
     };
   }, [hueShift, noiseIntensity, scanlineIntensity, speed, scanlineFrequency, warpAmount, resolutionScale]);
+
   return <canvas ref={ref} className="w-full h-full block" />;
 }

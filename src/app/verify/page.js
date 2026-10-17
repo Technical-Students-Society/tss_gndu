@@ -16,7 +16,12 @@ function VerifyContent() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [messageVisible, setMessageVisible] = useState(true); // Always true for toasts
+  const [mounted, setMounted] = useState(false);
   const lastVerifiedId = useRef(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const idFromQuery = searchParams.get("id") || searchParams.get("cert");
@@ -101,22 +106,25 @@ function VerifyContent() {
   };
 
   return (
-    <main className="min-h-screen py-10 relative flex items-center justify-center px-6 bg-siteblack overflow-hidden">
+    <main suppressHydrationWarning className="min-h-screen py-10 relative flex items-center justify-center px-6 bg-siteblack overflow-hidden">
 
-      <div className="absolute inset-0 z-0 pointer-events-none max-md:hidden">
-        <DarkVeil
-          hueShift={106}
-          noiseIntensity={0}
-          scanlineIntensity={0}
-          speed={0.5}
-          scanlineFrequency={0}
-          warpAmount={0}
-        />
-      </div>
+      {mounted && (
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <DarkVeil
+            hueShift={106}
+            noiseIntensity={0}
+            scanlineIntensity={0}
+            speed={0.5}
+            scanlineFrequency={0}
+            warpAmount={0}
+          />
+        </div>
+      )}
       <div className="grid lg:grid-cols-2 gap-10 w-full max-w-5xl">
 
         {/* LEFT SIDE - FORM */}
         <motion.div
+          suppressHydrationWarning
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           className="p-8 rounded-3xl border border-neutral-800 bg-neutral-900/40 backdrop-blur items-center"
@@ -136,7 +144,9 @@ function VerifyContent() {
             placeholder="Enter Certificate ID"
             value={certificateId}
             onChange={(e) => setCertificateId(e.target.value.toUpperCase())}
-            className="w-full mt-2 mb-6 px-4 py-3 rounded-xl border border-neutral-700 bg-transparent focus:outline-none focus:ring-2 focus:ring-[00ff40] uppercase text-white"
+            autoComplete="off"
+            spellCheck="false"
+            className="w-full mt-2 mb-6 px-4 py-3 rounded-xl border border-neutral-700 bg-transparent focus:outline-none focus:ring-2 focus:ring-[#00ff40] uppercase text-white"
           />
           <button
             type="submit"
@@ -166,6 +176,7 @@ function VerifyContent() {
 
         {/* RIGHT SIDE - RESULT */}
         <motion.div
+          suppressHydrationWarning
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           className="rounded-3xl border border-neutral-800 bg-neutral-900/40 backdrop-blur flex flex-col justify-center"
@@ -183,9 +194,7 @@ function VerifyContent() {
               )}
 
               {/* Footer Note */}
-              {loading ? (
-                <p />
-              ) : (
+              {loading ? null : (
                 <p className="text-sm text-center text-neutral-500">
                   If you lose your certificate, contact us at{" "} <br />
                   <a
@@ -276,7 +285,7 @@ function VerifyContent() {
           )}
         </motion.div>
       </div>
-      {messageVisible && (
+      {mounted && messageVisible && (
         <Toaster position="top-center"
           toastOptions={{
             duration: 2000,
