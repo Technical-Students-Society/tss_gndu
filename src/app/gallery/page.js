@@ -13,7 +13,7 @@ export const revalidate = 0;
 export default function GalleryPage() {
   // Navigation is now instant. Data loading is handled by the GalleryClient.
   return (
-    <div className="relative py-20 mx-auto font-openai dark:bg-siteblack px-4 md:px-12 lg:px-18 xl:px-30 max-sm:pb-3 min-h-screen">
+    <div className="relative py-20 mx-auto font-openai dark:bg-siteblack px-4 sm:px-8 md:px-12 lg:px-20 max-sm:pb-3 min-h-screen">
       
       {/* ── Visual Shell (Instant) ── */}
       <div className="absolute inset-0 dark:bg-[url('/images/backgrounds/galaxy.jpg')] bg-repeat-y bg-center opacity-15 pointer-events-none"
