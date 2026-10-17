@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import api from "@/utils/api";
 import {
   ShieldCheck,
@@ -11,34 +11,112 @@ import {
   Trophy,
   Users,
   User,
-  ExternalLink,
-  ArrowUpRight,
+  X,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Inline standalone social SVG icons
-const LinkedinIcon = ({ size = 13 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+const LinkedinIcon = ({ size = 14, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
     <rect width="4" height="12" x="2" y="9" />
     <circle cx="4" cy="4" r="2" />
   </svg>
 );
 
-const GithubIcon = ({ size = 13 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+const GithubIcon = ({ size = 14, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
     <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.28 1.15-.28 2.35 0 3.5-.73 1.02-1.08 2.25-1 3.5 0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
     <path d="M9 18c-4.51 2-5-2-7-2" />
   </svg>
 );
 
-const InstagramIcon = ({ size = 13 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+const InstagramIcon = ({ size = 14, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
     <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
     <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
   </svg>
 );
+
+// Lightweight URL optimizer: requests lightweight compressed dimensions for Unsplash & cloud images
+function getOptimizedImageUrl(url, width = 200, quality = 75) {
+  if (!url) return "";
+  if (typeof url === "string" && url.includes("images.unsplash.com")) {
+    const baseUrl = url.split("?")[0];
+    return `${baseUrl}?w=${width}&auto=format&fit=crop&q=${quality}`;
+  }
+  return url;
+}
+
+// Ultra-fast lazy avatar image with instant skeleton placeholder and smooth fade-in
+function FastImage({ src, alt = "", width = 200, className = "" }) {
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
+  const optimizedSrc = useMemo(() => getOptimizedImageUrl(src, width), [src, width]);
+
+  if (!src || error) {
+    return (
+      <div className={`w-full h-full flex items-center justify-center bg-neutral-200 dark:bg-neutral-800 text-neutral-500 font-bold ${className}`}>
+        {alt ? (
+          <span className="text-xs sm:text-sm font-semibold">{alt.charAt(0).toUpperCase()}</span>
+        ) : (
+          <User className="w-5 h-5 text-neutral-400" />
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div className={`relative w-full h-full overflow-hidden bg-neutral-200 dark:bg-neutral-800 ${className}`}>
+      {!loaded && (
+        <div className="absolute inset-0 bg-neutral-300/80 dark:bg-neutral-700/80 animate-pulse" />
+      )}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={optimizedSrc}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        onLoad={() => setLoaded(true)}
+        onError={() => setError(true)}
+        className={`w-full h-full object-cover object-center transition-opacity duration-300 ${
+          loaded ? "opacity-100" : "opacity-0"
+        }`}
+      />
+    </div>
+  );
+}
 
 // Category Metadata mapping for visual icons and descriptions
 const CATEGORY_META = {
@@ -158,7 +236,7 @@ const DEMO_MEMBERS = [
   },
 ];
 
-function MemberAvatar({ member, isDarkCard }) {
+function MemberAvatar({ member, isDarkCard, onSelect }) {
   const [isHovered, setIsHovered] = useState(false);
   const isLead = /president|head|lead|founder|convener/i.test(member.role || "");
 
@@ -167,33 +245,29 @@ function MemberAvatar({ member, isDarkCard }) {
       className="relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => onSelect(member)}
     >
-      {/* Avatar Circle */}
-
+      {/* Avatar Circle with tactile active touch response */}
       <div
-        className={`relative w-12 h-12 sm:w-14 sm:h-14 lg:h-20 lg:w-20 rounded-full cursor-pointer transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 shadow-sm ${isLead
-          ? "ring-2 ring-blue-500 p-1 shadow-md"
-          : isDarkCard
+        className={`relative w-12 h-12 sm:w-14 sm:h-14 lg:h-20 lg:w-20 rounded-full cursor-pointer transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 active:scale-95 shadow-sm touch-manipulation ${
+          isLead
+            ? "ring-2 ring-blue-500 p-0.5 sm:p-1 shadow-md"
+            : isDarkCard
             ? "border-2 border-neutral-800 bg-neutral-900"
             : "border-2 border-white dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-800"
-          }`}
+        }`}
       >
         <div className="w-full h-full rounded-full overflow-hidden">
-          {member.avatar_url ? (
-            <img
-              src={member.avatar_url}
-              alt={member.name}
-              className="w-full h-full object-cover object-center"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-xs font-bold text-neutral-500">
-              {member.name ? member.name.charAt(0) : "U"}
-            </div>
-          )}
+          <FastImage
+            src={member.avatar_url}
+            alt={member.name}
+            width={180}
+            className="w-full h-full"
+          />
         </div>
       </div>
 
-      {/* Floating Hover Tooltip Card with Full-Width Larger Image */}
+      {/* Desktop-Only Hover Tooltip Card (Hidden on Mobile to completely eliminate viewport overflow/glitches) */}
       <AnimatePresence>
         {isHovered && (
           <motion.div
@@ -201,24 +275,17 @@ function MemberAvatar({ member, isDarkCard }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.95 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 z-50 w-64 sm:w-72 overflow-hidden rounded-[20px] bg-neutral-950/95 dark:bg-neutral-900/95 text-white backdrop-blur-xl border border-neutral-200 dark:border-neutral-700 shadow-2xl shadow-black/60 pointer-events-auto"
+            className="hidden md:block absolute bottom-full left-1/2 -translate-x-1/2 mb-3 z-50 w-64 sm:w-72 overflow-hidden rounded-[20px] bg-neutral-950/95 dark:bg-neutral-900/95 text-white backdrop-blur-xl border border-neutral-200 dark:border-neutral-700 shadow-2xl shadow-black/60 pointer-events-auto"
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* Full-width Image Area (Larger & Taller) */}
+            {/* Full-width Image Area */}
             <div className="relative w-full h-52 sm:h-56 overflow-hidden bg-neutral-900">
-              {member.avatar_url ? (
-                <img
-                  src={member.avatar_url}
-                  alt={member.name}
-                  className="w-full h-full object-cover object-center"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center bg-neutral-800">
-                  <User className="w-14 h-14 text-neutral-500" />
-                </div>
-              )}
-
-              {/* Subtle gradient shadow overlay at bottom of photo */}
-              <div className="absolute inset-0" />
+              <FastImage
+                src={member.avatar_url}
+                alt={member.name}
+                width={500}
+                className="w-full h-full"
+              />
 
               {/* Lead badge on image */}
               {isLead && (
@@ -230,7 +297,7 @@ function MemberAvatar({ member, isDarkCard }) {
               )}
             </div>
 
-            {/* Single Compact Bottom Row: Details on Left, Socials on Right */}
+            {/* Bottom Row: Details on Left, Socials on Right */}
             <div className="p-3.5 px-4 flex items-center justify-between gap-3 relative z-10 bg-white dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800">
               {/* Left: Name & Role */}
               <div className="min-w-0 flex-1">
@@ -250,9 +317,9 @@ function MemberAvatar({ member, isDarkCard }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${member.name}'s LinkedIn`}
-                    className="w-6 h-6 rounded-md flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                    className="w-7 h-7 rounded-md flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                   >
-                    <LinkedinIcon size={12} />
+                    <LinkedinIcon size={13} />
                   </a>
                 )}
                 {member.github_url && (
@@ -261,9 +328,9 @@ function MemberAvatar({ member, isDarkCard }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${member.name}'s GitHub`}
-                    className="w-6 h-6 rounded-md flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                    className="w-7 h-7 rounded-md flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                   >
-                    <GithubIcon size={12} />
+                    <GithubIcon size={13} />
                   </a>
                 )}
                 {member.instagram_url && (
@@ -272,13 +339,10 @@ function MemberAvatar({ member, isDarkCard }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${member.name}'s Instagram`}
-                    className="w-6 h-6 rounded-md flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                    className="w-7 h-7 rounded-md flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                   >
-                    <InstagramIcon size={12} />
+                    <InstagramIcon size={13} />
                   </a>
-                )}
-                {!member.linkedin_url && !member.github_url && !member.instagram_url && (
-                  <span className="text-[9px] font-mono text-neutral-400 dark:text-neutral-500">TSS</span>
                 )}
               </div>
             </div>
@@ -289,11 +353,12 @@ function MemberAvatar({ member, isDarkCard }) {
   );
 }
 
+const GROUP_ORDER = ["Executives", "Technical", "Design", "Sponsorship", "Cultural", "Sports"];
+
 export default function TeamClient({ batch }) {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const groupOrder = ["Executives", "Technical", "Design", "Sponsorship", "Cultural", "Sports"];
+  const [selectedMobileMember, setSelectedMobileMember] = useState(null);
 
   useEffect(() => {
     async function fetchMembers() {
@@ -331,7 +396,7 @@ export default function TeamClient({ batch }) {
     const grouped = members.reduce((acc, member) => {
       let rawGroup = (member.team_group || "Other").trim();
       const matchingKey =
-        groupOrder.find((g) => g.toLowerCase() === rawGroup.toLowerCase()) ||
+        GROUP_ORDER.find((g) => g.toLowerCase() === rawGroup.toLowerCase()) ||
         rawGroup.charAt(0).toUpperCase() + rawGroup.slice(1).toLowerCase();
 
       if (!acc[matchingKey]) acc[matchingKey] = [];
@@ -365,10 +430,10 @@ export default function TeamClient({ batch }) {
       });
     });
 
-    // 3. Sort the group names according to groupOrder
+    // 3. Sort the group names according to GROUP_ORDER
     const sorted = Object.keys(grouped).sort((a, b) => {
-      const indexA = groupOrder.indexOf(a);
-      const indexB = groupOrder.indexOf(b);
+      const indexA = GROUP_ORDER.indexOf(a);
+      const indexB = GROUP_ORDER.indexOf(b);
       if (indexA !== -1 && indexB !== -1) return indexA - indexB;
       if (indexA !== -1) return -1;
       if (indexB !== -1) return 1;
@@ -377,6 +442,25 @@ export default function TeamClient({ batch }) {
 
     return { groupedTeam: grouped, sortedGroups: sorted };
   }, [members]);
+
+  // Lock background scroll when mobile modal is open
+  useEffect(() => {
+    if (selectedMobileMember) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedMobileMember]);
+
+  const handleSelectMember = useCallback((member) => {
+    // On mobile devices (or smaller viewports), open the dedicated mobile card
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      setSelectedMobileMember(member);
+    }
+  }, []);
 
   if (loading) {
     return (
@@ -389,9 +473,13 @@ export default function TeamClient({ batch }) {
     );
   }
 
+  const isSelectedLead = selectedMobileMember
+    ? /president|head|lead|founder|convener/i.test(selectedMobileMember.role || "")
+    : false;
+
   return (
     <div className="space-y-6">
-      {/* Bento Category Blocks with Fixed Symmetry and Hover Member Details */}
+      {/* Bento Category Blocks with Fixed Symmetry and Responsive Avatars */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
         {sortedGroups.map((groupKey, idx) => {
           const meta = CATEGORY_META[groupKey.toLowerCase()] || {
@@ -406,74 +494,181 @@ export default function TeamClient({ batch }) {
           return (
             <div
               key={groupKey}
-              className={`rounded-[28px] border transition-all duration-300 p-8 sm:p-10 flex flex-col justify-between min-h-[380px] md:min-h-[450px] ${isDarkCard
-                ? "bg-neutral-900 text-white border-neutral-800 shadow-xl shadow-black/10 dark:bg-neutral-900/90 dark:border-neutral-800"
-                : "bg-neutral-200/60 dark:bg-neutral-900/50 backdrop-blur-sm text-neutral-900 dark:text-neutral-100 border-neutral-200/80 dark:border-neutral-800/80 shadow-sm hover:shadow-md"
-                }`}
+              className={`rounded-[28px] border transition-all duration-300 p-6 sm:p-8 md:p-10 flex flex-col justify-between min-h-[340px] md:min-h-[450px] ${
+                isDarkCard
+                  ? "bg-neutral-900 text-white border-neutral-800 shadow-xl shadow-black/10 dark:bg-neutral-900/90 dark:border-neutral-800"
+                  : "bg-neutral-200/60 dark:bg-neutral-900/50 backdrop-blur-sm text-neutral-900 dark:text-neutral-100 border-neutral-200/80 dark:border-neutral-800/80 shadow-sm hover:shadow-md"
+              }`}
             >
               {/* Top Row: Icon Badge & Member Count Pill */}
-              <div className="flex flex-col ">
-
-
+              <div className="flex flex-col">
                 <div className="flex items-center justify-between">
                   <div
-                    className={`w-13 h-13 rounded-2xl flex items-center justify-center transition-transform duration-300 hover:scale-105 ${isDarkCard
-                      ? "bg-neutral-100 text-black border border-neutral-800"
-                      : "bg-neutral-300 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 border border-neutral-200/60 dark:border-neutral-700/60"
-                      }`}
+                    className={`w-12 h-12 sm:w-13 sm:h-13 rounded-2xl flex items-center justify-center transition-transform duration-300 hover:scale-105 ${
+                      isDarkCard
+                        ? "bg-neutral-100 text-black border border-neutral-800"
+                        : "bg-neutral-300 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 border border-neutral-200/60 dark:border-neutral-700/60"
+                    }`}
                   >
-                    <Icon className="w-6 h-6" />
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
 
                   <span
-                    className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs    font-medium tracking-wide ${isDarkCard
-                      ? "bg-neutral-900 text-neutral-300 border border-neutral-800"
-                      : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200/60 dark:border-neutral-700/60"
-                      }`}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-medium tracking-wide ${
+                      isDarkCard
+                        ? "bg-neutral-900 text-neutral-300 border border-neutral-800"
+                        : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200/60 dark:border-neutral-700/60"
+                    }`}
                   >
                     {groupMembers.length} {groupMembers.length === 1 ? "Member" : "Members"}
                   </span>
                 </div>
 
                 {/* Middle Row: Title & Subtitle */}
-                <div className="my-6 space-y-2.5">
+                <div className="my-5 sm:my-6 space-y-2">
                   <h3
-                    className={`text-2xl  sm:text-3xl lg:text-4xl font-semibold tracking-tight ${isDarkCard ? "text-white" : "text-neutral-900 dark:text-neutral-50"
-                      }`}
+                    className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight ${
+                      isDarkCard ? "text-white" : "text-neutral-900 dark:text-neutral-50"
+                    }`}
                   >
                     {meta.title}
                   </h3>
                   <p
-                    className={`text-xs sm:text-sm leading-relaxed max-w-md font-normal ${isDarkCard ? "text-neutral-400" : "text-neutral-500 dark:text-neutral-400"
-                      }`}
+                    className={`text-xs sm:text-sm leading-relaxed max-w-md font-normal ${
+                      isDarkCard ? "text-neutral-400" : "text-neutral-500 dark:text-neutral-400"
+                    }`}
                   >
                     {meta.description}
                   </p>
                 </div>
               </div>
 
-              {/* Bottom Row: All Members Interactive Avatars with Hover Details */}
-              <div className="pt-6  border-dashed border-neutral-400 dark:border-neutral-800/70 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                {/* Member Avatars Row */}
-                <div className="flex items-center flex-wrap gap-2.5">
+              {/* Bottom Row: All Members Interactive Avatars */}
+              <div className="pt-5 sm:pt-6 border-dashed border-neutral-400/40 dark:border-neutral-800/70 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div className="flex items-center flex-wrap gap-2 sm:gap-2.5">
                   {groupMembers.map((member) => (
                     <MemberAvatar
                       key={member.id || `${member.name}-${member.role}`}
                       member={member}
                       isDarkCard={isDarkCard}
+                      onSelect={handleSelectMember}
                     />
                   ))}
                 </div>
-
-
               </div>
             </div>
           );
         })}
       </div>
+
+      {/* ── Mobile Dedicated Member Detail Card (Centered & Compact) ── */}
+      <AnimatePresence>
+        {selectedMobileMember && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:hidden">
+            {/* Backdrop with tap-outside dismiss */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setSelectedMobileMember(null)}
+              className="absolute inset-0 bg-black/70 backdrop-blur-md"
+            />
+
+            {/* Modal Sheet Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 12 }}
+              transition={{ type: "spring", damping: 25, stiffness: 340 }}
+              className="relative w-full max-w-[280px] sm:max-w-[300px] rounded-[22px] overflow-hidden bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-700/80 shadow-2xl z-10 mx-auto"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedMobileMember(null)}
+                aria-label="Close"
+                className="absolute top-2.5 right-2.5 z-20 w-7 h-7 rounded-full bg-black/60 backdrop-blur-md text-white flex items-center justify-center border border-white/20 active:scale-90 transition-transform"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+
+              {/* Portrait image */}
+              <div className="relative w-full h-48 sm:h-52 bg-neutral-950 overflow-hidden">
+                <FastImage
+                  src={selectedMobileMember.avatar_url}
+                  alt={selectedMobileMember.name}
+                  width={400}
+                  className="w-full h-full"
+                />
+
+                {isSelectedLead && (
+                  <div className="absolute top-2.5 left-2.5">
+                    <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-black/60 backdrop-blur-md text-white border border-white/20 shadow-sm">
+                      Lead
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* Details & Touch-friendly Social Buttons */}
+              <div className="p-3.5 sm:p-4 space-y-3 bg-white dark:bg-neutral-900">
+                <div>
+                  <h3 className="text-sm sm:text-base font-bold text-neutral-900 dark:text-white capitalize leading-snug">
+                    {selectedMobileMember.name}
+                  </h3>
+                  <p className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mt-0.5">
+                    {selectedMobileMember.role}
+                  </p>
+                </div>
+
+                {/* Social Links Row */}
+                <div className="flex items-center gap-1.5 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+                  {selectedMobileMember.linkedin_url && (
+                    <a
+                      href={selectedMobileMember.linkedin_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 text-[11px] font-medium active:scale-95 transition-all"
+                    >
+                      <LinkedinIcon size={12} />
+                      <span>LinkedIn</span>
+                    </a>
+                  )}
+                  {selectedMobileMember.github_url && (
+                    <a
+                      href={selectedMobileMember.github_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 text-[11px] font-medium active:scale-95 transition-all"
+                    >
+                      <GithubIcon size={12} />
+                      <span>GitHub</span>
+                    </a>
+                  )}
+                  {selectedMobileMember.instagram_url && (
+                    <a
+                      href={selectedMobileMember.instagram_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 text-[11px] font-medium active:scale-95 transition-all"
+                    >
+                      <InstagramIcon size={12} />
+                      <span>Instagram</span>
+                    </a>
+                  )}
+                  {!selectedMobileMember.linkedin_url &&
+                    !selectedMobileMember.github_url &&
+                    !selectedMobileMember.instagram_url && (
+                      <span className="text-[11px] font-mono text-neutral-400 py-1">
+                        TSS Member
+                      </span>
+                    )}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
-
-
-
