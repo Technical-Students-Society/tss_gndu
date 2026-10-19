@@ -158,13 +158,35 @@ const PLANET_WIDTH_SCALE = 0.50;
 //   - Increase (e.g., 0.62) to move the planet lower down.
 const PLANET_CREST_TOP = 0.58;
 // ════════════════════════════════════════════════════════════════════════════
+// Google Maps iconic location pin symbol
+const GoogleMapsPinIcon = ({ className = "w-3.5 h-3.5" }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="none">
+    <path
+      d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+      fill="#EA4335"
+    />
+    <circle cx="12" cy="9" r="2.5" fill="#FFFFFF" />
+  </svg>
+);
+
+// 3D Location Marker Coordinates for GNDU on the planet surface
+// At MARKER_NY = -0.89, lon = 0, simplex elevation is ~0.46 (solid continental landmass, away from oceans)
+// Positioned downwards along the crest so it stays clear of hero text and CTA buttons
+const MARKER_NY = -0.82;
+const MARKER_LON = 0;
+const MARKER_RING_RADIUS = Math.sqrt(Math.max(0, 1 - MARKER_NY * MARKER_NY));
+const MARKER_X0 = MARKER_RING_RADIUS * Math.sin(MARKER_LON);
+const MARKER_Y0 = MARKER_NY;
+const MARKER_Z0 = MARKER_RING_RADIUS * Math.cos(MARKER_LON);
 
 export default function HeroPlanet() {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
 
-  const dragRef = useRef({ isDragging: false, startX: 0, rotOffset: 0, dragVelocity: 0 });
+  const dragRef = useRef({ isDragging: false, startX: 0, rotOffset: 0, targetRotOffset: 0, dragVelocity: 0 });
   const shockwaveRef = useRef({ active: false, x: 0, y: 0, r: 0, progress: 1 });
+  const markerRef = useRef(null);
+  const markerBufPosRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -192,6 +214,8 @@ export default function HeroPlanet() {
     let imgData = null;
     let data32 = null;
     let vpH = typeof window !== "undefined" ? window.innerHeight : 800;
+    let scaleX = 1;
+    let scaleY = 1;
 
     // Pre-allocated resize handler
     const resize = () => {
@@ -208,6 +232,9 @@ export default function HeroPlanet() {
 
       bufCanvas.width = bw;
       bufCanvas.height = bh;
+
+      scaleX = rect.width / bw;
+      scaleY = rect.height / bh;
 
       // Reallocate ImageData only on window resize (0 garbage per frame!)
       imgData = bufCtx.createImageData(bw, bh);
@@ -260,13 +287,31 @@ export default function HeroPlanet() {
       const bufW = bufCanvas.width;
       const bufH = bufCanvas.height;
 
-      // Drag inertia & rotation with delta-time scaling
+      // Smoothly ease the rendered rotation toward the drag target. This filters
+      // small pointer/touch jumps without making the planet feel sluggish.
       const drag = dragRef.current;
+      const dragEase = 1 - Math.pow(0.72, dt);
+      drag.rotOffset += (drag.targetRotOffset - drag.rotOffset) * dragEase;
+
       if (!drag.isDragging) {
         drag.dragVelocity *= Math.pow(0.94, dt);
-        baseRotation += (0.0018 + drag.dragVelocity) * dt;
+
+        // Precompute whether GNDU is currently behind the globe.
+        // When behind, smoothly increase rotation speed to cut down hidden wait time.
+        const curRot = baseRotation + drag.rotOffset;
+        const curMZ = -MARKER_X0 * Math.sin(curRot) + MARKER_Z0 * Math.cos(curRot);
+
+        let speedMultiplier = 1.0;
+        if (curMZ <= 0.05) {
+          const backProgress = Math.min(1.0, Math.max(0, (0.05 - curMZ) / (MARKER_RING_RADIUS * 0.6)));
+          speedMultiplier = 1.0 + backProgress * 2.2;
+        }
+
+        baseRotation += (0.0018 * speedMultiplier + drag.dragVelocity) * dt;
       }
-      cloudRotation += 0.0026 * dt;
+
+      // Keep the cloud layer moving at a slightly different speed for depth.
+      cloudRotation += 0.0022 * dt;
 
       const totalRotation = baseRotation + drag.rotOffset;
 
@@ -301,8 +346,9 @@ export default function HeroPlanet() {
       let swRMin2 = 0;
       let swRMax2 = 0;
       if (sw.active) {
-        sw.progress += 0.03 * dt;
-        sw.r = sw.progress * 60;
+        sw.progress = Math.min(1, sw.progress + 0.026 * dt);
+        // Ease the expanding ring so it travels quickly at first, then settles.
+        sw.r = (1 - Math.pow(1 - sw.progress, 1.35)) * 60;
         if (sw.progress >= 1) {
           sw.active = false;
         } else {
@@ -408,7 +454,13 @@ export default function HeroPlanet() {
             const sdx = px - sw.x;
             const sdist2 = sdx * sdx + swDy2;
             if (sdist2 >= swRMin2 && sdist2 <= swRMax2) {
-              color = COLOR_RIM_LIME;
+              // Blend the ripple into the surface and fade it as it expands.
+              const strength = 0.72 * (1 - sw.progress);
+              const target = COLOR_RIM_LIME;
+              const red = (color & 0xff) + (((target & 0xff) - (color & 0xff)) * strength);
+              const green = ((color >>> 8) & 0xff) + ((((target >>> 8) & 0xff) - ((color >>> 8) & 0xff)) * strength);
+              const blue = ((color >>> 16) & 0xff) + ((((target >>> 16) & 0xff) - ((color >>> 16) & 0xff)) * strength);
+              color = (0xff000000 | (Math.round(blue) << 16) | (Math.round(green) << 8) | Math.round(red)) >>> 0;
             }
           }
 
@@ -422,6 +474,35 @@ export default function HeroPlanet() {
       ctx.imageSmoothingEnabled = false;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(bufCanvas, 0, 0, bufW, bufH, 0, 0, canvas.width, canvas.height);
+
+      // ── 3D Location Marker calculation (GNDU) ──
+      const markerEl = markerRef.current;
+      if (markerEl) {
+        // Rotate along with planet
+        const mX = MARKER_X0 * cosRot + MARKER_Z0 * sinRot;
+        const mY = MARKER_Y0;
+        const mZ = -MARKER_X0 * sinRot + MARKER_Z0 * cosRot;
+
+        if (mZ > -0.04) {
+          const mBufX = cx + mX * R;
+          const mBufY = cy + mY * R;
+          markerBufPosRef.current.x = mBufX;
+          markerBufPosRef.current.y = mBufY;
+
+          const screenX = mBufX * scaleX;
+          const screenY = mBufY * scaleY;
+
+          // Smooth edge fade as it approaches the planet's horizon
+          const alpha = Math.min(1, Math.max(0, (mZ + 0.04) / (MARKER_RING_RADIUS * 0.35)));
+
+          markerEl.style.transform = `translate3d(${screenX}px, ${screenY}px, 0)`;
+          markerEl.style.opacity = alpha.toFixed(2);
+          markerEl.style.pointerEvents = alpha > 0.4 ? "auto" : "none";
+        } else {
+          markerEl.style.opacity = "0";
+          markerEl.style.pointerEvents = "none";
+        }
+      }
     };
 
     render(performance.now());
@@ -439,8 +520,8 @@ export default function HeroPlanet() {
   const handleMouseMove = useCallback((e) => {
     if (dragRef.current.isDragging) {
       const deltaX = e.clientX - dragRef.current.startX;
-      dragRef.current.dragVelocity = deltaX * 0.0004;
-      dragRef.current.rotOffset += deltaX * 0.006;
+      dragRef.current.dragVelocity = Math.max(-0.025, Math.min(0.025, deltaX * 0.00018));
+      dragRef.current.targetRotOffset += deltaX * 0.006;
       dragRef.current.startX = e.clientX;
     }
   }, []);
@@ -448,6 +529,7 @@ export default function HeroPlanet() {
   const handleMouseDown = useCallback((e) => {
     dragRef.current.isDragging = true;
     dragRef.current.startX = e.clientX;
+    dragRef.current.targetRotOffset = dragRef.current.rotOffset;
     dragRef.current.dragVelocity = 0;
   }, []);
 
@@ -470,11 +552,23 @@ export default function HeroPlanet() {
     }
   }, []);
 
+  const handleMarkerClick = useCallback((e) => {
+    e.stopPropagation();
+    shockwaveRef.current = {
+      active: true,
+      x: markerBufPosRef.current.x,
+      y: markerBufPosRef.current.y,
+      r: 0,
+      progress: 0,
+    };
+  }, []);
+
   // Touch handlers for mobile devices
   const handleTouchStart = useCallback((e) => {
     if (e.touches && e.touches[0]) {
       dragRef.current.isDragging = true;
       dragRef.current.startX = e.touches[0].clientX;
+      dragRef.current.targetRotOffset = dragRef.current.rotOffset;
       dragRef.current.dragVelocity = 0;
     }
   }, []);
@@ -482,8 +576,8 @@ export default function HeroPlanet() {
   const handleTouchMove = useCallback((e) => {
     if (dragRef.current.isDragging && e.touches && e.touches[0]) {
       const deltaX = e.touches[0].clientX - dragRef.current.startX;
-      dragRef.current.dragVelocity = deltaX * 0.0004;
-      dragRef.current.rotOffset += deltaX * 0.006;
+      dragRef.current.dragVelocity = Math.max(-0.025, Math.min(0.025, deltaX * 0.00018));
+      dragRef.current.targetRotOffset += deltaX * 0.006;
       dragRef.current.startX = e.touches[0].clientX;
     }
   }, []);
@@ -519,7 +613,21 @@ export default function HeroPlanet() {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       className="absolute inset-0 w-full h-full overflow-hidden pointer-events-auto cursor-grab active:cursor-grabbing select-none"
+      style={{ touchAction: "pan-y" }}
     >
+      <style>{`
+        @keyframes heroPlanetAuraPulse {
+          0% { opacity: 0.72; transform: translate3d(-50%, 0, 0) scale(0.96); }
+          100% { opacity: 1; transform: translate3d(-50%, -8px, 0) scale(1.04); }
+        }
+        @keyframes heroPlanetCrownPulse {
+          0% { opacity: 0.62; }
+          100% { opacity: 1; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-planet-aura, .hero-planet-crown { animation: none !important; }
+        }
+      `}</style>
       {/* ── Retro Grid Overlay (Light & Dark Compatible) ── */}
       {/* Light mode grid */}
       <div
@@ -546,7 +654,7 @@ export default function HeroPlanet() {
 
       {/* ── Volumetric Radiant Emitting Aura Behind Planet Rim (GPU Hardware Layer) ── */}
       <div
-        className="absolute top-[30vh] left-1/2 -translate-x-1/2 w-[140vw] max-w-[1450px] h-[55vh] pointer-events-none"
+        className="hero-planet-aura absolute top-[30vh] left-1/2 -translate-x-1/2 w-[140vw] max-w-[1450px] h-[55vh] pointer-events-none"
         style={{
           background: `
             radial-gradient(ellipse 60% 45% at 50% 40%, rgba(52, 211, 153, 0.28) 0%, rgba(34, 211, 238, 0.22) 35%, rgba(56, 189, 248, 0.1) 60%, transparent 80%),
@@ -555,13 +663,13 @@ export default function HeroPlanet() {
           filter: "blur(46px)",
           transform: "translate3d(-50%, 0, 0)",
           willChange: "transform, opacity",
-          animation: "auraPulsate 5s ease-in-out infinite alternate",
+          animation: "heroPlanetAuraPulse 6s ease-in-out infinite alternate",
         }}
       />
 
       {/* ── Atmospheric Crown Highlight Behind The Crest ── */}
       <div
-        className="absolute top-[44vh] left-1/2 -translate-x-1/2 w-[95vw] max-w-[1050px] h-[25vh] pointer-events-none"
+        className="hero-planet-crown absolute top-[44vh] left-1/2 -translate-x-1/2 w-[95vw] max-w-[1050px] h-[25vh] pointer-events-none"
         style={{
           background: `
             radial-gradient(ellipse 70% 30% at 50% 50%, rgba(110, 231, 183, 0.35) 0%, rgba(6, 182, 212, 0.22) 35%, transparent 70%)
@@ -569,6 +677,7 @@ export default function HeroPlanet() {
           filter: "blur(28px)",
           transform: "translate3d(-50%, 0, 0)",
           willChange: "opacity",
+          animation: "heroPlanetCrownPulse 4.5s ease-in-out infinite alternate",
         }}
       />
 
@@ -580,6 +689,35 @@ export default function HeroPlanet() {
           imageRendering: "pixelated",
         }}
       />
+
+      {/* ── GNDU Interactive Location Marker ── */}
+      <div
+        ref={markerRef}
+        onClick={handleMarkerClick}
+        onMouseDown={(e) => e.stopPropagation()}
+        onTouchStart={(e) => e.stopPropagation()}
+        className="absolute top-0 left-0 z-20 pointer-events-auto cursor-pointer transition-opacity duration-150 will-change-transform select-none"
+        style={{
+          transform: "translate3d(-9999px, -9999px, 0)",
+          opacity: 0,
+        }}
+        title="GNDU — Click to trigger radar pulse"
+      >
+        <div className="group flex flex-col items-center -translate-x-1/2 -translate-y-full">
+          {/* Badge */}
+          <div className="mb-1 flex items-center px-2 py-0.5 rounded-full bg-zinc-950/90 dark:bg-zinc-900/90 text-white border border-neutral-700/70 shadow-lg shadow-black/40 backdrop-blur-md transition-all duration-200 group-hover:scale-105">
+            <span className="text-[12px] font-mono font-bold tracking-wide uppercase text-neutral-100">
+              GNDU
+            </span>
+          </div>
+
+          {/* Google Maps Location Pin pointing to the planet surface */}
+          <div className="relative flex flex-col items-center">
+            <GoogleMapsPinIcon className="w-9 h-9 drop-shadow-[0_4px_12px_rgba(234,67,53,0.6)] transition-transform duration-200 group-hover:-translate-y-0.5" />
+            <div className="w-2 h-0.5 rounded-full bg-black/60 blur-[0.5px] -mt-0.5" />
+          </div>
+        </div>
+      </div>
 
       {/* ── Progressive Smooth Bottom Fade Transition (Expanded Height) ── */}
       {/* Light mode smooth fade */}
