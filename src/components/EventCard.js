@@ -12,7 +12,7 @@ const formatDate = (dateStr) =>
     })
     : null;
 
-export default function EventCard({ event, onSelect, thumbnailHeight = "h-66" }) {
+export default function EventCard({ event, onSelect, thumbnailHeight = "aspect-[3/2]" }) {
   const now = new Date();
   const isPast =
     !event.is_coming_soon && event.start_at && new Date(event.start_at) < now;

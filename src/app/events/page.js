@@ -18,7 +18,7 @@ export default function EventsPage() {
         <div className="flex items-center gap-2 mb-8">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-medium uppercase tracking-widest bg-neutral-100 dark:bg-neutral-800/90 text-neutral-600 dark:text-neutral-400 border border-neutral-200/60 dark:border-neutral-700/60">
             <Calendar className="w-3.5 h-3.5" />
-            Events Schedule
+            Events Calendar
           </span>
         </div>
 
