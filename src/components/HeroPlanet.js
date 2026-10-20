@@ -172,7 +172,7 @@ const GoogleMapsPinIcon = ({ className = "w-3.5 h-3.5" }) => (
 // 3D Location Marker Coordinates for GNDU on the planet surface
 // At MARKER_NY = -0.89, lon = 0, simplex elevation is ~0.46 (solid continental landmass, away from oceans)
 // Positioned downwards along the crest so it stays clear of hero text and CTA buttons
-const MARKER_NY = -0.82;
+const MARKER_NY = -0.80;
 const MARKER_LON = 0;
 const MARKER_RING_RADIUS = Math.sqrt(Math.max(0, 1 - MARKER_NY * MARKER_NY));
 const MARKER_X0 = MARKER_RING_RADIUS * Math.sin(MARKER_LON);
