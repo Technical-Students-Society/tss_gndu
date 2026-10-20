@@ -2,9 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import Link from "next/link";
-import ShinyText from "@/app/Animations/ShinyText";
-
 
 export default function Preloader({ loading, onFinish }) {
     const preloaderRef = useRef();
@@ -63,65 +60,30 @@ export default function Preloader({ loading, onFinish }) {
         >
             <div
                 ref={innerRef}
-                className={`relative w-full h-full scale-80 rounded-xl pt-32 bg-siteblack flex flex-col items-center justify-center text-center px-6 pb-24 font-openai transition-opacity duration-500 min-h-[100dvh] ${fontsLoaded ? "opacity-100" : "opacity-0"}`}
+                className={`relative w-full h-full scale-80 rounded-xl bg-siteblack flex flex-col items-center font-openai transition-opacity duration-500 min-h-[100dvh] ${fontsLoaded ? "opacity-100" : "opacity-0"}`}
             >
-                {/* Badge */}
-                <div className="flex items-center gap-2 mb-6 text-xs font-medium text-neutral-500 dark:text-neutral-400 tracking-wide bg-[#0C0C0E] dark:bg-zinc-950 dark:border dark:border-zinc-900 py-2 px-5 rounded-full">
-                          <span className="w-2 h-2 rounded-full bg-orange-400 inline-block" />
-                          <span className="w-2 h-2 rounded-full bg-orange-400 inline-block absolute animate-ping" />
-                          <ShinyText
-                            text="Technical Students' Society"
-                            speed={2.8}
-                            color="#b5b5b5"
-                            shineColor="#ffffff"
-                          />
-                        </div>
+                {/* Navbar spacer matching sticky navbar height */}
+                <div className="h-16 w-full shrink-0" />
 
-                <h1 className="relative text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-openai font-extrabold tracking-tight leading-[1.05]  max-w-3xl mb-5 pointer-events-none">
-
-                    <span className="relative z-10 bg-gradient-to-b from-[#ffffff] via-[#d4d4d4] to-[#737373] bg-clip-text text-transparent">
-                        Bridging Tech & Innovation
-                    </span>
-
-                    {/* 3D Depth Layers */}
-                    {/* <span className="absolute inset-0 dark:text-neutral-400 blur-[1px] translate-x-[2px] translate-y-[2px] opacity-70">
-                        Bridging Tech & Innovation
-                    </span>
-
-                    <span className="absolute inset-0 dark:text-neutral-600 translate-x-[4px] translate-y-[4px] opacity-50">
-                        Bridging Tech & Innovation
-                    </span> */}
-                </h1>
-
-                {/* Sub */}
-                <p className="max-w-xl text-sm md:text-base text-neutral-500 dark:text-neutral-400 leading-relaxed mb-9">
-                    Official Technical Student Society of Guru Nanak Dev University. We
-                    empower students through workshops, hackathons, and technical
-                    excellence.
-                </p>
-
-                {/* CTAs - Perfectly synced with HeroSection classes to ensure identical height/wrapping */}
-                <div className="flex flex-wrap opacity-0 pointer-events-none justify-center gap-4">
-                    <div
-                        className="group inline-flex items-center gap-2 h-11 px-6 rounded-full border border-neutral-300 dark:border-zinc-700 bg-siteblack dark:bg-zinc-800/70 backdrop-blur-sm text-neutral-400 dark:text-neutral-300 text-sm font-semibold transition-colors"
-                    >
-                        <span className="relative z-10 flex items-center gap-2">
-                            View Events
-                            <span>→</span>
-                        </span>
+                {/* Main content matching HeroSection */}
+                <div className="relative z-20 flex flex-col items-center pt-36 text-center px-6 pointer-events-none">
+                    {/* Badge */}
+                    <div className="pointer-events-auto flex items-center gap-2 mb-6 text-[8px] md:text-xs font-medium text-neutral-600 dark:text-neutral-400 tracking-wide dark:bg-neutral-100/90 bg-zinc-900 backdrop-blur-md border border-neutral-300/80 dark:border-white/10 py-2 px-5 rounded-full shadow-sm dark:shadow-lg dark:shadow-emerald-950/20">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block absolute animate-ping" />
+                        <span className="text-white dark:text-black md:-mb-1 font-bold uppercase">Technical Students' Society, GNDU</span>
                     </div>
-                    <div
-                        className="group inline-flex items-center gap-2 h-11 px-6 rounded-full border border-neutral-300 dark:border-zinc-700 bg-siteblack dark:bg-zinc-800/70 backdrop-blur-sm text-neutral-400 dark:text-neutral-300 text-sm font-semibold transition-colors"
-                    >
-                        <span className="flex items-center gap-2">
-                            Learn More
-                            <span>→</span>
+
+                    {/* Heading */}
+                    <h1 className="relative text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-openai font-extrabold tracking-tight leading-[1.05] max-w-4xl mb-6 drop-shadow-[0_4px_24px_rgba(0,0,0,0.06)] dark:drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
+                        <span className="relative z-10 bg-gradient-to-b from-neutral-950 via-neutral-800 to-neutral-600 dark:from-white dark:via-zinc-100 dark:to-zinc-400 bg-clip-text text-transparent">
+                            Real learning happens outside classroom
                         </span>
-                    </div>
+                    </h1>
                 </div>
 
                 {/* Counter */}
-                <span className={`absolute bottom-8 right-8 text-7xl font-semibold tabular-nums transition-colors ${count === 100 ? "text-orange-400" : "text-zinc-500"}`}>
+                <span className={`absolute bottom-8 right-8 text-7xl font-semibold tabular-nums transition-colors ${count === 100 ? "text-emerald-500" : "text-zinc-500"}`}>
                     {count}%
                 </span>
             </div>

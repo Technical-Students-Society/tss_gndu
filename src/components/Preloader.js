@@ -27,48 +27,30 @@ export default function Preloader({ loading, onFinish }) {
     };
 
     return (
-        <div ref={preloaderRef} className="fixed inset-0 z-[9999] flex items-center justify-center bg-white dark:bg-siteblack pt-8 max-lg:pt-9 max-md:pt-8 pointer-events-none flex-col min-h-screen text-center px-6 font-openai">
-            {/* Badge */}
-            <div className="flex items-center gap-2 mb-6 text-xs text-neutral-500 dark:text-neutral-400 tracking-wide bg-[#0C0C0E] p-2 rounded-full opacity-0">
-                <span className="w-2 h-2 rounded-full bg-orange-400 inline-block" />
-                <span className="w-2 h-2 rounded-full bg-orange-400 inline-block absolute animate-ping" />
-                Technical Students' Society
-            </div>
-            {/* Headline */}
-            <h1 className="text-5xl pointer-events-none sm:text-6xl md:text-7xl lg:text-[5.5rem] font-openai font-extrabold tracking-tight leading-[1.05] text-neutral-900 dark:text-white max-w-3xl mb-5 text-center">
-                <TextType
-                    text={["Bridging Tech & Innovation"]}
-                    typingSpeed={95}
-                    pauseDuration={1500}
-                    deletingSpeed={false}
-                />
-            </h1>
+        <div ref={preloaderRef} className="fixed inset-0 z-[9999] flex flex-col items-center bg-white dark:bg-siteblack pointer-events-none min-h-screen font-openai">
+            {/* Navbar spacer */}
+            <div className="h-16 w-full shrink-0" />
 
-            {/* Sub */}
-            <p className="max-w-xl text-sm md:text-base text-neutral-500 dark:text-neutral-400 leading-relaxed mb-9 opacity-0">
-                Official Technical Student Society of Guru Nanak Dev University. We
-                empower students through workshops, hackathons, and technical
-                excellence.
-            </p>
+            {/* Main content matching HeroSection */}
+            <div className="relative z-20 flex flex-col items-center pt-36 text-center px-6 pointer-events-none">
+                {/* Badge */}
+                <div className="pointer-events-auto flex items-center gap-2 mb-6 text-[8px] md:text-xs font-medium text-neutral-600 dark:text-neutral-400 tracking-wide dark:bg-neutral-100/90 bg-zinc-900 backdrop-blur-md border border-neutral-300/80 dark:border-white/10 py-2 px-5 rounded-full shadow-sm dark:shadow-lg dark:shadow-emerald-950/20">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block absolute animate-ping" />
+                    <span className="text-white dark:text-black md:-mb-1 font-bold uppercase">Technical Students' Society, GNDU</span>
+                </div>
 
-            {/* CTAs */}
-            <div className="flex flex-wrap justify-center gap-3 opacity-0">
-                <div
-                    className="group inline-flex items-center gap-2 h-11 px-6 rounded-full border border-neutral-300 dark:border-zinc-700 bg-siteblack dark:bg-zinc-800/70 backdrop-blur-sm text-neutral-400 dark:text-neutral-300 text-sm font-semibold dark:hover:bg-zinc-700 transition-colors"
-                >
-                    <span className="relative z-10 flex items-center gap-2">
-                        View Events
-                        <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                {/* Headline */}
+                <h1 className="relative text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-openai font-extrabold tracking-tight leading-[1.05] max-w-4xl mb-6 drop-shadow-[0_4px_24px_rgba(0,0,0,0.06)] dark:drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
+                    <span className="relative z-10 bg-gradient-to-b from-neutral-950 via-neutral-800 to-neutral-600 dark:from-white dark:via-zinc-100 dark:to-zinc-400 bg-clip-text text-transparent">
+                        <TextType
+                            text={["Real learning happens outside classroom"]}
+                            typingSpeed={95}
+                            pauseDuration={1500}
+                            deletingSpeed={false}
+                        />
                     </span>
-                </div>
-                <div
-                    className="group inline-flex items-center gap-2 h-11 px-6 rounded-full border border-neutral-300 dark:border-zinc-700 bg-siteblack dark:bg-zinc-800/70 backdrop-blur-sm text-neutral-400 dark:text-neutral-300 text-sm font-semibold dark:hover:bg-zinc-700 transition-colors"
-                >
-                    <span className="flex items-center gap-2">
-                        Learn More
-                        <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                    </span>
-                </div>
+                </h1>
             </div>
         </div>
     );
