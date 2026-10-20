@@ -516,14 +516,14 @@ export default function HomeTeamSectionSimple() {
               </div>
 
               {/* ── Minimal Monochromatic Pixelated Illustration Centered (Matches Hero Pixel Art) ── */}
-              <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+              {/* <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
                 <div className={`transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-1 ${category.textColor}`}>
                   <PixelIllustration title={category.title} />
                 </div>
-              </div>
+              </div> */}
 
               {/* Illustration centered in card */}
-              {/* {category.illustration && (
+              {category.illustration && (
                 <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
                   <div className="w-36 h-36 sm:w-40 sm:h-40 lg:w-52 lg:h-52 group-hover:scale-105 transition-all duration-500">
                     <img
@@ -534,7 +534,7 @@ export default function HomeTeamSectionSimple() {
                     />
                   </div>
                 </div>
-              )} */}
+              )}
 
               {/* Description pinned to bottom */}
               <div className={`relative z-20 ${category.textColor}`}>

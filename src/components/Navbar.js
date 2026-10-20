@@ -55,12 +55,12 @@ export default function Navbar() {
                 className="h-10 sm:h-12 lg:h-13 w-auto object-contain invert dark:invert-0 transition-transform duration-300 group-hover:scale-105"
               />
 
-              {/* Full Title Text Logo (Hidden on mobile < 640px as requested, shown on tablet/desktop) */}
-              <div className="hidden sm:flex flex-col leading-tight">
-                <span className="text-sm sm:text-base font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
+              {/* Full Title Text Logo (Visible across mobile, tablet, and desktop) */}
+              <div className="flex flex-col leading-tight">
+                <span className="text-xs sm:text-base font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
                   Technical Students&apos; Society
                 </span>
-                <span className="text-[11px] text-neutral-500 dark:text-neutral-400">
+                <span className="text-[9px] sm:text-[11px] text-neutral-500 dark:text-neutral-400">
                   Guru Nanak Dev University, Asr.
                 </span>
               </div>

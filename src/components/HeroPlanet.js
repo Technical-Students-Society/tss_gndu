@@ -320,7 +320,9 @@ export default function HeroPlanet() {
 
       // Planet geometry
       const vpHBuf = vpH / PIXEL_SIZE;
-      const R = Math.floor(Math.max(bufW * PLANET_WIDTH_SCALE, vpHBuf * (PLANET_WIDTH_SCALE * 1.5)));
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+      const effectiveScale = isMobile ? PLANET_WIDTH_SCALE * 0.82 : PLANET_WIDTH_SCALE;
+      const R = Math.floor(Math.max(bufW * effectiveScale, vpHBuf * (effectiveScale * 1.5)));
       const cx = Math.floor(bufW * 0.5);
       const cy = Math.floor(vpHBuf * PLANET_CREST_TOP + R);
 
@@ -495,9 +497,10 @@ export default function HeroPlanet() {
           // Smooth edge fade as it approaches the planet's horizon
           const alpha = Math.min(1, Math.max(0, (mZ + 0.04) / (MARKER_RING_RADIUS * 0.35)));
 
+          const isMobileScreen = typeof window !== "undefined" && window.innerWidth < 768;
           markerEl.style.transform = `translate3d(${screenX}px, ${screenY}px, 0)`;
           markerEl.style.opacity = alpha.toFixed(2);
-          markerEl.style.pointerEvents = alpha > 0.4 ? "auto" : "none";
+          markerEl.style.pointerEvents = (!isMobileScreen && alpha > 0.4) ? "auto" : "none";
         } else {
           markerEl.style.opacity = "0";
           markerEl.style.pointerEvents = "none";
@@ -563,8 +566,9 @@ export default function HeroPlanet() {
     };
   }, []);
 
-  // Touch handlers for mobile devices
+  // Touch handlers for mobile devices (bypassed on mobile screens < 768px so page scroll is uninterrupted)
   const handleTouchStart = useCallback((e) => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) return;
     if (e.touches && e.touches[0]) {
       dragRef.current.isDragging = true;
       dragRef.current.startX = e.touches[0].clientX;
@@ -574,6 +578,7 @@ export default function HeroPlanet() {
   }, []);
 
   const handleTouchMove = useCallback((e) => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) return;
     if (dragRef.current.isDragging && e.touches && e.touches[0]) {
       const deltaX = e.touches[0].clientX - dragRef.current.startX;
       dragRef.current.dragVelocity = Math.max(-0.025, Math.min(0.025, deltaX * 0.00018));
@@ -583,6 +588,7 @@ export default function HeroPlanet() {
   }, []);
 
   const handleTouchEnd = useCallback((e) => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) return;
     dragRef.current.isDragging = false;
     if (e.changedTouches && e.changedTouches[0] && containerRef.current) {
       const touch = e.changedTouches[0];
@@ -612,7 +618,7 @@ export default function HeroPlanet() {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className="absolute inset-0 w-full h-full overflow-hidden pointer-events-auto cursor-grab active:cursor-grabbing select-none"
+      className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none md:pointer-events-auto md:cursor-grab md:active:cursor-grabbing select-none"
       style={{ touchAction: "pan-y" }}
     >
       <style>{`
@@ -684,7 +690,7 @@ export default function HeroPlanet() {
       {/* ── Pixel Planet Canvas ── */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full pointer-events-auto"
+        className="absolute inset-0 w-full h-full pointer-events-none md:pointer-events-auto"
         style={{
           imageRendering: "pixelated",
         }}
@@ -696,7 +702,7 @@ export default function HeroPlanet() {
         onClick={handleMarkerClick}
         onMouseDown={(e) => e.stopPropagation()}
         onTouchStart={(e) => e.stopPropagation()}
-        className="absolute top-0 left-0 z-20 pointer-events-auto cursor-pointer transition-opacity duration-150 will-change-transform select-none"
+        className="absolute top-0 left-0 z-20 pointer-events-none md:pointer-events-auto cursor-default md:cursor-pointer transition-opacity duration-150 will-change-transform select-none"
         style={{
           transform: "translate3d(-9999px, -9999px, 0)",
           opacity: 0,
