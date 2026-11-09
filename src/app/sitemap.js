@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = "https://tss-gndu.org";
+  const baseUrl = "https://tss-gndu.vercel.app";
 
   return [
     {
