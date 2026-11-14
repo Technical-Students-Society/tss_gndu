@@ -28,7 +28,7 @@ export const metadata = {
     title: "TSS GNDU | Technical Students' Society",
     description:
       "Join Technical Students' Society at GNDU. Discover events, workshops, and innovation.",
-    url: "https://tss-gndu.org/",
+    url: "https://tss-gndu.vercel.app/",
     siteName: "TSS GNDU",
     type: "website",
   },
@@ -39,7 +39,7 @@ export const metadata = {
       "Official Technical Students' Society of Guru Nanak Dev University.",
   },
 
-  metadataBase: new URL("https://tss-gndu.org/"),
+  metadataBase: new URL("https://tss-gndu.vercel.app/"),
 };
 
 export default function RootLayout({ children }) {
