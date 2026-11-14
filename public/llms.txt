@@ -1,0 +1,48 @@
+# Technical Students' Society, GNDU (TSS GNDU)
+
+> Official website of the Technical Students' Society (TSS) at Guru Nanak Dev University, Amritsar, Punjab, India. TSS is the student body of Computer Science at GNDU, bridging academic knowledge with industry-level innovation through hackathons, technical workshops, coding competitions, guest lectures, sports and cultural events, and placement support.
+
+Membership is free and open to any student currently enrolled at Guru Nanak Dev University. The society is organized into eight divisions: Technical, Sports, Placement, Cultural, Alumni, Sponsorship, Content & Media, and Design.
+
+## Main Pages
+
+- [Home](https://tss-gndu.vercel.app/): Overview of TSS, its team divisions, events spotlight, and FAQs
+- [About](https://tss-gndu.vercel.app/about): Background, mission, and story of the society
+- [Team](https://tss-gndu.vercel.app/team): Members and leadership across the society's divisions
+- [Events](https://tss-gndu.vercel.app/events): Upcoming and ongoing hackathons, workshops, competitions, and fests, with registration links
+- [Gallery](https://tss-gndu.vercel.app/gallery): Photos from past TSS events
+- [Contact](https://tss-gndu.vercel.app/contact): Ways to get in touch with the society
+
+## Tools
+
+- [Verify Issued Certificate](https://tss-gndu.vercel.app/verify): Check the authenticity of a certificate issued by TSS
+
+## Team Divisions
+
+- Technical: Hackathons, workshops, and the infrastructure behind TSS events
+- Sports: Inter-college sports events
+- Placement: Connecting students with recruiters and career preparation
+- Cultural: Fests, performances, and campus life
+- Alumni: Mentorship and networking between alumni and current students
+- Sponsorship: Partnerships and funding for events
+- Content & Media: Documentation, photography/videography, and storytelling across channels
+- Design: Visual identity, event creatives, and digital experience
+
+## FAQ Summary
+
+- Who can join? Any currently enrolled GNDU student interested in technology, design, or management.
+- Is there a membership fee? No, membership is free.
+- What events are hosted? Technical workshops, annual hackathons, coding competitions, and industry guest lectures.
+- How to stay updated? Check the Events page or follow TSS on social media.
+
+## Social & Contact
+
+- [GitHub](https://github.com/Technical-Students-Society)
+- [LinkedIn](https://www.linkedin.com/company/technical-students-societies/)
+- [Instagram](https://www.instagram.com/tss_gndu)
+- Email: contact@tss-gndu.org
+
+## Optional
+
+- [Privacy Policy](https://tss-gndu.vercel.app/policies/privacy-policy)
+- [Terms of Service](https://tss-gndu.vercel.app/policies/terms-and-conditions)
